@@ -54,8 +54,19 @@ Every column in every file in `data/`, what it means, where it came from, and ho
 | Column | Meaning |
 |---|---|
 | `seifa_irsd_score` | Index of Relative Socio-economic **Disadvantage**. National mean 1000. **Lower = more disadvantaged.** The usual choice for vulnerability work |
-| `seifa_irsd_decile` | 1 = most disadvantaged decile nationally, 10 = least |
-| `seifa_irsad_score` | Index of Relative Socio-economic **Advantage and Disadvantage** — a two-ended measure. Do not use interchangeably with IRSD |
+| `seifa_irsd_decile_aus` | 1 = most disadvantaged decile nationally, 10 = least |
+| `seifa_irsd_percentile_aus` | Percentile rank within Australia, 1–100 |
+| `seifa_irsd_decile_state` | Decile rank within Queensland only. Use when comparing councils to each other rather than to the nation |
+| `seifa_irsad_score` | Index of Relative Socio-economic **Advantage and Disadvantage** — two-ended. Not interchangeable with IRSD |
+| `seifa_irsad_decile_aus` | National decile for IRSAD |
+| `seifa_ier_score` | Index of **Economic Resources** — income, housing, wealth |
+| `seifa_ieo_score` | Index of **Education and Occupation** — skills and qualifications |
+
+> **A bug worth knowing about**, because it was in this file until it was caught. The ABS SEIFA
+> dataflow ships several measures per area. `SCORE` is the area's score; `MINS` and `MAXS` are
+> the *minimum and maximum scores of the SA1s inside it*. An earlier build read `MINS` as the
+> score, which systematically understated disadvantage. If you pull SEIFA yourself, filter
+> `SEIFA_MEASURE == "SCORE"`.
 | `median_age` | Years |
 | `median_personal_income_weekly` | Dollars per week, persons 15+ |
 | `median_household_income_weekly` | Dollars per week |
