@@ -35,6 +35,7 @@ training — is the competitive advantage, not a soft supplement to it.
 Documents/Hackathon/
 ├── HANDOVER.md      <- you are here
 ├── README.md        one-page index
+├── COLLABORATION.md how the two of you work on this without treading on each other
 ├── docs/            three reference documents, open in any browser
 │   ├── mangrove-hackathon-brief.html        ten project options + top three + build spec
 │   ├── qld-council-governance.html          what QLD councils are, what law governs them
