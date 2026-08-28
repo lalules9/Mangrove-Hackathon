@@ -16,3 +16,6 @@ desktop.ini
 # OneDrive sync conflict copies — if you see these, read the note in HANDOVER.md
 *-DESKTOP-*
 *Conflict*
+
+# Large source PDFs — download links are in HANDOVER.md
+research/*.pdf

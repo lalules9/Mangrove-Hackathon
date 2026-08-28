@@ -1,0 +1,123 @@
+theme,indicator,data_source,note
+Social character,% lone person households,ABS 2011 Census of Population and Housing,Computed from census variable HCFMD (Family household composition – dwelling)
+Social character,% group households,ABS 2011 Census of Population and Housing,Computed from census variable HCFMD (Family household composition – dwelling)
+Social character,Sex ratio,ABS 2011 Census of Population and Housing,Computed from census variable SEXP (Sex) as the ratio of males to females
+Social character,% population aged over 75,ABS 2011 Census of Population and Housing,Computed from census variable AGEP (Age)
+Social character,% population aged below 15,ABS 2011 Census of Population and Housing,Computed from census variable AGEP (Age)
+Social character,Ratio of certificate/postgrad attainment to year 8-12 attainment,ABS 2011 Census of Population and Housing,Computed from census variable HEAP (Level of
+Social character,% population aged over,,
+Social character,% population aged below,,
+Social character,Ratio of,,
+Social character,% of labour force unemployed,ABS 2011 Census of Population and Housing,Computed from census variable LFHRP (Labour force status and hours worked not stated)
+Social character,% not in labour force,ABS 2011 Census of Population and Housing,Computed from census variable LFHRP (Labour force status and hours worked not stated)
+Social character,% managers and professionals,ABS 2011 Census of Population and Housing,Computed from census variable OCCP (Occupation)
+Social character,% of labour force,,
+Social character,% managers and,,
+Social character,% households without children,ABS 2011 Census of Population and Housing,Computed from census variable HCFMD (Family household composition – dwelling)
+Social character,Median age of persons,ABS 2011 Census of Population and Housing,ABS community profile (Median age of persons)
+Social character,Median total household income weekly,ABS 2011 Census of Population and Housing,ABS community profile
+Social character,% households without,,
+Social character,Median total household,,
+Social character,% population arrived in Australia 2001 onwards,,
+Social character,% of total households with all or some residents,,
+Social character,% speaks English not well or not at all,,
+Social character,% population with a core activity need for,,
+Social character,% one parent families,,
+Social character,% households with children,,
+Social character,Ratio of certificate/postgrad attainment to year,,
+Social character,% residents owning their home outright,ABS 2011 Census of Population and Housing,Computed from the ABS community profile
+Social character,% residents owning their home with a mortgage,ABS 2011 Census of Population and Housing,Computed from the ABS community profile
+Social character,% residents renting their home,ABS 2011 Census of Population and Housing,Computed from the ABS community profile
+Social character,Median weekly rent ($),ABS 2011 Census of Population and Housing,ABS community profile B02 (Selected means and averages)
+Social character,Median monthly mortgage repayment ($),ABS 2011 Census of Population and Housing,ABS community profile B02 (Selected means and averages)
+Social character,Median weekly personal income ($),ABS 2011 Census of Population and Housing,ABS community profile B02 (Selected means and averages)
+Social character,% residents owning their,,
+Social character,% residents renting their,,
+Social character,Median monthly,,
+Social character,Median weekly personal,,
+Economic capital,Median weekly family income ($),ABS 2011 Census of Population and Housing,ABS community profile B02 (Selected means and averages)
+Economic capital,% families with less than $600 p.w. income,ABS 2011 Census of Population and Housing,Computed from the ABS community profile
+Economic capital,"% families with more than $3,000 p.w. income",ABS 2011 Census of Population and Housing,Computed from the ABS community profile
+Economic capital,% employment in largest single sector,ABS 2011 Census of Population and Housing,Computed from the ABS community profile
+Economic capital,Economic Diversity Index,ABS 2011 Census of Population and Housing,Computed from the ABS community profile
+Economic capital,% businesses employing 20 or more people,ABS Counts of Australian Businesses,Computed from ABS Counts of Australian
+Economic capital,Median weekly family,,
+Economic capital,% families with less than,,
+Economic capital,% families with more than,,
+Economic capital,% employment in largest,,
+Economic capital,% businesses employing 20,,
+Economic capital,% population change 2001 to 2011,ABS 2011 Census of Population and Housing,Computed from the ABS community profile
+Economic capital,% population change,,
+Economic capital,% dwellings with one or more cars,ABS 2011 Census of Population and Housing,
+Economic capital,% dwellings with one or,,
+Economic capital,% residents owning their home outright,,
+Economic capital,% residents owning their home with a mortgage,,
+Economic capital,% residents renting their home,,
+Economic capital,Median weekly rent ($),,
+Economic capital,Median monthly mortgage repayment ($),,
+Economic capital,Median weekly personal income ($),,
+Economic capital,% residents owning their home with a,,
+Economic capital,Median monthly mortgage repayment,,
+Economic capital,% families with less than $600 p.w.,,
+Economic capital,"% families with more than $3,000 p.w.",,
+Economic capital,% businesses employing 20 or more,,
+Emergency services,Distance to medical facility (km),,"Computed by Regional Australia Institute as the average distance to medical facility, using a GIS"
+Emergency services,Distance to medical facility,,
+Emergency services,Distance to airport (km),,
+Emergency services,% caravan & improvised dwellings,ABS 2011 Census of Population and Housing,Computed from census variable STRD (Dwelling structure)
+Emergency services,% residential dwellings built post 1981,National Exposure,Computed from a composite of Version 7 and 9
+Emergency services,% commercial &,National Exposure,Computed from a composite of Version 7 and 9
+Emergency services,% caravan & improvised,,
+Emergency services,% residential dwellings,,
+Planning and the built environment,Number of dwellings per FTE council staff,Australian Bureau of,
+Planning and the built environment,Number of new dwellings approved in the 2015- 2016 year/52,,
+Planning and the built environment,Number of dwellings per,,
+Planning and the built environment,Number of new dwellings approved in the 2015-,,
+Planning and the built environment,% residential dwellings built pre 1980,National Exposure,
+Planning and the built environment,% commercial & industrial buildings built pre 1980,National Exposure,
+Planning and the built environment,% residential dwellings,,
+Planning and the built environment,% commercial & industrial,,
+Planning and the built environment,% caravan & improvised dwellings,,
+Planning and the built environment,% residential dwellings built post 1981,,
+Planning and the built environment,% commercial & industrial buildings built post 1981,,
+Planning and the built environment,Does the State or Territory legislation stipulate the development of a State or Territory emergency management plan?,State/Territory-level emergency,
+Planning and the built environment,"Does the State or Territory legislation, or associated guidelines, stipulate the content of a State or Territory emergency",,
+Planning and the built environment,"Does the State or Territory legislation, emergency management plan or associated guidelines, describe the principles",,
+Planning and the built environment,Does the local-level emergency management plan identify potential hazards in the local,,
+Planning and the built environment,Does the local-level emergency management plan set out the roles and responsibilities of the members of the local,,
+Planning and the built environment,Does the local-level emergency management plan include details for exercising,,
+Community capital,% households with no motor vehicle,ABS 2011 Census of Population and Housing,Computed from census variable VEHD (Number of motor vehicles).
+Community capital,% households with no motor,,
+Community capital,% residents in same residence > 5 years,ABS 2011 Census of Population and Housing,Computed from census variable MV5D (Household five year mobility indicator)
+Community capital,% population undertaking voluntary work,ABS 2011 Census of Population and Housing,Computed from census variable VOLWP (Voluntary work for an organisation or group)
+Community capital,% jobless families,ABS 2011 Census of Population and Housing,Computed from census variable LFSF (Labour force status of parents/partners in families)
+Community capital,% residents in same,,
+Community capital,% population undertaking,,
+Community capital,% area with excellent or good ADSL cover,,Computed from raster layers
+Community capital,% area with mobile phone coverage,,Computed from raster layers
+Community capital,% area with excellent or,,
+Community capital,% area with mobile phone,,
+Community capital,"% area with some, limited or no ADSL cover",,Computed from raster layers
+Community capital,"% area with some, limited or",,
+Community capital,Is community engagement mentioned in State emergency,State level commitment to,
+Community capital,Is community engagement mentioned in the agency annual report?,,
+Community capital,Is community engagement mentioned in the agency strategic goals?,,
+Community capital,Does the agency have a community engagement strategy?,,
+Community capital,Are community engagement activities promoted on the agency,,
+Community capital,Does the agency have staff whose core role is community,,
+Community capital,Index survey and the 2011 Census data.,,
+Social and community engagement,Index. The Business Dynamo sub-index focuses on,,
+Social and community engagement,Staff engagement as reported (% agreement),"State of the Public Service reports from each State/Territory, 2014",
+Social and community engagement,% agreement >75% = 2,,
+Social and community engagement,% agreement 50-75% = 1,,
+Social and community engagement,% agreement <50% = 0,,
+Social and community engagement,Staff confidence in organisational leadership as reported (% agreement),"State of the Public Service reports from each State/Territory, 2014",
+Social and community engagement,Opportunity for employee innovation,"State of the Public Service reports from each State/Territory, 2014",
+Social and community engagement,Staff engagement as reported (%,,
+Social and community engagement,Staff confidence in organisational,,
+Social and community engagement,Does the organisation or the oversight,,
+Social and community engagement,Does the organisation have a current,,
+Social and community engagement,"Does the strategic plan place agility,",,
+Social and community engagement,Does the emergency services sector,,
+Social and community engagement,Is the organisation a partner in the,,
+Social and community engagement,Is the organisation a member of AFAC?,,
