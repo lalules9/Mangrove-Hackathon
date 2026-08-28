@@ -140,6 +140,8 @@ def abs_census_medians() -> dict[str, dict]:
             "median total personal income": "median_personal_income_weekly",
             "median total household income": "median_household_income_weekly",
             "average household size": "avg_household_size",
+            "average number of persons per bedroom": "avg_persons_per_bedroom",
+            "median total family income": "median_family_income_weekly",
             "median mortgage repayment": "median_mortgage_monthly",
             "median rent": "median_rent_weekly"}
     for r in rows(txt):
@@ -297,6 +299,10 @@ def main() -> None:
             "median_personal_income_weekly": m.get("median_personal_income_weekly", ""),
             "median_household_income_weekly": m.get("median_household_income_weekly", ""),
             "avg_household_size": m.get("avg_household_size", ""),
+            "avg_persons_per_bedroom": m.get("avg_persons_per_bedroom", ""),
+            "median_family_income_weekly": m.get("median_family_income_weekly", ""),
+            "median_rent_weekly": m.get("median_rent_weekly", ""),
+            "median_mortgage_monthly": m.get("median_mortgage_monthly", ""),
             # --- council capacity (STALE — see module docstring)
             "staff_data_year": st.get("Year", ""),
             "staff_fte_indoor": num(st.get("Number of INDOOR staff (FTE) employed by council")),
@@ -308,6 +314,12 @@ def main() -> None:
                 fi.get("Net rates and utility charges - $'000")),
             "employee_expenses_k": num(fi.get("Employee expenses - $'000")),
             "water_sewer_data_year": wa.get("_year", ""),
+            "water_connections_total": num(
+                wa.get("Number of Water Connections - TOTAL - Actual ")),
+            "water_connections_residential": num(
+                wa.get("Number of Water Connections - Residential - Actual ")),
+            "sewerage_connections_total": num(
+                wa.get("Number of Sewerage Connections - Total - Actual ")),
             # --- ADRI, carried through
             "adri_andri": c.get("adri_andri", ""),
             "adri_coping_capacity": c.get("adri_coping_capacity", ""),
@@ -321,6 +333,15 @@ def main() -> None:
             row["indigenous_share_pct"] = round(100 * ind / tot, 1) if tot else ""
         except (ValueError, TypeError):
             row["indigenous_share_pct"] = ""
+        try:
+            wc = float(row["water_connections_total"])
+            row["is_water_service_provider"] = wc > 0
+            # SOCI Act: a "critical water asset" serves at least 100,000 connections.
+            # Below that, no critical infrastructure risk management program is owed.
+            row["above_soci_water_threshold"] = wc >= 100_000
+        except (ValueError, TypeError):
+            row["is_water_service_provider"] = ""
+            row["above_soci_water_threshold"] = ""
         try:
             inc = float(row["total_operating_income_k"])
             rates = float(row["net_rates_and_utility_charges_k"])
@@ -346,8 +367,9 @@ def main() -> None:
     for col in ("population_latest", "seifa_irsd_score", "seifa_irsd_decile_aus",
                 "seifa_ier_score", "median_age",
                 "census2021_indigenous_persons", "indigenous_share_pct",
+                "avg_persons_per_bedroom", "median_rent_weekly",
                 "staff_fte_total", "total_operating_income_k",
-                "own_source_revenue_share"):
+                "own_source_revenue_share", "water_connections_total"):
         print(f"  {col:32} {filled(col):3}/{len(out)}")
     for label, names in misses.items():
         if names:
