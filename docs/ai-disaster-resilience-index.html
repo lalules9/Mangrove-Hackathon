@@ -561,6 +561,80 @@ H5 = exposure × (1 - absorptive) × consequence × vendor_concentration</div>
   </div>
 </section>
 
+
+<section id="appendix">
+  <div class="sec-head">
+    <p class="eyebrow">Appendix · generated 29 August 2026</p>
+    <h2>Every column we hold</h2>
+    <p>All 51 columns of <span class="mono">data/lga_profile_QLD.csv</span>, 78 Queensland LGAs. Organised by column rather than by hazard, because the six outcomes will change and this will not.</p>
+  </div>
+  <p class="body" style="margin-bottom:14px">The column that matters most is <strong>“In ADRI?”</strong>. Anything marked <span style="color:var(--r1);font-weight:600">clean</span> is genuine independent signal. Anything <span style="color:var(--r3);font-weight:600">partial</span> or <span style="color:var(--r3);font-weight:600">indirect</span> shares Census inputs with the natural-hazard index and will drag your correlation up on its own. Anything <span style="color:var(--r5);font-weight:600">red</span> must be held out of the model entirely.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Column</th><th>Source</th><th>In ADRI?</th><th>Coverage</th><th>Note</th></tr></thead>
+      <tbody>
+<tr><td class="mono" style="font-size:11.5px">short_name</td><td>ADRI</td><td style="color:var(--ink-3)">—</td><td class="tabular">78/78</td><td>Join key across all files</td></tr>
+<tr><td class="mono" style="font-size:11.5px">council_name</td><td>Derived</td><td style="color:var(--ink-3)">No</td><td class="tabular">78/78</td><td>Pattern-derived; NOT verified</td></tr>
+<tr><td class="mono" style="font-size:11.5px">abs_lga_name</td><td>ABS</td><td style="color:var(--ink-3)">No</td><td class="tabular">78/78</td><td>ABS naming</td></tr>
+<tr><td class="mono" style="font-size:11.5px">abs_lga_code</td><td>ABS</td><td style="color:var(--ink-3)">No</td><td class="tabular">78/78</td><td>Key to any other ABS dataflow</td></tr>
+<tr><td class="mono" style="font-size:11.5px">stratum</td><td>Derived</td><td style="color:var(--ink-3)">No</td><td class="tabular">78/78</td><td>From remoteness; sampling band</td></tr>
+<tr><td class="mono" style="font-size:11.5px">is_local_government</td><td>Derived</td><td style="color:var(--ink-3)">No</td><td class="tabular">78/78</td><td>False only for Weipa Town Authority</td></tr>
+<tr><td class="mono" style="font-size:11.5px">is_indigenous_council</td><td>Derived</td><td style="color:var(--r1);font-weight:600">No — clean</td><td class="tabular">78/78</td><td>Not an ADRI concept</td></tr>
+<tr><td class="mono" style="font-size:11.5px">website</td><td>Verified fetch</td><td style="color:var(--ink-3)">No</td><td class="tabular">78/78</td><td>54 of 78 block automated clients</td></tr>
+<tr><td class="mono" style="font-size:11.5px">population_latest</td><td>ABS ERP 2025</td><td style="color:var(--ink-3)">No</td><td class="tabular">78/78</td><td>Denominator, not an ADRI indicator</td></tr>
+<tr><td class="mono" style="font-size:11.5px">population_latest_year</td><td>ABS ERP 2025</td><td style="color:var(--ink-3)">No</td><td class="tabular">78/78</td><td>Vintage tag</td></tr>
+<tr><td class="mono" style="font-size:11.5px">population_10yr_prior</td><td>ABS ERP</td><td style="color:var(--ink-3)">No</td><td class="tabular">78/78</td><td>Gives growth / decline</td></tr>
+<tr><td class="mono" style="font-size:11.5px">census2021_total_persons</td><td>ABS Census 2021</td><td style="color:var(--ink-3)">No</td><td class="tabular">78/78</td><td>Raw count; differs from ERP by design</td></tr>
+<tr><td class="mono" style="font-size:11.5px">census2021_indigenous_persons</td><td>ABS Census 2021</td><td style="color:var(--r1);font-weight:600">No — clean</td><td class="tabular">78/78</td><td>No ADRI analogue</td></tr>
+<tr><td class="mono" style="font-size:11.5px">seifa_irsd_score</td><td>ABS SEIFA 2021</td><td style="color:var(--r3);font-weight:600">Indirect</td><td class="tabular">78/78</td><td>Built from Census vars ADRI also uses</td></tr>
+<tr><td class="mono" style="font-size:11.5px">seifa_irsd_decile_aus</td><td>ABS SEIFA 2021</td><td style="color:var(--r3);font-weight:600">Indirect</td><td class="tabular">78/78</td><td>National decile</td></tr>
+<tr><td class="mono" style="font-size:11.5px">seifa_irsd_percentile_aus</td><td>ABS SEIFA 2021</td><td style="color:var(--r3);font-weight:600">Indirect</td><td class="tabular">78/78</td><td>Finer national rank</td></tr>
+<tr><td class="mono" style="font-size:11.5px">seifa_irsd_decile_state</td><td>ABS SEIFA 2021</td><td style="color:var(--r3);font-weight:600">Indirect</td><td class="tabular">78/78</td><td>Rank within Queensland only</td></tr>
+<tr><td class="mono" style="font-size:11.5px">seifa_irsad_score</td><td>ABS SEIFA 2021</td><td style="color:var(--r3);font-weight:600">Indirect</td><td class="tabular">78/78</td><td>Two-ended; not an IRSD substitute</td></tr>
+<tr><td class="mono" style="font-size:11.5px">seifa_irsad_decile_aus</td><td>ABS SEIFA 2021</td><td style="color:var(--r3);font-weight:600">Indirect</td><td class="tabular">78/78</td><td></td></tr>
+<tr><td class="mono" style="font-size:11.5px">seifa_ier_score</td><td>ABS SEIFA 2021</td><td style="color:var(--r3);font-weight:600">Indirect</td><td class="tabular">78/78</td><td>Economic resources only</td></tr>
+<tr><td class="mono" style="font-size:11.5px">seifa_ieo_score</td><td>ABS SEIFA 2021</td><td style="color:var(--r3);font-weight:600">Indirect</td><td class="tabular">78/78</td><td>Education and occupation only</td></tr>
+<tr><td class="mono" style="font-size:11.5px">median_age</td><td>ABS Census 2021</td><td style="color:var(--r3);font-weight:600">Partial</td><td class="tabular">78/78</td><td>ADRI uses % over 75 and % under 15</td></tr>
+<tr><td class="mono" style="font-size:11.5px">median_personal_income_weekly</td><td>ABS Census 2021</td><td style="color:var(--r3);font-weight:600">Partial</td><td class="tabular">78/78</td><td>ADRI uses family income</td></tr>
+<tr><td class="mono" style="font-size:11.5px">median_household_income_weekly</td><td>ABS Census 2021</td><td style="color:var(--r3);font-weight:600">Partial</td><td class="tabular">78/78</td><td></td></tr>
+<tr><td class="mono" style="font-size:11.5px">avg_household_size</td><td>ABS Census 2021</td><td style="color:var(--r3);font-weight:600">Partial</td><td class="tabular">78/78</td><td>ADRI uses household composition</td></tr>
+<tr><td class="mono" style="font-size:11.5px">avg_persons_per_bedroom</td><td>ABS Census 2021</td><td style="color:var(--r1);font-weight:600">No — clean</td><td class="tabular">78/78</td><td>ADRI has no crowding measure</td></tr>
+<tr><td class="mono" style="font-size:11.5px">median_family_income_weekly</td><td>ABS Census 2021</td><td style="color:var(--r5);font-weight:600">Yes — direct</td><td class="tabular">78/78</td><td>Is an ADRI economic_capital indicator</td></tr>
+<tr><td class="mono" style="font-size:11.5px">median_rent_weekly</td><td>ABS Census 2021</td><td style="color:var(--ink-3)">No</td><td class="tabular">78/78</td><td></td></tr>
+<tr><td class="mono" style="font-size:11.5px">median_mortgage_monthly</td><td>ABS Census 2021</td><td style="color:var(--ink-3)">No</td><td class="tabular">78/78</td><td></td></tr>
+<tr><td class="mono" style="font-size:11.5px">staff_data_year</td><td>Qld CDC</td><td style="color:var(--ink-3)">No</td><td class="tabular"><b style="color:var(--r4)">77/78</b></td><td>Vintage tag — 2015_16</td></tr>
+<tr><td class="mono" style="font-size:11.5px">staff_fte_indoor</td><td>Qld CDC 2015-16</td><td style="color:var(--r3);font-weight:600">Partial</td><td class="tabular"><b style="color:var(--r4)">73/78</b></td><td>ADRI: dwellings per FTE council staff</td></tr>
+<tr><td class="mono" style="font-size:11.5px">staff_fte_outdoor</td><td>Qld CDC 2015-16</td><td style="color:var(--r3);font-weight:600">Partial</td><td class="tabular"><b style="color:var(--r4)">73/78</b></td><td>Same</td></tr>
+<tr><td class="mono" style="font-size:11.5px">staff_fte_total</td><td>Qld CDC 2015-16</td><td style="color:var(--r3);font-weight:600">Partial</td><td class="tabular"><b style="color:var(--r4)">75/78</b></td><td>Same</td></tr>
+<tr><td class="mono" style="font-size:11.5px">finance_data_year</td><td>Qld CDC</td><td style="color:var(--ink-3)">No</td><td class="tabular"><b style="color:var(--r4)">77/78</b></td><td>Vintage tag</td></tr>
+<tr><td class="mono" style="font-size:11.5px">total_operating_income_k</td><td>Qld CDC 2015-16</td><td style="color:var(--r1);font-weight:600">No — clean</td><td class="tabular"><b style="color:var(--r4)">76/78</b></td><td>No ADRI analogue</td></tr>
+<tr><td class="mono" style="font-size:11.5px">net_rates_and_utility_charges_k</td><td>Qld CDC 2015-16</td><td style="color:var(--r1);font-weight:600">No — clean</td><td class="tabular"><b style="color:var(--r4)">76/78</b></td><td>No ADRI analogue</td></tr>
+<tr><td class="mono" style="font-size:11.5px">employee_expenses_k</td><td>Qld CDC 2015-16</td><td style="color:var(--r1);font-weight:600">No — clean</td><td class="tabular"><b style="color:var(--r4)">76/78</b></td><td>No ADRI analogue</td></tr>
+<tr><td class="mono" style="font-size:11.5px">water_sewer_data_year</td><td>Qld CDC</td><td style="color:var(--ink-3)">No</td><td class="tabular"><b style="color:var(--r4)">77/78</b></td><td>Vintage tag</td></tr>
+<tr><td class="mono" style="font-size:11.5px">water_connections_total</td><td>Qld CDC 2015-16</td><td style="color:var(--r1);font-weight:600">No — clean</td><td class="tabular"><b style="color:var(--r4)">75/78</b></td><td>No ADRI analogue</td></tr>
+<tr><td class="mono" style="font-size:11.5px">water_connections_residential</td><td>Qld CDC 2015-16</td><td style="color:var(--r1);font-weight:600">No — clean</td><td class="tabular"><b style="color:var(--r4)">58/78</b></td><td>Weakest coverage in the file</td></tr>
+<tr><td class="mono" style="font-size:11.5px">sewerage_connections_total</td><td>Qld CDC 2015-16</td><td style="color:var(--r1);font-weight:600">No — clean</td><td class="tabular"><b style="color:var(--r4)">75/78</b></td><td>No ADRI analogue</td></tr>
+<tr><td class="mono" style="font-size:11.5px">adri_andri</td><td>ADRI 2024</td><td style="color:var(--r5);font-weight:600">It IS the index</td><td class="tabular">78/78</td><td>Hold out — control</td></tr>
+<tr><td class="mono" style="font-size:11.5px">adri_coping_capacity</td><td>ADRI 2024</td><td style="color:var(--r5);font-weight:600">It IS the index</td><td class="tabular">78/78</td><td>Hold out — control</td></tr>
+<tr><td class="mono" style="font-size:11.5px">adri_adaptive_capacity</td><td>ADRI 2024</td><td style="color:var(--r5);font-weight:600">It IS the index</td><td class="tabular">78/78</td><td>Hold out — control</td></tr>
+<tr><td class="mono" style="font-size:11.5px">adri_information_access</td><td>ADRI 2024</td><td style="color:var(--r5);font-weight:600">It IS the index</td><td class="tabular">78/78</td><td>Hold out — most circular of all</td></tr>
+<tr><td class="mono" style="font-size:11.5px">mean_remoteness_score</td><td>ADRI 2024</td><td style="color:var(--r3);font-weight:600">Partial</td><td class="tabular">78/78</td><td>ADRI uses distance to facility / airport</td></tr>
+<tr><td class="mono" style="font-size:11.5px">indigenous_share_pct</td><td>Derived</td><td style="color:var(--r1);font-weight:600">No — clean</td><td class="tabular">78/78</td><td>No ADRI analogue</td></tr>
+<tr><td class="mono" style="font-size:11.5px">is_water_service_provider</td><td>Derived</td><td style="color:var(--r1);font-weight:600">No — clean</td><td class="tabular"><b style="color:var(--r4)">70/78</b></td><td></td></tr>
+<tr><td class="mono" style="font-size:11.5px">above_soci_water_threshold</td><td>Derived</td><td style="color:var(--r1);font-weight:600">No — clean</td><td class="tabular"><b style="color:var(--r4)">70/78</b></td><td>SOCI Act 100,000-connection line</td></tr>
+<tr><td class="mono" style="font-size:11.5px">own_source_revenue_share</td><td>Derived</td><td style="color:var(--r1);font-weight:600">No — clean</td><td class="tabular"><b style="color:var(--r4)">76/78</b></td><td>Exactly 0 for Indigenous councils</td></tr>
+<tr><td class="mono" style="font-size:11.5px">staff_per_1000_residents</td><td>Derived</td><td style="color:var(--r3);font-weight:600">Partial</td><td class="tabular"><b style="color:var(--r4)">75/78</b></td><td>Mixes 2015-16 staff with 2025 population</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout">
+    <strong>The independent signal, in full.</strong> Fourteen columns have no ADRI analogue at all: Indigenous population and share, persons per bedroom, the four council finance measures, own-source revenue share, the four water and sewerage measures, and the two derived service flags. That is the entire basis on which your index can differ from the natural-hazard one. Everything else is either shared Census input or ADRI itself.
+  </div>
+  <div class="callout hot">
+    <strong>Two coverage warnings.</strong> <span class="mono">water_connections_residential</span> is only 58/78 — do not build a factor on it. Every Queensland council column is <strong>2015–16</strong> regardless of what the portal says; the <span class="mono">*_data_year</span> fields carry the vintage so it travels with the number. All 30 ABS and ADRI columns are complete at 78/78 and current.
+  </div>
+</section>
+
 <section id="sources">
   <div class="sec-head">
     <p class="eyebrow">Everything you need</p>
