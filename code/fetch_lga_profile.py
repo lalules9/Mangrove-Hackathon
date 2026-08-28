@@ -103,21 +103,27 @@ def abs_seifa() -> dict[str, dict]:
     out: dict[str, dict] = {}
     txt = cached("abs_seifa2021_lga",
                  f"{ABS}/ABS,ABS_SEIFA2021_LGA,1.0.0/all?format=csvfilewithlabels")
-    keep = {"IRSD": "irsd", "IRSAD": "irsad"}
+    keep = {"IRSD": "irsd", "IRSAD": "irsad", "IER": "ier", "IEO": "ieo"}
+    # SEIFA_MEASURE codes, from the ABS codelist:
+    #   SCORE = the area's score        RWAD = rank within Australia, decile
+    #   RWAP  = percentile (Australia)  RWSD = rank within state, decile
+    #   MINS/MAXS = min/max score of the SA1s inside the area — NOT the area score.
+    #   Reading MINS as the score understates disadvantage; do not do it.
+    measures = {"SCORE": "score", "RWAD": "decile_aus", "RWAP": "percentile_aus",
+                "RWSD": "decile_state", "URP": "population"}
     for r in rows(txt):
         idx = r.get("SEIFAINDEXTYPE")
-        if idx not in keep:
+        meas = measures.get((r.get("SEIFA_MEASURE") or "").upper())
+        if idx not in keep or not meas:
             continue
-        code = r.get("LGA_2021")
-        meas = (r.get("SEIFA_MEASURE") or "").upper()
-        val = r.get("OBS_VALUE")
+        code, val = r.get("LGA_2021"), r.get("OBS_VALUE")
         if not code or not val:
             continue
-        d = out.setdefault(code, {})
-        if meas in ("SCORE", "MINS"):
-            d[f"seifa_{keep[idx]}_score"] = val
-        elif "DEC" in meas:
-            d[f"seifa_{keep[idx]}_decile"] = val
+        if meas == "population":
+            if idx == "IRSD":
+                out.setdefault(code, {})["seifa_usual_resident_population"] = val
+            continue
+        out.setdefault(code, {})[f"seifa_{keep[idx]}_{meas}"] = val
     return out
 
 
@@ -280,8 +286,13 @@ def main() -> None:
             "census2021_indigenous_persons": i.get("census_indigenous_persons", ""),
             # --- socio-economic
             "seifa_irsd_score": s.get("seifa_irsd_score", ""),
-            "seifa_irsd_decile": s.get("seifa_irsd_decile", ""),
+            "seifa_irsd_decile_aus": s.get("seifa_irsd_decile_aus", ""),
+            "seifa_irsd_percentile_aus": s.get("seifa_irsd_percentile_aus", ""),
+            "seifa_irsd_decile_state": s.get("seifa_irsd_decile_state", ""),
             "seifa_irsad_score": s.get("seifa_irsad_score", ""),
+            "seifa_irsad_decile_aus": s.get("seifa_irsad_decile_aus", ""),
+            "seifa_ier_score": s.get("seifa_ier_score", ""),
+            "seifa_ieo_score": s.get("seifa_ieo_score", ""),
             "median_age": m.get("median_age", ""),
             "median_personal_income_weekly": m.get("median_personal_income_weekly", ""),
             "median_household_income_weekly": m.get("median_household_income_weekly", ""),
@@ -332,7 +343,8 @@ def main() -> None:
     filled = lambda col: sum(1 for r in out if r[col])
     print(f"\nWrote {path}  ({len(out)} rows, {len(out[0])} columns)\n")
     print("Coverage:")
-    for col in ("population_latest", "seifa_irsd_score", "median_age",
+    for col in ("population_latest", "seifa_irsd_score", "seifa_irsd_decile_aus",
+                "seifa_ier_score", "median_age",
                 "census2021_indigenous_persons", "indigenous_share_pct",
                 "staff_fte_total", "total_operating_income_k",
                 "own_source_revenue_share"):
