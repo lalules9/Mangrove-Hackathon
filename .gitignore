@@ -1,0 +1,18 @@
+# API response cache — 38MB, fully regenerable by re-running the fetch scripts
+cache/
+
+# Secrets — never commit
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# OneDrive sync conflict copies — if you see these, read the note in HANDOVER.md
+*-DESKTOP-*
+*Conflict*

@@ -1,0 +1,1035 @@
+<title>Ten Ways In</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --ground:#F5F7F6;
+  --surface:#FFFFFF;
+  --surface-2:#EAEFED;
+  --ink:#16211F;
+  --ink-2:#44534F;
+  --ink-3:#6C7B77;
+  --rule:#D4DDD9;
+  --rule-soft:#E4EAE8;
+  --accent:#17635E;
+  --accent-ink:#0E4744;
+  --accent-soft:#DBEBE8;
+  --ok:#2F7D4F;
+  --warn:#8F6410;
+  --crit:#A33321;
+  --shadow:0 1px 2px rgba(22,33,31,.05), 0 8px 24px -16px rgba(22,33,31,.28);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0E1513;
+    --surface:#151F1D;
+    --surface-2:#1C2825;
+    --ink:#E7EDEA;
+    --ink-2:#A7B6B1;
+    --ink-3:#7A8A85;
+    --rule:#293733;
+    --rule-soft:#1F2C29;
+    --accent:#63C4B8;
+    --accent-ink:#8FD8CE;
+    --accent-soft:#15332F;
+    --ok:#72CC92;
+    --warn:#D6AC58;
+    --crit:#E58371;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.7);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0E1513;
+  --surface:#151F1D;
+  --surface-2:#1C2825;
+  --ink:#E7EDEA;
+  --ink-2:#A7B6B1;
+  --ink-3:#7A8A85;
+  --rule:#293733;
+  --rule-soft:#1F2C29;
+  --accent:#63C4B8;
+  --accent-ink:#8FD8CE;
+  --accent-soft:#15332F;
+  --ok:#72CC92;
+  --warn:#D6AC58;
+  --crit:#E58371;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px -16px rgba(0,0,0,.7);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--ground);
+  color:var(--ink);
+  font-family:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  font-size:16px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:"Newsreader",Georgia,"Times New Roman",serif;font-weight:500;text-wrap:balance;margin:0;line-height:1.18}
+p{margin:0}
+a{color:var(--accent-ink);text-underline-offset:3px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+.mono{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:500;
+}
+
+/* ---------- shell ---------- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.shell{display:grid;grid-template-columns:minmax(0,1fr);gap:0}
+@media (min-width:1040px){
+  .shell{grid-template-columns:212px minmax(0,1fr);gap:56px;align-items:start}
+}
+
+/* ---------- masthead ---------- */
+.masthead{border-bottom:1px solid var(--rule);background:var(--surface)}
+.masthead .wrap{padding-top:52px;padding-bottom:44px}
+.mast-grid{display:flex;flex-direction:column;gap:22px;max-width:78ch}
+h1{font-size:clamp(38px,6.2vw,64px);letter-spacing:-.018em}
+h1 em{font-style:italic;color:var(--accent-ink)}
+.standfirst{font-size:clamp(17px,2.1vw,20px);color:var(--ink-2);max-width:62ch}
+.mast-meta{
+  display:flex;flex-wrap:wrap;gap:8px 28px;padding-top:20px;
+  border-top:1px solid var(--rule-soft);
+}
+.mast-meta div{display:flex;flex-direction:column;gap:2px}
+.mast-meta b{font-size:14px;font-weight:600;color:var(--ink)}
+
+/* ---------- clock strip ---------- */
+.clock{background:var(--accent-soft);border-bottom:1px solid var(--rule)}
+.clock .wrap{display:flex;flex-wrap:wrap;gap:10px 32px;padding-top:14px;padding-bottom:14px;align-items:baseline}
+.clock .k{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);font-weight:600}
+.clock .v{font-size:14.5px;color:var(--ink-2)}
+.clock .v strong{color:var(--ink);font-weight:600}
+
+/* ---------- side nav ---------- */
+.sidenav{display:none}
+@media (min-width:1040px){
+  .sidenav{
+    display:block;position:sticky;top:28px;
+    padding:28px 0 60px;
+  }
+  .sidenav ol{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:1px}
+  .sidenav a{
+    display:grid;grid-template-columns:26px 1fr;gap:8px;
+    padding:5px 8px;margin-left:-8px;border-radius:4px;
+    font-size:13.5px;line-height:1.35;color:var(--ink-2);text-decoration:none;
+  }
+  .sidenav a:hover{background:var(--surface-2);color:var(--ink)}
+  .sidenav a span{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);padding-top:2px}
+  .sidenav .navsplit{margin:16px 0 6px}
+}
+
+/* ---------- content flow ---------- */
+main{padding:0 0 96px;min-width:0}
+section{padding-top:64px}
+.sec-head{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;max-width:70ch}
+.sec-head h2{font-size:clamp(26px,3.4vw,34px);letter-spacing:-.012em}
+.sec-head p{color:var(--ink-2);font-size:16.5px}
+.rule{height:1px;background:var(--rule);border:0;margin:0}
+
+/* ---------- read (strategic framing) ---------- */
+.reads{display:grid;gap:18px;grid-template-columns:1fr}
+@media (min-width:760px){.reads{grid-template-columns:repeat(3,1fr)}}
+.read{
+  background:var(--surface);border:1px solid var(--rule);border-radius:6px;
+  padding:22px 22px 24px;display:flex;flex-direction:column;gap:10px;
+}
+.read h3{font-size:19px}
+.read p{font-size:14.8px;color:var(--ink-2);line-height:1.58}
+.read .num{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;
+  color:var(--accent-ink);letter-spacing:.1em;
+}
+
+.callout{
+  border-left:3px solid var(--accent);background:var(--surface);
+  padding:18px 22px;border-radius:0 6px 6px 0;margin-top:22px;
+  font-size:15.5px;color:var(--ink-2);
+}
+.callout strong{color:var(--ink)}
+
+/* ---------- matrix ---------- */
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:14px}
+thead th{
+  text-align:left;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:600;
+  padding:14px 16px;border-bottom:1px solid var(--rule);white-space:nowrap;
+  background:var(--surface-2);
+}
+tbody td{padding:13px 16px;border-bottom:1px solid var(--rule-soft);vertical-align:top;color:var(--ink-2)}
+tbody tr:last-child td{border-bottom:0}
+tbody tr.pick td{background:var(--accent-soft)}
+td.name{color:var(--ink);font-weight:600;white-space:nowrap}
+td.idx{font-family:"IBM Plex Mono",monospace;color:var(--ink-3);font-size:12px}
+.tabular{font-variant-numeric:tabular-nums}
+
+/* ---------- chips + meters ---------- */
+.chip{
+  display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+  letter-spacing:.09em;text-transform:uppercase;font-weight:600;
+  padding:3px 8px;border-radius:3px;white-space:nowrap;
+  background:var(--surface-2);color:var(--ink-2);border:1px solid var(--rule);
+}
+.chip.govern{background:var(--accent-soft);color:var(--accent-ink);border-color:transparent}
+.chip.measure{background:var(--accent-soft);color:var(--accent-ink);border-color:transparent}
+.chip.prepare{background:var(--accent-soft);color:var(--accent-ink);border-color:transparent}
+
+.meter{display:inline-flex;gap:3px;align-items:center;vertical-align:middle}
+.meter i{width:15px;height:5px;border-radius:1px;background:var(--rule);display:block}
+.meter.d1 i:nth-child(1){background:var(--ok)}
+.meter.d2 i:nth-child(-n+2){background:var(--warn)}
+.meter.d3 i{background:var(--crit)}
+.meterlabel{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);margin-left:7px}
+
+/* ---------- project cards ---------- */
+.projects{display:flex;flex-direction:column;gap:20px}
+.proj{
+  background:var(--surface);border:1px solid var(--rule);border-radius:7px;
+  overflow:hidden;scroll-margin-top:20px;
+}
+.proj.top{border-color:var(--accent);box-shadow:var(--shadow)}
+.proj-head{
+  padding:22px 24px 18px;border-bottom:1px solid var(--rule-soft);
+  display:flex;flex-direction:column;gap:12px;
+}
+.proj-title{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.proj-num{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-3);font-weight:600}
+.proj-title h3{font-size:24px;letter-spacing:-.01em}
+.proj-tags{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.q{
+  font-family:"Newsreader",Georgia,serif;font-size:19px;font-style:italic;
+  color:var(--accent-ink);line-height:1.42;max-width:60ch;
+}
+.proj-body{display:grid;grid-template-columns:1fr;gap:0}
+@media (min-width:820px){.proj-body{grid-template-columns:1.35fr 1fr}}
+.field{padding:18px 24px;border-bottom:1px solid var(--rule-soft)}
+@media (min-width:820px){
+  .field.build{grid-row:span 2;border-right:1px solid var(--rule-soft)}
+}
+.field:last-child{border-bottom:0}
+.field h4{
+  font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);font-weight:600;margin-bottom:9px;
+}
+.field p, .field li{font-size:14.6px;color:var(--ink-2);line-height:1.6}
+.field ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.field ul.tight li::marker{color:var(--ink-3)}
+.field .strong-line{color:var(--ink);font-weight:600}
+.crit-txt{color:var(--crit);font-weight:600}
+
+/* ---------- podium ---------- */
+.podium{display:flex;flex-direction:column;gap:18px}
+.pick{
+  background:var(--surface);border:1px solid var(--rule);border-radius:7px;
+  padding:24px 26px;display:grid;gap:16px;grid-template-columns:1fr;
+}
+@media (min-width:720px){.pick{grid-template-columns:62px 1fr;gap:24px}}
+.pick .rank{
+  font-family:"Newsreader",Georgia,serif;font-size:52px;line-height:.9;
+  color:var(--accent);font-weight:400;
+}
+.pick h3{font-size:22px;margin-bottom:8px}
+.pick p{font-size:15.2px;color:var(--ink-2);margin-bottom:12px}
+.pick p:last-child{margin-bottom:0}
+.pick.gold{border-color:var(--accent);border-width:2px}
+
+/* ---------- schedule ---------- */
+.sched{border:1px solid var(--rule);border-radius:6px;background:var(--surface);overflow:hidden}
+.slot{display:grid;grid-template-columns:1fr;gap:4px;padding:15px 22px;border-bottom:1px solid var(--rule-soft)}
+@media (min-width:640px){.slot{grid-template-columns:150px 1fr;gap:20px;align-items:baseline}}
+.slot:last-child{border-bottom:0}
+.slot .t{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--accent-ink);font-weight:600;letter-spacing:.03em}
+.slot .d{font-size:14.8px;color:var(--ink-2)}
+.slot .d b{color:var(--ink);font-weight:600}
+
+/* ---------- data list ---------- */
+.data{display:grid;grid-template-columns:1fr;gap:14px}
+@media (min-width:700px){.data{grid-template-columns:1fr 1fr}}
+.src{
+  background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:16px 18px;
+}
+.src h4{font-size:15px;font-family:"Public Sans",sans-serif;font-weight:600;margin-bottom:4px;color:var(--ink)}
+.src p{font-size:13.8px;color:var(--ink-2)}
+.src .u{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--ink-3);word-break:break-all;display:block;margin-top:5px}
+
+/* ---------- ledger ---------- */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:6px;overflow:hidden;margin-bottom:24px}
+@media (min-width:760px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{background:var(--surface);padding:18px 20px;display:flex;flex-direction:column;gap:3px}
+.stat b{font-family:"Newsreader",Georgia,serif;font-size:38px;line-height:1;font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+.stat b.alarm{color:var(--crit)}
+.stat span{font-size:13px;color:var(--ink-2);line-height:1.4}
+.stat .eyebrow{margin-bottom:4px}
+.ledger-note{font-size:14px;color:var(--ink-3);margin-top:12px;font-style:italic}
+.gap{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.gapline{
+  display:grid;grid-template-columns:1fr;gap:4px;padding:14px 18px;
+  background:var(--surface);border:1px solid var(--rule);border-radius:6px;
+}
+@media (min-width:680px){.gapline{grid-template-columns:190px 1fr;gap:22px;align-items:baseline}}
+.gapline .j{font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;color:var(--accent-ink);letter-spacing:.04em}
+.gapline .s{font-size:14.5px;color:var(--ink-2)}
+.gapline .s b{color:var(--ink);font-weight:600}
+
+footer{border-top:1px solid var(--rule);margin-top:20px;background:var(--surface)}
+footer .wrap{padding:32px 24px 48px;display:flex;flex-direction:column;gap:8px}
+footer p{font-size:13.5px;color:var(--ink-3);max-width:74ch}
+</style>
+
+<div class="masthead">
+  <div class="wrap">
+    <div class="mast-grid">
+      <p class="eyebrow">Mangrove · Ground-level Governance Hackathon · 28–30 Aug 2026</p>
+      <h1>Ten ways in, and <em>the three worth taking</em></h1>
+      <p class="standfirst">A scoping brief for a two-person Australian team with one working day, aimed squarely at what this hackathon actually rewards — a sharp question, honest limits, and something a council could use on Monday.</p>
+      <div class="mast-meta">
+        <div><span class="eyebrow">Tracks</span><b>Prepare · Measure · Govern</b></div>
+        <div><span class="eyebrow">Judged on</span><b>Scope · Rigor · Usefulness · Communication</b></div>
+        <div><span class="eyebrow">Deliverable</span><b>Artifacts + 3–5 min video</b></div>
+        <div><span class="eyebrow">Team</span><b>Julie &amp; Paul</b></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="clock">
+  <div class="wrap">
+    <span class="k">Verify these</span>
+    <span class="v"><strong>Register by ≈5pm AEST Fri 28 Aug</strong> (12:00am PT)</span>
+    <span class="v">Runs <strong>≈5am Sat → 5pm Sun AEST</strong></span>
+    <span class="v">Prize <strong>$500</strong>, feedback within a week</span>
+  </div>
+</div>
+
+<div class="wrap">
+<div class="shell">
+
+  <nav class="sidenav" aria-label="Contents">
+    <p class="eyebrow">Evidence</p>
+    <ol>
+      <li><a href="#ledger"><span>→</span>Three-year ledger</a></li>
+    </ol>
+    <p class="eyebrow navsplit">The ten</p>
+    <ol>
+      <li><a href="#p1"><span>01</span>The Robodebt Test</a></li>
+      <li><a href="#p2"><span>02</span>Shockmap AU</a></li>
+      <li><a href="#p3"><span>03</span>Last Mile</a></li>
+      <li><a href="#p4"><span>04</span>Ghost Warning</a></li>
+      <li><a href="#p5"><span>05</span>The Shire Floor</a></li>
+      <li><a href="#p6"><span>06</span>The Register</a></li>
+      <li><a href="#p7"><span>07</span>Right of Reply</a></li>
+      <li><a href="#p8"><span>08</span>Voiceprint</a></li>
+      <li><a href="#p9"><span>09</span>Clause Nine</a></li>
+      <li><a href="#p10"><span>10</span>Blind Spots</a></li>
+    </ol>
+    <p class="eyebrow navsplit">Then</p>
+    <ol>
+      <li><a href="#podium"><span>→</span>The top three</a></li>
+      <li><a href="#thesis"><span>→</span>What it proves</a></li>
+      <li><a href="#build"><span>→</span>Council Scan build</a></li>
+      <li><a href="#day"><span>→</span>One-day plan</a></li>
+      <li><a href="#data"><span>→</span>Data sources</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <section id="read" style="padding-top:52px">
+      <div class="sec-head">
+        <p class="eyebrow">Before the list</p>
+        <h2>Three things that should change what you build</h2>
+      </div>
+      <div class="reads">
+        <div class="read">
+          <p class="num">01</p>
+          <h3>The theme is catastrophic risk, not civic tech</h3>
+          <p>Mangrove is an AI safety field-building organisation. The brief is <em>how local governments should respond to AI-driven catastrophic risks</em>. A tool that makes council services friendlier will read as off-theme. The work has to connect to severe, systemic, or irreversible harm — and to say honestly how large that harm plausibly is.</p>
+        </div>
+        <div class="read">
+          <p class="num">02</p>
+          <h3>The criteria are research criteria</h3>
+          <p>Question and scope. Rigor and honesty. Usefulness to decisionmakers. Communication to intelligent non-specialists. Nothing on that list rewards technical difficulty. Strong technical teams lose these hackathons by shipping an impressive demo that answers no stated question and states no limitations.</p>
+        </div>
+        <div class="read">
+          <p class="num">03</p>
+          <h3>Your asymmetry is larger than you think</h3>
+          <p>Judges span digital governance, AI research, economics and AI safety. They can all read code. Almost none of them can tell you what happens to a person in a remote community when an automated decision goes against them. Julie can. Build the thing that only your team could have built.</p>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>The Australian gift.</strong> Australia has the world's best-documented case of an automated government system causing catastrophic harm at population scale: Robodebt, and a Royal Commission report that names exactly how it happened. Every country has an equivalent scandal; Australia is the one with a forensic public record. That record is a free, rigorous, globally legible foundation — and it is sitting in a PDF that nobody at this hackathon except you will think to use.
+      </div>
+    </section>
+
+    <section id="ledger">
+      <div class="sec-head">
+        <p class="eyebrow">Verified · PM&amp;C implementation update, March 2026</p>
+        <h2>The three-year ledger</h2>
+        <p>Counted from the Government's own tracking table. Three questions get three different answers, and the gap between them is where the work is.</p>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><span class="eyebrow">Accepted</span><b>56<span style="font-size:20px;color:var(--ink-3)">/57</span></b><span>Accepted or accepted in principle, Nov 2023. The 57th was rejected.</span></div>
+        <div class="stat"><span class="eyebrow">Reported done</span><b>52</b><span>51 “Implemented” plus one “Implemented – ongoing”.</span></div>
+        <div class="stat"><span class="eyebrow">Still open</span><b class="alarm">4</b><span>16.2, 17.1, 17.2, 18.2 — after nearly three years.</span></div>
+        <div class="stat"><span class="eyebrow">Needing law, unpassed</span><b class="alarm">3</b><span>Every remaining item the Government itself flags as requiring legislation.</span></div>
+      </div>
+
+      <p style="font-size:15.5px;color:var(--ink-2);max-width:68ch;margin-bottom:20px">Two of those three unlegislated recommendations are <span style="color:var(--ink);font-weight:600">the automated decision-making ones</span> — 17.1, a consistent legal framework for automation in government with a clear review path and published business rules; and 17.2, a body empowered to monitor and audit automated decisions for bias and fairness. Both remain at “the Government will consider”. The third, 18.2, is the six-year limitation on debt recovery, accepted only in principle.</p>
+
+      <div class="callout">
+        <strong>The distinction that carries the argument.</strong> Most of the 52 completed items were delivered administratively — training, directions, guidance, Budget Process Operational Rules, recordkeeping standards, legal practice standards. The genuinely legislative wins sit in chapters 20 and 21 and rode on the Administrative Review Tribunal Act 2024: the ART itself, publication of first-instance decisions, the re-established Administrative Review Council, and the Ombudsman's referral powers. So: the accountability plumbing was rebuilt. The rules governing the machine were not.
+      </div>
+
+      <h3 style="font-size:22px;margin:40px 0 6px">And none of it reaches a council</h3>
+      <p style="font-size:15.5px;color:var(--ink-2);max-width:68ch;margin-bottom:18px">Every one of the 57 recommendations is directed at Commonwealth entities — Services Australia, DSS, the ATO, AGD, the APSC, the Ombudsman, the tribunal. A royal commission into a Commonwealth scheme produced Commonwealth remedies, and local government is a creature of state legislation. The result is a clean, checkable gap:</p>
+
+      <div class="gap">
+        <div class="gapline"><div class="j">Federal Privacy Act</div><div class="s">New APP 1.7–1.9 require disclosure of automated decisions in privacy policies from <b>10 December 2026</b> — the closest thing Australia has to a Robodebt-derived ADM transparency law. Councils are state authorities and sit outside the Act, so <b>it binds no Australian council</b>.</div></div>
+        <div class="gapline"><div class="j">NSW · VIC · QLD · TAS · NT</div><div class="s">State privacy Acts <b>do</b> cover local councils — but they are collection, use and disclosure principles written before ADM was a live issue. I found <b>no ADM-specific provision</b> in any of them. Verify this yourself before you put it on a slide; it is the load-bearing claim.</div></div>
+        <div class="gapline"><div class="j">Western Australia</div><div class="s">The Privacy and Responsible Information Sharing Act 2024 commences <b>1 July 2026</b> and does cover local and regional governments — 11 information privacy principles, breach reporting from 1 January 2027. Again, no ADM provision.</div></div>
+        <div class="gapline"><div class="j">South Australia</div><div class="s">No privacy legislation at all. SA councils are covered by <b>no privacy statute</b>, let alone an ADM one.</div></div>
+        <div class="gapline"><div class="j">AI policy instruments</div><div class="s">The Commonwealth's responsible-AI policy binds non-corporate Commonwealth entities. The NSW AI Assessment Framework binds NSW government agencies. Councils are separate bodies under state local government Acts and sit <b>outside both perimeters</b>.</div></div>
+      </div>
+
+      <div class="callout" style="border-left-color:var(--crit)">
+        <strong>The evidence that the gap is live.</strong> On 8 March 2024 the NSW Ombudsman tabled a special report mapping <strong>275 automated decision-making systems</strong> across NSW state agencies and local councils — the first systematic mapping of its kind in Australia. Roughly a third of the systems reported were in development, being piloted, or planned within three years, <strong>mostly by local councils</strong>. Neither agencies nor councils have any obligation to report ADM use at all, and the Ombudsman warned that voluntary reporting will not be sufficient. Councils are among the fastest-growing adopters of automated decision-making in the one jurisdiction anybody has counted — and they sit outside every reform Robodebt produced.
+      </div>
+
+      <p style="font-size:15.5px;color:var(--ink-2);max-width:68ch;margin-top:22px">This sharpens project 01 considerably. The question stops being <em>would today's frameworks have caught Robodebt?</em> and becomes the harder, better one: <em>for local government there is no framework to catch it, the two recommendations that would have built one are the two still unlegislated three years on, and councils are adopting automation faster than the state agencies that are regulated.</em> That is a finding, not a checklist.</p>
+    </section>
+
+    <section id="matrix">
+      <div class="sec-head">
+        <p class="eyebrow">At a glance</p>
+        <h2>The ten, compared</h2>
+        <p>Difficulty is calibrated for two people with Claude Code and about ten productive hours. Highlighted rows are the final three.</p>
+      </div>
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>Project</th><th>Track</th><th>Difficulty</th><th>Data risk</th><th>Differentiation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="pick"><td class="idx">01</td><td class="name">The Robodebt Test</td><td>Govern</td><td><span class="meter d1"><i></i><i></i><i></i></span><span class="meterlabel">Low–Med</span></td><td>Very low</td><td>Very high</td></tr>
+            <tr class="pick"><td class="idx">03</td><td class="name">Last Mile</td><td>Measure</td><td><span class="meter d2"><i></i><i></i><i></i></span><span class="meterlabel">Medium</span></td><td>Low</td><td>Very high</td></tr>
+            <tr class="pick"><td class="idx">02</td><td class="name">Shockmap AU</td><td>Prepare · Measure</td><td><span class="meter d2"><i></i><i></i><i></i></span><span class="meterlabel">Medium</span></td><td>Medium</td><td>Medium</td></tr>
+            <tr><td class="idx">04</td><td class="name">Ghost Warning</td><td>Prepare</td><td><span class="meter d1"><i></i><i></i><i></i></span><span class="meterlabel">Low</span></td><td>Low</td><td>Medium</td></tr>
+            <tr><td class="idx">05</td><td class="name">The Shire Floor</td><td>Prepare</td><td><span class="meter d1"><i></i><i></i><i></i></span><span class="meterlabel">Low–Med</span></td><td>Low</td><td>Low</td></tr>
+            <tr><td class="idx">06</td><td class="name">The Register</td><td>Measure</td><td><span class="meter d3"><i></i><i></i><i></i></span><span class="meterlabel">High</span></td><td class="crit-txt">High</td><td>Very high</td></tr>
+            <tr><td class="idx">07</td><td class="name">Right of Reply</td><td>Govern</td><td><span class="meter d1"><i></i><i></i><i></i></span><span class="meterlabel">Low–Med</span></td><td>Low</td><td>High</td></tr>
+            <tr><td class="idx">08</td><td class="name">Voiceprint</td><td>Prepare</td><td><span class="meter d1"><i></i><i></i><i></i></span><span class="meterlabel">Low</span></td><td>Low</td><td>Low</td></tr>
+            <tr><td class="idx">09</td><td class="name">Clause Nine</td><td>Govern</td><td><span class="meter d1"><i></i><i></i><i></i></span><span class="meterlabel">Low</span></td><td>Low</td><td>Medium</td></tr>
+            <tr><td class="idx">10</td><td class="name">Blind Spots</td><td>Measure</td><td><span class="meter d2"><i></i><i></i><i></i></span><span class="meterlabel">Medium</span></td><td>Medium</td><td>High</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="sec-head">
+        <p class="eyebrow">The catalogue</p>
+        <h2>Ten projects</h2>
+        <p>Each one leads with the question it answers, because that is the first thing being judged.</p>
+      </div>
+
+      <div class="projects">
+
+        <!-- 01 -->
+        <article class="proj top" id="p1">
+          <div class="proj-head">
+            <div class="proj-title">
+              <span class="proj-num">01</span>
+              <h3>The Robodebt Test</h3>
+            </div>
+            <div class="proj-tags">
+              <span class="chip govern">Govern</span>
+              <span class="chip">Difficulty: Low–Med</span>
+              <span class="chip">Recommended</span>
+            </div>
+            <p class="q">“Robodebt produced 57 recommendations. Three years on, the two that would have regulated automated decision-making are still unlegislated — and none of the reform reaches local government. What would a council-grade test have to look like?”</p>
+          </div>
+          <div class="proj-body">
+            <div class="field build">
+              <h4>What you build</h4>
+              <ul class="tight">
+                <li>Read the Robodebt Royal Commission final report with Claude Code and extract a structured list of <span class="strong-line">failure modes</span> — no lawful basis established before scaling; a statistical average substituted for a fact about an individual; the onus of disproof shifted onto the affected person; internal legal doubt suppressed; complaints handled as customer service rather than treated as a harm signal; no pilot before population-scale rollout; no pathway that could actually reverse a decision.</li>
+                <li>Convert each failure mode into a <span class="strong-line">testable screening criterion</span> — a question with a defensible pass/fail, traceable back to a numbered finding.</li>
+                <li>Score real, current governance artifacts against the criteria: the NSW AI Assessment Framework, the Commonwealth DTA policy for responsible AI use in government, Australia's eight AI Ethics Principles, ISO/IEC 42001, plus three to five actual council AI policies you can find online. Publish the scoring matrix and the rubric.</li>
+                <li>Ship the <span class="strong-line">screener itself</span>: a 12-question, 45-minute pre-deployment check a council officer can run without a consultant, where every question cites the finding that produced it.</li>
+              </ul>
+            </div>
+            <div class="field">
+              <h4>Data required</h4>
+              <p>All public, all free, no scraping: the Royal Commission final report (PDF), the framework documents, and council AI policies published on council websites. Zero data risk — this is the single biggest reason it fits one day.</p>
+            </div>
+            <div class="field">
+              <h4>Strengths &amp; weaknesses</h4>
+              <ul class="tight">
+                <li><span class="strong-line">Makes a claim, not just a tool.</span> The likely finding — that most frameworks would have passed Robodebt — is a genuine, checkable result.</li>
+                <li>Uniquely Australian, but immediately legible to judges anywhere; every country has its own version.</li>
+                <li>Julie's social work background makes the harm analysis authoritative rather than assumed.</li>
+                <li><span class="crit-txt">Risk:</span> if done lazily it is “a checklist”. Defend against this by scoring real named artifacts, publishing the rubric, and being explicit where a framework partially passes.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 02 -->
+        <article class="proj" id="p2">
+          <div class="proj-head">
+            <div class="proj-title">
+              <span class="proj-num">02</span>
+              <h3>Shockmap AU</h3>
+            </div>
+            <div class="proj-tags">
+              <span class="chip prepare">Prepare</span>
+              <span class="chip measure">Measure</span>
+              <span class="chip">Difficulty: Medium</span>
+            </div>
+            <p class="q">“Which Australian local government areas face the largest AI labour shock — and are they the ones least able to absorb it?”</p>
+          </div>
+          <div class="proj-body">
+            <div class="field build">
+              <h4>What you build</h4>
+              <ul class="tight">
+                <li>Pull ABS Census occupation counts by LGA, map ANZSCO occupations to a published AI-exposure index, and produce an exposure score for each of Australia's ~537 LGAs.</li>
+                <li>Overlay three absorption variables: SEIFA relative disadvantage, remoteness classification, and council own-source revenue share — a council that funds itself from rates on a single industry town has a very different shock profile from an inner-metro council.</li>
+                <li>Output an interactive choropleth, a ranked table, and a one-page auto-generated brief per LGA that a general manager could take to a council meeting.</li>
+                <li>Run the whole pipeline across <span class="strong-line">three different exposure indices</span> and publish where they disagree. This sensitivity analysis is the rigor score.</li>
+              </ul>
+            </div>
+            <div class="field">
+              <h4>Data required</h4>
+              <p>ABS Census DataPacks or the ABS Data Explorer API; SEIFA; ASGS remoteness; published exposure indices; state grants commission or council annual report financials. All free, but the ANZSCO-to-index crosswalk is fiddly and the newest usable Census is 2021 — 2026 Census data is not out yet.</p>
+            </div>
+            <div class="field">
+              <h4>Strengths &amp; weaknesses</h4>
+              <ul class="tight">
+                <li>Produces a number that does not currently exist at LGA resolution. Visually the strongest artifact of the ten.</li>
+                <li>Answers Prepare and Measure simultaneously, with a clean quantitative spine.</li>
+                <li><span class="crit-txt">Risk:</span> exposure indices are genuinely contested and the crosswalk is lossy. Treat that as the honest core of the work, not a footnote.</li>
+                <li><span class="crit-txt">Risk:</span> a technical team may attempt something similar, and labour disruption sits at the edge of “catastrophic”. Frame it as a <em>state capacity</em> shock — demand for council services rises exactly as the rates base falls.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 03 -->
+        <article class="proj top" id="p3">
+          <div class="proj-head">
+            <div class="proj-title">
+              <span class="proj-num">03</span>
+              <h3>Last Mile</h3>
+            </div>
+            <div class="proj-tags">
+              <span class="chip measure">Measure</span>
+              <span class="chip">Difficulty: Medium</span>
+              <span class="chip">Recommended</span>
+            </div>
+            <p class="q">“When a resident asks a general AI assistant about their council, how often is the answer right — and does that depend on which council they live in?”</p>
+          </div>
+          <div class="proj-body">
+            <div class="field build">
+              <h4>What you build</h4>
+              <ul class="tight">
+                <li><span class="strong-line">Don't test council chatbots.</span> Most councils don't have one, and remote Indigenous councils certainly don't. Test what is already happening: people ask ChatGPT, Claude, Gemini and AI search about their council <em>today</em>, at scale, with no council involvement and no council control. That is measurable right now, for any council in Australia, without anyone's permission.</li>
+                <li>A fixed question set every council can answer factually — bin collection day, rates due date and hardship process, dog registration fee, how to lodge a development application, tip opening hours, how to contest an infringement, who the mayor is.</li>
+                <li><span class="strong-line">Ground truth from each council's own website</span>, scraped and human-spot-checked. This is what makes it scoreable rather than impressionistic.</li>
+                <li>A cohort of Queensland's 77 councils, stratified: south-east metro → regional city → rural shire → remote → <span class="strong-line">the 17 Indigenous councils</span> (16 Aboriginal Shire Councils plus Torres Strait Island Regional Council).</li>
+                <li>Score per council and per stratum: correct, wrong, <span class="strong-line">confidently wrong</span>, refused, and “answered about a different council”. Then plot accuracy against remoteness and council size.</li>
+              </ul>
+            </div>
+            <div class="field">
+              <h4>Data required</h4>
+              <p>A list of QLD councils and their websites (trivial), the Queensland Local Government Comparative Information report on the state open data portal for size and remoteness, and model API access. No council cooperation needed, no legal analysis, no federation explaining.</p>
+            </div>
+            <div class="field">
+              <h4>Strengths &amp; weaknesses</h4>
+              <ul class="tight">
+                <li>The expected result is a clean gradient: accuracy falls with remoteness and council size, and collapses for Indigenous councils — because the training data holds a great deal about Brisbane and almost nothing about Kowanyama or Pormpuraaw. Confidently wrong is worse than refusing, and that distinction is measurable.</li>
+                <li>Nothing here depends on what councils are empowered to do, on the Robodebt ledger, or on any contested legal claim. It cannot be knocked over in Q&amp;A by a correction about Australian federalism.</li>
+                <li>Julie's expertise is load-bearing on which questions matter and how a wrong answer actually plays out, not decorative.</li>
+                <li><span class="crit-txt">Be honest about severity:</span> a wrong bin day is not catastrophic. The argument is that AI is quietly becoming the default interface to government for people who can least easily reach it another way, and it degrades exactly where the alternatives are thinnest. Make that argument plainly; do not inflate it.</li>
+                <li><span class="crit-txt">Handle carefully:</span> if you add Aboriginal English phrasings as a second axis, present them as a method and seed set needing community validation, not a finished benchmark.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 04 -->
+        <article class="proj" id="p4">
+          <div class="proj-head">
+            <div class="proj-title">
+              <span class="proj-num">04</span>
+              <h3>Ghost Warning</h3>
+            </div>
+            <div class="proj-tags">
+              <span class="chip prepare">Prepare</span>
+              <span class="chip">Difficulty: Low</span>
+            </div>
+            <p class="q">“How long would it take an Australian council to detect and correct a synthetic evacuation message during a fire — and who has authority to do it at 2am?”</p>
+          </div>
+          <div class="proj-body">
+            <div class="field build">
+              <h4>What you build</h4>
+              <ul class="tight">
+                <li>A runnable 60-minute tabletop exercise kit with timed injects: a cloned mayoral voice note in a community WhatsApp group, a fabricated emergency-services social post, an SMS with the wrong evacuation route.</li>
+                <li>A <span class="strong-line">time-to-correct model</span> built from real council and state emergency comms protocols — mapping who must approve a public correction, through how many steps, and what the delay is out of hours.</li>
+                <li>A one-page pre-authorisation template councils can adopt: the standing delegation that lets a duty officer contradict a fake without waiting for a manager.</li>
+              </ul>
+            </div>
+            <div class="field">
+              <h4>Data required</h4>
+              <p>Published state emergency management arrangements, council emergency plans (usually public), and the Bushfire Royal Commission findings on warning-message failure.</p>
+            </div>
+            <div class="field">
+              <h4>Strengths &amp; weaknesses</h4>
+              <ul class="tight">
+                <li>Genuinely catastrophic and genuinely local — this is a channel where AI misinformation kills people, and councils are the trusted local voice.</li>
+                <li>Australia has unmatched credibility on disaster comms. Excellent video demo.</li>
+                <li><span class="crit-txt">Risk:</span> thin as software; could land as “a Word document with a nice cover”.</li>
+                <li><span class="crit-txt">Ethics:</span> never generate a synthetic clip of a real, named official. Use a fictional shire throughout.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 05 -->
+        <article class="proj" id="p5">
+          <div class="proj-head">
+            <div class="proj-title">
+              <span class="proj-num">05</span>
+              <h3>The Shire Floor</h3>
+            </div>
+            <div class="proj-tags">
+              <span class="chip prepare">Prepare</span>
+              <span class="chip">Difficulty: Low–Med</span>
+            </div>
+            <p class="q">“What is the minimum security posture a 25-staff remote shire can actually reach — and what share of Australian councils sit below it?”</p>
+          </div>
+          <div class="proj-body">
+            <div class="field build">
+              <h4>What you build</h4>
+              <ul class="tight">
+                <li>A capacity-calibrated baseline: not “implement the Essential Eight”, but the achievable floor for a council with one IT person, plus the AI-era additions — model access logging, vendor data flows, staff use of consumer chatbots on resident data.</li>
+                <li>A sector gap estimate drawn from state audit office reports on local government cyber security, which contain real published compliance numbers.</li>
+                <li>A self-assessment a council can complete in 30 minutes that outputs a ranked remediation list priced against a small-council budget.</li>
+              </ul>
+            </div>
+            <div class="field">
+              <h4>Data required</h4>
+              <p>NSW Audit Office and Victorian Auditor-General local government cyber audits, ACSC annual threat reports, ALGA material — all public with real numbers in them.</p>
+            </div>
+            <div class="field">
+              <h4>Strengths &amp; weaknesses</h4>
+              <ul class="tight">
+                <li>Grounded in published audit data, which scores well on rigor. Regional councils run water and wastewater, so the tail risk is real.</li>
+                <li><span class="crit-txt">Weakness:</span> crowded field, and the AI angle is speculative unless you tie it specifically to AI-uplifted attackers. Weakest inclusion story of the ten.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 06 -->
+        <article class="proj" id="p6">
+          <div class="proj-head">
+            <div class="proj-title">
+              <span class="proj-num">06</span>
+              <h3>The Register</h3>
+            </div>
+            <div class="proj-tags">
+              <span class="chip measure">Measure</span>
+              <span class="chip">Difficulty: High</span>
+            </div>
+            <p class="q">“What AI is actually deployed in Australian local government right now?”</p>
+          </div>
+          <div class="proj-body">
+            <div class="field build">
+              <h4>What you build</h4>
+              <ul class="tight">
+                <li><span class="strong-line">Start from the NSW Ombudsman's map, don't start from zero.</span> Its March 2024 special report already catalogued 275 ADM systems across NSW agencies and councils. Nobody has updated it in over two years or replicated the method in another state — so the genuinely novel move is either a 2026 refresh of the NSW picture or the first equivalent map for Victoria or Queensland.</li>
+                <li><span class="strong-line">Do not attempt all 537 councils.</span> Take a stratified random sample of 100 across metro, regional and remote. That is both achievable in a day and more defensible statistically — you can state a sector-wide estimate with an error range instead of an incomplete list.</li>
+                <li>Classify by risk tier and, crucially, by whether the deciding council sits under any privacy statute at all.</li>
+              </ul>
+            </div>
+            <div class="field">
+              <h4>Data required</h4>
+              <p>The NSW Ombudsman / ADM+S dataset as a baseline, then council websites, meeting minutes (PDFs of highly variable quality) and state tender portals. Free, but slow and messy.</p>
+            </div>
+            <div class="field">
+              <h4>Strengths &amp; weaknesses</h4>
+              <ul class="tight">
+                <li>Pure Measure track, and the “nobody has counted this since 2024” framing is strong.</li>
+                <li><span class="crit-txt">Serious delivery risk.</span> This is the one project on the list that can consume your entire day and produce nothing presentable. Only attempt it with a hard timebox and the sampling design above.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 07 -->
+        <article class="proj" id="p7">
+          <div class="proj-head">
+            <div class="proj-title">
+              <span class="proj-num">07</span>
+              <h3>Right of Reply</h3>
+            </div>
+            <div class="proj-tags">
+              <span class="chip govern">Govern</span>
+              <span class="chip">Difficulty: Low–Med</span>
+            </div>
+            <p class="q">“If a council system makes an automated decision about you, can you actually contest it?”</p>
+          </div>
+          <div class="proj-body">
+            <div class="field build">
+              <h4>What you build</h4>
+              <ul class="tight">
+                <li>Trace the real appeal pathway for five automated or semi-automated council decisions — infringement notices, rates arrears escalation, development applications, unapproved-structure enforcement, animal impoundment — and measure each: number of steps, reading level of the notice, channels available, time limits, and crucially whether any human in the chain has power to reverse it.</li>
+                <li>Build a generator that turns any such decision notice into plain language, Easy English, and spoken audio, with the appeal pathway stated as concrete next actions.</li>
+              </ul>
+            </div>
+            <div class="field">
+              <h4>Data required</h4>
+              <p>Real published council notices and appeal policies. Easy English guidelines. No acquisition problem.</p>
+            </div>
+            <div class="field">
+              <h4>Strengths &amp; weaknesses</h4>
+              <ul class="tight">
+                <li>This is the central Robodebt lesson — the harm was not the algorithm, it was the absence of a working reversal path — and it is exactly Julie's professional terrain.</li>
+                <li><span class="crit-txt">Weakness:</span> substantially overlaps project 01. Strongest as a component of it, not a separate entry.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 08 -->
+        <article class="proj" id="p8">
+          <div class="proj-head">
+            <div class="proj-title">
+              <span class="proj-num">08</span>
+              <h3>Voiceprint</h3>
+            </div>
+            <div class="proj-tags">
+              <span class="chip prepare">Prepare</span>
+              <span class="chip">Difficulty: Low</span>
+            </div>
+            <p class="q">“Which communities are most exposed to AI-enabled impersonation scams routed through council-adjacent services?”</p>
+          </div>
+          <div class="proj-body">
+            <div class="field build">
+              <h4>What you build</h4>
+              <ul class="tight">
+                <li>An exposure model combining national scam-report data by age and channel with ABS population structure by LGA, identifying where voice-cloning and impersonation scams will land hardest — rates payment redirection, aged care, home care packages.</li>
+                <li>A council comms kit: verification protocol, what councils should promise never to do by phone, and a warning template tested for plain language.</li>
+              </ul>
+            </div>
+            <div class="field">
+              <h4>Data required</h4>
+              <p>Scamwatch / National Anti-Scam Centre quarterly data, ABS age structure by LGA. Clean and free.</p>
+            </div>
+            <div class="field">
+              <h4>Strengths &amp; weaknesses</h4>
+              <ul class="tight">
+                <li>Real data, real harm, easy build, clear audience.</li>
+                <li><span class="crit-txt">Weakness:</span> an AI safety panel may read this as ordinary cybercrime rather than AI-driven catastrophic risk. Hardest of the ten to justify against the theme.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 09 -->
+        <article class="proj" id="p9">
+          <div class="proj-head">
+            <div class="proj-title">
+              <span class="proj-num">09</span>
+              <h3>Clause Nine</h3>
+            </div>
+            <div class="proj-tags">
+              <span class="chip govern">Govern</span>
+              <span class="chip">Difficulty: Low</span>
+            </div>
+            <p class="q">“Do the contracts councils are actually signing give them the rights they would need when an AI system fails?”</p>
+          </div>
+          <div class="proj-body">
+            <div class="field build">
+              <h4>What you build</h4>
+              <ul class="tight">
+                <li>A short library of drafted procurement clauses covering the rights councils lack: audit access, incident notification thresholds, model change notification, exit and data portability, liability for automated decisions, and a right to human review that the vendor must technically support.</li>
+                <li>Then the interesting half — take the publicly available terms of service for widely used government AI products and assess which clauses they would currently fail.</li>
+              </ul>
+            </div>
+            <div class="field">
+              <h4>Data required</h4>
+              <p>Public vendor terms of service, existing government procurement frameworks, state ICT panel arrangements.</p>
+            </div>
+            <div class="field">
+              <h4>Strengths &amp; weaknesses</h4>
+              <ul class="tight">
+                <li>Immediately usable by a decisionmaker, and the vendor gap analysis is a genuine finding rather than a template.</li>
+                <li><span class="crit-txt">Weakness:</span> dry to demo, and you must frame vendor assessment as analysis of published terms, carefully worded.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <!-- 10 -->
+        <article class="proj" id="p10">
+          <div class="proj-head">
+            <div class="proj-title">
+              <span class="proj-num">10</span>
+              <h3>Blind Spots</h3>
+            </div>
+            <div class="proj-tags">
+              <span class="chip measure">Measure</span>
+              <span class="chip">Difficulty: Medium</span>
+            </div>
+            <p class="q">“Of the AI harms a council could plausibly cause or suffer, how many could it even detect?”</p>
+          </div>
+          <div class="proj-body">
+            <div class="field build">
+              <h4>What you build</h4>
+              <ul class="tight">
+                <li>Enumerate roughly fifteen harm channels. For each, specify the <span class="strong-line">minimum instrumentation</span> required to notice it happening: which log, which complaint category, which staff role, which retention period, which threshold triggers escalation.</li>
+                <li>Assess what councils actually have, from public documents, and produce a detectability score. The answer will be low, and that inversion is the finding: the Measure track asks what councils can measure reliably, and the honest reply is “almost nothing, and here is precisely which instrument is missing in each case”.</li>
+              </ul>
+            </div>
+            <div class="field">
+              <h4>Data required</h4>
+              <p>Council complaint handling policies, records management schedules, annual reports, ombudsman reports.</p>
+            </div>
+            <div class="field">
+              <h4>Strengths &amp; weaknesses</h4>
+              <ul class="tight">
+                <li>Intellectually the sharpest framing here — it is monitoring-and-evals thinking applied to an institution rather than a model, which will land well with an AI safety panel.</li>
+                <li><span class="crit-txt">Weakness:</span> abstract, and it needs one very concrete worked example to avoid feeling like a taxonomy exercise. The dark horse of the list.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="podium">
+      <div class="sec-head">
+        <p class="eyebrow">Recommendation</p>
+        <h2>The top three</h2>
+        <p>Ranked by win probability for <em>your</em> team specifically — one working day, two people, and a panel that rewards a good question over a good build.</p>
+      </div>
+      <div class="podium">
+
+        <div class="pick gold">
+          <div class="rank">1</div>
+          <div>
+            <h3>The Robodebt Test — with a small Last Mile experiment inside it</h3>
+            <p>Build 01 as the spine and fold in about forty items from 03 as the evidence layer. The submission then has all four things the criteria ask for: a question (<em>would today's frameworks have caught it?</em>), a method (failure modes extracted from a Royal Commission and turned into criteria), an experiment (running the resulting test against a live-representative council assistant and measuring who it fails), and a tool a council can use unaided on Monday.</p>
+            <p>It is nearly data-risk-free, it is impossible for a purely technical team to produce, and the video writes itself: <em>Australia already ran this experiment on 400,000 people. Here is the test we built from the wreckage, and here is what it catches.</em></p>
+            <p><strong>Split:</strong> Julie owns the failure-mode extraction, the criteria, and the eval items. Paul owns the RAG pipeline over the report, the scoring harness, and the published site. Cut the eval to twenty items before you cut the audit.</p>
+          </div>
+        </div>
+
+        <div class="pick">
+          <div class="rank">2</div>
+          <div>
+            <h3>Last Mile, standalone</h3>
+            <p>If you want the submission to be an experiment rather than an argument, run 03 on its own and go deeper — more registers, more service domains, a proper error taxonomy. Highest novelty of anything on the list, and the resulting benchmark is the kind of artifact that outlives the weekend.</p>
+            <p>Choose this over the top pick only if you are confident you can handle the community-validation caveat gracefully on camera. Stated well it is a strength; glossed over it is the one thing that could sink an otherwise winning entry.</p>
+          </div>
+        </div>
+
+        <div class="pick">
+          <div class="rank">3</div>
+          <div>
+            <h3>Shockmap AU</h3>
+            <p>The safe, visual, quantitative option. Take it if you would rather compete on a clean data artifact than on argument, or if the map matters more to you than the finding. Be aware this is also the project most likely to be attempted by a technical team, so your edge shifts from novelty to execution — and specifically to the sensitivity analysis, which most teams will skip and which is worth more points than the map.</p>
+            <p><strong>Dark horse:</strong> if none of these grab you, 10 (Blind Spots) is the most intellectually distinctive framing in the set and the one an AI safety panel is most likely to find genuinely interesting.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="thesis">
+      <div class="sec-head">
+        <p class="eyebrow">Correction · the thesis</p>
+        <h2>What it actually proves</h2>
+        <p>Scoring a 25-staff shire against a national welfare scheme's failure is a category error if you treat it as a compliance bar. Here is the version that survives contact with a judge.</p>
+      </div>
+
+      <div class="callout" style="border-left-color:var(--crit)">
+        <strong>The question that kills the weak version.</strong> “You have shown that a small rural council does not have the governance apparatus of a national agency. So what?” If the answer is a compliance score, there isn't one — small organisations lack big-organisation apparatus, and that is neither surprising nor necessarily wrong. The rubric has to stop being a bar and start being a ratio.
+      </div>
+
+      <h3 style="font-size:21px;margin:34px 0 8px">Separate the taxonomy from the threshold</h3>
+      <p style="font-size:15.5px;color:var(--ink-2);max-width:68ch;margin-bottom:16px">The Royal Commission is an excellent source of <em>what goes wrong</em> and a bad source of <em>how much apparatus is required</em>. Keep the first, throw away the second. Of the failure modes, roughly four transfer cleanly to council scale — no lawful basis established before deployment, the onus of disproof shifted onto the resident, complaints not treated as a signal, and no route that can actually reverse the decision. Two transfer weakly, because they are artefacts of national scale: statistical averaging in place of individual fact, and scaling before piloting.</p>
+      <p style="font-size:15.5px;color:var(--ink-2);max-width:68ch;margin-bottom:20px">So score <span class="strong-line">proportionality, not compliance</span>: is the safeguard matched to the consequence of the decision this council actually automates? A shire that automates pet registration should pass easily and be told so. A shire that automates hardship assessment with no reversal pathway should fail. This is also the only version councils will adopt — a tool that tells every small shire it is failing gets deleted.</p>
+
+      <h3 style="font-size:21px;margin:34px 0 8px">First, what an Australian council actually does</h3>
+      <p style="font-size:15.5px;color:var(--ink-2);max-width:68ch;margin-bottom:16px">Health, education, police, hospitals, public housing, welfare payments and public transport are <span class="strong-line">state functions, not council ones</span>. Australian local government is narrow: rates, waste, local roads, development applications and building compliance, parking and local-law enforcement, animal management, environmental health, libraries, parks, cemeteries, and local emergency coordination. Any scenario that has a council assessing someone's benefit entitlement is wrong, and a judge who knows Australia will catch it.</p>
+      <p style="font-size:15.5px;color:var(--ink-2);max-width:68ch;margin-bottom:16px">The exception matters: <span class="strong-line">Aboriginal shire councils in Queensland and regional councils in the Northern Territory</span> deliver in remote communities what metropolitan Australians receive from the state — municipal services, sometimes essential services and housing maintenance. That is a genuine structural difference, not a rhetorical one, and it is where lived experience beats desk research.</p>
+
+      <h3 style="font-size:21px;margin:34px 0 8px">So the risk surface is enforcement and revenue</h3>
+      <p style="font-size:15.5px;color:var(--ink-2);max-width:68ch;margin-bottom:16px">Within those narrow powers, councils are <span class="strong-line">the highest-volume issuers of small coercive automated decisions against individuals in the country</span> — and the automation being sold to them is overwhelmingly surveillance-based:</p>
+      <div class="gap" style="margin-bottom:18px">
+        <div class="gapline"><div class="j">Parking &amp; local law</div><div class="s">Plate recognition and automated infringement issuing. Very high volume, low individual value, rarely contested.</div></div>
+        <div class="gapline"><div class="j">Aerial change detection</div><div class="s">Commercial AI over aerial imagery flagging unapproved structures and land-use change, then driving compliance action — already in use at Australian councils across whole local government areas. Error rates will not be uniform across informal, remote or non-suburban housing.</div></div>
+        <div class="gapline"><div class="j">Waste &amp; dumping</div><div class="s">In-truck bin contamination detection and camera-based illegal dumping identification, both producing penalties.</div></div>
+        <div class="gapline"><div class="j">Rates arrears</div><div class="s">The one genuinely severe council power. Under s 713 of the NSW Local Government Act a council may sell land where rates have been unpaid for five years; Queensland, Victoria and South Australia set the threshold at three. <b>Councils can sell your house.</b> That is the catastrophic tail, and it sits at the end of an escalation pipeline that is increasingly automated.</div></div>
+      </div>
+      <p style="font-size:15.5px;color:var(--ink-2);max-width:68ch;margin-bottom:20px">The individual harms are small; the aggregate is not. And the person who will not contest a $120 fine is precisely the person for whom $120 matters most. That is the honest severity argument, and it does not require pretending councils run a welfare system.</p>
+
+      <h3 style="font-size:21px;margin:34px 0 8px">The catastrophic mechanism is the vendor, not the council</h3>
+      <p style="font-size:15.5px;color:var(--ink-2);max-width:68ch;margin-bottom:18px">This is the part worth building the project around. One council failing harms hundreds of people — bad, not catastrophic. But hundreds of councils buying the same handful of vendor products means <span class="strong-line">one biased model failing identically across two hundred jurisdictions at once</span>, where no council can detect it because each sees only its own caseload, and no entity anywhere aggregates across them. Correlated failure with no observer is the shape of catastrophic risk, and unlike everything borrowed from Robodebt it is <em>specific to local government</em>. It is also measurable: the statutory contracts registers name the vendors.</p>
+
+      <h3 style="font-size:21px;margin:34px 0 8px">The claim, in one sentence</h3>
+      <div class="callout">
+        <strong>The protection you get depends on which tier of government happens to decide about you — and the tier that decides most intimately is the least governed.</strong> A debt raised against you by the national agency now carries tribunal review, published decisions, an ombudsman with referral powers, and automated-decision disclosure from December 2026. The same debt raised by your council carries none of them. Same person, same harm, different desk. That is a rights claim, it is novel as a measured quantity, and it does not require anyone to know what a shire is.
+      </div>
+
+      <h3 style="font-size:21px;margin:34px 0 8px">Reading it from outside a federation</h3>
+      <p style="font-size:15.5px;color:var(--ink-2);max-width:68ch;margin-bottom:18px">Assume the panel is not Australian. Shire, LGA, GIPA, PPIP and Robodebt all mean nothing to them, and every one you use costs you a sentence of explanation you cannot afford in five minutes. The underlying structure, though, is universal: a scandal at the top tier produces reform at the top tier, and the bottom tier — governed by a different level entirely — inherits none of it. That is equally true of US counties, German <em>Kommunen</em>, Dutch municipalities, Indian panchayats and Brazilian <em>municípios</em>.</p>
+      <div class="gap">
+        <div class="gapline"><div class="j">Name it once, move on</div><div class="s">“Australia's <b>toeslagenaffaire</b>” lands instantly with anyone in AI governance — the Dutch childcare benefits scandal wrongly accused some 26,000 families, disproportionately parents of colour and single mothers, and brought down a government. The US analogue, <b>MiDAS</b>, was a state system. Use one comparator, then stop explaining.</div></div>
+        <div class="gapline"><div class="j">The contrast that carries it</div><div class="s">Under <b>Article 27 of the EU AI Act</b>, a fundamental rights impact assessment is a <em>deployer</em> obligation binding bodies governed by public law — municipalities included — with notification to the market surveillance authority. A German town of three thousand deploying a high-risk system owes that assessment. An Australian council deploying the identical system owes nothing to anyone. <b>Check the Annex III commencement date before you cite it</b> — the high-risk timetable has been amended and is currently slated for late 2027.</div></div>
+        <div class="gapline"><div class="j">Measuring stick, not model</div><div class="s">Do <b>not</b> propose that Australian councils adopt the EU regime — a full fundamental rights impact assessment is absurd apparatus for a 25-staff shire, and recommending it would be bad advice a judge will spot. Borrow the <em>classification questions</em>, which are portable, and leave the <em>compliance machinery</em>, which is not. The deliverable is “here is what would be classified high-risk in Europe, is unregulated here, and here is a shire-sized version of the assessment” — not “adopt the AI Act”.</div></div>
+        <div class="gapline"><div class="j">Open with this</div><div class="s"><em>“In most countries the government closest to you — the one that fines you, houses you, and decides whether you get help — is the least regulated user of AI in the state. We measured how much.”</em> No jurisdiction-specific vocabulary, and every judge already knows whether it is true where they live.</div></div>
+      </div>
+    </section>
+
+    <section id="build">
+      <div class="sec-head">
+        <p class="eyebrow">The actual thing to build</p>
+        <h2>Council Scan</h2>
+        <p>Not a report about councils — an instrument that assesses any council automatically, from documents that council is legally required to publish.</p>
+      </div>
+
+      <h3 style="font-size:21px;margin-bottom:8px">Why NSW, and why there is enough data</h3>
+      <p style="font-size:15.5px;color:var(--ink-2);max-width:68ch;margin-bottom:18px">NSW is the only jurisdiction where the corpus is <em>mandated, uniform and per-council</em>. 128 councils, one legal regime, and three statutory publication duties that hand you a comparable document set for every single one:</p>
+      <div class="gap" style="margin-bottom:26px">
+        <div class="gapline"><div class="j">PPIP Act s 33</div><div class="s">Every council must have a <b>Privacy Management Plan</b> covering its information practices and its internal review procedures. Published. This is your primary document.</div></div>
+        <div class="gapline"><div class="j">GIPA Act ss 6, 18, 27</div><div class="s">Every council must publish a <b>contracts register</b> for contracts of $150,000 or more, within 45 days. This is where the AI vendors are.</div></div>
+        <div class="gapline"><div class="j">OLG “Your Council”</div><div class="s">Downloadable comparative dataset for all 128 councils — staffing, revenue, expenditure, demographics. Your structured baseline and your capacity variable.</div></div>
+        <div class="gapline"><div class="j">NSW Ombudsman map</div><div class="s">275 ADM systems catalogued across NSW agencies and councils in March 2024. Your ground truth for known deployments, and your 2024 comparison point.</div></div>
+      </div>
+
+      <h3 style="font-size:21px;margin-bottom:8px">The rubric — eight checks, each traceable</h3>
+      <p style="font-size:15.5px;color:var(--ink-2);max-width:68ch;margin-bottom:16px">Every criterion has to satisfy two tests: it traces to a numbered Royal Commission finding, and it is checkable from a public document. That intersection is what keeps this from being opinion. Score each one <span class="strong-line">against the consequence of the decision, not against a fixed bar</span> — the same missing reversal pathway is a footnote on pet registration and a serious finding on hardship assessment.</p>
+      <div class="tablewrap" style="margin-bottom:26px">
+        <table>
+          <thead><tr><th>#</th><th>Check</th><th>What you look for</th><th>Traces to</th></tr></thead>
+          <tbody>
+            <tr><td class="idx">1</td><td class="name">Automation disclosed</td><td>Any public document stating that automated or AI systems are used in decisions</td><td>17.1</td></tr>
+            <tr><td class="idx">2</td><td class="name">Explained plainly</td><td>A plain-language account of how the process works</td><td>17.1</td></tr>
+            <tr><td class="idx">3</td><td class="name">Rules scrutable</td><td>Business rules or algorithms published, or offered on request</td><td>17.1</td></tr>
+            <tr><td class="idx">4</td><td class="name">Reversal exists</td><td>A review route that can <em>change</em> the decision — not a feedback form that acknowledges it</td><td>The central failure</td></tr>
+            <tr><td class="idx">5</td><td class="name">Human delegate named</td><td>A delegations register identifying a person for that decision class</td><td>Ch 15, 19</td></tr>
+            <tr><td class="idx">6</td><td class="name">Capacity recognised</td><td>Provision for circumstances affecting ability to respond; no automatic expiry of that recognition</td><td>11.2, 11.3</td></tr>
+            <tr><td class="idx">7</td><td class="name">Statutory basis stated</td><td>The notice or policy cites the power the decision is made under</td><td>The original sin</td></tr>
+            <tr><td class="idx">8</td><td class="name">Pathway reachable</td><td>Reading grade of the review text, non-digital channel, interpreter provision</td><td>Ch 12, 13</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout" style="border-left-color:var(--crit)">
+        <strong>Refuse to publish a league table.</strong> A composite score invites the only real attack available — “your weighting is arbitrary” — and it is a fair attack. Publish per-criterion findings with a quoted passage and a source URL for each, and make your one headline figure a <em>count</em>: how many of 128 councils publish any disclosure of automated decision-making at all. Counts are defensible. Indices are not. Saying this out loud in the video is worth more than the index would have been.
+      </div>
+
+      <h3 style="font-size:21px;margin:36px 0 8px">What makes it a build, not a slide deck</h3>
+      <div class="reads" style="margin-bottom:22px">
+        <div class="read">
+          <p class="num">A</p>
+          <h3>Finding, not scraping</h3>
+          <p>There is no standard URL for a privacy management plan. Across 128 sites it lives under a different name, menu and file type each time. An agent that searches, reads and decides “this is the document” is doing work a scraper cannot, and work that was infeasible before tool-using models.</p>
+        </div>
+        <div class="read">
+          <p class="num">B</p>
+          <h3>Judgement at scale</h3>
+          <p>Deciding whether a complaints policy offers genuine reversal or merely a response is a reading task with a rubric, applied 128 times across eight criteria. That is a classification pipeline with a defined ground truth — an eval, in the ordinary AI-safety sense.</p>
+        </div>
+        <div class="read">
+          <p class="num">C</p>
+          <h3>Measure your own instrument</h3>
+          <p>Hand-label 15 councils between you, then report your pipeline's agreement with human coding, per criterion. You stop asserting scores and start reporting a measurement instrument's accuracy — including where it is unreliable. Almost no hackathon team will do this.</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>The limitation, and the reframe that survives it.</strong> Not published does not mean does not exist — a council may do the right thing and never write it down, and you must say so plainly. But recommendation 17.1 asked specifically that <em>websites carry the disclosure</em>, because a review right nobody can find is not a review right. So publication is not a proxy for the thing you care about; for transparency it <em>is</em> the thing. State the limit, then state why the measure still holds.
+      </div>
+
+      <h3 style="font-size:21px;margin:36px 0 8px">Shape of it</h3>
+      <div class="sched">
+        <div class="slot"><div class="t">Pipeline</div><div class="d">Async fetch → document discovery → PDF and HTML extraction → per-criterion classification → evidence store. <b>Cache every fetch to disk</b> so reruns cost nothing; you will rerun many times.</div></div>
+        <div class="slot"><div class="t">Models</div><div class="d">A cheap fast model for the bulk classification pass across 128 × 8 judgements; a stronger one to adjudicate only where confidence is low or where your hand labels disagree. Ask for structured output and store the quoted evidence span with every verdict.</div></div>
+        <div class="slot"><div class="t">Store</div><div class="d">SQLite is plenty for a day. Reach for Supabase only if the front end needs to read live.</div></div>
+        <div class="slot"><div class="t">Front end</div><div class="d">One input: pick a council. One output: a scorecard, eight rows, each with a verdict, a quoted passage and a link to the source document. Then a sector view behind it.</div></div>
+        <div class="slot"><div class="t">The demo</div><div class="d"><b>Type a council name, get a cited scorecard in twenty seconds.</b> Then the sector count. Then your agreement-with-human-coding figure. That sequence — instrument, finding, accuracy — is the whole submission.</div></div>
+        <div class="slot"><div class="t">If time runs short</div><div class="d">Cut councils before you cut criteria, and cut criteria before you cut the hand-labelled validation. Thirty councils scored honestly beats 128 scored unverifiably.</div></div>
+      </div>
+    </section>
+
+    <section id="day">
+      <div class="sec-head">
+        <p class="eyebrow">Execution</p>
+        <h2>One day, honestly budgeted</h2>
+        <p>Times are AEST, assuming you work Saturday and reserve Sunday morning for the video. Verify the actual window when you register.</p>
+      </div>
+      <div class="sched">
+        <div class="slot"><div class="t">Thu–Fri, before</div><div class="d"><b>Register.</b> Read the Royal Commission executive summary and recommendations. Pick your project and write the one-sentence question down. Do not write code yet.</div></div>
+        <div class="slot"><div class="t">Sat 08:00–09:00</div><div class="d"><b>Lock scope.</b> Write the question, the claim you expect to make, and the limitations section — <em>before</em> you have results. If the claim turns out wrong, that is a finding, and having written it down first is what makes it rigorous.</div></div>
+        <div class="slot"><div class="t">Sat 09:00–12:30</div><div class="d"><b>Core artifact.</b> Extraction and criteria, or pipeline and data join. Parallel tracks: one person on content, one on code, syncing on the half hour.</div></div>
+        <div class="slot"><div class="t">Sat 12:30–15:00</div><div class="d"><b>Run it against something real.</b> Whatever your project, this is the step that separates you from the field. Score real frameworks, real councils, a real assistant. Record the raw results.</div></div>
+        <div class="slot"><div class="t">Sat 15:00–17:00</div><div class="d"><b>The site.</b> Static page, no auth, no database. Findings first, method second, tool third, limitations visible not buried. Publish it and get the URL working early.</div></div>
+        <div class="slot"><div class="t">Sat 17:00–18:30</div><div class="d"><b>Write the limitations page properly.</b> This is a scored criterion and almost every team treats it as an afterthought. Name what you could not check, what your sample cannot support, and what would change your conclusion.</div></div>
+        <div class="slot"><div class="t">Sun 08:00–11:00</div><div class="d"><b>Video.</b> Script it — five minutes is short. Thirty seconds on the question, ninety on the method, two minutes on the finding with the artifact on screen, thirty seconds on limitations, thirty on what a council does with it. Record it twice.</div></div>
+        <div class="slot"><div class="t">Sun 11:00–13:00</div><div class="d"><b>Buffer.</b> Something will break. If nothing breaks, tighten the writing — communication is a quarter of the score.</div></div>
+      </div>
+      <div class="callout">
+        <strong>The one habit worth more than any feature.</strong> Every claim on your site should be either linked to a source or labelled as an estimate with its method shown. Judges scoring “rigor and honesty” are looking for exactly this, and it costs you almost nothing to do while you build. A page where the reader can check you is worth more than a page with twice the content.
+      </div>
+    </section>
+
+    <section id="data">
+      <div class="sec-head">
+        <p class="eyebrow">Appendix</p>
+        <h2>Free Australian data worth knowing about</h2>
+        <p>All publicly accessible without an account, though a few require accepting terms or downloading bulk files.</p>
+      </div>
+      <div class="data">
+        <div class="src"><h4>Robodebt Royal Commission</h4><p>Final report and evidence. The most valuable single document for this hackathon.<span class="u">robodebt.royalcommission.gov.au</span></p></div>
+        <div class="src"><h4>ABS Data Explorer &amp; DataPacks</h4><p>Census by LGA — occupation, industry, language, income. SDMX API available.<span class="u">abs.gov.au</span></p></div>
+        <div class="src"><h4>SEIFA</h4><p>Socio-economic indexes by LGA and SA2. The standard disadvantage measure.<span class="u">abs.gov.au/websitedbs/censushome.nsf/home/seifa</span></p></div>
+        <div class="src"><h4>Australian Digital Inclusion Index</h4><p>Access, affordability and ability by region, with an expanded First Nations sample.<span class="u">digitalinclusionindex.org.au</span></p></div>
+        <div class="src"><h4>Closing the Gap dashboard</h4><p>Productivity Commission data by outcome area, including Outcome 17 on access to information — the digital inclusion target whose deadline is this year.<span class="u">pc.gov.au/closing-the-gap-data/dashboard</span></p></div>
+        <div class="src"><h4>data.gov.au</h4><p>Federal, state and some council open data in one catalogue.<span class="u">data.gov.au</span></p></div>
+        <div class="src"><h4>State audit office reports</h4><p>NSW Audit Office and VAGO publish local government cyber and IT governance audits with real compliance figures.<span class="u">audit.nsw.gov.au · audit.vic.gov.au</span></p></div>
+        <div class="src"><h4>NSW AI Assessment Framework &amp; DTA AI policy</h4><p>The two governance artifacts most worth auditing, and neither is mandatory for local government — which is itself a finding.<span class="u">digital.nsw.gov.au · architecture.digital.gov.au</span></p></div>
+        <div class="src"><h4>National Anti-Scam Centre / Scamwatch</h4><p>Quarterly scam loss data by age, channel and state.<span class="u">scamwatch.gov.au</span></p></div>
+        <div class="src"><h4>ACSC Annual Cyber Threat Report</h4><p>Sector breakdowns including government, with reported incident counts.<span class="u">cyber.gov.au</span></p></div>
+      </div>
+      <div class="callout">
+        <strong>A note on the 2026 Census.</strong> It was conducted this month, so no 2026 data is available. Use 2021 and say so — a team that silently presents five-year-old occupation data as current loses more on rigor than it gains on recency.
+      </div>
+    </section>
+
+  </main>
+</div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p class="eyebrow">Caveats</p>
+    <p>Hackathon dates, deadlines and criteria are summarised from mangrove.one/hackathon and should be verified against the site before you rely on them; the AEST conversions are approximate. Difficulty and data-risk ratings are judgements, not measurements. Dataset descriptions reflect what is generally published by these agencies — confirm current availability and licensing before building on any of them.</p>
+    <p>Recommendation counts and statuses in the three-year ledger are taken directly from the PM&amp;C <em>Robodebt Royal Commission Implementation Update, March 2026</em>, whose own legend marks legislation-dependent items with an asterisk; a more recent update may exist by the time you read this. The claim that no state privacy Act contains an ADM-specific provision reflects searching rather than a clause-by-clause reading of seven statutes — check it before you rely on it, and say how you checked. Statements about which Commonwealth Act delivered which recommendation are inferred from the response text in that table, not from an itemised legislative map.</p>
+  </div>
+</footer>

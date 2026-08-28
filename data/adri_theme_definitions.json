@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "resilience_factor_name": "social_character",
+    "description": "The social and demographic characteristics of the community.\nFactors such as household and family composition, age, sex, education, employment, disability, language, and length of residence have well-known influences on capacity to prepare for, respond to and recover from natural hazards.\n",
+    "adri_version_id": 1
+  },
+  {
+    "id": 2,
+    "resilience_factor_name": "economic_capital",
+    "description": "The economic characteristics of the community.\nEconomic capital can contribute to the reduction of losses from natural hazard events through improved mitigation and risk management, individual flexibility and adaptation, enhanced recovery, market continuity and business continuity.\n",
+    "adri_version_id": 1
+  },
+  {
+    "id": 3,
+    "resilience_factor_name": "emergency_services",
+    "description": "The presence and resourcing of emergency services.\nEmergency management is a core government service and is integral to natural hazard preparation, response and recovery. Emergency services undertake a range of activities to assist communities before, during and after natural hazards.",
+    "adri_version_id": 1
+  },
+  {
+    "id": 4,
+    "resilience_factor_name": "planning_build_environment",
+    "description": "The presence of legislation, plans, structures or codes to protect communities and their built environment.\nLand use planning articulates and regulates relationships between development and hazards. Planning reduces current and future risk and enhances the readiness and capacity of organisations to respond to events.",
+    "adri_version_id": 1
+  },
+  {
+    "id": 5,
+    "resilience_factor_name": "community_capital",
+    "description": "The cohesion and connectedness of the community.\nSocial capital is a resource that facilitates collective action for mutual benefit. Sense of community fosters participation, community competency, pro-social behaviour and preparedness through working with others to solve shared local problems.\n",
+    "adri_version_id": 1
+  },
+  {
+    "id": 6,
+    "resilience_factor_name": "information_access",
+    "description": "The potential for communities to engage with natural hazard information.\nTelecommunication and internet access is vital to information sharing before, during and after natural hazard events. Community engagement activities benefit communities through capacity building, social connectedness, self-reliance, training, awareness of risk and psycho-social preparation.",
+    "adri_version_id": 1
+  },
+  {
+    "id": 7,
+    "resilience_factor_name": "govt_leadership",
+    "description": "The capacity within organisations to adaptively learn, review and adjust policies and procedures, or to transform organisational practices.\nAdaptive institutions have conditions suited to the development of the skills, knowledge and culture for managing complex change. They have flexibility and can learn from experience, innovate and adjust.",
+    "adri_version_id": 1
+  },
+  {
+    "id": 8,
+    "resilience_factor_name": "community_social_engagement",
+    "description": "The capacity within communities to adaptively learn and transform in the face of complex change.\nAdaptive communities have support and resources to manage complex change and to renew for mutual benefit. Characteristics of adaptive communities include social engagement, trust, cooperation, learning and wellbeing.",
+    "adri_version_id": 1
+  },
+  {
+    "id": 9,
+    "resilience_factor_name": "social_character",
+    "description": "The social and demographic characteristics of the community.\nFactors such as household and family composition, age, sex, education, employment, disability, language, and length of residence have well-known influences on capacity to prepare for, respond to and recover from natural hazards.\n",
+    "adri_version_id": 2
+  },
+  {
+    "id": 10,
+    "resilience_factor_name": "economic_capital",
+    "description": "The economic characteristics of the community.\nEconomic capital can contribute to the reduction of losses from natural hazard events through improved mitigation and risk management, individual flexibility and adaptation, enhanced recovery, market continuity and business continuity.\n",
+    "adri_version_id": 2
+  },
+  {
+    "id": 11,
+    "resilience_factor_name": "emergency_services",
+    "description": "The presence and resourcing of emergency services.\nEmergency management is a core government service and is integral to natural hazard preparation, response and recovery. Emergency services undertake a range of activities to assist communities before, during and after natural hazards.",
+    "adri_version_id": 2
+  },
+  {
+    "id": 12,
+    "resilience_factor_name": "planning_build_environment",
+    "description": "The presence of legislation, plans, structures or codes to protect communities and their built environment.\nLand use planning articulates and regulates relationships between development and hazards. Planning reduces current and future risk and enhances the readiness and capacity of organisations to respond to events.",
+    "adri_version_id": 2
+  },
+  {
+    "id": 13,
+    "resilience_factor_name": "community_capital",
+    "description": "The cohesion and connectedness of the community.\nSocial capital is a resource that facilitates collective action for mutual benefit. Sense of community fosters participation, community competency, pro-social behaviour and preparedness through working with others to solve shared local problems.\n",
+    "adri_version_id": 2
+  },
+  {
+    "id": 14,
+    "resilience_factor_name": "information_access",
+    "description": "The potential for communities to engage with natural hazard information.\nTelecommunication and internet access is vital to information sharing before, during and after natural hazard events. Community engagement activities benefit communities through capacity building, social connectedness, self-reliance, training, awareness of risk and psycho-social preparation.",
+    "adri_version_id": 2
+  },
+  {
+    "id": 15,
+    "resilience_factor_name": "govt_leadership",
+    "description": "The capacity within organisations to adaptively learn, review and adjust policies and procedures, or to transform organisational practices.\nAdaptive institutions have conditions suited to the development of the skills, knowledge and culture for managing complex change. They have flexibility and can learn from experience, innovate and adjust.",
+    "adri_version_id": 2
+  },
+  {
+    "id": 16,
+    "resilience_factor_name": "community_social_engagement",
+    "description": "The capacity within communities to adaptively learn and transform in the face of complex change.\nAdaptive communities have support and resources to manage complex change and to renew for mutual benefit. Characteristics of adaptive communities include social engagement, trust, cooperation, learning and wellbeing.",
+    "adri_version_id": 2
+  }
+]

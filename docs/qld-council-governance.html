@@ -1,0 +1,431 @@
+<title>Who Governs a Queensland Council</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --paper:#F7F7FA;
+  --card:#FFFFFF;
+  --card-2:#EEEEF4;
+  --ink:#191A22;
+  --ink-2:#4B4D5E;
+  --ink-3:#75778A;
+  --rule:#DBDBE6;
+  --rule-soft:#E9E9F1;
+  --accent:#4A3D8F;
+  --accent-ink:#3A2F73;
+  --accent-soft:#E6E3F4;
+  --state:#4A3D8F;
+  --federal:#8A6410;
+  --internal:#1F6B52;
+  --alarm:#A32F3F;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#101018;
+    --card:#181822;
+    --card-2:#20202C;
+    --ink:#EBEBF2;
+    --ink-2:#ADAEC0;
+    --ink-3:#7E809440;
+    --ink-3:#7E8094;
+    --rule:#2C2C3B;
+    --rule-soft:#22222E;
+    --accent:#9E90E8;
+    --accent-ink:#B7ABF0;
+    --accent-soft:#241F3D;
+    --state:#9E90E8;
+    --federal:#D9AC55;
+    --internal:#63C49C;
+    --alarm:#E5808D;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101018;
+  --card:#181822;
+  --card-2:#20202C;
+  --ink:#EBEBF2;
+  --ink-2:#ADAEC0;
+  --ink-3:#7E8094;
+  --rule:#2C2C3B;
+  --rule-soft:#22222E;
+  --accent:#9E90E8;
+  --accent-ink:#B7ABF0;
+  --accent-soft:#241F3D;
+  --state:#9E90E8;
+  --federal:#D9AC55;
+  --internal:#63C49C;
+  --alarm:#E5808D;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16px;line-height:1.62;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:"Spectral",Georgia,serif;font-weight:500;margin:0;text-wrap:balance;line-height:1.2}
+p{margin:0}
+a{color:var(--accent-ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:920px;margin:0 auto;padding:0 24px}
+.mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--ink-3);font-weight:500}
+
+header{background:var(--card);border-bottom:1px solid var(--rule)}
+header .wrap{padding:56px 24px 44px;display:flex;flex-direction:column;gap:18px}
+h1{font-size:clamp(36px,6vw,58px);letter-spacing:-.02em}
+.stand{font-size:clamp(17px,2vw,19.5px);color:var(--ink-2);max-width:60ch}
+
+section{padding-top:60px}
+.sec-head{display:flex;flex-direction:column;gap:9px;margin-bottom:24px;max-width:68ch}
+.sec-head h2{font-size:clamp(25px,3.3vw,32px);letter-spacing:-.01em}
+.sec-head p{color:var(--ink-2)}
+h3{font-size:20px;margin:32px 0 10px}
+.body{font-size:15.6px;color:var(--ink-2);max-width:68ch}
+.body + .body{margin-top:12px}
+
+/* citation chip */
+.cite{font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:500;
+  padding:2px 7px;border-radius:3px;background:var(--accent-soft);color:var(--accent-ink);
+  white-space:nowrap;display:inline-block}
+.tier-state{border-left:3px solid var(--state)}
+.tier-federal{border-left:3px solid var(--federal)}
+.tier-internal{border-left:3px solid var(--internal)}
+
+/* stack diagram */
+.stack{display:flex;flex-direction:column;gap:10px;margin:6px 0 8px}
+.layer{background:var(--card);border:1px solid var(--rule);border-radius:6px;
+  padding:16px 20px;display:grid;grid-template-columns:1fr;gap:5px}
+@media(min-width:700px){.layer{grid-template-columns:210px 1fr;gap:24px;align-items:baseline}}
+.layer .lname{font-family:"Spectral",serif;font-size:18px;color:var(--ink)}
+.layer .ldesc{font-size:14.6px;color:var(--ink-2)}
+.layer.void{border-style:dashed;background:transparent}
+.layer.void .lname{color:var(--ink-3);font-style:italic}
+
+table{border-collapse:collapse;width:100%;font-size:14.2px;min-width:600px}
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:6px;background:var(--card);margin:8px 0}
+thead th{text-align:left;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+  letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);font-weight:600;
+  padding:13px 15px;border-bottom:1px solid var(--rule);background:var(--card-2);white-space:nowrap}
+tbody td{padding:12px 15px;border-bottom:1px solid var(--rule-soft);vertical-align:top;color:var(--ink-2)}
+tbody tr:last-child td{border-bottom:0}
+td strong{color:var(--ink);font-weight:600}
+td.no{color:var(--alarm);font-weight:600}
+.tabular{font-variant-numeric:tabular-nums}
+
+.callout{border-left:3px solid var(--accent);background:var(--card);padding:18px 22px;
+  border-radius:0 6px 6px 0;margin:22px 0;font-size:15.4px;color:var(--ink-2)}
+.callout strong{color:var(--ink)}
+.callout.hot{border-left-color:var(--alarm)}
+
+.split{display:grid;grid-template-columns:1fr;gap:16px;margin:8px 0}
+@media(min-width:760px){.split{grid-template-columns:1fr 1fr}}
+.pane{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:20px 22px}
+.pane h4{font-family:"Spectral",serif;font-weight:500;font-size:19px;margin:0 0 4px}
+.pane .sub{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--ink-3);
+  letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+.pane dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:7px 14px;font-size:14.3px}
+.pane dt{color:var(--ink-3);white-space:nowrap}
+.pane dd{margin:0;color:var(--ink-2)}
+.pane dd b{color:var(--ink)}
+
+ul.clean{margin:8px 0;padding-left:19px;display:flex;flex-direction:column;gap:7px;
+  font-size:15.2px;color:var(--ink-2);max-width:68ch}
+ul.clean li::marker{color:var(--ink-3)}
+ul.clean b{color:var(--ink)}
+
+.res{display:flex;flex-direction:column;gap:10px;margin:10px 0}
+.rescard{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:16px 20px}
+.rescard h4{font-family:"IBM Plex Sans",sans-serif;font-size:15.5px;font-weight:600;margin:0 0 4px;color:var(--ink)}
+.rescard p{font-size:14.2px;color:var(--ink-2)}
+.rescard a{font-family:"IBM Plex Mono",monospace;font-size:12px;word-break:break-all;display:inline-block;margin-top:6px}
+
+footer{border-top:1px solid var(--rule);margin-top:64px;background:var(--card)}
+footer .wrap{padding:30px 24px 52px}
+footer p{font-size:13.4px;color:var(--ink-3);max-width:76ch}
+</style>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Reference · Queensland local government</p>
+    <h1>Who governs a Queensland council</h1>
+    <p class="stand">What the 77 councils are responsible for, which law puts them there, what constrains how they buy and deploy technology, and how far Brisbane sits from the Torres Strait under identical statutory duties.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section id="origin">
+  <div class="sec-head">
+    <p class="eyebrow">Part one</p>
+    <h2>Where councils come from</h2>
+    <p>The single most important structural fact: local government has no federal existence at all.</p>
+  </div>
+
+  <div class="stack">
+    <div class="layer void">
+      <div class="lname">Commonwealth Constitution</div>
+      <div class="ldesc">Does not mention local government. Referendums to recognise it failed in 1974 and 1988, and a third attempt was abandoned in 2013. There is no constitutional hook for the Commonwealth to regulate councils directly.</div>
+    </div>
+    <div class="layer tier-state">
+      <div class="lname">Constitution of Queensland 2001</div>
+      <div class="ldesc">Recognises a system of local government and requires one to exist — but the Parliament creates, amalgamates and can dissolve councils. Councils exist entirely at the pleasure of the State.</div>
+    </div>
+    <div class="layer tier-state">
+      <div class="lname">Local Government Act 2009</div>
+      <div class="ldesc">The governing Act for <strong>76 of the 77</strong> Queensland local governments, with the <span class="cite">Local Government Regulation 2012</span> underneath it.</div>
+    </div>
+    <div class="layer tier-state">
+      <div class="lname">City of Brisbane Act 2010</div>
+      <div class="ldesc">Brisbane City Council alone. Its own Act and its own <span class="cite">City of Brisbane Regulation 2012</span>. Brisbane is not governed by the Local Government Act — a point most people, including many public servants, get wrong.</div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Responsibilities are not a list in a statute.</strong> The Local Government Act does not enumerate functions. Section 9 gives councils a <em>general competence power</em> — broad authority to do what is necessary or convenient for governing the local area. So what a council is “responsible for” is the residue of whatever the State has not kept for itself, plus whatever specific Acts hand them. This is why there is no single page anywhere that lists council functions authoritatively, and why the answer differs by council.
+  </div>
+</section>
+
+<section id="functions">
+  <div class="sec-head">
+    <p class="eyebrow">Part two</p>
+    <h2>What they are actually responsible for</h2>
+    <p>Function by function, and the Act that assigns it. Everything here is state legislation.</p>
+  </div>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Function</th><th>Assigned by</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Rating &amp; revenue</strong></td><td><span class="cite">LGA 2009</span> <span class="cite">Land Valuation Act 2010</span></td><td>Rates are levied on valuations issued by the State, not by the council. Councils may ultimately sell land for arrears.</td></tr>
+        <tr><td><strong>Development assessment</strong></td><td><span class="cite">Planning Act 2016</span></td><td>Councils are the assessment manager for most development. The most consequential regulatory power they hold.</td></tr>
+        <tr><td><strong>Building &amp; plumbing</strong></td><td><span class="cite">Building Act 1975</span> <span class="cite">Plumbing and Drainage Act 2018</span></td><td>Certification is partly privatised; councils retain compliance and enforcement.</td></tr>
+        <tr><td><strong>Waste &amp; recycling</strong></td><td><span class="cite">Waste Reduction and Recycling Act 2011</span></td><td>Collection, landfill, transfer stations. Service model varies enormously by remoteness.</td></tr>
+        <tr><td><strong>Local roads</strong></td><td><span class="cite">LGA 2009</span></td><td>Local roads only. State-controlled roads and highways are Transport and Main Roads.</td></tr>
+        <tr><td><strong>Animal management</strong></td><td><span class="cite">Animal Management (Cats and Dogs) Act 2008</span></td><td>Registration, impoundment, dangerous dog declarations.</td></tr>
+        <tr><td><strong>Food safety &amp; env. health</strong></td><td><span class="cite">Food Act 2006</span> <span class="cite">Public Health Act 2005</span></td><td>Licensing and inspection of food businesses; public health nuisance.</td></tr>
+        <tr><td><strong>Environmental regulation</strong></td><td><span class="cite">Environmental Protection Act 1994</span></td><td>Only devolved activities. Most serious ERAs stay with the State.</td></tr>
+        <tr><td><strong>Water &amp; sewerage</strong></td><td><span class="cite">Water Supply (Safety and Reliability) Act 2008</span></td><td>Most regional councils are the water service provider. In SEQ this was largely taken over by bulk/distributor entities.</td></tr>
+        <tr><td><strong>Disaster management</strong></td><td><span class="cite">Disaster Management Act 2003</span></td><td>Councils chair Local Disaster Management Groups. Front line for flood and cyclone.</td></tr>
+        <tr><td><strong>Local laws</strong></td><td><span class="cite">LGA 2009</span></td><td>Parking, public spaces, nuisance. Council makes and enforces its own subordinate law.</td></tr>
+        <tr><td><strong>Libraries, parks, pools, cemeteries</strong></td><td>General competence</td><td>Discretionary services, not statutory duties.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>What councils are <em>not</em> responsible for</h3>
+  <p class="body">This is where most people — and most AI systems — get it wrong. All of the following are State functions in Queensland, delivered by State departments and agencies, not councils:</p>
+  <ul class="clean">
+    <li><b>Health and hospitals</b>, including community health · <b>Schools and education</b> · <b>Police and emergency services</b> (councils coordinate disaster response but do not run police, fire or ambulance)</li>
+    <li><b>Public and social housing</b> · <b>Child safety and family services</b> · <b>Welfare and income support</b> (that is Commonwealth) · <b>Public transport</b> · <b>Main roads and highways</b> · <b>Courts and corrections</b></li>
+  </ul>
+  <p class="body" style="margin-top:12px">A scenario in which a council assesses someone's benefit entitlement, allocates public housing, or runs a health service is wrong on its face in Queensland — with the qualified exception of remote Indigenous councils, discussed in part four.</p>
+</section>
+
+<section id="constraints">
+  <div class="sec-head">
+    <p class="eyebrow">Part three</p>
+    <h2>What governs how they behave</h2>
+    <p>Split by where the obligation comes from — because that determines who can change it.</p>
+  </div>
+
+  <h3><span style="color:var(--state)">■</span> From the State — binding, external</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Instrument</th><th>What it requires</th><th>Relevance to technology</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Human Rights Act 2019</strong><br><span class="cite">s 9 · s 58</span></td><td>Local governments and councillors are <strong>core public entities</strong>. A public entity must act compatibly with human rights and <strong>give proper consideration to human rights when making a decision</strong> — demonstrably, on the record.</td><td class="no">The strongest existing hook, and nobody applies it to automated systems. See below.</td></tr>
+        <tr><td><strong>Local Government Act 2009</strong><br><span class="cite">s 104 · ch 4</span></td><td>Five <strong>sound contracting principles</strong> govern all purchasing: value for money, open and effective competition, development of competitive local business, environmental protection, and ethical behaviour and fair dealing.</td><td>Applies to every AI procurement. Says nothing about AI specifically.</td></tr>
+        <tr><td><strong>Local Government Regulation 2012</strong><br><span class="cite">ch 6</span></td><td>Default contracting procedures. <strong>Medium</strong> arrangements from $21,000 need written quotes; <strong>large</strong> from $280,000 require public tender. Raised from $15,000 / $200,000 on 12 December 2025, CPI-indexed annually from 1 July 2026.</td><td>A SaaS AI tool under $21,000 a year can be bought with no quotes at all.</td></tr>
+        <tr><td><strong>Information Privacy Act 2009</strong></td><td>Queensland Privacy Principles since the IPOLA reforms commenced 1 July 2025. Mandatory notification of data breaches reaches local government from 1 July 2026.</td><td>Governs personal information handling. <strong>No automated-decision provision.</strong></td></tr>
+        <tr><td><strong>Right to Information Act 2009</strong></td><td>Push model of disclosure; publication schemes and disclosure logs.</td><td>A route to obtain records about council systems — useful to you as researchers.</td></tr>
+        <tr><td><strong>Public Records Act</strong></td><td>Recordkeeping and retention obligations.</td><td>Whether an automated decision leaves a record at all is a live question here.</td></tr>
+        <tr><td><strong>Crime and Corruption Act 2001</strong></td><td>CCC jurisdiction over councils and council officers.</td><td>Procurement integrity.</td></tr>
+        <tr><td><strong>Ombudsman Act 2001</strong></td><td>Queensland Ombudsman has jurisdiction over council administrative action.</td><td>The existing complaint route for a bad automated decision — untested at scale.</td></tr>
+        <tr><td><strong>Auditor-General Act 2009</strong></td><td>QAO audits every council and reports annually to Parliament.</td><td>Published per-council financial data; a second dataset for you.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3><span style="color:var(--federal)">■</span> From the Commonwealth — very little reaches them</h3>
+  <ul class="clean">
+    <li><b>The Privacy Act 1988 does not apply.</b> Councils are state authorities and fall outside it — so the automated-decision transparency obligation commencing 10 December 2026 binds no Australian council.</li>
+    <li>Commonwealth reforms flowing from the Robodebt Royal Commission bind Commonwealth entities only. None reaches local government.</li>
+    <li>What does apply: <span class="cite">Competition and Consumer Act 2010</span>, <span class="cite">Native Title Act 1993</span>, <span class="cite">EPBC Act 1999</span>, and Financial Assistance Grants, which arrive via the State.</li>
+  </ul>
+
+  <h3><span style="color:var(--internal)">■</span> Internal — the council's own instruments</h3>
+  <ul class="clean">
+    <li><b>Procurement policy</b> — every council must adopt one annually. Content is largely up to the council above the statutory floor.</li>
+    <li><b>Register of delegations</b> — who may lawfully make which decision. An automated decision must still be made under someone's delegation; there is no category for “the software decided”.</li>
+    <li><b>Local laws</b>, <b>complaints management process</b>, and any <b>IT or AI policy</b> — the last being entirely discretionary.</li>
+  </ul>
+
+  <div class="callout hot">
+    <strong>The finding, if you want one.</strong> There is no Queensland legislation, regulation, or mandatory policy governing council use of artificial intelligence or automated decision-making. Not one instrument. But <span class="cite">s 58 of the Human Rights Act 2019</span> already requires every council to give proper consideration to human rights when making a decision, and to be able to demonstrate it — which is, in substance, most of what Article 27 of the EU AI Act demands of a European municipality. Queensland has had the obligation since 1 January 2020. It simply is not being applied to automated systems. That is a far better argument than importing a European regime: <em>the duty already exists here, and here is what applying it would look like.</em>
+  </div>
+</section>
+
+<section id="variation">
+  <div class="sec-head">
+    <p class="eyebrow">Part four</p>
+    <h2>How far apart the ends are</h2>
+    <p>Identical statutory duties, radically unequal capacity to discharge them.</p>
+  </div>
+
+  <div class="split">
+    <div class="pane">
+      <h4>Brisbane City Council</h4>
+      <p class="sub">Its own Act of Parliament</p>
+      <dl>
+        <dt>Governed by</dt><dd><b>City of Brisbane Act 2010</b> — not the LGA</dd>
+        <dt>Population</dt><dd>Over <b>1.2 million</b>; the largest local government in Australia</dd>
+        <dt>Revenue</dt><dd>Multi-billion, dominated by <b>own-source rates</b></dd>
+        <dt>Water</dt><dd>Separated into SEQ bulk and distribution entities</dd>
+        <dt>Capacity</dt><dd>In-house legal, procurement, IT, data and digital teams</dd>
+      </dl>
+    </div>
+    <div class="pane">
+      <h4>Torres Strait Island Regional Council</h4>
+      <p class="sub">Fifteen island communities</p>
+      <dl>
+        <dt>Governed by</dt><dd><b>Local Government Act 2009</b> — the same Act as Cairns or Toowoomba</dd>
+        <dt>Population</dt><dd>A few thousand, across <b>15 separate island communities</b></dd>
+        <dt>Revenue</dt><dd>Overwhelmingly <b>grant-dependent</b></dd>
+        <dt>Services</dt><dd>Delivers in-community what the State provides elsewhere</dd>
+        <dt>Capacity</dt><dd>No in-house legal or data function; procurement often one role among many</dd>
+      </dl>
+    </div>
+  </div>
+
+  <h3>The structural reason Indigenous councils cannot behave like other councils</h3>
+  <p class="body">This is not a matter of scale or effort. It is tenure. Most land in Queensland's Indigenous local government areas is held communally under <strong>Deed of Grant in Trust</strong>, and under the <span class="cite">Land Valuation Act 2010</span> valuations are generally not issued for land in those areas. No valuation means no rateable value, which means <strong>the ordinary revenue base of a council effectively does not exist</strong>.</p>
+  <p class="body">The consequence is direct grant dependency. The <strong>Indigenous Councils Funding Program provided $74.6 million in operating grants across Queensland's Indigenous councils in 2025–26</strong> — money that in any other council would come from rates. Reforms to the <span class="cite">Aboriginal Land Act 1991</span> allowing private home ownership will slowly make some land rateable, but that is a generational change.</p>
+
+  <div class="callout">
+    <strong>What this means for anything you build.</strong> Every council in the table above owes the same sound contracting principles, the same human rights obligation, the same privacy duties, and faces the same $280,000 tender threshold. A uniform legal duty across a 400-fold difference in capacity is not equality — it is a compliance burden that lands very differently. Any assessment tool that scores all 77 against one bar will simply rediscover which councils are small. Score proportionality, or score nothing.
+  </div>
+
+  <p class="body" style="margin-top:18px"><span class="cite">check this</span> Sources differ on whether there are 16 or 17 Indigenous local governments, because Torres Shire Council is a mainstream shire serving a largely Indigenous population while the other 16 are Aboriginal Shire Councils, the Torres Strait Island Regional Council and the Northern Peninsula Area Regional Council. Decide which definition you are using and state it.</p>
+</section>
+
+<section id="data">
+  <div class="sec-head">
+    <p class="eyebrow">Part five</p>
+    <h2>The dataset</h2>
+    <p>The Queensland local government comparative information report — what is in it, and the trap.</p>
+  </div>
+
+  <p class="body">The Department collects data from every council each November through the <strong>Consolidated Data Collection</strong> and publishes it as a comparative report. It deliberately <em>does not rank</em> councils. Coverage includes financial inputs, general rate data, rate revenue, residential rating, separate and special rates, personnel (indoor and outdoor FTE), road data, waste services, trade waste, and water and sewer charges and connections — with explanatory notes.</p>
+
+  <div class="callout hot">
+    <strong>The trap.</strong> There are two versions and the convenient one is stale. The open-data release on data.qld.gov.au is CSV under CC BY 4.0 with an API — but it covers roughly <strong>2010–11 to 2016–17 and was last updated in November 2022</strong>. The current years, including 2023–24 and 2024–25, live on the Department's own site as separate downloads. Use the Department's copy for current figures and the open-data copy only for the historical series, and say which you used.
+  </div>
+
+  <div class="res">
+    <div class="rescard">
+      <h4>Department of Local Government, Water and Volunteers — comparative reports</h4>
+      <p>The authoritative and current source. Most recent years available here, including 2023–24 and 2024–25. Note the site rejects automated fetching, so download in a browser.</p>
+      <a href="https://www.dlgwv.qld.gov.au/local-government/for-councils/resources/local-government-comparative-reports">dlgwv.qld.gov.au/local-government/for-councils/resources/local-government-comparative-reports</a>
+    </div>
+    <div class="rescard">
+      <h4>data.qld.gov.au — comparative information report dataset</h4>
+      <p>Eleven CSV resources plus explanatory notes, CC BY 4.0, with API endpoints. Historical series only — confirm the year range before you build on it.</p>
+      <a href="https://www.data.qld.gov.au/dataset/queensland-local-government-comparative-information-report">data.qld.gov.au/dataset/queensland-local-government-comparative-information-report</a>
+    </div>
+    <div class="rescard">
+      <h4>Queensland Audit Office — <i>Local government</i> annual report to Parliament</h4>
+      <p>Arguably the better financial source. Audits every council annually, publishes per-council appendices with financial sustainability measures, and comments on internal controls and IT governance. Current and independent.</p>
+      <a href="https://www.qao.qld.gov.au/reports-resources/reports-parliament/local-government-2024">qao.qld.gov.au/reports-resources/reports-parliament/local-government-2024</a>
+    </div>
+    <div class="rescard">
+      <h4>Indigenous Councils Funding Program</h4>
+      <p>Grant allocations by council — the practical measure of how grant-dependent each Indigenous council is.</p>
+      <a href="https://www.dlgwv.qld.gov.au/local-government/for-councils/grants/current-programs/indigenous-councils-funding-program">dlgwv.qld.gov.au/local-government/for-councils/grants/current-programs/indigenous-councils-funding-program</a>
+    </div>
+    <div class="rescard">
+      <h4>Queensland Human Rights Commission — public entities</h4>
+      <p>Guidance on what the s 58 obligation actually requires of a council in practice. Your rubric should be built from this, not invented.</p>
+      <a href="https://www.qhrc.qld.gov.au/your-responsibilities/public-entities">qhrc.qld.gov.au/your-responsibilities/public-entities</a>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Why the open data stops in 2016–17.</strong> Not a policy decision — a maintenance failure. The department kept publishing the annual report as documents on its own site and stopped syncing them to the open data portal in November 2022. This is the single most common trap in Australian open data: a portal entry is usually a <em>snapshot someone published once</em>, not a live pipeline. Always check the last-updated date against the agency's own site before assuming a dataset is current.
+  </div>
+</section>
+
+<section id="disaster">
+  <div class="sec-head">
+    <p class="eyebrow">Part six</p>
+    <h2>Disaster management — the corpus that actually exists</h2>
+    <p>The best per-council document set in Queensland, and the one with an oversight body already attached.</p>
+  </div>
+
+  <p class="body">Under the <span class="cite">Disaster Management Act 2003</span> every Queensland local government must establish a <strong>Local Disaster Management Group</strong> and maintain a <strong>Local Disaster Management Plan</strong>. Those plans are public and every one of the 77 councils has one. That is a mandated, uniform, published, per-council corpus — precisely the thing that makes automated assessment possible, and it sits in the one domain where councils genuinely are the front line.</p>
+
+  <p class="body" style="margin-top:12px">Better still, the assessment framework and the assessor already exist. The <strong>Office of the Inspector-General of Emergency Management</strong> maintains the Emergency Management Assurance Framework and the Standard for Disaster Management in Queensland, runs an assessment process over local and district plans, and tables review reports in Parliament — four of them in December 2025 alone. You would not be inventing a rubric; you would be extending an official one to a risk it does not yet cover.</p>
+
+  <div class="res">
+    <div class="rescard">
+      <h4>Office of the Inspector-General of Emergency Management</h4>
+      <p>Assurance framework, the Standard for Disaster Management in Queensland, plan assessments and tabled review reports. The existing oversight body for exactly this.</p>
+      <a href="https://www.igem.qld.gov.au/">igem.qld.gov.au</a>
+    </div>
+    <div class="rescard">
+      <h4>Queensland Disaster Management — publications</h4>
+      <p>Plans, guidelines and the disaster management arrangements. Start here for the plan templates every council works from.</p>
+      <a href="https://www.disaster.qld.gov.au/publications">disaster.qld.gov.au/publications</a>
+    </div>
+    <div class="rescard">
+      <h4>Australian Disaster Resilience Index</h4>
+      <p>The comparative dataset you were looking for. 82 indicators of coping and adaptive capacity, national, available at LGA as well as SA2. Published through the federal Regional Data Hub.</p>
+      <a href="https://catalogue.data.infrastructure.gov.au/dataset/rdh-australiandisasterresilienceindex">catalogue.data.infrastructure.gov.au/dataset/rdh-australiandisasterresilienceindex</a>
+    </div>
+    <div class="rescard">
+      <h4>Queensland Reconstruction Authority</h4>
+      <p>Disaster Recovery Funding Arrangements activations and recovery data by local government area — a per-LGA record of which councils have actually been hit, and how often.</p>
+      <a href="https://www.qra.qld.gov.au/">qra.qld.gov.au</a>
+    </div>
+    <div class="rescard">
+      <h4>Australian Disaster Resilience Knowledge Hub</h4>
+      <p>AIDR's library, including the Australian Journal of Emergency Management. Good for the academic framing of warning-message failure.</p>
+      <a href="https://knowledge.aidr.org.au/">knowledge.aidr.org.au</a>
+    </div>
+  </div>
+
+  <h3>ABS, for anything comparative</h3>
+  <div class="res">
+    <div class="rescard">
+      <h4>ABS Data by Region — LGA</h4>
+      <p>The workhorse. Economy, education, employment, health, income, land, population and family/community themes, per LGA, in time series. Query it through Data Explorer under <span class="mono">ABS_REGIONAL_LGA2021</span>, or pull the CSV from data.gov.au. 566 LGAs nationally.</p>
+      <a href="https://dataexplorer.abs.gov.au/vis?tm=ABS_REGIONAL_LGA2021">dataexplorer.abs.gov.au/vis?tm=ABS_REGIONAL_LGA2021</a>
+    </div>
+    <div class="rescard">
+      <h4>SEIFA and the ASGS remoteness structure</h4>
+      <p>Relative disadvantage and remoteness class per LGA — your two stratification variables. Both free, both stable.</p>
+      <a href="https://www.abs.gov.au/websitedbs/d3310114.nsf/home/finding+data+for+local+government+areas">abs.gov.au — finding data for local government areas</a>
+    </div>
+    <div class="rescard">
+      <h4>ABS boundaries as a live service</h4>
+      <p>LGA boundaries served as ArcGIS FeatureServer layers — pull them straight into a map without downloading shapefiles.</p>
+      <a href="https://geo.abs.gov.au/arcgis/rest/services/ASGS2023/LGA/FeatureServer/layers">geo.abs.gov.au/arcgis/rest/services/ASGS2023/LGA/FeatureServer/layers</a>
+    </div>
+  </div>
+
+  <div class="callout hot">
+    <strong>This reopens a project you set aside.</strong> Disaster management is the strongest domain available to you, and better than privacy or procurement on every axis: the documents are mandated and exist for all 77 councils; an official standard and an official assessor already exist; councils genuinely are the front line rather than a bit player; the harm from a wrong answer is loss of life rather than a missed deadline; and there is a real comparative capacity index at LGA level. An assessment of whether local disaster management plans anticipate <em>synthetic</em> warnings and impersonated official channels is a question nobody has asked, against a corpus that is already public.
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p class="eyebrow">Verify before citing</p>
+    <p>Section numbers and thresholds are current to the best of this research as at August 2026 and were drawn from Queensland legislation, departmental and commission sources, but statute changes and section numbering is easy to get wrong — check each citation against legislation.qld.gov.au before it appears in a submission. The contracting thresholds changed on 12 December 2025 and are CPI-indexed from 1 July 2026, so the figures move. The characterisation of which functions are council rather than State is accurate in general but admits local exceptions, particularly where councils deliver services under contract to the State. Where a claim here is load-bearing for your argument, read the primary instrument.</p>
+  </div>
+</footer>
