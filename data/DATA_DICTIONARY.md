@@ -61,16 +61,16 @@ Every column in every file in `data/`, what it means, where it came from, and ho
 | `seifa_irsad_decile_aus` | National decile for IRSAD |
 | `seifa_ier_score` | Index of **Economic Resources** — income, housing, wealth |
 | `seifa_ieo_score` | Index of **Education and Occupation** — skills and qualifications |
+| `median_age` | Years |
+| `median_personal_income_weekly` | Dollars per week, persons 15+ |
+| `median_household_income_weekly` | Dollars per week |
+| `avg_household_size` | Persons per household. A crowding proxy, though not the ABS overcrowding measure |
 
 > **A bug worth knowing about**, because it was in this file until it was caught. The ABS SEIFA
 > dataflow ships several measures per area. `SCORE` is the area's score; `MINS` and `MAXS` are
 > the *minimum and maximum scores of the SA1s inside it*. An earlier build read `MINS` as the
 > score, which systematically understated disadvantage. If you pull SEIFA yourself, filter
 > `SEIFA_MEASURE == "SCORE"`.
-| `median_age` | Years |
-| `median_personal_income_weekly` | Dollars per week, persons 15+ |
-| `median_household_income_weekly` | Dollars per week |
-| `avg_household_size` | Persons per household. A crowding proxy, though not the ABS overcrowding measure |
 
 ### Council capacity — Queensland CDC, **2015–16**
 
