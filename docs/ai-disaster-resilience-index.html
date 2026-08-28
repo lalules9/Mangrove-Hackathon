@@ -493,6 +493,54 @@ H5 = exposure × (1 - absorptive) × consequence × vendor_concentration</div>
   <p class="body" style="margin-top:14px">Note that ADRI itself had <strong>67 of its indicators in coping capacity and far fewer in adaptive capacity</strong>, because national-scale adaptive indicators are hard to find. You will hit the same wall. Say so rather than padding it.</p>
 </section>
 
+<section id="datastatus">
+  <div class="sec-head">
+    <p class="eyebrow">Status · 29 August 2026</p>
+    <h2>What data we actually have</h2>
+    <p>Per hazard, honestly. 78 Queensland LGAs in <span class="mono">data/lga_profile_QLD.csv</span>, 51 columns.</p>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Hazard</th><th>Have</th><th>Missing</th><th>Buildable?</th></tr></thead>
+      <tbody>
+        <tr><td><strong>H1 essential services</strong></td><td>Water and sewerage connections, SOCI threshold flag, remoteness</td><td>Isolated electricity networks</td><td><strong>Yes</strong> — but connections are 2015–16</td></tr>
+        <tr><td><strong>H2 biological</strong></td><td>Persons per bedroom (crowding), median age, remoteness, SEIFA</td><td>Travel time to ICU, local health workforce</td><td><strong>Partly</strong> — vulnerability yes, access no</td></tr>
+        <tr><td><strong>H3 synthetic warning</strong></td><td>Remoteness, Indigenous share</td><td>Disaster activation counts (dataset dead), digital inclusion (not published at LGA), English proficiency</td><td><span class="crit-txt">Weakest</span> — the exposure term has no data</td></tr>
+        <tr><td><strong>H4 substitutability</strong></td><td>Remoteness, Indigenous council flag</td><td>Alternative access points, council function breadth</td><td><strong>Proxy only</strong></td></tr>
+        <tr><td><strong>H5 institutional</strong></td><td>Staff FTE indoor/outdoor, own-source revenue share</td><td>Vendor concentration, system count</td><td><strong>Partly</strong> — capacity yes, dependence no</td></tr>
+        <tr><td><strong>H6 labour</strong></td><td>—</td><td>Occupation by LGA</td><td><strong>Not sourced</strong> — one ABS Census pull away</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout hot">
+    <strong>The honest headline: you have a complete dataset for H1, H2 and H5, and not for the rest.</strong> H3 is the one to worry about, because it is the most rhetorically compelling hazard and the one where you can measure least. Either source English proficiency and connectivity from the Census and rebuild it, or drop H3 and say why. Do not present a factor whose exposure term is guesswork.
+  </div>
+
+  <h3 style="font-size:21px;margin:34px 0 8px">ADRI is the control, not an input</h3>
+  <p class="body">ADRI's composite is built from 77 indicators, overwhelmingly ABS Census — named variables include <span class="mono">AGEP</span>, <span class="mono">SEXP</span>, <span class="mono">HCFMD</span>, <span class="mono">HEAP</span>, <span class="mono">LFHRP</span>, <span class="mono">OCCP</span>, <span class="mono">VEHD</span>, <span class="mono">VOLWP</span>. <strong>The raw indicator values are not published</strong> — the API serves only the eight themes, the two capacities and the composite. Verified by reading the application's own bundle.</p>
+  <p class="body" style="margin-top:11px">So: hold every <span class="mono">adri_*</span> column out of the model and use it as the held-out comparison. But know that the overlap is heavier than it looks — median income, age structure, household composition and SEIFA all draw on the same Census variables ADRI does, and <em>council staff per dwelling is itself an ADRI indicator</em>. Genuinely independent of ADRI: own-source revenue share, water connections, the SOCI flag, and Indigenous council status. That is a thinner independent signal than it first appears, and the write-up should say so.</p>
+
+  <h3 style="font-size:21px;margin:34px 0 8px">Sign inversions — the actual contribution</h3>
+  <p class="body">You do not need to build a competing index. Take ADRI's own indicators and <strong>flip the sign where the causal mechanism inverts.</strong> Every flip below traces to a stated argument, so the divergence is derived rather than manufactured.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Indicator</th><th>Natural hazard</th><th>AI</th><th>Why it flips</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Connectivity</strong> (information_access)</td><td>Good — you get the warning</td><td class="crit-txt">Bad</td><td>It is the entire exposure surface for synthetic content, scams and AI-mediated services. Partly offset: connectivity also enables verification</td></tr>
+        <tr><td><strong>Education, % managers and professionals</strong></td><td>Good — literacy, resources, planning</td><td class="crit-txt">Bad</td><td>Professional and managerial work is the most automatable. The cleanest flip in the set, and it moves metro councils</td></tr>
+        <tr><td><strong>Dwellings per FTE council staff</strong></td><td>More staff = capacity</td><td class="crit-txt">Inverts</td><td>ND reads staffing; AI reads system dependence. Many staff and few systems means real manual fallback</td></tr>
+        <tr><td><strong>Remoteness</strong> (distance to facility / airport)</td><td>Bad — slow everything</td><td>Partly protective</td><td>Sealable, low digital penetration, fewer systems to compromise. Consequence still worse</td></tr>
+        <tr><td><strong>Volunteering, residence &gt;5 years</strong></td><td>Good</td><td>Good — <em>under-weighted</em></td><td>Not a flip, a re-weight. These are the mechanism of social verification: you can check a fake by asking someone</td></tr>
+        <tr><td><strong>% caravan &amp; improvised dwellings</strong></td><td>Bad — structural vulnerability</td><td>Bad — <em>different reason</em></td><td>Exactly the false-positive class for aerial change-detection compliance enforcement</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout">
+    <strong>One line of attack that turned out not to work.</strong> ADRI 1 measured connectivity as <span class="mono">% area with excellent or good ADSL cover</span>, from 2016 broadband data — which looked like an exploitable staleness. It is not. Comparing ADRI 1 and ADRI 2 across matched areas, <strong>information_access correlates at only 0.605 and its mean rose from 0.486 to 0.571</strong>, exactly what the NBN rollout would produce. The indicator was refreshed. Drop that argument. <em>(Caveat on our own method: the two versions use different ASGS boundary editions, so the correlation is contaminated; the means are not.)</em> Incidentally <span class="mono">govt_leadership</span> moved most of all, at r = 0.426 — nobody appears to have looked at why.
+  </div>
+</section>
+
 <section id="honesty">
   <div class="sec-head">
     <p class="eyebrow">Read this before you publish a number</p>
