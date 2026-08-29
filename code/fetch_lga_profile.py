@@ -7,8 +7,13 @@ Assemble a standard profile for every Queensland local government area.
 Pulls from two places and joins them onto the 78-row council list:
 
   ABS SDMX API   data.api.abs.gov.au — population, SEIFA disadvantage, Census medians,
-                 Indigenous population. Current, free, no key needed.
+                 Indigenous population, and (new) Census G01 age structure, language,
+                 birthplace and schooling. Current, free, no key needed.
   data.qld.gov.au  council staff numbers and finances, from the Consolidated Data Collection.
+
+Land area comes from the map's own boundary file (docs/map/qld_lga.geojson, ABS ASGS
+2021) with no extra download; from it are derived population_density_per_sqkm,
+population_growth_10yr_pct and the pct_* composition columns.
 
 A WARNING ABOUT THE STAFF NUMBERS. Every resource in the Queensland comparative information
 open-data release stops at **2015-16**, whatever the portal's "last updated" date says. The
@@ -25,6 +30,8 @@ from __future__ import annotations
 import argparse
 import csv
 import io
+import json
+import math
 import re
 from pathlib import Path
 
@@ -38,6 +45,7 @@ for _d in (DATA, CACHE):
 
 ABS = "https://data.api.abs.gov.au/rest/data"
 QLD_RES = "https://www.data.qld.gov.au/dataset/c7c0c31e-a844-480d-bfbe-4b689179a5cf/resource"
+GEOJSON = BASE / "docs" / "map" / "qld_lga.geojson"
 
 CLIENT = httpx.Client(timeout=300, follow_redirects=True,
                       headers={"User-Agent": "hackathon-research/0.1 (non-commercial)"})
@@ -182,6 +190,125 @@ def abs_indigenous() -> dict[str, dict]:
     return out
 
 
+def abs_g01_composition() -> dict[str, dict]:
+    """Census 2021 G01 — age structure, language, birthplace and schooling.
+
+    Reuses the same cached file as abs_indigenous(). The fetch_lga_profile pipeline
+    already downloads the whole 17MB G01 table and keeps only two rows of it; this
+    keeps the rest. Persons counts only (SEXP == "3"), keyed by LGA code, returned as
+    raw sub-totals — main() turns them into percentages so the denominator is explicit.
+    """
+    out: dict[str, dict] = {}
+    try:
+        txt = cached("abs_c21_g01_lga",
+                     f"{ABS}/ABS,C21_G01_LGA,1.0.0/all?format=csvfilewithlabels")
+    except Exception as e:
+        print(f"  (census G01 composition unavailable: {e})")
+        return out
+    aged_65_plus = {"age groups: 65-74 years", "age groups: 75-84 years",
+                    "age groups: 85 years and over"}
+    aged_under_15 = {"age groups: 0-4 years", "age groups: 5-14 years"}
+    school_buckets = {
+        "highest year of school completed: year 12 or equivalent",
+        "highest year of school completed: year 11 or equivalent",
+        "highest year of school completed: year 10 or equivalent",
+        "highest year of school completed: year 9 or equivalent",
+        "highest year of school completed: year 8 or below",
+        "highest year of school completed: did not go to school",
+    }
+    for r in rows(txt):
+        if (r.get("SEXP") or "") != "3":                      # 1=Males 2=Females 3=Persons
+            continue
+        code = r.get("REGION")
+        label = (r.get("Selected person characteristic") or "").strip().lower()
+        val = r.get("OBS_VALUE")
+        if not code or not val:
+            continue
+        try:
+            n = float(val)
+        except ValueError:
+            continue
+        d = out.setdefault(code, {})
+        if label == "total persons":
+            d["g01_total_persons"] = n
+        elif label in aged_65_plus:
+            d["g01_aged_65_plus"] = d.get("g01_aged_65_plus", 0.0) + n
+        elif label in aged_under_15:
+            d["g01_aged_under_15"] = d.get("g01_aged_under_15", 0.0) + n
+        elif label == "language used at home: english only":
+            d["g01_lang_english_only"] = n
+        elif label == "language used at home: other language":
+            d["g01_lang_other"] = n
+        elif label == "birthplace: australia":
+            d["g01_born_australia"] = n
+        elif label == "birthplace: elsewhere":
+            d["g01_born_elsewhere"] = n
+        elif label in school_buckets:
+            d["g01_school_answered"] = d.get("g01_school_answered", 0.0) + n
+            if label == "highest year of school completed: year 12 or equivalent":
+                d["g01_school_year12"] = n
+    return out
+
+
+# --------------------------------------------------------------------------- land area
+
+def _ring_area_sqm(ring: list) -> float:
+    """Spherical polygon area for one lon/lat ring, in square metres.
+
+    Standard spherical-excess sum (as used by Google's SphericalUtil.computeArea and
+    OpenLayers), on the WGS84 authalic (equal-area) radius. The formula itself is exact
+    on a sphere; the error that matters is the web-resolution boundary in qld_lga.geojson,
+    which runs a few percent per LGA and about 6% low on the state total. That is fine for
+    a *ranked* density denominator. If an exact area is ever needed, pull AREASQKM from the
+    ABS ASGS LGA layer instead.
+    """
+    if len(ring) < 4:
+        return 0.0
+    r = 6371007.2
+    total = 0.0
+    for (lon1, lat1), (lon2, lat2) in zip(ring, ring[1:]):
+        total += (math.radians(lon2) - math.radians(lon1)) * (
+            2 + math.sin(math.radians(lat1)) + math.sin(math.radians(lat2)))
+    return abs(total * r * r / 2.0)
+
+
+def _polygon_area_sqkm(geom: dict) -> float:
+    """Area of a GeoJSON Polygon or MultiPolygon in square kilometres (holes subtracted)."""
+    if not geom:
+        return 0.0
+    polys = geom["coordinates"] if geom["type"] == "MultiPolygon" else [geom["coordinates"]]
+    sqm = 0.0
+    for poly in polys:
+        for i, ring in enumerate(poly):
+            a = _ring_area_sqm(ring)
+            sqm += a if i == 0 else -a          # ring 0 is the outer boundary
+    return sqm / 1_000_000.0
+
+
+def lga_area_sqkm() -> dict[str, float]:
+    """Land area per LGA, keyed by normalised name, from the map's own boundary file."""
+    if not GEOJSON.exists():
+        print(f"  (area unavailable: {GEOJSON} not found)")
+        return {}
+    g = json.loads(GEOJSON.read_text(encoding="utf8"))
+    out: dict[str, float] = {}
+    for f in g.get("features", []):
+        name = (f.get("properties") or {}).get("lga_name", "")
+        geom = f.get("geometry")
+        if not name or not geom:
+            continue
+        out[_area_key(name)] = round(_polygon_area_sqkm(geom), 1)
+    return out
+
+
+def _area_key(name: str) -> str:
+    """Same reduction the master-file join uses, so area keys line up with short_name."""
+    words = re.split(r"[^a-z]+", (name or "").lower())
+    drop = {"council", "regional", "region", "shire", "city", "town", "authority",
+            "aboriginal", "island", "area", "qld"}
+    return "".join(w for w in words if w and w not in drop)
+
+
 # --------------------------------------------------------------------------- Queensland pulls
 
 def qld_resource(name: str, path: str) -> list[dict]:
@@ -217,6 +344,15 @@ def num(v) -> str:
     return (v or "").replace(",", "").replace("$", "").strip()
 
 
+def pct(numer, denom, nd: int = 1):
+    """100 * numer / denom, rounded, or "" if either side is missing or denom is zero."""
+    try:
+        numer, denom = float(numer), float(denom)
+    except (ValueError, TypeError):
+        return ""
+    return round(100 * numer / denom, nd) if denom else ""
+
+
 # --------------------------------------------------------------------------- assemble
 
 def main() -> None:
@@ -233,6 +369,9 @@ def main() -> None:
     print("Fetching ABS...")
     pop, seifa = abs_population(), abs_seifa()
     medians, indig = abs_census_medians(), abs_indigenous()
+    g01x = abs_g01_composition()
+    areas = lga_area_sqkm()
+    print(f"  land area from {GEOJSON.name}: {len(areas)} LGAs")
 
     print("Fetching Queensland Consolidated Data Collection...")
     staff = qld_latest_by_council(qld_resource(
@@ -260,6 +399,8 @@ def main() -> None:
         s = seifa.get(code, {})
         m = medians.get(code, {})
         i = indig.get(code, {})
+        gx = g01x.get(code, {})
+        ar = areas.get(_area_key(c["short_name"]), "")
         st = staff.get(k, {})
         fi = fin.get(k, {})
         wa = water.get(k, {})
@@ -284,6 +425,7 @@ def main() -> None:
             "population_latest": p.get(latest_erp, "") if latest_erp else "",
             "population_latest_year": (latest_erp or "").replace("erp_", ""),
             "population_10yr_prior": p.get(older_erp, "") if older_erp else "",
+            "area_sqkm": ar,
             "census2021_total_persons": i.get("census_total_persons", ""),
             "census2021_indigenous_persons": i.get("census_indigenous_persons", ""),
             # --- socio-economic
@@ -333,6 +475,32 @@ def main() -> None:
             row["indigenous_share_pct"] = round(100 * ind / tot, 1) if tot else ""
         except (ValueError, TypeError):
             row["indigenous_share_pct"] = ""
+
+        # derived — density and 10-year growth
+        try:
+            # 3 dp, not 2 — the outback LGAs sit near 0.005 persons/km2 and round to
+            # zero at coarser precision.
+            row["population_density_per_sqkm"] = round(
+                float(row["population_latest"]) / float(row["area_sqkm"]), 3)
+        except (ValueError, TypeError, ZeroDivisionError):
+            row["population_density_per_sqkm"] = ""
+        try:
+            now, then = float(row["population_latest"]), float(row["population_10yr_prior"])
+            row["population_growth_10yr_pct"] = round(100 * (now - then) / then, 1) if then else ""
+        except (ValueError, TypeError, ZeroDivisionError):
+            row["population_growth_10yr_pct"] = ""
+
+        # derived — Census 2021 composition, kept from G01 (denominators explicit)
+        g_total = gx.get("g01_total_persons")
+        row["pct_aged_65_plus"] = pct(gx.get("g01_aged_65_plus"), g_total)
+        row["pct_aged_under_15"] = pct(gx.get("g01_aged_under_15"), g_total)
+        _lang = [gx.get("g01_lang_english_only"), gx.get("g01_lang_other")]
+        row["pct_language_not_english_home"] = pct(
+            gx.get("g01_lang_other"), sum(v for v in _lang if isinstance(v, float)) or "")
+        _bp = [gx.get("g01_born_australia"), gx.get("g01_born_elsewhere")]
+        row["pct_birthplace_overseas"] = pct(
+            gx.get("g01_born_elsewhere"), sum(v for v in _bp if isinstance(v, float)) or "")
+        row["pct_year12_completed"] = pct(gx.get("g01_school_year12"), gx.get("g01_school_answered"))
         try:
             wc = float(row["water_connections_total"])
             row["is_water_service_provider"] = wc > 0
@@ -361,13 +529,15 @@ def main() -> None:
         w.writeheader()
         w.writerows(out)
 
-    filled = lambda col: sum(1 for r in out if r[col])
+    filled = lambda col: sum(1 for r in out if str(r[col]) != "")
     print(f"\nWrote {path}  ({len(out)} rows, {len(out[0])} columns)\n")
     print("Coverage:")
-    for col in ("population_latest", "seifa_irsd_score", "seifa_irsd_decile_aus",
-                "seifa_ier_score", "median_age",
-                "census2021_indigenous_persons", "indigenous_share_pct",
-                "avg_persons_per_bedroom", "median_rent_weekly",
+    for col in ("population_latest", "area_sqkm", "population_density_per_sqkm",
+                "population_growth_10yr_pct", "seifa_irsd_score", "seifa_ier_score",
+                "median_age", "pct_aged_65_plus", "pct_aged_under_15",
+                "pct_language_not_english_home", "pct_birthplace_overseas",
+                "pct_year12_completed", "census2021_indigenous_persons",
+                "indigenous_share_pct", "avg_persons_per_bedroom",
                 "staff_fte_total", "total_operating_income_k",
                 "own_source_revenue_share", "water_connections_total"):
         print(f"  {col:32} {filled(col):3}/{len(out)}")
@@ -378,6 +548,8 @@ def main() -> None:
 
     print("\nATTRIBUTION")
     print("  Population, SEIFA and Census: Australian Bureau of Statistics, CC BY 4.0.")
+    print("  Land area computed from ABS ASGS 2021 LGA boundaries (docs/map/qld_lga.geojson),")
+    print("    Australian Bureau of Statistics, CC BY 4.0.")
     print("  Staff and finance: State of Queensland, CC BY 4.0. DATA IS 2015-16 — see docstring.")
 
 

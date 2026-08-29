@@ -4,14 +4,20 @@ Build the single master file: one row per Queensland LGA, every column we hold.
     python build_master.py
 
 Sources, all joined on a normalised LGA name:
-  data/lga_profile_QLD.csv        base — ABS population, SEIFA, Census, council finances
+  data/lga_profile_QLD.csv        base — ABS population, area, SEIFA, Census, council finances
   data/adri_lga_QLD.csv           all eight ADRI themes (the profile carries only four)
   data/councils.csv               url_status, worst remoteness, ICFP, de-amalgamation
-  data/qld_lga_ai_risk_master.csv water utility tier and 2023-24 connections, AI status
+  data/qld_lga_ai_inputs.csv     water utility tier and 2023-24 connections, AI status
+  data/qld_lga_airports.csv       lifeline airstrips, airport control tier
+  data/qld_lga_infrastructure.csv roads, waste, isolated power networks
+  data/qld_lga_mobile_blackspots.csv  MBSP funded base stations per LGA, by carrier
   research/qld_lga_ai_infrastructure_tracker.csv   AI deployment detail and sources
   research/qld_council_ai_policies.csv             published AI policy scan (partial)
 
 Output: data/qld_lga_master.csv
+
+Derived here: indoor_staff_share, water_connections_best, ai_deployment_confirmed,
+road_density_km_per_sqkm, mbsp_stations_per_1000_residents.
 
 Nothing here is hand-edited. Re-run it after any source changes. If a column appears in two
 sources the base wins, except where a source is explicitly newer — water connections are taken
@@ -63,11 +69,12 @@ def main() -> None:
     profile = load(DATA / "lga_profile_QLD.csv", "short_name")
     adri = load(DATA / "adri_lga_QLD.csv", "lga_name")
     councils = load(DATA / "councils.csv", "short_name")
-    aimaster = load(DATA / "qld_lga_ai_risk_master.csv", "short_name")
+    aimaster = load(DATA / "qld_lga_ai_inputs.csv", "short_name")
     tracker = load(RESEARCH / "qld_lga_ai_infrastructure_tracker.csv", "LGA")
     policies = load(RESEARCH / "qld_council_ai_policies.csv", "short_name")
     airports = load(DATA / "qld_lga_airports.csv", "short_name")
     infra    = load(DATA / "qld_lga_infrastructure.csv", "short_name")
+    mbsp     = load(DATA / "qld_lga_mobile_blackspots.csv", "join_key")
 
     if not profile:
         raise SystemExit("lga_profile_QLD.csv is required. Run fetch_lga_profile.py first.")
@@ -128,9 +135,29 @@ def main() -> None:
                   "isolated_power_confidence"):
             row[c] = inf.get(c, "")
 
+        # Mobile Black Spot Program funded base stations. Left join: an LGA absent from
+        # the file received no MBSP funding, which is a real zero, not missing data.
+        mb = mbsp.get(k, {})
+        row["mbsp_lga_raw"] = mb.get("mbsp_lga_raw", "")
+        for c in ("mbsp_funded_stations_total", "mbsp_funded_stations_telstra",
+                  "mbsp_funded_stations_optus", "mbsp_funded_stations_other",
+                  "mbsp_rounds_covered"):
+            row[c] = mb.get(c, "0")
+        for c in ("mbsp_earliest_year", "mbsp_latest_year"):
+            row[c] = mb.get(c, "")
+
         # ---- derived ----------------------------------------------------------
         ind, tot = num(row.get("staff_fte_indoor")), num(row.get("staff_fte_total"))
         row["indoor_staff_share"] = round(ind / tot, 3) if ind and tot else ""
+
+        area = num(row.get("area_sqkm"))
+        roads = num(row.get("road_km_total"))
+        row["road_density_km_per_sqkm"] = round(roads / area, 4) if roads and area else ""
+
+        pop = num(row.get("population_latest"))
+        mb_total = num(row.get("mbsp_funded_stations_total"))
+        row["mbsp_stations_per_1000_residents"] = (
+            round(1000 * mb_total / pop, 3) if mb_total is not None and pop else "")
 
         # water connections: prefer 2023-24, fall back to 2015-16, record which
         new, old = num(row.get("water_connections_2023_24")), num(row.get("water_connections_total"))
@@ -165,7 +192,10 @@ def main() -> None:
     print("\n  coverage of the joined-in columns:")
     for c in (ADRI_THEMES[:2] + ["url_status", "water_control_tier",
                                  "water_connections_best", "ai_status",
-                                 "ai_deployment_confirmed", "indoor_staff_share"]):
+                                 "ai_deployment_confirmed", "indoor_staff_share",
+                                 "area_sqkm", "population_density_per_sqkm",
+                                 "road_density_km_per_sqkm",
+                                 "mbsp_funded_stations_total"]):
         key = f"adri_{c}" if c in ADRI_THEMES else c
         print(f"    {key:34} {filled(key):>3}/{len(out)}")
 

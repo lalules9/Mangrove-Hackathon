@@ -21,47 +21,75 @@ Every column in every file in `data/`, what it means, where it came from, and ho
 
 ---
 
-## 0. `qld_lga_ai_risk_master.csv` — THE index spine, start here
+## Which file do I use? — the pipeline
 
-**This is the file the index gets built from.** Everything else in `data/` and `research/` is a
-source that feeds this one. One row per LGA (78 — 77 councils plus Weipa Town Authority), keyed on
-`short_name`, joining together every layer collected so far:
+**One row per LGA, 78 of them (77 councils + Weipa Town Authority), joined on `short_name`
+throughout.** There is exactly one analysis table. Everything else is a step on the way to it.
+
+```
+fetch_lga_profile.py  ->  lga_profile_QLD.csv        ABS population + area + Census + SEIFA + QLD finance
+fetch_adri.py         ->  adri_lga_QLD.csv           all 8 ADRI resilience themes
+fetch_mbsp.py         ->  qld_lga_mobile_blackspots.csv   MBSP funded base stations per LGA, by carrier
+(hand-curated)        ->  qld_lga_ai_inputs.csv      AI-in-infrastructure status, water utility tier
+(hand-curated)        ->  qld_lga_airports.csv, qld_lga_infrastructure.csv   airstrips, roads, waste, isolated power
+                              |
+                              v
+build_master.py       ->  qld_lga_master.csv    <-- THE analysis table. 90+ columns. Read this one.
+                              |
+                              v
+build_index.py        ->  qld_lga_index.csv     the scored index + rank vs ADRI (+ a copy under docs/map/)
+```
+
+- **Use `qld_lga_master.csv` for any analysis.** It is what `build_index.py` reads and what the
+  map is built from. If a column exists anywhere in `data/`, it is in here too.
+- **`lga_profile_QLD.csv` is a build intermediate**, not a working file — it is only the ABS /
+  Census / QLD-finance slice, before ADRI's other four themes, the AI layer, infrastructure and
+  the black-spot data are joined on. Don't analyse from it; it will be missing columns.
+- **`qld_lga_ai_inputs.csv`** (was `qld_lga_ai_risk_master.csv` — renamed to stop it reading as a
+  second "master") is one hand-curated *source*: AI-in-infrastructure status per council, water
+  utility control tier, published-AI-policy flag. `build_master.py` joins it in.
+- Re-run order after changing any source: `fetch_*` for the source you touched, then
+  `build_master.py`, then `build_index.py`.
+
+Everything below documents columns by the file they originate in. Their final home is
+`qld_lga_master.csv`.
+
+---
+
+## 0. `qld_lga_ai_inputs.csv` — hand-curated AI + water-control source
+
+One row per LGA, keyed on `short_name`. A *feeder* for `build_master.py`, not the index spine.
 
 | Column | Source | Meaning |
 |---|---|---|
-| `short_name`, `council_name`, `stratum`, `is_indigenous_council` | `lga_profile_QLD.csv` | Identity |
-| `population_latest`, `own_source_revenue_share`, `staff_fte_total` | `lga_profile_QLD.csv` | Capacity |
-| `adri_andri`, `adri_coping_capacity`, `adri_adaptive_capacity`, `adri_information_access` | `lga_profile_QLD.csv` | Existing disaster-resilience baseline |
+| `short_name`, `council_name`, `stratum`, `is_indigenous_council` | `lga_profile_QLD.csv` | Identity, carried for convenience |
+| `population_latest`, `own_source_revenue_share`, `staff_fte_total` | `lga_profile_QLD.csv` | Capacity, carried for convenience |
+| `adri_andri`, `adri_coping_capacity`, `adri_adaptive_capacity`, `adri_information_access` | `lga_profile_QLD.csv` | Existing disaster-resilience baseline, carried for convenience |
 | `ai_status`, `ai_infrastructure_type`, `ai_source` | `research/qld_lga_ai_infrastructure_tracker.csv` | **Realized exposure** — is AI actually running in this council's infrastructure, verified against a named source |
-| `water_utility`, `water_control_tier`, `water_connections_2023_24`, `meets_soci_threshold` | `data/water_sewer_connections_NPR_2023_24_QLD.csv` | **Current critical-infrastructure exposure** — who actually runs the water/sewer asset (the council itself, or a joint bulk authority it doesn't control alone) and whether it crosses the SOCI Act's 100,000-connection line |
-| `has_published_ai_governance_policy` | tracker | **Governance readiness** — currently `True` for exactly one council (Cairns), `False` for all 77 others including every one of the 8 with confirmed AI in infrastructure |
+| `water_utility`, `water_control_tier`, `water_connections_2023_24`, `meets_soci_threshold` | `water_sewer_connections_NPR_2023_24_QLD.csv` | **Current critical-infrastructure exposure** — who runs the water/sewer asset (the council, or a joint bulk authority it doesn't control alone) and whether it crosses the SOCI Act's 100,000-connection line |
+| `has_published_ai_governance_policy` | tracker | **Governance readiness** — `True` for exactly one council (Cairns), `False` for all 77 others including every one of the 8 with confirmed AI in infrastructure |
 
-**The join key is `short_name`** — ADRI's own naming convention, already used across `councils.csv`,
-`adri_lga_QLD.csv`, `adri_sa2_QLD.csv` and `lga_profile_QLD.csv`. Neither the AI tracker (which
-uses full LGA names like "Sunshine Coast Regional") nor the NPR water file (which uses utility
-names, several of which — Urban Utilities, Unitywater — are joint authorities covering *multiple*
-councils, not 1:1) match this convention directly, which is exactly why they'd been sitting as
-separate, unmergeable files. The name-normalisation logic that resolves both onto `short_name`
-(stripping "Regional"/"Shire"/"City"/"Council"/"Aboriginal", handling the "City of X" prefix, and
-explicitly mapping the two bulk water authorities to their member councils) isn't yet saved as a
-standalone script — it's currently one-off Python run to produce this CSV. **Worth turning into a
-proper `code/build_master.py` before this needs re-running with a fifth data source**, so the
-crosswalk logic doesn't get silently re-derived (and potentially drift) each time.
+**Name crosswalk.** The AI tracker uses full names ("Sunshine Coast Regional"); the NPR water
+file uses utility names, and Urban Utilities / Unitywater are joint authorities covering several
+councils each. `build_master.py` resolves both onto `short_name` — stripping
+"Regional"/"Shire"/"City"/"Council"/"Aboriginal", handling the "City of X" prefix, and mapping
+the two bulk water authorities to their member councils.
 
-**What's still a gap, not filled by this merge:** 52 of the 78 councils have no water-connection
-data at all (blank `water_utility`) because they fall below the ~10,000-connection NPR reporting
-threshold — they're still only findable in the stale 2015-16 release. And `ai_status` for the 61
-"no evidence found" councils means exactly that — not found in the sources searched, not
+**Gaps, not filled by this file:** 52 of 78 councils have no water-connection data (blank
+`water_utility`) because they fall below the ~10,000-connection NPR reporting threshold. And
+`ai_status` = "no evidence found" for 61 councils means not found in the sources searched, not
 confirmed absent.
 
-**This is a feature table, not a score.** Per HANDOVER's own rule, the next step is not collapsing
-these columns into one composite — it's deciding how the realized-exposure, capacity, and
-governance-readiness layers get reported side by side so a council can see which one drives its
-own result.
+**This is a feature layer, not a score.** Per HANDOVER's rule, the composite is deferred — the
+job is reporting realized-exposure, capacity and governance-readiness side by side so a council
+can see which drives its own result.
 
-## 1. `lga_profile_QLD.csv` — the main working file
+## 1. `lga_profile_QLD.csv` — ABS / Census / finance base (build intermediate)
 
 78 rows: Queensland's 77 local governments plus the Weipa Town Authority. One row per LGA.
+Produced by `fetch_lga_profile.py`; consumed only by `build_master.py`. Analyse from
+`qld_lga_master.csv` instead — this file is missing the ADRI, AI, infrastructure and black-spot
+columns.
 
 ### Identity
 
@@ -86,6 +114,28 @@ own result.
 | `census2021_total_persons` | Census 2021 count. **Will differ from ERP** — ERP is an estimate adjusted for undercount, Census is a raw count. Do not mix them in one ratio |
 | `census2021_indigenous_persons` | Aboriginal and/or Torres Strait Islander persons, Census 2021 |
 | `indigenous_share_pct` | Derived: Indigenous ÷ total persons × 100, both Census 2021 |
+| `population_growth_10yr_pct` | Derived: (`population_latest` − `population_10yr_prior`) ÷ prior × 100. Negative for the many councils losing population |
+
+### Land area and density
+
+| Column | Meaning |
+|---|---|
+| `area_sqkm` | Land area, km². **Computed from the boundary polygons in `docs/map/qld_lga.geojson`** (ABS ASGS 2021) with a spherical-area formula — no separate download. A few % below official ABS `AREASQKM` per LGA because the map geometry is web-resolution; fine as a *ranked* denominator, not for exact areas. See `code/fetch_lga_profile.py`. |
+| `population_density_per_sqkm` | Derived: `population_latest` ÷ `area_sqkm`. Ranges from ~0.02 (Diamantina) to ~900 (Brisbane) |
+| `road_density_km_per_sqkm` | Derived **in `build_master.py`** (needs `road_km_total` from `qld_lga_infrastructure.csv`): `road_km_total` ÷ `area_sqkm` |
+
+### Census 2021 composition — ABS Census G01
+
+Kept from the G01 table `fetch_lga_profile.py` already downloads (it previously used only two
+rows of it). Each is a percentage with an explicit denominator so it can't be misread.
+
+| Column | Meaning |
+|---|---|
+| `pct_aged_65_plus` | Persons 65+ ÷ total persons × 100 |
+| `pct_aged_under_15` | Persons 0–14 ÷ total persons × 100 |
+| `pct_language_not_english_home` | "Other language" ÷ (English only + Other language) × 100. Excludes not-stated. A proxy for exposure to synthetic-warning / scam messaging in the wrong channel |
+| `pct_birthplace_overseas` | "Elsewhere" ÷ (Australia + Elsewhere) × 100 |
+| `pct_year12_completed` | Year 12 or equivalent ÷ (all six "highest year of school completed" buckets) × 100 — i.e. of those who have finished schooling, the share who reached Year 12 |
 
 ### Socio-economic — ABS SEIFA 2021 and Census 2021
 
@@ -227,8 +277,9 @@ area weighting above.
 | Data | Attribute to | Licence |
 |---|---|---|
 | ADRI (`adri_*`, and the `adri_*` columns elsewhere) | **Natural Hazards Research Australia / University of New England** | **CC BY-NC 4.0 — non-commercial only** |
-| Population, SEIFA, Census | **Australian Bureau of Statistics** | CC BY 4.0 |
+| Population, SEIFA, Census, and LGA boundaries used for `area_sqkm` (ASGS 2021) | **Australian Bureau of Statistics** | CC BY 4.0 |
 | Staff, finance, water connections | **State of Queensland** | CC BY 4.0 |
+| MBSP funded base stations (`mbsp_*`) | **Dept of Infrastructure, Transport, Regional Development, Communications, Sport and the Arts** | CC BY 4.0 |
 
 The ADRI licence is the binding one: non-commercial use, attribution displayed. A hackathon
 entry is non-commercial, but put the attribution on the page rather than in a footnote.
@@ -289,3 +340,38 @@ the response carries both codes and human-readable labels, which saves fetching 
 Beware two boundary vintages in play: ADRI and Census are on **2021** boundaries, ERP is on
 **2025**. For Queensland the differences are minor, but check before joining anything where a
 boundary changed.
+
+---
+
+## 8. `qld_lga_mobile_blackspots.csv` — MBSP funded base stations
+
+Produced by `code/fetch_mbsp.py` from the Department of Infrastructure's **Mobile Black Spot
+Program — Funded Base Stations** ArcGIS service (`spatial.infrastructure.gov.au`). 62 QLD LGAs
+that received at least one funded site; `build_master.py` left-joins it, so an LGA missing here
+is a real **zero**, not missing data. Keyed on `join_key` (already-normalised `short_name`).
+
+**What it measures — and what it does not.** Each source record is a mobile base station that
+Commonwealth money (with state / carrier co-contribution) built or upgraded under MBSP Rounds
+1–7, 2015–2024. It marks **where mobile coverage was poor enough to fund a fix** — a historical
+remediation signal, *not* a current coverage or black-spot map. The nominated-black-spot database
+that would show live gaps was withdrawn from data.gov.au (now behind a login); Queensland's own
+dataset was retired. Funded base stations are the best open proxy left.
+
+| Column | Meaning |
+|---|---|
+| `join_key` | Normalised `short_name` for the join |
+| `mbsp_lga_raw` | The LGA string(s) as the source labels them — kept for audit |
+| `mbsp_funded_stations_total` | Count of funded sites in the LGA, all carriers, Rounds 1–7 |
+| `mbsp_funded_stations_telstra` | Of which Telstra is the grantee. **Telstra took 190 of Queensland's 246 funded sites (77%)** |
+| `mbsp_funded_stations_optus` | Of which Optus |
+| `mbsp_funded_stations_other` | TPG/Vodafone + infrastructure providers (Field Solutions Group, OneWiFi) |
+| `mbsp_rounds_covered` | How many distinct funding rounds touched this LGA — a spread-over-time signal |
+| `mbsp_earliest_year`, `mbsp_latest_year` | Completion-year range, parsed from the source's `Completion_Date` |
+
+Derived in `build_master.py`: **`mbsp_stations_per_1000_residents`** = `mbsp_funded_stations_total`
+÷ `population_latest` × 1000 — normalises the count so a remote LGA with three towers and 800
+people is not swamped by a metro LGA with ten towers and 200,000.
+
+**Attribution:** Department of Infrastructure, Transport, Regional Development, Communications,
+Sport and the Arts — *Mobile Black Spot Program*. CC BY 4.0. Not covered by the ADRI CC BY-NC
+licence.

@@ -277,8 +277,10 @@ is backed by a plain REST API. `code/fetch_adri.py` pulls it and aggregates SA2 
 | `adri_theme_definitions.json` | Official prose definition of each theme — **quote verbatim** |
 | `adri_ATTRIBUTION.txt` | The attribution line you must display |
 | `councils.csv` | All 78 QLD entries: verified URL, stratum, Indigenous/ICFP flags, ADRI scores |
-| `lga_profile_QLD.csv` | **The main working file** — 37 columns per LGA: population, SEIFA, Census medians, Indigenous share, council staff FTE, finances, own-source revenue share, ADRI |
-| `DATA_DICTIONARY.md` | **Every column in every file explained**, with vintage and licence |
+| `lga_profile_QLD.csv` | ABS/Census/QLD-finance base — a **build step** feeding `build_master.py`, not for analysis (add area, density, growth, Census composition since this was written) |
+| `qld_lga_master.csv` | **The analysis table.** One row per LGA, every column joined — ABS + all 8 ADRI themes + AI layer + infrastructure + mobile black spots. `build_index.py` reads this. Start here |
+| `qld_lga_mobile_blackspots.csv` | MBSP funded base stations per LGA, by carrier (Telstra 190 of 246 QLD sites). From `code/fetch_mbsp.py` |
+| `DATA_DICTIONARY.md` | **Every column in every file explained**, with vintage and licence. See its "Which file do I use?" section |
 
 Analysis year **2024**, so it is current.
 
@@ -334,7 +336,10 @@ Six Python scripts. **Only two have been run, and those two have already produce
 |---|---|---|
 | `fetch_adri.py` | Pulls ADRI off its REST API, aggregates SA2 → LGA | **Run** — produced `data/adri_*` |
 | `build_councils.py` | Builds the 78-row council list, verifies every URL | **Run** — produced `data/councils.csv` |
-| `fetch_lga_profile.py` | Joins ABS population/SEIFA/Census + QLD staff and finances onto the council list | **Run** — produced `data/lga_profile_QLD.csv` |
+| `fetch_lga_profile.py` | ABS population/SEIFA/Census/area + QLD staff and finances onto the council list | **Run** — produced `data/lga_profile_QLD.csv` |
+| `fetch_mbsp.py` | MBSP funded base stations per LGA, by carrier, from the DITRDCA ArcGIS service | **Run** — produced `data/qld_lga_mobile_blackspots.csv` |
+| `build_master.py` | Joins every source into the one analysis table | **Run** — produced `data/qld_lga_master.csv` |
+| `build_index.py` | Scores `qld_lga_master.csv` against `config/index.yaml`, ranks vs ADRI | **Run** — produced `data/qld_lga_index.csv` |
 | `run_queries.py` | Puts the question set to Gemini / a SERP API, caches and archives | Never run |
 | `grade.py` | Scrapes council ground truth, grades the answers | Never run |
 | `validate.py` | Blind hand-labelling by both of you, then agreement stats | Never run |
@@ -351,7 +356,12 @@ cp .env.example .env                 # only needed for Option B
 python fetch_adri.py --state QLD     # already run; re-run only to refresh
 python build_councils.py             # already run; takes ~5 min, hits 78 sites
 python fetch_lga_profile.py          # already run; ABS + QLD open data, all cached
+python fetch_mbsp.py                  # already run; DITRDCA ArcGIS, cached
+python build_master.py               # join everything -> data/qld_lga_master.csv
+python build_index.py                # score it -> data/qld_lga_index.csv
 ```
+
+Re-run order after touching a source: its `fetch_*`, then `build_master.py`, then `build_index.py`.
 
 `code/README.md` documents the Option B pipeline in full:
 `build_councils.py` → `run_queries.py` → `grade.py` → `validate.py` → `analyse.py`.
