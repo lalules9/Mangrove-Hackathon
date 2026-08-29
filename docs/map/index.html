@@ -9,12 +9,12 @@
 <style>
 :root{
   --paper:#F5F6F8;--card:#fff;--ink:#131820;--ink2:#465061;--ink3:#6F7A8C;
-  --rule:#D5DAE1;--accent:#0B5C8A;
+  --rule:#D5DAE1;--accent:#0B5C8A;--cta:#E8531C;--cta-ink:#fff;
   --r1:#3D7A6B;--r2:#7A9B3C;--r3:#C79A12;--r4:#CE7026;--r5:#B0362C;
 }
 @media(prefers-color-scheme:dark){:root{
   --paper:#0D1117;--card:#151B23;--ink:#E9EDF2;--ink2:#A6B1BF;--ink3:#788596;
-  --rule:#28313D;--accent:#5FB3DE;
+  --rule:#28313D;--accent:#5FB3DE;--cta:#FF7A3D;--cta-ink:#181008;
   --r1:#57A18E;--r2:#9DBE5C;--r3:#DCB33A;--r4:#E28A45;--r5:#DE6155;}}
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
@@ -54,13 +54,76 @@ footer{background:var(--card);border-top:1px solid var(--rule);padding:9px 20px;
   font-size:11.5px;color:var(--ink3)}
 .leaflet-container{background:var(--paper)}
 .note{font-size:12px;color:var(--ink3);line-height:1.5;margin-top:6px}
+
+.header-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.badge-btn{width:auto;flex:none;white-space:normal;text-align:center;max-width:220px;
+  background:var(--cta);color:var(--cta-ink);border:none;border-radius:12px;
+  padding:12px 20px;font-size:14.5px;font-weight:800;line-height:1.25;cursor:pointer;
+  box-shadow:0 3px 14px rgba(232,83,28,.4)}
+.badge-btn:hover{opacity:.9}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(10,14,20,.55);z-index:500;
+  display:flex;align-items:center;justify-content:center;padding:20px}
+.modal-overlay[hidden]{display:none}
+.modal{position:relative;background:var(--card);color:var(--ink);border-radius:12px;
+  max-width:560px;width:100%;padding:26px 28px 22px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.modal-close{position:absolute;top:10px;right:12px;background:none;border:none;
+  font-size:26px;line-height:1;color:var(--ink3);cursor:pointer;width:auto;padding:4px}
+.modal-title{margin:0 0 8px;font-size:20px;font-weight:700}
+.modal-sub{font-size:13.5px;color:var(--ink2);line-height:1.5;margin:0 0 20px}
+.modal-source{font-size:11.5px;color:var(--ink3);line-height:1.5;margin-top:16px}
+
+.stage-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:480px){.stage-grid{grid-template-columns:repeat(2,1fr)}}
+.stage-pair{display:flex;flex-direction:column;align-items:center;gap:2px}
+.stage-box{width:100%;text-align:center;padding:12px 4px;border-radius:8px;
+  font-size:13px;font-weight:700}
+.stage-box.report{background:var(--accent);color:#fff}
+.stage-box.dma{background:var(--paper);border:1.5px solid var(--accent);color:var(--accent)}
+.stage-arrow{font-size:17px;color:var(--ink3);line-height:1}
 </style>
 </head>
 <body>
 <header>
-  <h1>Queensland AI Risk Exposure Index</h1>
-  <p>78 local government areas. Drag the weights — the map recomputes. ADRI is held out as the control.</p>
+  <div class="header-row">
+    <div>
+      <h1>Queensland AI Risk Exposure Index</h1>
+      <p>77 councils plus one non-council entity (Weipa Town Authority). Drag the weights and the map recomputes. ADRI is held out as the control.</p>
+    </div>
+    <button id="openResilience" class="badge-btn">Mapping AI risk to Disaster Risk Management</button>
+  </div>
 </header>
+
+<div id="resilienceModal" class="modal-overlay" hidden>
+  <div class="modal" role="dialog" aria-label="Mapping AI risk to Disaster Risk Management">
+    <button id="closeResilience" class="modal-close" aria-label="Close">&times;</button>
+    <h2 class="modal-title">Mapping AI risk to Disaster Risk Management</h2>
+    <p class="modal-sub">The international AI safety report's resilience model lines up with the stages Queensland councils already run for disasters. AI risk is not a new discipline. It fits the shape councils already use.</p>
+    <div class="stage-grid">
+      <div class="stage-pair">
+        <div class="stage-box report">Resist</div>
+        <div class="stage-arrow">&#8597;</div>
+        <div class="stage-box dma">Prevention</div>
+      </div>
+      <div class="stage-pair">
+        <div class="stage-box report">Absorb</div>
+        <div class="stage-arrow">&#8597;</div>
+        <div class="stage-box dma">Preparation</div>
+      </div>
+      <div class="stage-pair">
+        <div class="stage-box report">Recover</div>
+        <div class="stage-arrow">&#8597;</div>
+        <div class="stage-box dma">Response</div>
+      </div>
+      <div class="stage-pair">
+        <div class="stage-box report">Adapt</div>
+        <div class="stage-arrow">&#8597;</div>
+        <div class="stage-box dma">Recovery</div>
+      </div>
+    </div>
+    <p class="modal-source">Top row: International AI Safety Report 2026 (Bengio et al). Bottom row: Disaster Management Act 2003 (Qld), s4A(a). A council's existing s30 disaster planning already covers this shape.</p>
+  </div>
+</div>
 
 <div id="wrap">
   <div id="map"></div>
@@ -80,20 +143,28 @@ footer{background:var(--card);border-top:1px solid var(--rule);padding:9px 20px;
     <div id="sliders"></div>
     <div id="wsum"></div>
     <button id="reset">Reset to config</button>
-    <p class="note">Weights are the argument, not the finding. Moving them changes the ranking —
-      that is the sensitivity analysis, not a flaw.</p>
+    <p class="note">Weights are the argument, not the finding. Moving them changes the ranking.
+      That is the sensitivity analysis, not a flaw.</p>
 
     <h2>Legend</h2>
     <div class="legend" id="legend"></div>
 
     <h2>Selected</h2>
     <div id="detail">Click an LGA.</div>
+
+    <h2>About this index</h2>
+    <p class="note">Architecture borrowed from the Australian Disaster Resilience Index, hazard
+      swapped from natural disaster to AI. Risk categories from the <i>International AI Safety
+      Report 2026</i> (Bengio et al.) and <i>An Overview of Catastrophic AI Risks</i> (Hendrycks,
+      Mazeika &amp; Woodside). Legal basis: Disaster Management Act 2003 (Qld) s4A(d), s16(1)(d);
+      Human Rights Act 2019 (Qld) ss9, 58. See "Mapping AI risk to Disaster Risk Management"
+      above for how the response model maps onto Queensland's existing disaster planning.</p>
   </div>
 </div>
 
 <footer>
   Australian Disaster Resilience Index © Natural Hazards Research Australia / University of New
-  England, CC BY-NC 4.0 — non-commercial use only. Population, SEIFA and Census © Australian
+  England, CC BY-NC 4.0 (non-commercial use only). Population, SEIFA and Census © Australian
   Bureau of Statistics, CC BY 4.0. Council data © State of Queensland, CC BY 4.0.
   Boundaries: ABS ASGS 2023.
 </footer>
@@ -206,7 +277,7 @@ function detail(rec){
     ["Deployment evidence", rec.deployment_evidence_score],
     ["Components complete", rec.components_complete]];
   el.innerHTML = `<h3>${rec.council_name||rec.short_name}</h3>` +
-    "<table>" + rows.map(([k,v])=>`<tr><td>${k}</td><td>${v??"—"}</td></tr>`).join("") + "</table>";
+    "<table>" + rows.map(([k,v])=>`<tr><td>${k}</td><td>${v??"n/a"}</td></tr>`).join("") + "</table>";
 }
 
 function sliders(){
@@ -226,7 +297,7 @@ function sliders(){
 function wsum(){
   const s=Object.values(weights).reduce((a,b)=>a+b,0);
   const el=document.getElementById("wsum");
-  el.textContent=`sum ${s.toFixed(2)} — scores are renormalised, so any sum works`;
+  el.textContent=`sum ${s.toFixed(2)}. Scores are renormalised, so any sum works`;
   el.className = s===0 ? "bad" : "";
 }
 
@@ -267,6 +338,12 @@ Promise.all([
 
 document.getElementById("layer").addEventListener("change", e=>{ current=e.target.value; render(); });
 document.getElementById("reset").addEventListener("click", ()=>{ weights={...DEFAULTS}; sliders(); render(); });
+
+const resilienceModal = document.getElementById("resilienceModal");
+document.getElementById("openResilience").addEventListener("click", ()=>{ resilienceModal.hidden = false; });
+document.getElementById("closeResilience").addEventListener("click", ()=>{ resilienceModal.hidden = true; });
+resilienceModal.addEventListener("click", e=>{ if (e.target === resilienceModal) resilienceModal.hidden = true; });
+document.addEventListener("keydown", e=>{ if (e.key === "Escape") resilienceModal.hidden = true; });
 </script>
 </body>
 </html>
