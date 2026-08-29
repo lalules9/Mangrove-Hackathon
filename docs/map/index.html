@@ -108,10 +108,10 @@ footer a:hover{text-decoration:underline}
 <header>
   <div class="header-row">
     <div>
-      <h1>QAIRI · Queensland Artificial Intelligence Risk Index</h1>
+      <h1>QAIRI</h1>
       <p>All 77 Queensland councils and 1 non-council entity scored for exposure to catastrophic risks of AI.</p>
-      <p>The Australian Disaster Resilience Index (ADRI) is a peer-reviewed natural-hazard
-         resilience index that is used for comparison and not used as part of the QAIRI value.</p>
+      <p>ADRI is a peer-reviewed natural-hazard resilience index that is used for comparison and
+         not used as part of the QAIRI value.</p>
     </div>
     <button id="openResilience" class="badge-btn">Mapping AI risk to Disaster Risk Management</button>
   </div>
@@ -170,13 +170,13 @@ footer a:hover{text-decoration:underline}
     <select id="layer">
       <option value="ai_risk_index">QAIRI score</option>
       <option value="rank_shift">Divergence from ADRI rank</option>
-      <option value="adri_andri">Australian Disaster Resilience Index</option>
+      <option value="adri_andri">ADRI</option>
       <option value="essential_services_score">Component · essential services</option>
       <option value="population_vulnerability_score">Component · population vulnerability</option>
       <option value="institutional_capacity_score">Component · institutional capacity</option>
       <option value="deployment_evidence_score">Component · deployment evidence</option>
       <option value="synthetic_warning_score">Component · synthetic warning</option>
-      <option value="systemic_labour_score">Component · systemic labour</option>
+      <option value="systemic_labour_score">Component · labour market exposure</option>
     </select>
 
     <h2>Component weights</h2>
@@ -189,7 +189,7 @@ footer a:hover{text-decoration:underline}
     <div class="legend" id="legend"></div>
 
     <h2>About this index</h2>
-    <p class="note">Architecture borrowed from the Australian Disaster Resilience Index, hazard
+    <p class="note">Architecture borrowed from ADRI, hazard
       swapped from natural disaster to AI. Risk categories from the <i>International AI Safety
       Report 2026</i> (Bengio et al.) and <i>An Overview of Catastrophic AI Risks</i> (Hendrycks,
       Mazeika &amp; Woodside). Legal basis: Disaster Management Act 2003 (Qld) s4A(d), s16(1)(d);
@@ -204,9 +204,9 @@ footer a:hover{text-decoration:underline}
     <a href="../limitations.html">Limitations</a> &middot;
     <a href="../qld-council-governance.html">Legal background</a>
   </div>
-  QAIRI (Queensland Artificial Intelligence Risk Index) is a draft research index, not an
+  QAIRI is a draft research index, not an
   official product. Remoteness is the ABS Remoteness Area of each LGA; Indigenous status is
-  shown separately. The Australian Disaster Resilience Index © Natural Hazards Research
+  shown separately. ADRI © Natural Hazards Research
   Australia / University of New England, CC BY-NC 4.0 (non-commercial use only), is used only
   for comparison, not in the QAIRI score. Population, SEIFA and Census © Australian Bureau of Statistics,
   CC BY 4.0. Council data © State of Queensland, CC BY 4.0. Boundaries: ABS ASGS 2023.
@@ -227,13 +227,13 @@ const LABELS = {essential_services:"Essential services",
                 institutional_capacity:"Institutional capacity",
                 deployment_evidence:"Deployment evidence",
                 synthetic_warning:"Synthetic warning",
-                systemic_labour:"Systemic labour"};
+                systemic_labour:"Labour market exposure"};
 
 // Plain-language explanations for the "what does this mean" popup on each slider.
 // inputs is left empty for a component built from a single variable, nothing to weigh.
 const DEFINITIONS = {
   essential_services: {
-    what: "This measures how exposed a council is if a basic service such as water, sewerage or electricity fails, and how hard that failure would be to fix. Councils that run their own water supply, are small enough to fall outside national critical-infrastructure rules, or rely on an isolated power network not connected to the main grid score higher here.",
+    what: "This measures how exposed a council is if a basic service such as water, sewerage, or electricity fails and how hard that failure would be to fix. Councils that run their own water supply are small enough to fall outside national critical-infrastructure rules or rely on an isolated power network not connected to the main grid score higher here.",
     inputs: [
       ["Small enough to fall outside the national critical-infrastructure rules", "30%"],
       ["Council runs its own water or sewerage service", "25%"],
@@ -242,11 +242,11 @@ const DEFINITIONS = {
     ]
   },
   population_vulnerability: {
-    what: "How well residents themselves could cope if something went wrong, regardless of the cause. This uses the same kind of measures already used for floods and bushfires, not anything AI-specific. Areas score higher here if they have more socio-economic disadvantage, more crowded housing, or a larger Aboriginal and Torres Strait Islander population share.",
+    what: "How well residents themselves could cope if something went wrong, regardless of the cause. This uses the same kind of measures already used for floods and bushfires, not anything AI-specific. Areas score higher here if they have more socio-economic disadvantage, more crowded housing, or a larger percentage of the population that identifies as Aboriginal and/or Torres Strait Islander.",
     inputs: [
       ["Socio-economic disadvantage (SEIFA index)", "40%"],
       ["Household crowding (people per bedroom)", "35%"],
-      ["Aboriginal and Torres Strait Islander population share", "25%"]
+      ["Percentage of the population that identifies as Aboriginal and/or Torres Strait Islander", "25%"]
     ]
   },
   institutional_capacity: {
@@ -270,7 +270,7 @@ const DEFINITIONS = {
     ]
   },
   systemic_labour: {
-    what: "Whether a lot of local jobs are in the kinds of roles generative AI is most likely to change, office, clerical and sales work. This is the one component about the local economy rather than a specific emergency, and it is the only one that pulls in the opposite direction from the rest of the index, see the Limitations page.",
+    what: "Whether significant local jobs are in the kinds of roles generative AI is most likely to change, such as office, clerical and sales work. This is the one component about the local economy rather than a specific emergency.",
     inputs: []
   }
 };
@@ -334,20 +334,23 @@ function legend(vals){
   const el=document.getElementById("legend");
   if(current==="rank_shift"){
     el.innerHTML = [
-      ["Ranks much better than ADRI predicts",DIVERGE[0]],
-      ["Ranks somewhat better",DIVERGE[1]],
-      ["About where ADRI predicts",DIVERGE[2]],
-      ["Ranks somewhat worse",DIVERGE[3]],
-      ["Ranks much worse than ADRI predicts",DIVERGE[4]]]
+      ["Risk ranks much higher than ADRI would predict",DIVERGE[4]],
+      ["Risk ranks somewhat higher than predicted",DIVERGE[3]],
+      ["About where ADRI would predict",DIVERGE[2]],
+      ["Risk ranks somewhat lower than predicted",DIVERGE[1]],
+      ["Risk ranks much lower than ADRI would predict",DIVERGE[0]]]
       .map(([t,c])=>`<div><i style="background:${c}"></i>${t}</div>`).join("");
     return;
   }
-  // Five equal-count groups. Label by what a high value means for this layer.
+  // Five equal-count groups, worst outcome listed first (red at top, green at
+  // bottom), on every layer. "Worst" is highest value for a risk layer, lowest
+  // value for the resilience layer, matching scale()'s colour assignment exactly.
   const highIsWorse = current!=="adri_andri";
-  const cols = highIsWorse ? RAMP : RAMP.slice().reverse();
-  const bands = ["Lowest 20%","20–40%","Middle 20%","60–80%","Highest 20%"];
-  const tail = current==="ai_risk_index" ? " risk"
-             : current==="adri_andri"    ? " resilience" : "";
+  const cols = RAMP.slice().reverse();
+  const bands = highIsWorse
+    ? ["Highest 20%","60–80%","Middle 20%","20–40%","Lowest 20%"]
+    : ["Lowest 20%","20–40%","Middle 20%","60–80%","Highest 20%"];
+  const tail = current==="adri_andri" ? " resilience" : " risk";
   el.innerHTML = bands
     .map((t,i)=>`<div><i style="background:${cols[i]}"></i>${t}${i===0||i===4?tail:""}</div>`)
     .join("");
@@ -375,7 +378,7 @@ const COMPONENTS = [
   ["institutional_capacity_score",  "Institutional capacity"],
   ["deployment_evidence_score",     "Deployment evidence"],
   ["synthetic_warning_score",       "Synthetic warning"],
-  ["systemic_labour_score",         "Systemic labour"]];
+  ["systemic_labour_score",         "Labour market exposure"]];
 
 function fmt(v,d=2){ const n=parseFloat(v); return Number.isFinite(n)?n.toFixed(d):"n/a"; }
 function isYes(v){ return String(v).toLowerCase()==="true"; }
@@ -397,8 +400,8 @@ function detail(rec){
     .sort((a,b)=>b[1]-a[1]);
   const shift = parseInt(rec.rank_shift,10);
   const shiftTxt = !Number.isFinite(shift) ? "n/a"
-    : shift===0 ? "same as ADRI"
-    : `${shift>0?"worse":"better"} than ADRI (${Math.abs(shift)} ${Math.abs(shift)===1?"place":"places"})`;
+    : shift===0 ? "same rank as ADRI would predict"
+    : `${shift>0?"higher":"lower"} risk rank than ADRI predicts (by ${Math.abs(shift)} ${Math.abs(shift)===1?"place":"places"})`;
   const rows=[
     ["QAIRI score", idx!=null?idx.toFixed(3):"n/a"],
     ["QAIRI rank", rec.ai_risk_rank?`${rec.ai_risk_rank} of 78`:"n/a"],

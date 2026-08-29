@@ -70,9 +70,9 @@ not hidden in favour of a cleaner story.
 | Institutional capacity | 25% | Malfunctions | Discretionary revenue, staffing depth and mix, can the council itself keep functioning |
 | Deployment evidence | 15% | AI race (Hendrycks) | Confirmed AI use, press-derived |
 | Synthetic warning | 10% | Malicious use | Fabricated, AI-generated evacuation message during a live emergency, with no second channel to check it against, the only component whose scored factor genuinely depends on AI as the cause. Built from disaster-event frequency, funded mobile coverage (channel redundancy) and non-English-speaking household share (does the official channel actually reach everyone) |
-| Systemic labour | 10% | Systemic risk | Share of employed persons in occupations most exposed to generative AI (Professionals, Clerical and Administrative, Sales, Census 2021, ABS). The only component addressing Bengio's third category, which was otherwise absent from the index entirely |
+| Labour market exposure | 10% | Systemic risk | Share of employed persons in occupations most exposed to generative AI (Professionals, Clerical and Administrative, Sales, Census 2021, ABS). The only component addressing Bengio's third category, which was otherwise absent from the index entirely |
 
-**A genuine, notable tension surfaced by adding systemic labour:** this component pulls in the
+**A genuine, notable tension surfaced by adding labour market exposure:** this component pulls in the
 *opposite* direction from the rest of the index. AI-exposed occupations (professional, clerical,
 sales) are concentrated in wealthy, high-capacity metro councils, the same councils that score
 *well* on ADRI. So this component, scored as "more exposure = more risk," actually correlates
@@ -108,11 +108,11 @@ direction.
 
 **Why these weights.** Institutional capacity carries the most weight because it's the
 component with the least analogue in ADRI, the independent signal this index can actually add.
-Deployment evidence, synthetic warning and systemic labour are deliberately the three lowest
+Deployment evidence, synthetic warning and labour market exposure are deliberately the three lowest
 weights, and deliberately not all equal: all three rest on thinner evidence than the first three
 components (press-derived AI-usage reports; official but incomplete channel-coverage and language
 data; a single occupational-exposure proxy never cross-checked against a second index), but
-synthetic warning and systemic labour's data is thinner still, so they carry less weight than
+synthetic warning and labour market exposure's data is thinner still, so they carry less weight than
 deployment evidence, not the same amount. Together the three lowest-confidence components hold
 35% of the index, not 70%, reliability comes from keeping the weakest evidence from dominating
 the result, not from excluding it. These are expert-judgement weights, not fitted ones; the
@@ -159,7 +159,7 @@ The full account, written as its own page rather than a footnote, is **[`docs/li
 - Most of the index measures general vulnerability, not an AI-specific mechanism, it would
   score similarly for a natural disaster. Of the six components, synthetic warning is the one
   genuinely specific to AI as the cause.
-- Systemic labour pulls in the *opposite* direction from the rest of the index, AI-exposed
+- Labour market exposure pulls in the *opposite* direction from the rest of the index, AI-exposed
   occupations concentrate in the same wealthy, high-capacity councils ADRI already scores as
   resilient, which is a large part of why the overall correlation moved toward zero once it was
   added, not away from it.
