@@ -66,6 +66,7 @@ def main() -> None:
     aimaster = load(DATA / "qld_lga_ai_risk_master.csv", "short_name")
     tracker = load(RESEARCH / "qld_lga_ai_infrastructure_tracker.csv", "LGA")
     policies = load(RESEARCH / "qld_council_ai_policies.csv", "short_name")
+    airports = load(DATA / "qld_lga_airports.csv", "short_name")
 
     if not profile:
         raise SystemExit("lga_profile_QLD.csv is required. Run fetch_lga_profile.py first.")
@@ -106,8 +107,18 @@ def main() -> None:
         row["ai_region"] = t.get("Region", "")
 
         p = policies.get(k, {})
+        checked = bool(p)
         row["ai_policy_scan_result"] = p.get("ai_policy_found", "not checked")
         row["ai_policy_url"] = p.get("url", "")
+        # Only 27 of 78 councils were scanned. Asserting False for the other 51 would be a
+        # false negative dressed as data, so unchecked councils are left blank.
+        if not checked:
+            row["has_published_ai_governance_policy"] = ""
+
+        ap = airports.get(k, {})
+        for c in ("airports_total", "airports_council_operated", "airports_external",
+                  "has_lifeline_airstrip", "airport_control_tier"):
+            row[c] = ap.get(c, "")
 
         # ---- derived ----------------------------------------------------------
         ind, tot = num(row.get("staff_fte_indoor")), num(row.get("staff_fte_total"))

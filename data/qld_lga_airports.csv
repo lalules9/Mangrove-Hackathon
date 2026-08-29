@@ -1,0 +1,50 @@
+short_name,airports_total,airports_council_operated,airports_external,has_lifeline_airstrip,airport_control_tier
+Aurukun,1,1,0,True,lifeline
+Balonne,2,2,0,True,lifeline
+Banana,1,1,0,False,council-operated
+Barcaldine,1,1,0,False,council-operated
+Barcoo,1,1,0,False,council-operated
+Blackall-Tambo,1,1,0,False,council-operated
+Boulia,1,1,0,False,council-operated
+Brisbane,1,0,1,False,external
+Bulloo,1,1,0,False,council-operated
+Bundaberg,1,1,0,False,council-operated
+Burke,1,1,0,True,lifeline
+Cairns,1,0,1,False,external
+Carpentaria,2,2,0,True,lifeline
+Central Highlands,2,2,0,False,council-operated
+Cloncurry,1,1,0,False,council-operated
+Cook,2,2,0,False,council-operated
+Diamantina,2,2,0,False,council-operated
+Doomadgee,1,1,0,True,lifeline
+Flinders,1,1,0,True,lifeline
+Fraser Coast,1,1,0,False,council-operated
+Gladstone,1,1,0,False,council-operated
+Gold Coast,1,0,1,False,external
+Isaac,3,3,0,False,council-operated
+Kowanyama,1,1,0,False,council-operated
+Lockhart River,1,1,0,False,council-operated
+Longreach,1,1,0,False,council-operated
+Mackay,1,1,0,False,council-operated
+Maranoa,1,1,0,False,council-operated
+Mareeba,1,1,0,False,council-operated
+McKinlay,1,1,0,True,lifeline
+Mornington,1,1,0,True,lifeline
+Mount Isa,1,1,0,False,council-operated
+Murweh,1,1,0,False,council-operated
+Northern Peninsula Area,1,1,0,True,lifeline
+Palm Island,1,1,0,True,lifeline
+Paroo,1,1,0,False,council-operated
+Pormpuraaw,1,1,0,True,lifeline
+Quilpie,1,1,0,False,council-operated
+Richmond,1,1,0,True,lifeline
+Rockhampton,1,1,0,False,council-operated
+South Burnett,1,1,0,False,council-operated
+Sunshine Coast,1,0,1,False,external
+Toowoomba,1,0,1,False,external
+Torres Strait Island,12,12,0,True,lifeline
+Townsville,1,1,0,False,council-operated
+Weipa,1,1,0,False,council-operated
+Western Downs,1,1,0,False,council-operated
+Whitsunday,3,3,0,True,lifeline
+Winton,1,1,0,False,council-operated
