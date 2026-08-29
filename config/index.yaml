@@ -41,7 +41,7 @@ meta:
 components:
 
   essential_services:
-    weight: 0.30
+    weight: 0.25
     rationale: >
       Councils that run water and sewerage themselves, in places where restoration is slow,
       and which sit below the SOCI Act threshold so owe no critical infrastructure risk
@@ -58,7 +58,7 @@ components:
         direction: higher_worse       # consequence term: days to restore
 
   population_vulnerability:
-    weight: 0.25
+    weight: 0.20
     rationale: >
       Who absorbs a shock badly. Validated vulnerability measures, hazard-agnostic.
     inputs:
@@ -97,3 +97,26 @@ components:
       - col: ai_deployment_confirmed
         weight: 1.0
         direction: true_worse
+
+  synthetic_warning:
+    weight: 0.10
+    rationale: >
+      A fabricated, AI-generated evacuation message during a live emergency, with no second
+      channel to check it against. The only component whose scored factor genuinely depends
+      on AI as the cause, not just a general-vulnerability proxy. Deliberately the second-
+      smallest weight -- its inputs are newer and thinner than the rest of the index.
+      Deliberately does NOT include adri_information_access as a proxy for channel access:
+      that column is held out as the ADRI control, and using it here would leak the control
+      into the model. mean_remoteness_score is deliberately left out too -- the project's own
+      analysis found remoteness genuinely ambiguous for this hazard (short local verification
+      chains cut against it, thin channel coverage cuts for it), not a defensible higher_worse.
+    inputs:
+      - col: disaster_events_alltime
+        weight: 0.40
+        direction: higher_worse       # exposure: how often this LGA is actually in an emergency
+      - col: mbsp_stations_per_1000_residents
+        weight: 0.35
+        direction: invert             # more funded coverage = more channels to check against
+      - col: pct_language_not_english_home
+        weight: 0.25
+        direction: higher_worse       # consequence: official channel may not reach everyone
