@@ -1,0 +1,99 @@
+# AI Risk Exposure Index — the formula.
+#
+# THIS FILE IS THE ARGUMENT. Everything debatable lives here, not in the code:
+# which inputs, which direction, how much each counts, how they are normalised.
+# Edit this, re-run build_index.py, and the ranking changes. Nothing else to touch.
+#
+# Every input is normalised to 0–1 where 1 = MORE AT RISK, then weighted.
+#   direction: higher_worse   a big raw value means more risk (crowding, remoteness)
+#              invert         a big raw value means LESS risk (revenue, staff, SEIFA)
+#              true_worse     boolean; True = more risk
+#              false_worse    boolean; False = more risk (e.g. below the SOCI threshold)
+#
+# normalise: minmax      rescale to the observed 0–1 range. Sensitive to outliers.
+#            percentile  rank-based, 0–1. Robust, but discards magnitude.
+#            zscore_clip z-scored then clipped to ±2.5 and rescaled.
+#
+# Component weights must sum to 1.0. Input weights within a component must also sum to 1.0.
+# Where a council is missing an input, the remaining inputs in that component are
+# renormalised, and `components_complete` records how many were fully evidenced.
+
+meta:
+  name: AI Risk Exposure Index (Queensland)
+  version: 0.1-draft
+  normalise_default: percentile
+  # Held out of the model entirely and used only as the comparison. The code refuses to
+  # score any column listed here — this is what stops the control leaking into the model.
+  held_out:
+    - adri_andri
+    - adri_coping_capacity
+    - adri_adaptive_capacity
+    - adri_information_access
+    - adri_social_character
+    - adri_economic_capital
+    - adri_planning_build_environment
+    - adri_emergency_services
+    - adri_govt_leadership
+    - adri_community_social_engagement
+    - adri_community_capital
+    - median_family_income_weekly     # is literally an ADRI indicator
+
+components:
+
+  essential_services:
+    weight: 0.30
+    rationale: >
+      Councils that run water and sewerage themselves, in places where restoration is slow,
+      and which sit below the SOCI Act threshold so owe no critical infrastructure risk
+      management program.
+    inputs:
+      - col: above_soci_water_threshold
+        weight: 0.40
+        direction: false_worse        # below the threshold = unregulated critical infrastructure
+      - col: is_water_service_provider
+        weight: 0.35
+        direction: true_worse
+      - col: mean_remoteness_score
+        weight: 0.25
+        direction: higher_worse       # consequence term: days to restore
+
+  population_vulnerability:
+    weight: 0.25
+    rationale: >
+      Who absorbs a shock badly. Validated vulnerability measures, hazard-agnostic.
+    inputs:
+      - col: seifa_irsd_score
+        weight: 0.40
+        direction: invert             # lower score = more disadvantaged
+      - col: avg_persons_per_bedroom
+        weight: 0.35
+        direction: higher_worse
+      - col: indigenous_share_pct
+        weight: 0.25
+        direction: higher_worse
+
+  institutional_capacity:
+    weight: 0.30
+    rationale: >
+      The independent signal. None of these appear in ADRI, so this is where any divergence
+      from the natural-hazard index has to come from.
+    inputs:
+      - col: own_source_revenue_share
+        weight: 0.50
+        direction: invert             # grant-dependent = no discretionary capacity
+      - col: indoor_staff_share
+        weight: 0.30
+        direction: higher_worse       # digitisation proxy: office-bound workforce
+      - col: staff_per_1000_residents
+        weight: 0.20
+        direction: invert             # thin staffing = no manual fallback
+
+  deployment_evidence:
+    weight: 0.15
+    rationale: >
+      Confirmed AI in the field. Deliberately the smallest weight — only 8 of 77 councils
+      are confirmed, and "no evidence found" is not evidence of absence.
+    inputs:
+      - col: ai_deployment_confirmed
+        weight: 1.0
+        direction: true_worse
