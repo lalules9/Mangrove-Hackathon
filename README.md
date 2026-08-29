@@ -11,6 +11,27 @@ channels: essential services, warning systems, institutional capacity. **Are the
 already known to be least resilient the ones with the most to lose from AI risk, and has
 anyone checked?**
 
+![QAIRI, the interactive map](docs/map/screenshot.png)
+
+## Key findings
+
+- **The councils Australia's own natural-disaster index rates as most resilient are, on this
+  measure, some of the most exposed.** Townsville, Brisbane, Sunshine Coast and Moreton Bay all
+  rank 50 or more places worse here than their official disaster-resilience ranking would
+  predict. Relying heavily on digital systems is a strength against floods and cyclones; it's a
+  weakness if the system itself fails. Nobody had measured that trade-off before.
+- **The communities already known to cope worst with natural disasters carry a second, separate
+  risk nobody has checked.** Doomadgee, Aurukun, Torres Strait Island and Kowanyama already rank
+  among Queensland's least resilient to floods and cyclones. They also rank among the most
+  exposed here, but for different reasons entirely (unregulated water and power supply, thin
+  council budgets, not digitisation). Two different risks, same communities, not previously
+  connected.
+- **Queensland law already covers this, nobody has applied it to AI yet.** If a basic service
+  like water or power fails, state law already treats that as a disaster a council is
+  responsible for handling, whatever the cause. Councils are also already required by law to
+  consider people's rights before making decisions that affect them. Neither rule mentions AI.
+  Both already apply to it.
+
 ## The method
 
 **Borrow ADRI's architecture, swap the hazard.** ADRI doesn't measure "how much bushfire is

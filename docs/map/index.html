@@ -109,8 +109,8 @@ footer a:hover{text-decoration:underline}
   <div class="header-row">
     <div>
       <h1>QAIRI · Queensland Artificial Intelligence Risk Index</h1>
-      <p>All 77 Queensland councils and 1 non-council entity, scored for exposure to catastrophic risks of AI.</p>
-      <p>The <b>Australian Disaster Resilience Index (ADRI)</b> is a peer-reviewed natural-hazard
+      <p>All 77 Queensland councils and 1 non-council entity scored for exposure to catastrophic risks of AI.</p>
+      <p>The Australian Disaster Resilience Index (ADRI) is a peer-reviewed natural-hazard
          resilience index that is used for comparison and not used as part of the QAIRI value.</p>
     </div>
     <button id="openResilience" class="badge-btn">Mapping AI risk to Disaster Risk Management</button>
@@ -233,7 +233,7 @@ const LABELS = {essential_services:"Essential services",
 // inputs is left empty for a component built from a single variable, nothing to weigh.
 const DEFINITIONS = {
   essential_services: {
-    what: "How bad it would be if a basic service like water, sewerage or electricity failed, and how hard it would be to fix. Councils that run their own water supply, are small enough to fall outside national critical-infrastructure rules, or rely on an isolated power network not connected to the main grid, score higher here.",
+    what: "This measures how exposed a council is if a basic service such as water, sewerage or electricity fails, and how hard that failure would be to fix. Councils that run their own water supply, are small enough to fall outside national critical-infrastructure rules, or rely on an isolated power network not connected to the main grid score higher here.",
     inputs: [
       ["Small enough to fall outside the national critical-infrastructure rules", "30%"],
       ["Council runs its own water or sewerage service", "25%"],
@@ -242,7 +242,7 @@ const DEFINITIONS = {
     ]
   },
   population_vulnerability: {
-    what: "How well residents themselves could cope if something went wrong, regardless of the cause. This uses the same kind of measures already used for floods and bushfires, not anything AI-specific. Areas with more disadvantage, more crowded housing, or a higher Aboriginal and Torres Strait Islander population share score higher.",
+    what: "How well residents themselves could cope if something went wrong, regardless of the cause. This uses the same kind of measures already used for floods and bushfires, not anything AI-specific. Areas score higher here if they have more socio-economic disadvantage, more crowded housing, or a larger Aboriginal and Torres Strait Islander population share.",
     inputs: [
       ["Socio-economic disadvantage (SEIFA index)", "40%"],
       ["Household crowding (people per bedroom)", "35%"],
@@ -250,7 +250,7 @@ const DEFINITIONS = {
     ]
   },
   institutional_capacity: {
-    what: "Whether the council itself has the money and staff to keep going if its systems go down. Councils that rely heavily on state grants rather than their own rates, or run mostly office-based rather than field staff, score higher, meaning less spare capacity and more day-to-day dependence on digital systems.",
+    what: "Whether the council itself has the money and staff to keep going if its systems go down. Councils that rely heavily on state grants rather than their own rates or run mostly office-based rather than field staff score higher as they would have less spare capacity and more day-to-day dependence on digital systems.",
     inputs: [
       ["Relies on government grants rather than its own revenue", "50%"],
       ["Share of staff who are office-based, not out in the field", "30%"],
@@ -258,7 +258,7 @@ const DEFINITIONS = {
     ]
   },
   deployment_evidence: {
-    what: "Whether this council has a confirmed, publicly reported example of using AI already. Only 8 of 78 councils are confirmed. The other 70 are not scored as safe, they are simply unconfirmed, so this component only ever affects the councils where real evidence exists.",
+    what: "Whether the council has a confirmed, publicly reported example of already using AI. Eight of the 77 councils and 1 non-council entity currently use AI for purposes such as AI-adaptive traffic signal control, automated road and footpath condition surveys, and AI-based waste and recycling sorting. No information was publicly available for the other 70 councils so deployment evidence could not be scored for these cases.",
     inputs: []
   },
   synthetic_warning: {
