@@ -1,79 +1,79 @@
-short_name,council_name,stratum,is_indigenous_council,population_latest,own_source_revenue_share,staff_fte_total,adri_andri,adri_coping_capacity,adri_adaptive_capacity,adri_information_access,ai_status,ai_infrastructure_type,ai_source,water_utility,water_control_tier,water_connections_2023_24,meets_soci_threshold,has_published_ai_governance_policy
-Aurukun,Aurukun Shire Council,indigenous,True,1165,0.038,82,0.0,0.0369,0.0,0.0091,No evidence found,,,,,,False,False
-Balonne,Balonne Regional Council,remote,False,4350,0.457,85,0.4122,0.3994,0.3963,0.085,No evidence found,,,,,,False,False
-Banana,Banana Regional Council,outer_regional,False,15144,0.492,247,0.4395,0.4099,0.4284,0.1157,No evidence found,,,,,,False,False
-Barcaldine,Barcaldine Regional Council,very_remote,False,2937,0.256,155,0.4428,0.4309,0.4202,0.0842,No evidence found,,,,,,False,False
-Barcoo,Barcoo Regional Council,very_remote,False,321,0.074,69,0.4189,0.3681,0.4241,0.0882,No evidence found,,,,,,False,False
-Blackall Tambo,Blackall Tambo Regional Council,very_remote,False,1975,0.245,108,0.4428,0.4309,0.4202,0.0842,No evidence found,,,,,,False,False
-Boulia,Boulia Regional Council,very_remote,False,489,0.084,42,0.4189,0.3681,0.4241,0.0882,No evidence found,,,,,,False,False
-Brisbane,Brisbane City Council,seq_metro,False,1375301,0.494,7558,0.708,0.6171,0.6652,0.6179,Confirmed AI,Traffic management,ABC News (21 Aug 2026),Urban Utilities,bulk-authority (dependent),676983,True,False
-Bulloo,Bulloo Regional Council,very_remote,False,347,0.313,66,0.3932,0.3602,0.3927,0.0702,No evidence found,,,,,,False,False
-Bundaberg,Bundaberg Regional Council,regional_city,False,107297,0.764,793,0.4964,0.4696,0.4694,0.3714,No evidence found,,,Bundaberg Regional Council,direct (council-operated),34398,False,False
-Burdekin,Burdekin Regional Council,outer_regional,False,17220,0.789,241,0.5011,0.4425,0.4947,0.0927,No evidence found,,,,,,False,False
-Burke,Burke Regional Council,very_remote,False,449,0.284,48,0.2639,0.2123,0.2905,0.0483,No evidence found,,,,,,False,False
-Cairns,Cairns Regional Council,outer_regional,False,179334,0.858,1120,0.6004,0.467,0.6171,0.3686,"AI-adjacent (IoT/smart, no AI confirmed) + AI governance policy exists",Water metering; AI governance,Cairns Regional Council AI General Policy PDF; Itron press release (14 Nov 2017),Cairns Regional Council,direct (council-operated),76270,False,True
-Carpentaria,Carpentaria Regional Council,very_remote,False,2247,0.148,91,0.2639,0.2123,0.2905,0.0483,No evidence found,,,,,,False,False
-Cassowary Coast,Cassowary Coast Regional Council,outer_regional,False,30666,0.828,319,0.5236,0.3875,0.5594,0.0899,State-deployed AI within LGA (not council-operated),Road safety — wildlife detection,ABC News (30 Jul 2025),Cassowary Coast Regional Council,direct (council-operated),13503,False,False
-Central Highlands,Central Highlands Regional Council,remote,False,29481,0.654,437,0.4758,0.4274,0.468,0.125,No evidence found,,,Central Highlands Regional Council,direct (council-operated),12362,False,False
-Charters Towers,Charters Towers Regional Council,remote,False,12088,0.589,211,0.4937,0.4168,0.5001,0.0869,No evidence found,,,,,,False,False
-Cherbourg,Cherbourg Aboriginal Shire Council,indigenous,True,1289,0.0,,0.384,0.2963,0.4153,0.0797,Confirmed AI,Waste/recycling facility,Noosa Shire Council media release (Oct 2021); Council Magazine; South Burnett Times,,,,False,False
-Cloncurry,Cloncurry Regional Council,remote,False,3907,0.527,105,0.3273,0.312,0.3274,0.1097,No evidence found,,,,,,False,False
-Cook,Cook Regional Council,remote,False,4876,0.366,116,0.3093,0.2935,0.3123,0.0569,No evidence found,,,,,,False,False
-Croydon,Croydon Regional Council,very_remote,False,273,0.056,33,0.3402,0.3357,0.3323,0.0812,No evidence found,,,,,,False,False
-Diamantina,Diamantina Regional Council,very_remote,False,265,0.047,58,0.4189,0.3681,0.4241,0.0882,No evidence found,,,,,,False,False
-Doomadgee,Doomadgee Aboriginal Shire Council,indigenous,True,1484,0.043,0,0.2639,0.2123,0.2905,0.0483,No evidence found,,,,,,False,False
-Douglas,Douglas Regional Council,outer_regional,False,13169,0.782,161,0.5371,0.408,0.5659,0.1477,No evidence found,,,,,,False,False
-Etheridge,Etheridge Regional Council,very_remote,False,727,0.187,53,0.3402,0.3357,0.3323,0.0812,No evidence found,,,,,,False,False
-Flinders,Flinders Regional Council,very_remote,False,1545,0.2,87,0.385,0.4024,0.3565,0.0998,No evidence found,,,,,,False,False
-Fraser Coast,Fraser Coast Regional Council,regional_city,False,122924,0.778,702,0.4294,0.3881,0.4267,0.129,No evidence found,,,Fraser Coast Regional Council,direct (council-operated),42799,False,False
-Gladstone,Gladstone Regional Council,regional_city,False,69046,0.724,641,0.5146,0.4544,0.5061,0.1358,No evidence found,,,Gladstone Regional Council,direct (council-operated),26362,False,False
-Gold Coast,Gold Coast Regional Council,seq_metro,False,691230,0.841,3780,0.6906,0.6044,0.6508,0.56,"AI-adjacent (IoT/smart, no AI confirmed)",Flood monitoring,HiLo Monitoring,City of Gold Coast,direct (council-operated),279107,True,False
-Goondiwindi,Goondiwindi Regional Council,outer_regional,False,10438,0.58,155,0.4297,0.3314,0.4599,0.102,No evidence found,,,,,,False,False
-Gympie,Gympie Regional Council,regional_city,False,58487,0.779,463,0.4848,0.4372,0.475,0.1948,No evidence found,,,Gympie Regional Council,direct (council-operated),15234,False,False
-Hinchinbrook,Hinchinbrook Regional Council,outer_regional,False,11194,0.657,175,0.5016,0.4328,0.5014,0.078,No evidence found,,,,,,False,False
-Hope Vale,Hope Vale Aboriginal Shire Council,indigenous,True,1073,0.0,97,0.3093,0.2935,0.3123,0.0569,No evidence found,,,,,,False,False
-Ipswich,Ipswich Regional Council,seq_metro,False,268272,0.597,1031,0.4865,0.4664,0.4583,0.6021,No evidence found,,Shape Your Ipswich privacy statement,Urban Utilities,bulk-authority (dependent),676983,True,False
-Isaac,Isaac Regional Council,outer_regional,False,23186,0.788,387,0.4734,0.4533,0.4491,0.1288,No evidence found,,,,,,False,False
-Kowanyama,Kowanyama Aboriginal Shire Council,indigenous,True,1155,0.054,91,0.1351,0.1392,0.145,0.0283,No evidence found,,,,,,False,False
-Livingstone,Livingstone Regional Council,outer_regional,False,43668,0.699,362,0.6164,0.5488,0.5865,0.1817,Confirmed AI,Road/footpath network survey,Central Queensland Today (25 Nov 2025),Livingstone Shire Council,direct (council-operated),14078,False,False
-Lockhart River,Lockhart River Aboriginal Shire Council,indigenous,True,702,0.007,81,0.3093,0.2935,0.3123,0.0569,No evidence found,,,,,,False,False
-Lockyer Valley,Lockyer Valley Regional Council,regional_city,False,46058,0.612,307,0.6303,0.5379,0.6135,0.5943,No evidence found,,,Urban Utilities,bulk-authority (dependent),676983,True,False
-Logan,Logan Regional Council,seq_metro,False,403515,0.828,1531,0.5575,0.4871,0.5427,0.5997,Confirmed AI,Road maintenance,Council Magazine (27 Jun 2023),Logan City Council,direct (council-operated),142488,True,False
-Longreach,Longreach Regional Council,very_remote,False,3741,0.269,162,0.475,0.5014,0.4207,0.1097,No evidence found,,,,,,False,False
-Mackay,Mackay Regional Council,outer_regional,False,129253,0.837,876,0.5762,0.4814,0.5747,0.1835,"AI-adjacent (IoT/smart, no AI confirmed) + non-infrastructure AI in use",Water leak detection (IoT); customer service AI (non-infrastructure),Mackay Regional Council media release (Jun 2026); Utility Magazine (2019),Mackay Regional Council,direct (council-operated),57506,False,False
-Mapoon,Mapoon Aboriginal Shire Council,indigenous,True,494,0.0,44,0.3093,0.2935,0.3123,0.0569,No evidence found,,,,,,False,False
-Maranoa,Maranoa Regional Council,remote,False,13370,0.371,407,0.5038,0.456,0.49,0.1122,No evidence found,,,,,,False,False
-Mareeba,Mareeba Regional Council,remote,False,24205,0.517,211,0.3628,0.4204,0.3145,0.1011,No evidence found,,,,,,False,False
-McKinlay,McKinlay Regional Council,very_remote,False,850,0.215,71,0.385,0.4024,0.3565,0.0998,No evidence found,,,,,,False,False
-Moreton Bay,Moreton Bay Regional Council,seq_metro,False,532445,0.541,1477,0.6254,0.6076,0.5571,0.6039,Confirmed AI,Traffic signals; road/pothole detection,AfMA (Jul 2026); CarExpert (Jul 2026); newscop.com.au (Feb 2026),Unitywater,bulk-authority (dependent),358160,True,False
-Mornington,Mornington Shire Council,indigenous,True,1099,0.112,96,0.2639,0.2123,0.2905,0.0483,,,,,,,False,False
-Mount Isa,Mount Isa Regional Council,remote,False,18585,0.715,166,0.3163,0.2947,0.321,0.0998,"AI-adjacent (IoT/smart, no AI confirmed)",Water metering,Jacobs newsroom (2026),,,,False,False
-Murweh,Murweh Regional Council,very_remote,False,4004,0.343,107,0.4413,0.4252,0.4216,0.0819,No evidence found,,,,,,False,False
-Napranum,Napranum Aboriginal Shire Council,indigenous,True,952,0.0,100,0.3093,0.2935,0.3123,0.0569,No evidence found,,,,,,False,False
-Noosa,Noosa Regional Council,seq_metro,False,59551,0.646,345,0.6933,0.6261,0.6398,0.521,Confirmed AI,Road/pathway maintenance,TechnologyOne press release (11 Dec 2024),Unitywater,bulk-authority (dependent),358160,True,False
-North Burnett,North Burnett Regional Council,outer_regional,False,10562,0.422,209,0.445,0.3957,0.4445,0.0716,No evidence found,,,,,,False,False
-Northern Peninsula Area,Northern Peninsula Area Regional Council,indigenous,True,2944,0.057,0,0.1422,0.1691,0.141,0.0396,No evidence found,,,,,,False,False
-Palm Island,Palm Island Aboriginal Shire Council,indigenous,True,2335,0.023,130,0.1283,0.1232,0.1427,0.0213,No evidence found,,,,,,False,False
-Paroo,Paroo Regional Council,very_remote,False,1724,0.251,100,0.3932,0.3602,0.3927,0.0702,No evidence found,,,,,,False,False
-Pormpuraaw,Pormpuraaw Aboriginal Shire Council,indigenous,True,650,0.02,76,0.1351,0.1392,0.145,0.0283,No evidence found,,,,,,False,False
-Quilpie,Quilpie Regional Council,very_remote,False,720,0.208,64,0.3932,0.3602,0.3927,0.0702,No evidence found,,,,,,False,False
-Redland,Redland Regional Council,outer_regional,False,172831,0.855,870,0.6108,0.5675,0.564,0.3575,"AI-adjacent (IoT/smart, no AI confirmed)",Water monitoring; wildlife monitoring,Your Say Redlands Coast (Smart and Connected City Strategy page),Redland City Council,direct (council-operated),65497,False,False
-Richmond,Richmond Regional Council,very_remote,False,788,0.138,66,0.385,0.4024,0.3565,0.0998,No evidence found,,,,,,False,False
-Rockhampton,Rockhampton Regional Council,regional_city,False,85794,0.645,854,0.5844,0.4687,0.5935,0.4388,"AI-adjacent (IoT/smart, no AI confirmed) + AI governance partnership",AI governance MoU; water treatment SCADA,Rockhampton Regional Council news release; TheCSRUniverse (Dec 2025),Rockhampton Regional Council,direct (council-operated),33514,False,False
-Scenic Rim,Scenic Rim Regional Council,regional_city,False,46947,0.68,362,0.5016,0.4264,0.5048,0.134,No evidence found,,,Urban Utilities,bulk-authority (dependent),676983,True,False
-Somerset,Somerset Regional Council,regional_city,False,26936,0.549,181,0.508,0.5068,0.463,0.5817,No evidence found,,,Urban Utilities,bulk-authority (dependent),676983,True,False
-South Burnett,South Burnett Regional Council,regional_city,False,35111,0.677,329,0.4209,0.3529,0.4347,0.2967,No evidence found,,,,,,False,False
-Southern Downs,Southern Downs Regional Council,regional_city,False,38064,0.744,325,0.4956,0.3944,0.5158,0.273,No evidence found,,,Southern Downs Regional Council,direct (council-operated),11627,False,False
-Sunshine Coast,Sunshine Coast Regional Council,seq_metro,False,381957,0.624,1661,0.7306,0.6781,0.6524,0.5978,Confirmed AI,Traffic signals; flood/stormwater monitoring; development assessment,Information Age/ACS (Jul 2026); HiLo Monitoring; Sunshine Coast Council site; Sunshine Coast News (Jul 2026),Unitywater,bulk-authority (dependent),358160,True,False
-Tablelands,Tablelands Regional Council,outer_regional,False,27902,0.687,259,0.495,0.4122,0.5046,0.1003,No evidence found,,,,,,False,False
-Toowoomba,Toowoomba Regional Council,regional_city,False,186276,0.76,1440,0.5048,0.4161,0.5136,0.4319,"AI-adjacent (IoT/smart, no AI confirmed)",Water metering,Boomi press release (12 Dec 2023); SWAN Forum case study,Toowoomba Regional Council,direct (council-operated),66193,False,False
-Torres,Torres Shire Council,indigenous,True,3490,0.334,85,0.3053,0.2617,0.3234,0.0621,No evidence found,,,,,,False,False
-Torres Strait Island,Torres Strait Island Regional Council,indigenous,True,4298,0.02,314,0.2307,0.1816,0.259,0.0237,No evidence found,,,,,,False,False
-Townsville,Townsville Regional Council,outer_regional,False,206260,0.862,1730,0.6645,0.5014,0.6858,0.2162,Confirmed AI,Water safety monitoring; animal control; planned flood prediction,Townsville City Council media release (Jun 2025); Public Spectrum (Jun 2025),Townsville City Council,direct (council-operated),89020,False,False
-Weipa,Weipa Town Authority,very_remote,False,4297,,,0.4296,0.4995,0.3582,0.583,No evidence found,,,,,,False,False
-Western Downs,Western Downs Regional Council,outer_regional,False,35452,0.459,653,0.4188,0.3265,0.4473,0.1342,No evidence found,,ABC News (24 Aug 2026),Western Downs Regional Council,direct (council-operated),11702,False,False
-Whitsunday,Whitsunday Regional Council,outer_regional,False,41374,0.733,363,0.4447,0.4426,0.4156,0.1203,No evidence found,,,Whitsunday Regional Council,direct (council-operated),14922,False,False
-Winton,Winton Regional Council,very_remote,False,1152,0.208,97,0.4189,0.3681,0.4241,0.0882,No evidence found,,,,,,False,False
-Woorabinda,Woorabinda Aboriginal Shire Council,indigenous,True,1087,,,0.4383,0.3589,0.4567,0.1193,No evidence found,,,,,,False,False
-Wujal Wujal,Wujal Wujal Aboriginal Shire Council,indigenous,True,301,0.0,76,0.3093,0.2935,0.3123,0.0569,No evidence found,,,,,,False,False
-Yarrabah,Yarrabah Aboriginal Shire Council,indigenous,True,2669,0.037,115,0.2662,0.1585,0.3195,0.0263,No evidence found,,,,,,False,False
+"short_name","council_name","stratum","is_indigenous_council","population_latest","own_source_revenue_share","staff_fte_total","adri_andri","adri_coping_capacity","adri_adaptive_capacity","adri_information_access","ai_status","ai_infrastructure_type","ai_source","water_utility","water_control_tier","water_connections_2023_24","meets_soci_threshold","has_published_ai_governance_policy"
+"Aurukun","Aurukun Shire Council","indigenous","True","1165","0.038","82","0.0","0.0369","0.0","0.0091","No evidence found","","","","","","False","False"
+"Balonne","Balonne Shire Council","remote","False","4350","0.457","85","0.4122","0.3994","0.3963","0.085","No evidence found","","","","","","False","False"
+"Banana","Banana Shire Council","outer_regional","False","15144","0.492","247","0.4395","0.4099","0.4284","0.1157","No evidence found","","","","","","False","False"
+"Barcaldine","Barcaldine Regional Council","very_remote","False","2937","0.256","155","0.4428","0.4309","0.4202","0.0842","No evidence found","","","","","","False","False"
+"Barcoo","Barcoo Shire Council","very_remote","False","321","0.074","69","0.4189","0.3681","0.4241","0.0882","No evidence found","","","","","","False","False"
+"Blackall Tambo","Blackall-Tambo Regional Council","very_remote","False","1975","0.245","108","0.4428","0.4309","0.4202","0.0842","No evidence found","","","","","","False","False"
+"Boulia","Boulia Shire Council","very_remote","False","489","0.084","42","0.4189","0.3681","0.4241","0.0882","No evidence found","","","","","","False","False"
+"Brisbane","Brisbane City Council","seq_metro","False","1375301","0.494","7558","0.708","0.6171","0.6652","0.6179","Confirmed AI","Traffic management","ABC News (21 Aug 2026)","Urban Utilities","bulk-authority (dependent)","676983","True","False"
+"Bulloo","Bulloo Shire Council","very_remote","False","347","0.313","66","0.3932","0.3602","0.3927","0.0702","No evidence found","","","","","","False","False"
+"Bundaberg","Bundaberg Regional Council","regional_city","False","107297","0.764","793","0.4964","0.4696","0.4694","0.3714","No evidence found","","","Bundaberg Regional Council","direct (council-operated)","34398","False","False"
+"Burdekin","Burdekin Shire Council","outer_regional","False","17220","0.789","241","0.5011","0.4425","0.4947","0.0927","No evidence found","","","","","","False","False"
+"Burke","Burke Shire Council","very_remote","False","449","0.284","48","0.2639","0.2123","0.2905","0.0483","No evidence found","","","","","","False","False"
+"Cairns","Cairns Regional Council","outer_regional","False","179334","0.858","1120","0.6004","0.467","0.6171","0.3686","AI-adjacent (IoT/smart, no AI confirmed) + AI governance policy exists","Water metering; AI governance","Cairns Regional Council AI General Policy PDF; Itron press release (14 Nov 2017)","Cairns Regional Council","direct (council-operated)","76270","False","True"
+"Carpentaria","Carpentaria Shire Council","very_remote","False","2247","0.148","91","0.2639","0.2123","0.2905","0.0483","No evidence found","","","","","","False","False"
+"Cassowary Coast","Cassowary Coast Regional Council","outer_regional","False","30666","0.828","319","0.5236","0.3875","0.5594","0.0899","State-deployed AI within LGA (not council-operated)","Road safety — wildlife detection","ABC News (30 Jul 2025)","Cassowary Coast Regional Council","direct (council-operated)","13503","False","False"
+"Central Highlands","Central Highlands Regional Council","remote","False","29481","0.654","437","0.4758","0.4274","0.468","0.125","No evidence found","","","Central Highlands Regional Council","direct (council-operated)","12362","False","False"
+"Charters Towers","Charters Towers Regional Council","remote","False","12088","0.589","211","0.4937","0.4168","0.5001","0.0869","No evidence found","","","","","","False","False"
+"Cherbourg","Cherbourg Aboriginal Shire Council","indigenous","True","1289","0.0","","0.384","0.2963","0.4153","0.0797","Confirmed AI","Waste/recycling facility","Noosa Shire Council media release (Oct 2021); Council Magazine; South Burnett Times","","","","False","False"
+"Cloncurry","Cloncurry Shire Council","remote","False","3907","0.527","105","0.3273","0.312","0.3274","0.1097","No evidence found","","","","","","False","False"
+"Cook","Cook Shire Council","remote","False","4876","0.366","116","0.3093","0.2935","0.3123","0.0569","No evidence found","","","","","","False","False"
+"Croydon","Croydon Shire Council","very_remote","False","273","0.056","33","0.3402","0.3357","0.3323","0.0812","No evidence found","","","","","","False","False"
+"Diamantina","Diamantina Shire Council","very_remote","False","265","0.047","58","0.4189","0.3681","0.4241","0.0882","No evidence found","","","","","","False","False"
+"Doomadgee","Doomadgee Aboriginal Shire Council","indigenous","True","1484","0.043","0","0.2639","0.2123","0.2905","0.0483","No evidence found","","","","","","False","False"
+"Douglas","Douglas Shire Council","outer_regional","False","13169","0.782","161","0.5371","0.408","0.5659","0.1477","No evidence found","","","","","","False","False"
+"Etheridge","Etheridge Shire Council","very_remote","False","727","0.187","53","0.3402","0.3357","0.3323","0.0812","No evidence found","","","","","","False","False"
+"Flinders","Flinders Shire Council","very_remote","False","1545","0.2","87","0.385","0.4024","0.3565","0.0998","No evidence found","","","","","","False","False"
+"Fraser Coast","Fraser Coast Regional Council","regional_city","False","122924","0.778","702","0.4294","0.3881","0.4267","0.129","No evidence found","","","Fraser Coast Regional Council","direct (council-operated)","42799","False","False"
+"Gladstone","Gladstone Regional Council","regional_city","False","69046","0.724","641","0.5146","0.4544","0.5061","0.1358","No evidence found","","","Gladstone Regional Council","direct (council-operated)","26362","False","False"
+"Gold Coast","City of Gold Coast","seq_metro","False","691230","0.841","3780","0.6906","0.6044","0.6508","0.56","AI-adjacent (IoT/smart, no AI confirmed)","Flood monitoring","HiLo Monitoring","City of Gold Coast","direct (council-operated)","279107","True","False"
+"Goondiwindi","Goondiwindi Regional Council","outer_regional","False","10438","0.58","155","0.4297","0.3314","0.4599","0.102","No evidence found","","","","","","False","False"
+"Gympie","Gympie Regional Council","regional_city","False","58487","0.779","463","0.4848","0.4372","0.475","0.1948","No evidence found","","","Gympie Regional Council","direct (council-operated)","15234","False","False"
+"Hinchinbrook","Hinchinbrook Shire Council","outer_regional","False","11194","0.657","175","0.5016","0.4328","0.5014","0.078","No evidence found","","","","","","False","False"
+"Hope Vale","Hope Vale Aboriginal Shire Council","indigenous","True","1073","0.0","97","0.3093","0.2935","0.3123","0.0569","No evidence found","","","","","","False","False"
+"Ipswich","Ipswich City Council","seq_metro","False","268272","0.597","1031","0.4865","0.4664","0.4583","0.6021","No evidence found","","Shape Your Ipswich privacy statement","Urban Utilities","bulk-authority (dependent)","676983","True","False"
+"Isaac","Isaac Regional Council","outer_regional","False","23186","0.788","387","0.4734","0.4533","0.4491","0.1288","No evidence found","","","","","","False","False"
+"Kowanyama","Kowanyama Aboriginal Shire Council","indigenous","True","1155","0.054","91","0.1351","0.1392","0.145","0.0283","No evidence found","","","","","","False","False"
+"Livingstone","Livingstone Shire Council","outer_regional","False","43668","0.699","362","0.6164","0.5488","0.5865","0.1817","Confirmed AI","Road/footpath network survey","Central Queensland Today (25 Nov 2025)","Livingstone Shire Council","direct (council-operated)","14078","False","False"
+"Lockhart River","Lockhart River Aboriginal Shire Council","indigenous","True","702","0.007","81","0.3093","0.2935","0.3123","0.0569","No evidence found","","","","","","False","False"
+"Lockyer Valley","Lockyer Valley Regional Council","regional_city","False","46058","0.612","307","0.6303","0.5379","0.6135","0.5943","No evidence found","","","Urban Utilities","bulk-authority (dependent)","676983","True","False"
+"Logan","Logan City Council","seq_metro","False","403515","0.828","1531","0.5575","0.4871","0.5427","0.5997","Confirmed AI","Road maintenance","Council Magazine (27 Jun 2023)","Logan City Council","direct (council-operated)","142488","True","False"
+"Longreach","Longreach Regional Council","very_remote","False","3741","0.269","162","0.475","0.5014","0.4207","0.1097","No evidence found","","","","","","False","False"
+"Mackay","Mackay Regional Council","outer_regional","False","129253","0.837","876","0.5762","0.4814","0.5747","0.1835","AI-adjacent (IoT/smart, no AI confirmed) + non-infrastructure AI in use","Water leak detection (IoT); customer service AI (non-infrastructure)","Mackay Regional Council media release (Jun 2026); Utility Magazine (2019)","Mackay Regional Council","direct (council-operated)","57506","False","False"
+"Mapoon","Mapoon Aboriginal Shire Council","indigenous","True","494","0.0","44","0.3093","0.2935","0.3123","0.0569","No evidence found","","","","","","False","False"
+"Maranoa","Maranoa Regional Council","remote","False","13370","0.371","407","0.5038","0.456","0.49","0.1122","No evidence found","","","","","","False","False"
+"Mareeba","Mareeba Shire Council","remote","False","24205","0.517","211","0.3628","0.4204","0.3145","0.1011","No evidence found","","","","","","False","False"
+"McKinlay","McKinlay Shire Council","very_remote","False","850","0.215","71","0.385","0.4024","0.3565","0.0998","No evidence found","","","","","","False","False"
+"Moreton Bay","City of Moreton Bay","seq_metro","False","532445","0.541","1477","0.6254","0.6076","0.5571","0.6039","Confirmed AI","Traffic signals; road/pothole detection","AfMA (Jul 2026); CarExpert (Jul 2026); newscop.com.au (Feb 2026)","Unitywater","bulk-authority (dependent)","358160","True","False"
+"Mornington","Mornington Shire Council","indigenous","True","1099","0.112","96","0.2639","0.2123","0.2905","0.0483","","","","","","","False","False"
+"Mount Isa","Mount Isa City Council","remote","False","18585","0.715","166","0.3163","0.2947","0.321","0.0998","AI-adjacent (IoT/smart, no AI confirmed)","Water metering","Jacobs newsroom (2026)","","","","False","False"
+"Murweh","Murweh Shire Council","very_remote","False","4004","0.343","107","0.4413","0.4252","0.4216","0.0819","No evidence found","","","","","","False","False"
+"Napranum","Napranum Aboriginal Shire Council","indigenous","True","952","0.0","100","0.3093","0.2935","0.3123","0.0569","No evidence found","","","","","","False","False"
+"Noosa","Noosa Shire Council","seq_metro","False","59551","0.646","345","0.6933","0.6261","0.6398","0.521","Confirmed AI","Road/pathway maintenance","TechnologyOne press release (11 Dec 2024)","Unitywater","bulk-authority (dependent)","358160","True","False"
+"North Burnett","North Burnett Regional Council","outer_regional","False","10562","0.422","209","0.445","0.3957","0.4445","0.0716","No evidence found","","","","","","False","False"
+"Northern Peninsula Area","Northern Peninsula Area Regional Council","indigenous","True","2944","0.057","0","0.1422","0.1691","0.141","0.0396","No evidence found","","","","","","False","False"
+"Palm Island","Palm Island Aboriginal Shire Council","indigenous","True","2335","0.023","130","0.1283","0.1232","0.1427","0.0213","No evidence found","","","","","","False","False"
+"Paroo","Paroo Shire Council","very_remote","False","1724","0.251","100","0.3932","0.3602","0.3927","0.0702","No evidence found","","","","","","False","False"
+"Pormpuraaw","Pormpuraaw Aboriginal Shire Council","indigenous","True","650","0.02","76","0.1351","0.1392","0.145","0.0283","No evidence found","","","","","","False","False"
+"Quilpie","Quilpie Shire Council","very_remote","False","720","0.208","64","0.3932","0.3602","0.3927","0.0702","No evidence found","","","","","","False","False"
+"Redland","Redland City Council","outer_regional","False","172831","0.855","870","0.6108","0.5675","0.564","0.3575","AI-adjacent (IoT/smart, no AI confirmed)","Water monitoring; wildlife monitoring","Your Say Redlands Coast (Smart and Connected City Strategy page)","Redland City Council","direct (council-operated)","65497","False","False"
+"Richmond","Richmond Shire Council","very_remote","False","788","0.138","66","0.385","0.4024","0.3565","0.0998","No evidence found","","","","","","False","False"
+"Rockhampton","Rockhampton Regional Council","regional_city","False","85794","0.645","854","0.5844","0.4687","0.5935","0.4388","AI-adjacent (IoT/smart, no AI confirmed) + AI governance partnership","AI governance MoU; water treatment SCADA","Rockhampton Regional Council news release; TheCSRUniverse (Dec 2025)","Rockhampton Regional Council","direct (council-operated)","33514","False","False"
+"Scenic Rim","Scenic Rim Regional Council","regional_city","False","46947","0.68","362","0.5016","0.4264","0.5048","0.134","No evidence found","","","Urban Utilities","bulk-authority (dependent)","676983","True","False"
+"Somerset","Somerset Regional Council","regional_city","False","26936","0.549","181","0.508","0.5068","0.463","0.5817","No evidence found","","","Urban Utilities","bulk-authority (dependent)","676983","True","False"
+"South Burnett","South Burnett Regional Council","regional_city","False","35111","0.677","329","0.4209","0.3529","0.4347","0.2967","No evidence found","","","","","","False","False"
+"Southern Downs","Southern Downs Regional Council","regional_city","False","38064","0.744","325","0.4956","0.3944","0.5158","0.273","No evidence found","","","Southern Downs Regional Council","direct (council-operated)","11627","False","False"
+"Sunshine Coast","Sunshine Coast Regional Council","seq_metro","False","381957","0.624","1661","0.7306","0.6781","0.6524","0.5978","Confirmed AI","Traffic signals; flood/stormwater monitoring; development assessment","Information Age/ACS (Jul 2026); HiLo Monitoring; Sunshine Coast Council site; Sunshine Coast News (Jul 2026)","Unitywater","bulk-authority (dependent)","358160","True","False"
+"Tablelands","Tablelands Regional Council","outer_regional","False","27902","0.687","259","0.495","0.4122","0.5046","0.1003","No evidence found","","","","","","False","False"
+"Toowoomba","Toowoomba Regional Council","regional_city","False","186276","0.76","1440","0.5048","0.4161","0.5136","0.4319","AI-adjacent (IoT/smart, no AI confirmed)","Water metering","Boomi press release (12 Dec 2023); SWAN Forum case study","Toowoomba Regional Council","direct (council-operated)","66193","False","False"
+"Torres","Torres Shire Council","indigenous","True","3490","0.334","85","0.3053","0.2617","0.3234","0.0621","No evidence found","","","","","","False","False"
+"Torres Strait Island","Torres Strait Island Regional Council","indigenous","True","4298","0.02","314","0.2307","0.1816","0.259","0.0237","No evidence found","","","","","","False","False"
+"Townsville","Townsville City Council","outer_regional","False","206260","0.862","1730","0.6645","0.5014","0.6858","0.2162","Confirmed AI","Water safety monitoring; animal control; planned flood prediction","Townsville City Council media release (Jun 2025); Public Spectrum (Jun 2025)","Townsville City Council","direct (council-operated)","89020","False","False"
+"Weipa","Weipa Town Authority","very_remote","False","4297","","","0.4296","0.4995","0.3582","0.583","No evidence found","","","","","","False","False"
+"Western Downs","Western Downs Regional Council","outer_regional","False","35452","0.459","653","0.4188","0.3265","0.4473","0.1342","No evidence found","","ABC News (24 Aug 2026)","Western Downs Regional Council","direct (council-operated)","11702","False","False"
+"Whitsunday","Whitsunday Regional Council","outer_regional","False","41374","0.733","363","0.4447","0.4426","0.4156","0.1203","No evidence found","","","Whitsunday Regional Council","direct (council-operated)","14922","False","False"
+"Winton","Winton Shire Council","very_remote","False","1152","0.208","97","0.4189","0.3681","0.4241","0.0882","No evidence found","","","","","","False","False"
+"Woorabinda","Woorabinda Aboriginal Shire Council","indigenous","True","1087","","","0.4383","0.3589","0.4567","0.1193","No evidence found","","","","","","False","False"
+"Wujal Wujal","Wujal Wujal Aboriginal Shire Council","indigenous","True","301","0.0","76","0.3093","0.2935","0.3123","0.0569","No evidence found","","","","","","False","False"
+"Yarrabah","Yarrabah Aboriginal Shire Council","indigenous","True","2669","0.037","115","0.2662","0.1585","0.3195","0.0263","No evidence found","","","","","","False","False"

@@ -1,79 +1,79 @@
-short_name,council_name,website,url_status,stratum,mean_remoteness_score,worst_remoteness_score,is_local_government,is_indigenous_council,icfp_eligible,deamalgamated_2014,adri_andri,adri_coping_capacity,adri_adaptive_capacity,adri_information_access
-Aurukun,Aurukun Shire Council,https://www.aurukun.qld.gov.au,verified,indigenous,5.0,5,True,True,True,False,0.0,0.0369,0.0,0.0091
-Balonne,Balonne Regional Council,https://www.balonne.qld.gov.au,verified (blocks bots),remote,4.0,4,True,False,False,False,0.4122,0.3994,0.3963,0.085
-Banana,Banana Regional Council,https://www.banana.qld.gov.au,verified (blocks bots),outer_regional,3.0,3,True,False,False,False,0.4395,0.4099,0.4284,0.1157
-Barcaldine,Barcaldine Regional Council,https://www.barcaldinerc.qld.gov.au,verified (blocks bots),very_remote,5.0,5,True,False,False,False,0.4428,0.4309,0.4202,0.0842
-Barcoo,Barcoo Regional Council,https://www.barcoo.qld.gov.au,verified,very_remote,5.0,5,True,False,False,False,0.4189,0.3681,0.4241,0.0882
-Blackall Tambo,Blackall Tambo Regional Council,https://www.btrc.qld.gov.au,verified (blocks bots),very_remote,5.0,5,True,False,False,False,0.4428,0.4309,0.4202,0.0842
-Boulia,Boulia Regional Council,https://www.boulia.qld.gov.au,verified (blocks bots),very_remote,5.0,5,True,False,False,False,0.4189,0.3681,0.4241,0.0882
-Brisbane,Brisbane City Council,https://www.brisbane.qld.gov.au,verified,seq_metro,1.0,1,True,False,False,False,0.708,0.6171,0.6652,0.6179
-Bulloo,Bulloo Regional Council,https://www.bulloo.qld.gov.au,verified (blocks bots),very_remote,5.0,5,True,False,False,False,0.3932,0.3602,0.3927,0.0702
-Bundaberg,Bundaberg Regional Council,https://www.bundaberg.qld.gov.au,verified (blocks bots),regional_city,2.0,2,True,False,False,False,0.4964,0.4696,0.4694,0.3714
-Burdekin,Burdekin Regional Council,https://www.burdekin.qld.gov.au,verified (blocks bots),outer_regional,3.0,3,True,False,False,False,0.5011,0.4425,0.4947,0.0927
-Burke,Burke Regional Council,https://www.burke.qld.gov.au,verified (blocks bots),very_remote,5.0,5,True,False,False,False,0.2639,0.2123,0.2905,0.0483
-Cairns,Cairns Regional Council,https://www.cairns.qld.gov.au,verified (blocks bots),outer_regional,3.0,3,True,False,False,False,0.6004,0.467,0.6171,0.3686
-Carpentaria,Carpentaria Regional Council,https://www.carpentaria.qld.gov.au,verified (blocks bots),very_remote,5.0,5,True,False,False,False,0.2639,0.2123,0.2905,0.0483
-Cassowary Coast,Cassowary Coast Regional Council,https://www.cassowarycoast.qld.gov.au,verified (blocks bots),outer_regional,3.0,3,True,False,False,False,0.5236,0.3875,0.5594,0.0899
-Central Highlands,Central Highlands Regional Council,https://chrc.qld.gov.au,verified (hand-resolved),remote,3.694,4,True,False,False,False,0.4758,0.4274,0.468,0.125
-Charters Towers,Charters Towers Regional Council,https://www.charterstowers.qld.gov.au,verified (blocks bots),remote,3.999,4,True,False,False,False,0.4937,0.4168,0.5001,0.0869
-Cherbourg,Cherbourg Aboriginal Shire Council,https://www.cherbourg.qld.gov.au,verified (blocks bots),indigenous,2.0,2,True,True,True,False,0.384,0.2963,0.4153,0.0797
-Cloncurry,Cloncurry Regional Council,https://www.cloncurry.qld.gov.au,verified (blocks bots),remote,4.0,4,True,False,False,False,0.3273,0.312,0.3274,0.1097
-Cook,Cook Regional Council,https://www.cook.qld.gov.au,verified,remote,4.0,5,True,False,False,False,0.3093,0.2935,0.3123,0.0569
-Croydon,Croydon Regional Council,https://www.croydon.qld.gov.au,verified (blocks bots),very_remote,5.0,5,True,False,False,False,0.3402,0.3357,0.3323,0.0812
-Diamantina,Diamantina Regional Council,https://www.diamantina.qld.gov.au,verified (blocks bots),very_remote,5.0,5,True,False,False,False,0.4189,0.3681,0.4241,0.0882
-Doomadgee,Doomadgee Aboriginal Shire Council,https://www.doomadgee.qld.gov.au,verified,indigenous,5.0,5,True,True,True,False,0.2639,0.2123,0.2905,0.0483
-Douglas,Douglas Regional Council,https://douglas.qld.gov.au/,verified,outer_regional,3.0,3,True,False,False,True,0.5371,0.408,0.5659,0.1477
-Etheridge,Etheridge Regional Council,https://www.etheridge.qld.gov.au,verified (blocks bots),very_remote,5.0,5,True,False,False,False,0.3402,0.3357,0.3323,0.0812
-Flinders,Flinders Regional Council,https://www.flinders.qld.gov.au,verified (blocks bots),very_remote,5.0,5,True,False,False,False,0.385,0.4024,0.3565,0.0998
-Fraser Coast,Fraser Coast Regional Council,https://www.frasercoast.qld.gov.au,verified (blocks bots),regional_city,2.388,3,True,False,False,False,0.4294,0.3881,0.4267,0.129
-Gladstone,Gladstone Regional Council,https://www.gladstone.qld.gov.au,verified (blocks bots),regional_city,2.0,2,True,False,False,False,0.5146,0.4544,0.5061,0.1358
-Gold Coast,Gold Coast Regional Council,https://www.goldcoast.qld.gov.au/Home,verified,seq_metro,1.0,1,True,False,False,False,0.6906,0.6044,0.6508,0.56
-Goondiwindi,Goondiwindi Regional Council,https://www.grc.qld.gov.au,verified (blocks bots),outer_regional,3.0,3,True,False,False,False,0.4297,0.3314,0.4599,0.102
-Gympie,Gympie Regional Council,https://www.gympie.qld.gov.au,verified (blocks bots),regional_city,2.0,2,True,False,False,False,0.4848,0.4372,0.475,0.1948
-Hinchinbrook,Hinchinbrook Regional Council,https://www.hinchinbrook.qld.gov.au,verified,outer_regional,3.0,3,True,False,False,False,0.5016,0.4328,0.5014,0.078
-Hope Vale,Hope Vale Aboriginal Shire Council,https://www.hopevale.qld.gov.au,verified (blocks bots),indigenous,4.0,4,True,True,True,False,0.3093,0.2935,0.3123,0.0569
-Ipswich,Ipswich Regional Council,https://www.ipswich.qld.gov.au,verified (blocks bots),seq_metro,1.008,2,True,False,False,False,0.4865,0.4664,0.4583,0.6021
-Isaac,Isaac Regional Council,https://www.isaac.qld.gov.au,verified (blocks bots),outer_regional,3.471,4,True,False,False,False,0.4734,0.4533,0.4491,0.1288
-Kowanyama,Kowanyama Aboriginal Shire Council,https://www.kowanyama.qld.gov.au,verified,indigenous,5.0,5,True,True,True,False,0.1351,0.1392,0.145,0.0283
-Livingstone,Livingstone Regional Council,https://www.livingstone.qld.gov.au,verified (blocks bots),outer_regional,2.882,3,True,False,False,True,0.6164,0.5488,0.5865,0.1817
-Lockhart River,Lockhart River Aboriginal Shire Council,https://lockhart.qld.gov.au,verified (hand-resolved),indigenous,4.0,4,True,True,True,False,0.3093,0.2935,0.3123,0.0569
-Lockyer Valley,Lockyer Valley Regional Council,https://www.lockyervalley.qld.gov.au,verified,regional_city,2.0,2,True,False,False,False,0.6303,0.5379,0.6135,0.5943
-Logan,Logan Regional Council,https://www.logan.qld.gov.au,verified (blocks bots),seq_metro,1.0,1,True,False,False,False,0.5575,0.4871,0.5427,0.5997
-Longreach,Longreach Regional Council,https://www.longreach.qld.gov.au,verified (blocks bots),very_remote,5.0,5,True,False,False,False,0.475,0.5014,0.4207,0.1097
-Mackay,Mackay Regional Council,https://www.mackay.qld.gov.au,verified (blocks bots),outer_regional,2.85,3,True,False,False,False,0.5762,0.4814,0.5747,0.1835
-Mapoon,Mapoon Aboriginal Shire Council,https://www.mapoon.qld.gov.au,verified (blocks bots),indigenous,4.0,4,True,True,True,False,0.3093,0.2935,0.3123,0.0569
-Maranoa,Maranoa Regional Council,https://www.maranoa.qld.gov.au,verified (blocks bots),remote,3.998,4,True,False,False,False,0.5038,0.456,0.49,0.1122
-Mareeba,Mareeba Regional Council,https://msc.qld.gov.au/,verified,remote,3.98,4,True,False,False,True,0.3628,0.4204,0.3145,0.1011
-McKinlay,McKinlay Regional Council,https://www.mckinlay.qld.gov.au,verified (blocks bots),very_remote,5.0,5,True,False,False,False,0.385,0.4024,0.3565,0.0998
-Moreton Bay,Moreton Bay Regional Council,https://www.moretonbay.qld.gov.au,verified (blocks bots),seq_metro,1.053,2,True,False,False,False,0.6254,0.6076,0.5571,0.6039
-Mornington,Mornington Shire Council,https://www.mornington.qld.gov.au,verified,indigenous,5.0,5,True,True,True,False,0.2639,0.2123,0.2905,0.0483
-Mount Isa,Mount Isa Regional Council,https://www.mountisa.qld.gov.au,verified (blocks bots),remote,4.174,5,True,False,False,False,0.3163,0.2947,0.321,0.0998
-Murweh,Murweh Regional Council,https://www.murweh.qld.gov.au,verified (blocks bots),very_remote,5.0,5,True,False,False,False,0.4413,0.4252,0.4216,0.0819
-Napranum,Napranum Aboriginal Shire Council,https://www.napranum.qld.gov.au,verified,indigenous,4.0,4,True,True,True,False,0.3093,0.2935,0.3123,0.0569
-Noosa,Noosa Regional Council,https://www.noosa.qld.gov.au,verified (blocks bots),seq_metro,1.0,1,True,False,False,True,0.6933,0.6261,0.6398,0.521
-North Burnett,North Burnett Regional Council,https://northburnett.qld.gov.au/,verified,outer_regional,2.567,3,True,False,False,False,0.445,0.3957,0.4445,0.0716
-Northern Peninsula Area,Northern Peninsula Area Regional Council,https://www.nparc.qld.gov.au,verified (blocks bots),indigenous,5.0,5,True,True,True,False,0.1422,0.1691,0.141,0.0396
-Palm Island,Palm Island Aboriginal Shire Council,https://www.palmcouncil.qld.gov.au,verified (blocks bots),indigenous,4.0,4,True,True,True,False,0.1283,0.1232,0.1427,0.0213
-Paroo,Paroo Regional Council,https://www.paroo.qld.gov.au,verified (blocks bots),very_remote,5.0,5,True,False,False,False,0.3932,0.3602,0.3927,0.0702
-Pormpuraaw,Pormpuraaw Aboriginal Shire Council,https://www.pormpuraaw.qld.gov.au,verified,indigenous,5.0,5,True,True,True,False,0.1351,0.1392,0.145,0.0283
-Quilpie,Quilpie Regional Council,https://quilpie.qld.gov.au/,verified,very_remote,5.0,5,True,False,False,False,0.3932,0.3602,0.3927,0.0702
-Redland,Redland Regional Council,https://www.redland.qld.gov.au,verified (blocks bots),outer_regional,2.622,4,True,False,False,False,0.6108,0.5675,0.564,0.3575
-Richmond,Richmond Regional Council,https://www.richmond.qld.gov.au,verified,very_remote,5.0,5,True,False,False,False,0.385,0.4024,0.3565,0.0998
-Rockhampton,Rockhampton Regional Council,https://www.rockhamptonregion.qld.gov.au/,verified (blocks bots),regional_city,2.0,2,True,False,False,False,0.5844,0.4687,0.5935,0.4388
-Scenic Rim,Scenic Rim Regional Council,https://www.scenicrim.qld.gov.au,verified (blocks bots),regional_city,1.876,2,True,False,False,False,0.5016,0.4264,0.5048,0.134
-Somerset,Somerset Regional Council,https://www.somerset.qld.gov.au,verified (blocks bots),regional_city,1.885,2,True,False,False,False,0.508,0.5068,0.463,0.5817
-South Burnett,South Burnett Regional Council,https://www.southburnett.qld.gov.au,verified (blocks bots),regional_city,2.0,2,True,False,False,False,0.4209,0.3529,0.4347,0.2967
-Southern Downs,Southern Downs Regional Council,https://www.sdrc.qld.gov.au,verified,regional_city,2.005,3,True,False,False,False,0.4956,0.3944,0.5158,0.273
-Sunshine Coast,Sunshine Coast Regional Council,https://www.sunshinecoast.qld.gov.au,verified,seq_metro,1.454,2,True,False,False,False,0.7306,0.6781,0.6524,0.5978
-Tablelands,Tablelands Regional Council,https://www.trc.qld.gov.au,verified,outer_regional,3.0,3,True,False,False,False,0.495,0.4122,0.5046,0.1003
-Toowoomba,Toowoomba Regional Council,https://www.tr.qld.gov.au,verified (blocks bots),regional_city,2.0,2,True,False,False,False,0.5048,0.4161,0.5136,0.4319
-Torres,Torres Shire Council,https://www.torres.qld.gov.au,verified (blocks bots),indigenous,5.0,5,True,True,False,False,0.3053,0.2617,0.3234,0.0621
-Torres Strait Island,Torres Strait Island Regional Council,https://tsirc.qld.gov.au/,verified,indigenous,5.0,5,True,True,True,False,0.2307,0.1816,0.259,0.0237
-Townsville,Townsville Regional Council,https://www.townsville.qld.gov.au,verified (blocks bots),outer_regional,3.0,3,True,False,False,False,0.6645,0.5014,0.6858,0.2162
-Weipa,Weipa Town Authority,https://www.weipatownauthority.com.au,verified (blocks bots),very_remote,5.0,5,False,False,False,False,0.4296,0.4995,0.3582,0.583
-Western Downs,Western Downs Regional Council,https://www.wdrc.qld.gov.au,verified (blocks bots),outer_regional,2.848,3,True,False,False,False,0.4188,0.3265,0.4473,0.1342
-Whitsunday,Whitsunday Regional Council,https://www.whitsundayrc.qld.gov.au/,verified (blocks bots),outer_regional,3.013,4,True,False,False,False,0.4447,0.4426,0.4156,0.1203
-Winton,Winton Regional Council,https://www.winton.qld.gov.au,verified (blocks bots),very_remote,5.0,5,True,False,False,False,0.4189,0.3681,0.4241,0.0882
-Woorabinda,Woorabinda Aboriginal Shire Council,https://www.woorabinda.qld.gov.au,verified (blocks bots),indigenous,3.0,3,True,True,True,False,0.4383,0.3589,0.4567,0.1193
-Wujal Wujal,Wujal Wujal Aboriginal Shire Council,https://www.wujalwujalcouncil.qld.gov.au,verified (blocks bots),indigenous,4.0,4,True,True,True,False,0.3093,0.2935,0.3123,0.0569
-Yarrabah,Yarrabah Aboriginal Shire Council,https://www.yarrabah.qld.gov.au,verified,indigenous,3.0,3,True,True,True,False,0.2662,0.1585,0.3195,0.0263
+"short_name","council_name","website","url_status","stratum","mean_remoteness_score","worst_remoteness_score","is_local_government","is_indigenous_council","icfp_eligible","deamalgamated_2014","adri_andri","adri_coping_capacity","adri_adaptive_capacity","adri_information_access"
+"Aurukun","Aurukun Shire Council","https://www.aurukun.qld.gov.au","verified","indigenous","5.0","5","True","True","True","False","0.0","0.0369","0.0","0.0091"
+"Balonne","Balonne Shire Council","https://www.balonne.qld.gov.au","verified (blocks bots)","remote","4.0","4","True","False","False","False","0.4122","0.3994","0.3963","0.085"
+"Banana","Banana Shire Council","https://www.banana.qld.gov.au","verified (blocks bots)","outer_regional","3.0","3","True","False","False","False","0.4395","0.4099","0.4284","0.1157"
+"Barcaldine","Barcaldine Regional Council","https://www.barcaldinerc.qld.gov.au","verified (blocks bots)","very_remote","5.0","5","True","False","False","False","0.4428","0.4309","0.4202","0.0842"
+"Barcoo","Barcoo Shire Council","https://www.barcoo.qld.gov.au","verified","very_remote","5.0","5","True","False","False","False","0.4189","0.3681","0.4241","0.0882"
+"Blackall Tambo","Blackall-Tambo Regional Council","https://www.btrc.qld.gov.au","verified (blocks bots)","very_remote","5.0","5","True","False","False","False","0.4428","0.4309","0.4202","0.0842"
+"Boulia","Boulia Shire Council","https://www.boulia.qld.gov.au","verified (blocks bots)","very_remote","5.0","5","True","False","False","False","0.4189","0.3681","0.4241","0.0882"
+"Brisbane","Brisbane City Council","https://www.brisbane.qld.gov.au","verified","seq_metro","1.0","1","True","False","False","False","0.708","0.6171","0.6652","0.6179"
+"Bulloo","Bulloo Shire Council","https://www.bulloo.qld.gov.au","verified (blocks bots)","very_remote","5.0","5","True","False","False","False","0.3932","0.3602","0.3927","0.0702"
+"Bundaberg","Bundaberg Regional Council","https://www.bundaberg.qld.gov.au","verified (blocks bots)","regional_city","2.0","2","True","False","False","False","0.4964","0.4696","0.4694","0.3714"
+"Burdekin","Burdekin Shire Council","https://www.burdekin.qld.gov.au","verified (blocks bots)","outer_regional","3.0","3","True","False","False","False","0.5011","0.4425","0.4947","0.0927"
+"Burke","Burke Shire Council","https://www.burke.qld.gov.au","verified (blocks bots)","very_remote","5.0","5","True","False","False","False","0.2639","0.2123","0.2905","0.0483"
+"Cairns","Cairns Regional Council","https://www.cairns.qld.gov.au","verified (blocks bots)","outer_regional","3.0","3","True","False","False","False","0.6004","0.467","0.6171","0.3686"
+"Carpentaria","Carpentaria Shire Council","https://www.carpentaria.qld.gov.au","verified (blocks bots)","very_remote","5.0","5","True","False","False","False","0.2639","0.2123","0.2905","0.0483"
+"Cassowary Coast","Cassowary Coast Regional Council","https://www.cassowarycoast.qld.gov.au","verified (blocks bots)","outer_regional","3.0","3","True","False","False","False","0.5236","0.3875","0.5594","0.0899"
+"Central Highlands","Central Highlands Regional Council","https://chrc.qld.gov.au","verified (hand-resolved)","remote","3.694","4","True","False","False","False","0.4758","0.4274","0.468","0.125"
+"Charters Towers","Charters Towers Regional Council","https://www.charterstowers.qld.gov.au","verified (blocks bots)","remote","3.999","4","True","False","False","False","0.4937","0.4168","0.5001","0.0869"
+"Cherbourg","Cherbourg Aboriginal Shire Council","https://www.cherbourg.qld.gov.au","verified (blocks bots)","indigenous","2.0","2","True","True","True","False","0.384","0.2963","0.4153","0.0797"
+"Cloncurry","Cloncurry Shire Council","https://www.cloncurry.qld.gov.au","verified (blocks bots)","remote","4.0","4","True","False","False","False","0.3273","0.312","0.3274","0.1097"
+"Cook","Cook Shire Council","https://www.cook.qld.gov.au","verified","remote","4.0","5","True","False","False","False","0.3093","0.2935","0.3123","0.0569"
+"Croydon","Croydon Shire Council","https://www.croydon.qld.gov.au","verified (blocks bots)","very_remote","5.0","5","True","False","False","False","0.3402","0.3357","0.3323","0.0812"
+"Diamantina","Diamantina Shire Council","https://www.diamantina.qld.gov.au","verified (blocks bots)","very_remote","5.0","5","True","False","False","False","0.4189","0.3681","0.4241","0.0882"
+"Doomadgee","Doomadgee Aboriginal Shire Council","https://www.doomadgee.qld.gov.au","verified","indigenous","5.0","5","True","True","True","False","0.2639","0.2123","0.2905","0.0483"
+"Douglas","Douglas Shire Council","https://douglas.qld.gov.au/","verified","outer_regional","3.0","3","True","False","False","True","0.5371","0.408","0.5659","0.1477"
+"Etheridge","Etheridge Shire Council","https://www.etheridge.qld.gov.au","verified (blocks bots)","very_remote","5.0","5","True","False","False","False","0.3402","0.3357","0.3323","0.0812"
+"Flinders","Flinders Shire Council","https://www.flinders.qld.gov.au","verified (blocks bots)","very_remote","5.0","5","True","False","False","False","0.385","0.4024","0.3565","0.0998"
+"Fraser Coast","Fraser Coast Regional Council","https://www.frasercoast.qld.gov.au","verified (blocks bots)","regional_city","2.388","3","True","False","False","False","0.4294","0.3881","0.4267","0.129"
+"Gladstone","Gladstone Regional Council","https://www.gladstone.qld.gov.au","verified (blocks bots)","regional_city","2.0","2","True","False","False","False","0.5146","0.4544","0.5061","0.1358"
+"Gold Coast","City of Gold Coast","https://www.goldcoast.qld.gov.au/Home","verified","seq_metro","1.0","1","True","False","False","False","0.6906","0.6044","0.6508","0.56"
+"Goondiwindi","Goondiwindi Regional Council","https://www.grc.qld.gov.au","verified (blocks bots)","outer_regional","3.0","3","True","False","False","False","0.4297","0.3314","0.4599","0.102"
+"Gympie","Gympie Regional Council","https://www.gympie.qld.gov.au","verified (blocks bots)","regional_city","2.0","2","True","False","False","False","0.4848","0.4372","0.475","0.1948"
+"Hinchinbrook","Hinchinbrook Shire Council","https://www.hinchinbrook.qld.gov.au","verified","outer_regional","3.0","3","True","False","False","False","0.5016","0.4328","0.5014","0.078"
+"Hope Vale","Hope Vale Aboriginal Shire Council","https://www.hopevale.qld.gov.au","verified (blocks bots)","indigenous","4.0","4","True","True","True","False","0.3093","0.2935","0.3123","0.0569"
+"Ipswich","Ipswich City Council","https://www.ipswich.qld.gov.au","verified (blocks bots)","seq_metro","1.008","2","True","False","False","False","0.4865","0.4664","0.4583","0.6021"
+"Isaac","Isaac Regional Council","https://www.isaac.qld.gov.au","verified (blocks bots)","outer_regional","3.471","4","True","False","False","False","0.4734","0.4533","0.4491","0.1288"
+"Kowanyama","Kowanyama Aboriginal Shire Council","https://www.kowanyama.qld.gov.au","verified","indigenous","5.0","5","True","True","True","False","0.1351","0.1392","0.145","0.0283"
+"Livingstone","Livingstone Shire Council","https://www.livingstone.qld.gov.au","verified (blocks bots)","outer_regional","2.882","3","True","False","False","True","0.6164","0.5488","0.5865","0.1817"
+"Lockhart River","Lockhart River Aboriginal Shire Council","https://lockhart.qld.gov.au","verified (hand-resolved)","indigenous","4.0","4","True","True","True","False","0.3093","0.2935","0.3123","0.0569"
+"Lockyer Valley","Lockyer Valley Regional Council","https://www.lockyervalley.qld.gov.au","verified","regional_city","2.0","2","True","False","False","False","0.6303","0.5379","0.6135","0.5943"
+"Logan","Logan City Council","https://www.logan.qld.gov.au","verified (blocks bots)","seq_metro","1.0","1","True","False","False","False","0.5575","0.4871","0.5427","0.5997"
+"Longreach","Longreach Regional Council","https://www.longreach.qld.gov.au","verified (blocks bots)","very_remote","5.0","5","True","False","False","False","0.475","0.5014","0.4207","0.1097"
+"Mackay","Mackay Regional Council","https://www.mackay.qld.gov.au","verified (blocks bots)","outer_regional","2.85","3","True","False","False","False","0.5762","0.4814","0.5747","0.1835"
+"Mapoon","Mapoon Aboriginal Shire Council","https://www.mapoon.qld.gov.au","verified (blocks bots)","indigenous","4.0","4","True","True","True","False","0.3093","0.2935","0.3123","0.0569"
+"Maranoa","Maranoa Regional Council","https://www.maranoa.qld.gov.au","verified (blocks bots)","remote","3.998","4","True","False","False","False","0.5038","0.456","0.49","0.1122"
+"Mareeba","Mareeba Shire Council","https://msc.qld.gov.au/","verified","remote","3.98","4","True","False","False","True","0.3628","0.4204","0.3145","0.1011"
+"McKinlay","McKinlay Shire Council","https://www.mckinlay.qld.gov.au","verified (blocks bots)","very_remote","5.0","5","True","False","False","False","0.385","0.4024","0.3565","0.0998"
+"Moreton Bay","City of Moreton Bay","https://www.moretonbay.qld.gov.au","verified (blocks bots)","seq_metro","1.053","2","True","False","False","False","0.6254","0.6076","0.5571","0.6039"
+"Mornington","Mornington Shire Council","https://www.mornington.qld.gov.au","verified","indigenous","5.0","5","True","True","True","False","0.2639","0.2123","0.2905","0.0483"
+"Mount Isa","Mount Isa City Council","https://www.mountisa.qld.gov.au","verified (blocks bots)","remote","4.174","5","True","False","False","False","0.3163","0.2947","0.321","0.0998"
+"Murweh","Murweh Shire Council","https://www.murweh.qld.gov.au","verified (blocks bots)","very_remote","5.0","5","True","False","False","False","0.4413","0.4252","0.4216","0.0819"
+"Napranum","Napranum Aboriginal Shire Council","https://www.napranum.qld.gov.au","verified","indigenous","4.0","4","True","True","True","False","0.3093","0.2935","0.3123","0.0569"
+"Noosa","Noosa Shire Council","https://www.noosa.qld.gov.au","verified (blocks bots)","seq_metro","1.0","1","True","False","False","True","0.6933","0.6261","0.6398","0.521"
+"North Burnett","North Burnett Regional Council","https://northburnett.qld.gov.au/","verified","outer_regional","2.567","3","True","False","False","False","0.445","0.3957","0.4445","0.0716"
+"Northern Peninsula Area","Northern Peninsula Area Regional Council","https://www.nparc.qld.gov.au","verified (blocks bots)","indigenous","5.0","5","True","True","True","False","0.1422","0.1691","0.141","0.0396"
+"Palm Island","Palm Island Aboriginal Shire Council","https://www.palmcouncil.qld.gov.au","verified (blocks bots)","indigenous","4.0","4","True","True","True","False","0.1283","0.1232","0.1427","0.0213"
+"Paroo","Paroo Shire Council","https://www.paroo.qld.gov.au","verified (blocks bots)","very_remote","5.0","5","True","False","False","False","0.3932","0.3602","0.3927","0.0702"
+"Pormpuraaw","Pormpuraaw Aboriginal Shire Council","https://www.pormpuraaw.qld.gov.au","verified","indigenous","5.0","5","True","True","True","False","0.1351","0.1392","0.145","0.0283"
+"Quilpie","Quilpie Shire Council","https://quilpie.qld.gov.au/","verified","very_remote","5.0","5","True","False","False","False","0.3932","0.3602","0.3927","0.0702"
+"Redland","Redland City Council","https://www.redland.qld.gov.au","verified (blocks bots)","outer_regional","2.622","4","True","False","False","False","0.6108","0.5675","0.564","0.3575"
+"Richmond","Richmond Shire Council","https://www.richmond.qld.gov.au","verified","very_remote","5.0","5","True","False","False","False","0.385","0.4024","0.3565","0.0998"
+"Rockhampton","Rockhampton Regional Council","https://www.rockhamptonregion.qld.gov.au/","verified (blocks bots)","regional_city","2.0","2","True","False","False","False","0.5844","0.4687","0.5935","0.4388"
+"Scenic Rim","Scenic Rim Regional Council","https://www.scenicrim.qld.gov.au","verified (blocks bots)","regional_city","1.876","2","True","False","False","False","0.5016","0.4264","0.5048","0.134"
+"Somerset","Somerset Regional Council","https://www.somerset.qld.gov.au","verified (blocks bots)","regional_city","1.885","2","True","False","False","False","0.508","0.5068","0.463","0.5817"
+"South Burnett","South Burnett Regional Council","https://www.southburnett.qld.gov.au","verified (blocks bots)","regional_city","2.0","2","True","False","False","False","0.4209","0.3529","0.4347","0.2967"
+"Southern Downs","Southern Downs Regional Council","https://www.sdrc.qld.gov.au","verified","regional_city","2.005","3","True","False","False","False","0.4956","0.3944","0.5158","0.273"
+"Sunshine Coast","Sunshine Coast Regional Council","https://www.sunshinecoast.qld.gov.au","verified","seq_metro","1.454","2","True","False","False","False","0.7306","0.6781","0.6524","0.5978"
+"Tablelands","Tablelands Regional Council","https://www.trc.qld.gov.au","verified","outer_regional","3.0","3","True","False","False","False","0.495","0.4122","0.5046","0.1003"
+"Toowoomba","Toowoomba Regional Council","https://www.tr.qld.gov.au","verified (blocks bots)","regional_city","2.0","2","True","False","False","False","0.5048","0.4161","0.5136","0.4319"
+"Torres","Torres Shire Council","https://www.torres.qld.gov.au","verified (blocks bots)","indigenous","5.0","5","True","True","False","False","0.3053","0.2617","0.3234","0.0621"
+"Torres Strait Island","Torres Strait Island Regional Council","https://tsirc.qld.gov.au/","verified","indigenous","5.0","5","True","True","True","False","0.2307","0.1816","0.259","0.0237"
+"Townsville","Townsville City Council","https://www.townsville.qld.gov.au","verified (blocks bots)","outer_regional","3.0","3","True","False","False","False","0.6645","0.5014","0.6858","0.2162"
+"Weipa","Weipa Town Authority","https://www.weipatownauthority.com.au","verified (blocks bots)","very_remote","5.0","5","False","False","False","False","0.4296","0.4995","0.3582","0.583"
+"Western Downs","Western Downs Regional Council","https://www.wdrc.qld.gov.au","verified (blocks bots)","outer_regional","2.848","3","True","False","False","False","0.4188","0.3265","0.4473","0.1342"
+"Whitsunday","Whitsunday Regional Council","https://www.whitsundayrc.qld.gov.au/","verified (blocks bots)","outer_regional","3.013","4","True","False","False","False","0.4447","0.4426","0.4156","0.1203"
+"Winton","Winton Shire Council","https://www.winton.qld.gov.au","verified (blocks bots)","very_remote","5.0","5","True","False","False","False","0.4189","0.3681","0.4241","0.0882"
+"Woorabinda","Woorabinda Aboriginal Shire Council","https://www.woorabinda.qld.gov.au","verified (blocks bots)","indigenous","3.0","3","True","True","True","False","0.4383","0.3589","0.4567","0.1193"
+"Wujal Wujal","Wujal Wujal Aboriginal Shire Council","https://www.wujalwujalcouncil.qld.gov.au","verified (blocks bots)","indigenous","4.0","4","True","True","True","False","0.3093","0.2935","0.3123","0.0569"
+"Yarrabah","Yarrabah Aboriginal Shire Council","https://www.yarrabah.qld.gov.au","verified","indigenous","3.0","3","True","True","True","False","0.2662","0.1585","0.3195","0.0263"
