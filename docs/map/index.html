@@ -58,6 +58,8 @@ button{cursor:pointer;margin-top:8px}
 #detail table{width:100%;border-collapse:collapse;margin-top:8px;font-size:14.5px}
 #detail td{padding:3px 0;border-bottom:1px solid var(--rule)}
 #detail td:last-child{text-align:right;font-family:ui-monospace,monospace;color:var(--ink)}
+#detail td.nowrap{white-space:nowrap}
+#detail td.small{font-size:13px}
 .scoretable td.scorebar{width:90px;padding:3px 8px}
 .scorebar-track{position:relative;display:block;width:100%;height:8px;border-radius:4px;
   background:var(--rule)}
@@ -425,18 +427,19 @@ function detail(rec){
   const shift = parseInt(rec.rank_shift,10);
   const shiftTxt = !Number.isFinite(shift) ? "n/a"
     : shift===0 ? "same rank as ADRI would predict"
-    : `${shift>0?"higher":"lower"} risk rank than ADRI predicts (by ${Math.abs(shift)} ${Math.abs(shift)===1?"place":"places"})`;
+    : `${shift>0?"higher":"lower"} risk rank than ADRI predicts (${Math.abs(shift)})`;
   const rows=[
     ["QAIRI score", idx!=null?idx.toFixed(3):"n/a"],
     ["QAIRI rank", rec.ai_risk_rank?`${rec.ai_risk_rank} of 78`:"n/a"],
     ["ADRI rank", rec.adri_rank?`${rec.adri_rank} of 78`:"n/a"],
-    ["Divergence", shiftTxt],
+    ["Divergence", shiftTxt, true],
     ["Population", rec.population_latest?Number(rec.population_latest).toLocaleString():"n/a"]];
   el.innerHTML =
     `<h3>${rec.council_name||rec.short_name}</h3>` +
     `<p style="margin:2px 0 6px;color:var(--ink3)">${classline(rec)}</p>` +
-    "<table>" + rows.map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join("") + "</table>" +
-    `<h2 style="margin:14px 0 4px">Component scores</h2>` +
+    "<table>" + rows.map(([k,v,small])=>
+      `<tr><td class="nowrap">${k}</td><td${small?' class="small"':''}>${v}</td></tr>`).join("") + "</table>" +
+    `<h2 style="margin:14px 0 4px">Component risk scores</h2>` +
     '<table class="scoretable">' + comps.map(([label,v,key])=>
       `<tr><td>${label}</td>`+
       `<td class="scorebar"><span class="scorebar-track"><span class="scorebar-fill" style="width:${Math.round(v*100)}%;background:${colorFor(key)}"></span></span></td>`+
@@ -462,7 +465,8 @@ function sliders(){
        style="accent-color:${colorFor(k)}"></div>`).join("");
   box.querySelectorAll(".info-btn").forEach(btn=>{
     btn.addEventListener("click", e=>{ e.preventDefault(); openCompModal(btn.dataset.comp); });
-    btn.addEventListener("mouseenter", ()=>{ openCompModal(btn.dataset.comp); });
+    btn.addEventListener("mouseenter", ()=>{ cancelCompModalClose(); openCompModal(btn.dataset.comp); });
+    btn.addEventListener("mouseleave", scheduleCompModalClose);
   });
   Object.keys(DEFAULTS).forEach(k=>{
     document.getElementById("w_"+k).addEventListener("input", e=>{
@@ -556,6 +560,18 @@ function openCompModal(key){
 }
 document.getElementById("closeCompModal").addEventListener("click", ()=>{ compModal.hidden = true; });
 compModal.addEventListener("click", e=>{ if (e.target === compModal) compModal.hidden = true; });
+
+// Hover to open, cursor moving away to close, with a short grace period so
+// moving from the "?" button onto the popup itself does not close it.
+let compModalCloseTimer = null;
+function scheduleCompModalClose(){
+  compModalCloseTimer = setTimeout(()=>{ compModal.hidden = true; }, 250);
+}
+function cancelCompModalClose(){
+  if (compModalCloseTimer) { clearTimeout(compModalCloseTimer); compModalCloseTimer = null; }
+}
+document.querySelector("#compModal .modal").addEventListener("mouseenter", cancelCompModalClose);
+document.querySelector("#compModal .modal").addEventListener("mouseleave", scheduleCompModalClose);
 
 document.addEventListener("keydown", e=>{
   if (e.key !== "Escape") return;
