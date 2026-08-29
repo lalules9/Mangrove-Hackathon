@@ -1,0 +1,40 @@
+lga_name,events_all_time,events_last_5yr,categories
+Banana,4,0,Flood:1; Industrial:3
+Barcaldine,1,0,Fire - Bushfire:1
+Barcoo,1,1,Flood:1
+Blackall Tambo,1,0,Fire - Bushfire:1
+Brisbane,10,0,Cyclone:1; Fire - Urban:1; Flood:2; Health:1; Storm:5
+Bundaberg,2,0,Fire - Urban:1; Tornado:1
+Cairns,1,0,Cyclone:1
+Cassowary Coast,3,0,Cyclone:3
+Charters Towers,1,0,Industrial:1
+Cloncurry,1,0,Flood:1
+Cook,2,0,Cyclone:2
+Douglas,1,0,Flood:1
+Flinders (Qld),3,0,Fire - Bushfire:2; Flood:1
+Fraser Coast,1,0,Flood:1
+Gold Coast,6,1,Cyclone:2; Flood:4
+Gympie,2,0,Flood:1; Storm:1
+Hinchinbrook,2,1,Flood:2
+Ipswich,3,0,Fire - Urban:1; Industrial:2
+Isaac,1,0,Flood:1
+Logan,2,1,Fire - Urban:1; Storm:1
+Longreach,2,0,Flood:2
+Mackay,1,0,Flood:1
+Maranoa,1,1,Fire - Bushfire:1
+Mareeba,1,0,Industrial:1
+Moreton Bay,1,0,Storm:1
+Noosa,1,0,Tornado:1
+Richmond,2,0,Flood:1; Health:1
+Rockhampton,3,0,Cyclone:2; Flood:1
+Scenic Rim,2,0,Fire - Bushfire:1; Flood:1
+Somerset,1,0,Storm:1
+South Burnett,1,0,Cyclone:1
+Southern Downs,1,0,Storm:1
+Sunshine Coast,1,0,Storm:1
+Tablelands,1,0,Flood:1
+Toowoomba,2,1,Flood:1; Storm:1
+Torres,1,0,Cyclone:1
+Townsville,7,1,Cyclone:6; Health:1
+Western Downs,2,0,Flood:2
+Whitsunday,3,0,Cyclone:1; Flood:1; Industrial:1
