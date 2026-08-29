@@ -82,8 +82,20 @@ section{padding-top:50px}
 footer{border-top:1px solid var(--rule);margin-top:60px;background:var(--card)}
 footer .wrap{padding:28px 24px 50px}
 footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
+
+.pagenav{background:var(--card-2);border-bottom:1px solid var(--rule)}
+.pagenav .wrap{padding:10px 24px;display:flex;gap:18px;flex-wrap:wrap;font-size:13px}
+.pagenav a{color:var(--ink-2);text-decoration:none;font-weight:500}
+.pagenav a:hover{color:var(--accent-ink);text-decoration:underline}
+.pagenav a.current{color:var(--accent-ink);font-weight:700}
 </style>
 
+<nav class="pagenav"><div class="wrap">
+  <a href="map/index.html">Interactive map</a>
+  <a href="ai-disaster-resilience-index.html">Methodology</a>
+  <a href="limitations.html" class="current">Limitations</a>
+  <a href="qld-council-governance.html">Legal background</a>
+</div></nav>
 <header>
   <div class="wrap">
     <p class="eyebrow">QAIRI, Queensland Artificial Intelligence Risk Index</p>
@@ -152,14 +164,16 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
   </div>
 
   <div class="item">
-    <h3>Disaster event locations are approximate</h3>
-    <p>The disaster frequency input to synthetic warning was matched to a council by coordinates
-      pulled from a public disaster events catalogue. Many older entries share the exact same
-      coordinate, a generic point near a major regional town, rather than the real event
-      location. This was confirmed directly on Cyclone Kirrily (2024), which the source data
-      places at generic coordinates near Townsville rather than its real path. This will
-      under-count events in remote and Cape York councils specifically. Known, and accepted for
-      this hackathon rather than hand-verified across all 78 councils.</p>
+    <h3>Disaster frequency, corrected during this build</h3>
+    <p>The first version of this input matched disaster events to a council by coordinates pulled
+      from a public disaster events catalogue, and that approach was wrong more often than it was
+      right. Many entries shared the exact same generic coordinate near a major regional town
+      rather than the real event location, and it missed real, confirmed events entirely,
+      including Cyclone Jasper at Wujal Wujal and Cyclone Kirrily's actual path.</p>
+    <p>Replaced with the Queensland Reconstruction Authority's own Disaster Recovery Funding
+      Arrangements activation records, filterable by council directly on QRA's site, every
+      activation since 2010 to 2011. This is the authoritative source, not an approximation of
+      one, and every council's count is independently checkable.</p>
   </div>
 
   <div class="item">

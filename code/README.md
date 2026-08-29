@@ -1,7 +1,7 @@
 # Council AI Audit
 
 **Question:** When a Queensland resident asks an AI about their council, how often is the answer
-right — and does that depend on which council they live in?
+right, and does that depend on which council they live in?
 
 **Problem:** An AI answer now sits above the council's own website in search results. The council
 is still the accountable authority for its services, but the channel most people hit first is one
@@ -12,7 +12,7 @@ are wrong, here are the pages causing it, fix them.
 
 ---
 
-## Pre-registration — fill this in BEFORE running anything
+## Pre-registration, fill this in BEFORE running anything
 
 Timestamp it, commit it, don't edit it afterwards. If the results contradict it, that is a finding.
 
@@ -42,7 +42,7 @@ python analyse.py                      # 6. stratified results + council reports
 ```
 
 Everything is cached to `cache/` and archived to `archive/`. Re-runs cost nothing.
-**Never delete `archive/`** — it is your evidence when a judge asks you to prove a finding.
+**Never delete `archive/`**, it is your evidence when a judge asks you to prove a finding.
 
 ---
 
@@ -51,13 +51,13 @@ Everything is cached to `cache/` and archived to `archive/`. Re-runs cost nothin
 You asked whether this can be automated rather than copy-pasted. Three routes, in order of
 preference:
 
-**1. A SERP API that returns AI Overview content — use this.** Services like Serper.dev, SerpApi
+**1. A SERP API that returns AI Overview content, use this.** Services like Serper.dev, SerpApi
 and DataForSEO run the searches for you and return the AI Overview block as structured data.
 They handle the querying commercially, so you are not scripting Google yourself. Costs are
 trivial at this scale (hundreds of queries), and most have a free tier that will cover a
-subsample. Check current free-tier limits when you sign up — they change.
+subsample. Check current free-tier limits when you sign up, they change.
 
-**2. The Gemini API — use this too, but know what it is not.** It is cheap, reproducible and
+**2. The Gemini API, use this too, but know what it is not.** It is cheap, reproducible and
 scriptable, but it is *a different system from AI Overviews*, with different retrieval. It is a
 proxy, not the thing itself. Say so out loud in the write-up.
 
@@ -89,7 +89,7 @@ where it is bad.
 ## Layout
 
 ```
-questions.yaml      the question set — 8 per council, each tagged to a failure mode
+questions.yaml      the question set, 8 per council, each tagged to a failure mode
 build_councils.py   fetch + verify the 77 QLD councils, tag remoteness/Indigenous status
 run_queries.py      run questions through providers, cache + archive raw responses
 grade.py            auto-grade responses against scraped council ground truth

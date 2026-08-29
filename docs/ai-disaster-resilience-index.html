@@ -1,4 +1,4 @@
-<title>AI Disaster Resilience Index</title>
+<title>QAIRI: Methodology</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
@@ -130,12 +130,24 @@ td strong{color:var(--ink);font-weight:600}
 footer{border-top:1px solid var(--rule);margin-top:60px;background:var(--card)}
 footer .wrap{padding:28px 24px 50px}
 footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
+
+.pagenav{background:var(--card-2);border-bottom:1px solid var(--rule)}
+.pagenav .wrap{padding:10px 24px;display:flex;gap:18px;flex-wrap:wrap;font-size:13px}
+.pagenav a{color:var(--ink-2);text-decoration:none;font-weight:500}
+.pagenav a:hover{color:var(--accent-ink);text-decoration:underline}
+.pagenav a.current{color:var(--accent-ink);font-weight:700}
 </style>
 
+<nav class="pagenav"><div class="wrap">
+  <a href="map/index.html">Interactive map</a>
+  <a href="ai-disaster-resilience-index.html" class="current">Methodology</a>
+  <a href="limitations.html">Limitations</a>
+  <a href="qld-council-governance.html">Legal background</a>
+</div></nav>
 <header>
   <div class="wrap">
-    <p class="eyebrow">Framework · Queensland local government areas</p>
-    <h1>AI Disaster Resilience Index</h1>
+    <p class="eyebrow">QAIRI, Queensland Artificial Intelligence Risk Index, methodology</p>
+    <h1>How QAIRI was built</h1>
     <p class="stand">Take a validated Australian index built for bushfires and floods, keep its architecture, and swap the hazard. Six scored components, live today as QAIRI, the Queensland Artificial Intelligence Risk Index. This page is the research write-up behind it: what was tried, what survived contact with real data, and what did not.</p>
     <div class="ramp"><i></i><i></i><i></i><i></i><i></i></div>
   </div>
@@ -237,7 +249,7 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
     <p>This was pre-registered before the index was scored, then tested. Here is what happened.</p>
   </div>
   <p class="body">If you take the same inputs and make the same assumptions as ADRI, you reproduce it with extra steps, and a judge will say you rediscovered that remote communities are disadvantaged. The defence is not an argument. It is a number, computed against ADRI held entirely out of the model and used only for comparison.</p>
-  <p class="body"><strong>Spearman rank correlation between QAIRI and ADRI's resilience score: r = -0.331.</strong> Comfortably below the 0.9 threshold that would mean the index adds nothing, and below the 0.7 threshold that would mean it is merely a variant of the same thing. The two rankings are substantially different.</p>
+  <p class="body"><strong>Spearman rank correlation between QAIRI and ADRI's resilience score: r = -0.408.</strong> Comfortably below the 0.9 threshold that would mean the index adds nothing, and below the 0.7 threshold that would mean it is merely a variant of the same thing. The two rankings are substantially different.</p>
   <p class="body" style="margin-top:11px">The prediction, written down before the six components were finalised: highly digitised metropolitan councils would rank worse on QAIRI than they do on ADRI, because system dependence is a strength in a natural-hazard index and a liability in this one. That prediction held. Townsville, Brisbane, Sunshine Coast, Moreton Bay and Livingstone all shift more than fifty ranks worse on QAIRI than their ADRI position would predict.</p>
   <p class="body" style="margin-top:14px">Two real sources of divergence turned out to matter, and one turned out to cut the other way:</p>
   <div class="tablewrap">
@@ -409,7 +421,7 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
       <div class="fld">
         <h5>Data</h5>
         <ul>
-          <li>Disaster events matched to council by location, AIDR Disaster Mapper, coordinates approximate, see Limitations</li>
+          <li>Disaster Recovery Funding Arrangements activations by council, Queensland Reconstruction Authority, 2010 to 2011 onward, 78/78</li>
           <li>Funded mobile base stations, DITRDCA Mobile Black Spot Program, 78/78</li>
           <li>Non-English-speaking households, Census 2021, 78/78</li>
         </ul>
@@ -488,7 +500,7 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
         <tr><td><strong>Population vulnerability</strong></td><td>78/78</td><td>Complete</td></tr>
         <tr><td><strong>Institutional capacity</strong></td><td>73 to 76/78</td><td>Staff and finance figures are 2015 to 2016, current years blocked at source, see Limitations</td></tr>
         <tr><td><strong>Deployment evidence</strong></td><td>16/78 confirmed either way</td><td>The rest excluded as missing, not scored as safe</td></tr>
-        <tr><td><strong>Synthetic warning</strong></td><td>78/78</td><td>Disaster-event locations are approximate, see Limitations</td></tr>
+        <tr><td><strong>Synthetic warning</strong></td><td>78/78</td><td>Disaster frequency from QRA's own activation records, authoritative, not approximated</td></tr>
         <tr><td><strong>Systemic labour</strong></td><td>78/78</td><td>One occupational proxy, not cross-validated, see Limitations</td></tr>
       </tbody>
     </table>
@@ -627,7 +639,7 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
     <div class="rescard"><h4>ADRI methodology, index design and computation</h4><p>Volume II. Read this for how they actually combined indicators, you want to mirror the method, not just the themes.</p><a href="https://www.preventionweb.net/publication/australian-natural-disaster-resilience-index-volume-ii">preventionweb.net/publication/australian-natural-disaster-resilience-index-volume-ii</a></div>
     <div class="rescard"><h4>SOCI Act, water and sewerage</h4><p>The 100,000-connection threshold and what a responsible entity owes above it. The basis for essential services.</p><a href="https://www.cisc.gov.au/information-for-your-industry/water-and-sewerage/legislation-regulation-and-compliance/soci-act-2018">cisc.gov.au, water and sewerage, SOCI Act 2018</a></div>
     <div class="rescard"><h4>ABS Data by Region, LGA</h4><p>Health, housing, income, population, employment per LGA. Feeds population vulnerability and most of the capacity themes.</p><a href="https://dataexplorer.abs.gov.au/vis?tm=ABS_REGIONAL_LGA2021">dataexplorer.abs.gov.au/vis?tm=ABS_REGIONAL_LGA2021</a></div>
-    <div class="rescard"><h4>AIDR Disaster Mapper</h4><p>Historical disaster events by location and date, back to 1876. The disaster-frequency input to synthetic warning, coordinates approximate, see Limitations.</p><a href="https://knowledge.aidr.org.au/disasters/">knowledge.aidr.org.au/disasters</a></div>
+    <div class="rescard"><h4>QRA Disaster Funding Activations</h4><p>Every Disaster Recovery Funding Arrangements activation by council since 2010 to 2011, filterable directly on the site. The disaster-frequency input to synthetic warning.</p><a href="https://www.qra.qld.gov.au/disaster-funding-activations/activations">qra.qld.gov.au/disaster-funding-activations/activations</a></div>
     <div class="rescard"><h4>Mobile Black Spot Program</h4><p>Funded base stations per LGA, by carrier and round. The channel-redundancy input to synthetic warning.</p><a href="https://www.infrastructure.gov.au/">infrastructure.gov.au, DITRDCA</a></div>
     <div class="rescard"><h4>ABS Census 2021, table G61</h4><p>Occupation by LGA, via the ABS SDMX API. The input to systemic labour.</p><a href="https://data.api.abs.gov.au/">data.api.abs.gov.au</a></div>
     <div class="rescard"><h4>Limitations</h4><p>Everything named above as not measured, approximate, or a single judgement call, in one place.</p><a href="limitations.html">docs/limitations.html</a></div>
