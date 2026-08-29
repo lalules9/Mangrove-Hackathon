@@ -25,11 +25,16 @@ header{background:var(--card);border-bottom:1px solid var(--rule);padding:14px 2
 h1{margin:0;font-size:19px;font-weight:700;letter-spacing:-.01em}
 header p{margin:3px 0 0;font-size:13.5px;color:var(--ink2)}
 #wrap{flex:1;display:flex;min-height:0;flex-direction:column}
-@media(min-width:900px){#wrap{flex-direction:row}}
 #map{flex:1;min-height:340px;background:var(--paper)}
-#side{width:100%;background:var(--card);border-top:1px solid var(--rule);
+#detailCol,#side{background:var(--card);border-top:1px solid var(--rule);
   overflow-y:auto;padding:16px 18px}
-@media(min-width:900px){#side{width:340px;border-top:0;border-left:1px solid var(--rule)}}
+@media(min-width:900px){
+  #wrap{flex-direction:row}
+  /* Queensland's bounding box is ~square, so give the map a square and hand the
+     rest of the width to the two panels instead of empty ocean. */
+  #map{flex:0 0 auto;height:100%;aspect-ratio:1/1;max-width:54%;min-height:0}
+  #detailCol,#side{flex:1 1 0;min-width:0;border-top:0;border-left:1px solid var(--rule)}
+}
 h2{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3);
   margin:20px 0 8px;font-weight:600;font-family:ui-monospace,monospace}
 h2:first-child{margin-top:0}
@@ -59,23 +64,25 @@ footer{background:var(--card);border-top:1px solid var(--rule);padding:9px 20px;
 <body>
 <header>
   <h1>QAIRI · Queensland Artificial Intelligence Risk Index</h1>
-  <p>Every Queensland local government area (78), scored for exposure to AI-driven risks.
-     Move a component weight and every area re-scores. The <b>Australian Disaster Resilience
-     Index (ADRI)</b> — a peer-reviewed natural-hazard resilience index — is held back as an
-     independent check and never feeds the score.</p>
+  <p>Every Queensland local government area (78), scored for exposure to AI-driven risks.</p>
+  <p>The <b>Australian Disaster Resilience Index (ADRI)</b> is a peer-reviewed natural-hazard
+     resilience index that is used for comparison and not used as part of the QAIRI value.</p>
 </header>
 
 <div id="wrap">
   <div id="map"></div>
-  <div id="side">
-    <h2>Selected area</h2>
-    <div id="detail">Hover an area for a summary. Click it to pin the detail here.</div>
 
+  <section id="detailCol">
+    <h2>Selected area</h2>
+    <div id="detail">Hover an area on the map for a summary. Click to keep it here.</div>
+  </section>
+
+  <aside id="side">
     <h2>Colour by</h2>
     <select id="layer">
       <option value="ai_risk_index">QAIRI score</option>
       <option value="rank_shift">Divergence from ADRI rank</option>
-      <option value="adri_andri">Australian Disaster Resilience Index (held out)</option>
+      <option value="adri_andri">Australian Disaster Resilience Index</option>
       <option value="essential_services_score">Component · essential services</option>
       <option value="population_vulnerability_score">Component · population vulnerability</option>
       <option value="institutional_capacity_score">Component · institutional capacity</option>
@@ -86,12 +93,11 @@ footer{background:var(--card);border-top:1px solid var(--rule);padding:9px 20px;
     <div id="sliders"></div>
     <div id="wsum"></div>
     <button id="reset">Reset to defaults</button>
-    <p class="note">Move a weight and every area re-scores. This is how you see which
-      choices in the formula the ranking actually depends on.</p>
+    <p class="note">Adjust to test how much the ranking depends on the formula's choices.</p>
 
     <h2>Legend</h2>
     <div class="legend" id="legend"></div>
-  </div>
+  </aside>
 </div>
 
 <footer>
@@ -99,7 +105,7 @@ footer{background:var(--card);border-top:1px solid var(--rule);padding:9px 20px;
   official product. Remoteness is the ABS Remoteness Area of each LGA; Indigenous status is
   shown separately. The Australian Disaster Resilience Index © Natural Hazards Research
   Australia / University of New England, CC BY-NC 4.0 — non-commercial use only — is used only
-  as a held-out comparison. Population, SEIFA and Census © Australian Bureau of Statistics,
+  for comparison, not in the QAIRI score. Population, SEIFA and Census © Australian Bureau of Statistics,
   CC BY 4.0. Council data © State of Queensland, CC BY 4.0. Boundaries: ABS ASGS 2023.
 </footer>
 
@@ -242,7 +248,7 @@ function detail(rec){
   const rows=[
     ["QAIRI score", idx!=null?idx.toFixed(3):"—"],
     ["QAIRI rank", rec.ai_risk_rank?`${rec.ai_risk_rank} of 78`:"—"],
-    ["ADRI rank (held out)", rec.adri_rank?`${rec.adri_rank} of 78`:"—"],
+    ["ADRI rank", rec.adri_rank?`${rec.adri_rank} of 78`:"—"],
     ["Divergence", shiftTxt],
     ["Population", rec.population_latest?Number(rec.population_latest).toLocaleString():"—"]];
   el.innerHTML =
@@ -288,8 +294,14 @@ function wsum(){
 // No basemap. A tile layer's maxZoom silently caps fitBounds (it pinned this map at z12),
 // most providers now want an API key, and for a choropleth of whole LGAs the tiles add
 // nothing but noise. Boundaries alone, on the page background.
-const map = L.map("map",{scrollWheelZoom:true, minZoom:3, maxZoom:10,
-                         attributionControl:false}).setView([-22.5,144.5],5);
+const map = L.map("map",{
+  scrollWheelZoom:true,
+  zoomSnap:0.25, zoomDelta:0.5,          // finer steps, less jump per notch
+  wheelPxPerZoomLevel:240,               // default 60 — much gentler wheel
+  wheelDebounceTime:60,
+  minZoom:2, maxZoom:9, maxBoundsViscosity:1,
+  attributionControl:false
+}).setView([-22.5,144.5],5);
 L.control.attribution({prefix:false})
  .addAttribution("Boundaries: ABS ASGS 2023").addTo(map);
 
@@ -307,17 +319,25 @@ Promise.all([
       l.on("mouseover",()=>l.setStyle({weight:2,color:"#000"}));
       l.on("mouseout", ()=>l.setStyle({weight:.6,color:STROKE}));
     }}).addTo(map);
-  // The map div is flex:1 and has no final size on first paint, so an immediate fitBounds
-  // clamps to maxZoom and every path renders as "M0 0". Wait for the container to actually
-  // get a size, then fit once.
-  const fit = () => { map.invalidateSize(); map.fitBounds(layer.getBounds(),{padding:[10,10]}); };
-  let fitted = false;
+  // The map div has no final size on first paint. Wait for it to get one, fit the state to
+  // the frame, then lock that as the furthest-out zoom and pen panning to the state — no
+  // scrolling off into blank ocean.
+  const fit = () => {
+    map.setMinZoom(2);
+    map.invalidateSize();
+    map.fitBounds(layer.getBounds(), {padding:[6,6]});
+    const z = map.getZoom();
+    map.setMinZoom(z);
+    map.setMaxZoom(z + 4);
+    map.setMaxBounds(layer.getBounds().pad(0.06));
+  };
+  let sized = false;
   const ro = new ResizeObserver(entries => {
     const box = entries[0].contentRect;
-    if(box.width > 50 && box.height > 50){ fit(); if(fitted) ro.disconnect(); fitted = true; }
+    if(box.width > 50 && box.height > 50){ fit(); sized = true; }
   });
   ro.observe(document.getElementById("map"));
-  window.addEventListener("resize", () => map.invalidateSize());
+  window.addEventListener("resize", () => { if(sized) fit(); });
   sliders(); render();
 });
 
