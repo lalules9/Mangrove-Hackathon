@@ -11,6 +11,7 @@ Sources, all joined on a normalised LGA name:
   data/qld_lga_airports.csv       lifeline airstrips, airport control tier
   data/qld_lga_infrastructure.csv roads, waste, isolated power networks
   data/qld_lga_mobile_blackspots.csv  MBSP funded base stations per LGA, by carrier
+  data/qld_lga_remoteness.csv    official ABS Remoteness Area per LGA (vs the sampling stratum)
   research/qld_lga_ai_infrastructure_tracker.csv   AI deployment detail and sources
   research/qld_council_ai_policies.csv             published AI policy scan (partial)
 
@@ -75,6 +76,7 @@ def main() -> None:
     airports = load(DATA / "qld_lga_airports.csv", "short_name")
     infra    = load(DATA / "qld_lga_infrastructure.csv", "short_name")
     mbsp     = load(DATA / "qld_lga_mobile_blackspots.csv", "join_key")
+    remote   = load(DATA / "qld_lga_remoteness.csv", "short_name")
 
     if not profile:
         raise SystemExit("lga_profile_QLD.csv is required. Run fetch_lga_profile.py first.")
@@ -134,6 +136,13 @@ def main() -> None:
                   "waste_collection_cost_k", "isolated_power_network",
                   "isolated_power_confidence"):
             row[c] = inf.get(c, "")
+
+        # Official ABS Remoteness Area, and Indigenous status kept as its own axis.
+        # `stratum` stays the area-weighted sampling bucket; these are the classification.
+        rm = remote.get(k, {})
+        for c in ("remoteness_category", "remoteness_rank", "remoteness_method",
+                  "remoteness_sa2_mix"):
+            row[c] = rm.get(c, "")
 
         # Mobile Black Spot Program funded base stations. Left join: an LGA absent from
         # the file received no MBSP funding, which is a real zero, not missing data.

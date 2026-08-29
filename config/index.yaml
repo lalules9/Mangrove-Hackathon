@@ -1,4 +1,4 @@
-# AI Risk Exposure Index — the formula.
+# QAIRI (Queensland Artificial Intelligence Risk Index) — the formula.
 #
 # THIS FILE IS THE ARGUMENT. Everything debatable lives here, not in the code:
 # which inputs, which direction, how much each counts, how they are normalised.
@@ -19,7 +19,7 @@
 # renormalised, and `components_complete` records how many were fully evidenced.
 
 meta:
-  name: AI Risk Exposure Index (Queensland)
+  name: QAIRI — Queensland Artificial Intelligence Risk Index
   version: 0.1-draft
   normalise_default: percentile
   # Held out of the model entirely and used only as the comparison. The code refuses to

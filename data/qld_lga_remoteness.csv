@@ -1,0 +1,79 @@
+short_name,remoteness_category,remoteness_rank,is_indigenous_council,remoteness_method,remoteness_sa2_mix,differs_from_stratum
+Aurukun,Very Remote,5,True,modal,Very Remotex1,False
+Balonne,Remote,4,False,modal,Remotex1,False
+Banana,Outer Regional,3,False,modal,Outer Regionalx2,False
+Barcaldine,Very Remote,5,False,modal,Very Remotex1,False
+Barcoo,Very Remote,5,False,modal,Very Remotex1,False
+Blackall Tambo,Very Remote,5,False,modal,Very Remotex1,False
+Boulia,Very Remote,5,False,modal,Very Remotex1,False
+Brisbane,Major City,1,False,modal,Major Cityx130,False
+Bulloo,Very Remote,5,False,modal,Very Remotex1,False
+Bundaberg,Inner Regional,2,False,modal,Inner Regionalx12,False
+Burdekin,Outer Regional,3,False,modal,Outer Regionalx3,False
+Burke,Very Remote,5,False,modal,Very Remotex1,False
+Cairns,Outer Regional,3,False,modal,Outer Regionalx20,False
+Carpentaria,Very Remote,5,False,modal,Very Remotex1,False
+Cassowary Coast,Outer Regional,3,False,modal,Outer Regionalx4,False
+Central Highlands,Outer Regional,3,False,modal,Outer Regionalx2; Remotex1,True
+Charters Towers,Outer Regional,3,False,modal-tie-break,Outer Regionalx1; Remotex1,True
+Cherbourg,Inner Regional,2,True,modal,Inner Regionalx1,False
+Cloncurry,Remote,4,False,modal,Remotex1,False
+Cook,Remote,4,False,modal-tie-break,Remotex1; Very Remotex1,False
+Croydon,Very Remote,5,False,modal,Very Remotex1,False
+Diamantina,Very Remote,5,False,modal,Very Remotex1,False
+Doomadgee,Very Remote,5,True,modal,Very Remotex1,False
+Douglas,Outer Regional,3,False,modal,Outer Regionalx2,False
+Etheridge,Very Remote,5,False,modal,Very Remotex1,False
+Flinders,Very Remote,5,False,modal,Very Remotex1,False
+Fraser Coast,Inner Regional,2,False,modal,Inner Regionalx12; Outer Regionalx1,False
+Gladstone,Inner Regional,2,False,modal,Inner Regionalx8,False
+Gold Coast,Major City,1,False,modal,Major Cityx53,False
+Goondiwindi,Outer Regional,3,False,modal,Outer Regionalx3,False
+Gympie,Inner Regional,2,False,modal,Inner Regionalx7,False
+Hinchinbrook,Outer Regional,3,False,modal,Outer Regionalx2,False
+Hope Vale,Remote,4,True,modal,Remotex1,False
+Ipswich,Major City,1,False,modal,Major Cityx21; Inner Regionalx1,False
+Isaac,Outer Regional,3,False,modal,Outer Regionalx2; Remotex1,False
+Kowanyama,Very Remote,5,True,modal,Very Remotex1,False
+Livingstone,Inner Regional,2,False,modal,Inner Regionalx4; Outer Regionalx1,True
+Lockhart River,Remote,4,True,modal,Remotex1,False
+Lockyer Valley,Inner Regional,2,False,modal,Inner Regionalx3,False
+Logan,Major City,1,False,modal,Major Cityx33,False
+Longreach,Very Remote,5,False,modal,Very Remotex1,False
+Mackay,Inner Regional,2,False,modal,Inner Regionalx13; Outer Regionalx3,True
+Mapoon,Remote,4,True,modal,Remotex1,False
+Maranoa,Outer Regional,3,False,modal,Outer Regionalx2; Remotex1,True
+Mareeba,Outer Regional,3,False,modal,Outer Regionalx3; Remotex1,True
+McKinlay,Very Remote,5,False,modal,Very Remotex1,False
+Moreton Bay,Major City,1,False,modal,Major Cityx35; Inner Regionalx1,False
+Mornington,Very Remote,5,True,modal,Very Remotex1,False
+Mount Isa,Remote,4,False,modal,Remotex2; Very Remotex1,False
+Murweh,Very Remote,5,False,modal,Very Remotex1,False
+Napranum,Remote,4,True,modal,Remotex1,False
+Noosa,Major City,1,False,modal,Major Cityx6,False
+North Burnett,Inner Regional,2,False,modal-tie-break,Inner Regionalx1; Outer Regionalx1,True
+Northern Peninsula Area,Very Remote,5,True,modal,Very Remotex1,False
+Palm Island,Remote,4,True,modal,Remotex1,False
+Paroo,Very Remote,5,False,modal,Very Remotex1,False
+Pormpuraaw,Very Remote,5,True,modal,Very Remotex1,False
+Quilpie,Very Remote,5,False,modal,Very Remotex1,False
+Redland,Major City,1,False,modal,Major Cityx11; Inner Regionalx1; Remotex1,True
+Richmond,Very Remote,5,False,modal,Very Remotex1,False
+Rockhampton,Inner Regional,2,False,modal,Inner Regionalx13,False
+Scenic Rim,Inner Regional,2,False,modal,Major Cityx1; Inner Regionalx2,False
+Somerset,Inner Regional,2,False,modal,Major Cityx1; Inner Regionalx3,False
+South Burnett,Inner Regional,2,False,modal,Inner Regionalx4,False
+Southern Downs,Inner Regional,2,False,modal,Inner Regionalx5; Outer Regionalx1,False
+Sunshine Coast,Major City,1,False,modal,Major Cityx27; Inner Regionalx3,False
+Tablelands,Outer Regional,3,False,modal,Outer Regionalx3,False
+Toowoomba,Inner Regional,2,False,modal,Inner Regionalx20,False
+Torres,Very Remote,5,True,modal,Very Remotex1,False
+Torres Strait Island,Very Remote,5,True,modal,Very Remotex1,False
+Townsville,Outer Regional,3,False,modal,Outer Regionalx26,False
+Weipa,Very Remote,5,False,modal,Very Remotex1,False
+Western Downs,Outer Regional,3,False,modal,Inner Regionalx2; Outer Regionalx3,False
+Whitsunday,Outer Regional,3,False,modal,Outer Regionalx3; Remotex1,False
+Winton,Very Remote,5,False,modal,Very Remotex1,False
+Woorabinda,Outer Regional,3,True,modal,Outer Regionalx1,False
+Wujal Wujal,Remote,4,True,modal,Remotex1,False
+Yarrabah,Outer Regional,3,True,modal,Outer Regionalx1,False

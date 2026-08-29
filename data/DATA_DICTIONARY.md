@@ -27,18 +27,23 @@ Every column in every file in `data/`, what it means, where it came from, and ho
 throughout.** There is exactly one analysis table. Everything else is a step on the way to it.
 
 ```
-fetch_lga_profile.py  ->  lga_profile_QLD.csv        ABS population + area + Census + SEIFA + QLD finance
-fetch_adri.py         ->  adri_lga_QLD.csv           all 8 ADRI resilience themes
-fetch_mbsp.py         ->  qld_lga_mobile_blackspots.csv   MBSP funded base stations per LGA, by carrier
-(hand-curated)        ->  qld_lga_ai_inputs.csv      AI-in-infrastructure status, water utility tier
-(hand-curated)        ->  qld_lga_airports.csv, qld_lga_infrastructure.csv   airstrips, roads, waste, isolated power
+fetch_lga_profile.py   ->  lga_profile_QLD.csv        ABS population + area + Census + SEIFA + QLD finance
+fetch_adri.py          ->  adri_lga_QLD.csv           all 8 ADRI resilience themes
+fetch_mbsp.py          ->  qld_lga_mobile_blackspots.csv   MBSP funded base stations per LGA, by carrier
+classify_remoteness.py ->  qld_lga_remoteness.csv     official ABS Remoteness Area per LGA
+(hand-curated)         ->  qld_lga_ai_inputs.csv      AI-in-infrastructure status, water utility tier
+(hand-curated)         ->  qld_lga_airports.csv, qld_lga_infrastructure.csv   airstrips, roads, waste, isolated power
                               |
                               v
-build_master.py       ->  qld_lga_master.csv    <-- THE analysis table. 90+ columns. Read this one.
+build_master.py       ->  qld_lga_master.csv    <-- THE analysis table. 110+ columns. Read this one.
                               |
                               v
-build_index.py        ->  qld_lga_index.csv     the scored index + rank vs ADRI (+ a copy under docs/map/)
+build_index.py        ->  qld_lga_index.csv     the scored index + rank vs ADRI
+                          docs/map/qld_lga_index.csv   identical copy the QAIRI map fetches (written by build_index.py)
 ```
+
+The scored index is **QAIRI — the Queensland Artificial Intelligence Risk Index**. `config/index.yaml`
+is its formula; `docs/map/` is its interactive form.
 
 - **Use `qld_lga_master.csv` for any analysis.** It is what `build_index.py` reads and what the
   map is built from. If a column exists anywhere in `data/`, it is in here too.
@@ -375,3 +380,39 @@ people is not swamped by a metro LGA with ten towers and 200,000.
 **Attribution:** Department of Infrastructure, Transport, Regional Development, Communications,
 Sport and the Arts — *Mobile Black Spot Program*. CC BY 4.0. Not covered by the ADRI CC BY-NC
 licence.
+
+---
+
+## 9. `qld_lga_remoteness.csv` — official remoteness, as its own axis
+
+Produced by `code/classify_remoteness.py`. `build_master.py` joins it in; the QAIRI map shows
+`remoteness_category` and Indigenous status as two separate lines.
+
+**Why it exists.** `stratum` (in `councils.csv`) is the *sampling* stratum — it buckets each LGA
+by the **area-weighted** mean of its SA2 remoteness scores, and folds all 17 Indigenous councils
+into one `indigenous` value. Area-weighting over-remotes large LGAs whose people all live in one
+town, and the `indigenous` value hides remoteness entirely (Cherbourg and Aurukun are both just
+"indigenous"). This file fixes both: it is the ABS **Remoteness Area**, and Indigenous status
+stays in its own column.
+
+**Method.** ADRI already carries the official RA of every SA2 (`adri_sa2_QLD.csv`, `remoteness`,
+from the ASGS Remoteness Structure). Each LGA takes the **modal RA of its SA2s** — the category
+most of its SA2s sit in, which is where the population is. Ties break to the less-remote side.
+The SA2 mix is written out so every call is checkable.
+
+| Column | Meaning |
+|---|---|
+| `remoteness_category` | Major City / Inner Regional / Outer Regional / Remote / Very Remote |
+| `remoteness_rank` | 1 (Major City) … 5 (Very Remote) |
+| `is_indigenous_council` | Carried through — an **orthogonal** axis, not a remoteness value |
+| `remoteness_method` | `modal`, `modal-tie-break`, or `mean-fallback` |
+| `remoteness_sa2_mix` | e.g. `Outer Regionalx2; Remotex1` — the evidence for the call |
+| `differs_from_stratum` | `True` for the 8 LGAs where this disagrees with the sampling stratum |
+
+**The 8 that move:** Redland (→ Major City — it's Greater Brisbane), Central Highlands, Charters
+Towers, Maranoa, Mareeba (→ Outer Regional — the town, not the hinterland), Livingstone, Mackay,
+North Burnett (→ Inner Regional). `stratum` is left as-is for the sampling design; use
+`remoteness_category` for classification.
+
+**Attribution:** ASGS Remoteness Structure, via the ADRI SA2 data — Australian Bureau of
+Statistics / Natural Hazards Research Australia.

@@ -96,8 +96,10 @@ def main() -> None:
     # ---- score ----------------------------------------------------------------------
     out = []
     for i, r in enumerate(rows):
-        rec = {k: r[k] for k in ("short_name", "council_name", "stratum", "abs_lga_code",
-                                 "is_indigenous_council", "population_latest")}
+        rec = {k: r.get(k, "") for k in (
+            "short_name", "council_name", "stratum", "abs_lga_code",
+            "is_indigenous_council", "population_latest",
+            "remoteness_category", "remoteness_rank")}
         total, complete = 0.0, 0
         for cname, comp in cfg["components"].items():
             got = [(inp, norm_vals[inp["col"]][i]) for inp in comp["inputs"]]
@@ -129,12 +131,18 @@ def main() -> None:
         a, b = rec.get("ai_risk_rank"), rec.get("adri_rank")
         rec["rank_shift"] = (b - a) if isinstance(a, int) and isinstance(b, int) else ""
 
-    path = DATA / "qld_lga_index.csv"
-    with open(path, "w", newline="", encoding="utf8") as f:
-        w = csv.DictWriter(f, fieldnames=list(out[0].keys()))
-        w.writeheader()
-        w.writerows(out)
-    print(f"\nWrote {path}  ({len(out)} rows x {len(out[0])} cols)")
+    # Written twice: data/ is the record, docs/map/ is what the map fetches. Keeping the
+    # copy here stops the two drifting (they had).
+    targets = [DATA / "qld_lga_index.csv"]
+    map_dir = BASE / "docs" / "map"
+    if map_dir.is_dir():
+        targets.append(map_dir / "qld_lga_index.csv")
+    for path in targets:
+        with open(path, "w", newline="", encoding="utf8") as f:
+            w = csv.DictWriter(f, fieldnames=list(out[0].keys()))
+            w.writeheader()
+            w.writerows(out)
+        print(f"\nWrote {path}  ({len(out)} rows x {len(out[0])} cols)")
 
     # ---- the honesty check -----------------------------------------------------------
     pairs = [(num(r["ai_risk_index"]), num(r["adri_andri"])) for r in out

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Queensland AI Risk Exposure Index</title>
+<title>QAIRI — Queensland Artificial Intelligence Risk Index</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -58,18 +58,24 @@ footer{background:var(--card);border-top:1px solid var(--rule);padding:9px 20px;
 </head>
 <body>
 <header>
-  <h1>Queensland AI Risk Exposure Index</h1>
-  <p>78 local government areas. Drag the weights — the map recomputes. ADRI is held out as the control.</p>
+  <h1>QAIRI · Queensland Artificial Intelligence Risk Index</h1>
+  <p>Every Queensland local government area (78), scored for exposure to AI-driven risks.
+     Move a component weight and every area re-scores. The <b>Australian Disaster Resilience
+     Index (ADRI)</b> — a peer-reviewed natural-hazard resilience index — is held back as an
+     independent check and never feeds the score.</p>
 </header>
 
 <div id="wrap">
   <div id="map"></div>
   <div id="side">
+    <h2>Selected area</h2>
+    <div id="detail">Hover an area for a summary. Click it to pin the detail here.</div>
+
     <h2>Colour by</h2>
     <select id="layer">
-      <option value="ai_risk_index">AI risk index</option>
-      <option value="rank_shift">Divergence from ADRI (rank shift)</option>
-      <option value="adri_andri">ADRI resilience (held out)</option>
+      <option value="ai_risk_index">QAIRI score</option>
+      <option value="rank_shift">Divergence from ADRI rank</option>
+      <option value="adri_andri">Australian Disaster Resilience Index (held out)</option>
       <option value="essential_services_score">Component · essential services</option>
       <option value="population_vulnerability_score">Component · population vulnerability</option>
       <option value="institutional_capacity_score">Component · institutional capacity</option>
@@ -79,23 +85,22 @@ footer{background:var(--card);border-top:1px solid var(--rule);padding:9px 20px;
     <h2>Component weights</h2>
     <div id="sliders"></div>
     <div id="wsum"></div>
-    <button id="reset">Reset to config</button>
-    <p class="note">Weights are the argument, not the finding. Moving them changes the ranking —
-      that is the sensitivity analysis, not a flaw.</p>
+    <button id="reset">Reset to defaults</button>
+    <p class="note">Move a weight and every area re-scores. This is how you see which
+      choices in the formula the ranking actually depends on.</p>
 
     <h2>Legend</h2>
     <div class="legend" id="legend"></div>
-
-    <h2>Selected</h2>
-    <div id="detail">Click an LGA.</div>
   </div>
 </div>
 
 <footer>
-  Australian Disaster Resilience Index © Natural Hazards Research Australia / University of New
-  England, CC BY-NC 4.0 — non-commercial use only. Population, SEIFA and Census © Australian
-  Bureau of Statistics, CC BY 4.0. Council data © State of Queensland, CC BY 4.0.
-  Boundaries: ABS ASGS 2023.
+  QAIRI (Queensland Artificial Intelligence Risk Index) is a draft research index, not an
+  official product. Remoteness is the ABS Remoteness Area of each LGA; Indigenous status is
+  shown separately. The Australian Disaster Resilience Index © Natural Hazards Research
+  Australia / University of New England, CC BY-NC 4.0 — non-commercial use only — is used only
+  as a held-out comparison. Population, SEIFA and Census © Australian Bureau of Statistics,
+  CC BY 4.0. Council data © State of Queensland, CC BY 4.0. Boundaries: ABS ASGS 2023.
 </footer>
 
 <script>
@@ -170,16 +175,24 @@ function scale(vals){
 function legend(vals){
   const el=document.getElementById("legend");
   if(current==="rank_shift"){
-    el.innerHTML = [["Much better than ADRI predicts",DIVERGE[0]],["",DIVERGE[1]],
-      ["About as ADRI predicts",DIVERGE[2]],["",DIVERGE[3]],
-      ["Much worse than ADRI predicts",DIVERGE[4]]]
+    el.innerHTML = [
+      ["Ranks much better than ADRI predicts",DIVERGE[0]],
+      ["Ranks somewhat better",DIVERGE[1]],
+      ["About where ADRI predicts",DIVERGE[2]],
+      ["Ranks somewhat worse",DIVERGE[3]],
+      ["Ranks much worse than ADRI predicts",DIVERGE[4]]]
       .map(([t,c])=>`<div><i style="background:${c}"></i>${t}</div>`).join("");
-  } else {
-    const inv = current==="adri_andri";
-    const cols = inv?RAMP.slice().reverse():RAMP;
-    el.innerHTML = ["lowest quintile","","middle","","highest quintile"]
-      .map((t,i)=>`<div><i style="background:${cols[i]}"></i>${t}</div>`).join("");
+    return;
   }
+  // Five equal-count groups. Label by what a high value means for this layer.
+  const highIsWorse = current!=="adri_andri";
+  const cols = highIsWorse ? RAMP : RAMP.slice().reverse();
+  const bands = ["Lowest 20%","20–40%","Middle 20%","60–80%","Highest 20%"];
+  const tail = current==="ai_risk_index" ? " risk"
+             : current==="adri_andri"    ? " resilience" : "";
+  el.innerHTML = bands
+    .map((t,i)=>`<div><i style="background:${cols[i]}"></i>${t}${i===0||i===4?tail:""}</div>`)
+    .join("");
 }
 
 function render(){
@@ -191,22 +204,64 @@ function render(){
     return {fillColor: rec?col(valueFor(rec)):"#00000012", fillOpacity:.85,
             color:STROKE, weight:.6};
   });
+  // QAIRI score in the tooltip moves with the weights — refresh the text.
+  layer.eachLayer(l=>{
+    const name=l.feature.properties.lga_name;
+    l.setTooltipContent(tipHTML(data[norm(name)],name));
+  });
+}
+
+const COMPONENTS = [
+  ["essential_services_score",     "Essential services"],
+  ["population_vulnerability_score","Population vulnerability"],
+  ["institutional_capacity_score", "Institutional capacity"],
+  ["deployment_evidence_score",    "Deployment evidence"]];
+
+function fmt(v,d=2){ const n=parseFloat(v); return Number.isFinite(n)?n.toFixed(d):"—"; }
+function isYes(v){ return String(v).toLowerCase()==="true"; }
+
+function classline(rec){
+  const bits=[];
+  if(rec.remoteness_category) bits.push(rec.remoteness_category);
+  bits.push(isYes(rec.is_indigenous_council) ? "Indigenous council" : "Non-Indigenous council");
+  return bits.join(" · ");
 }
 
 function detail(rec){
   const el=document.getElementById("detail");
   if(!rec){ el.textContent="No data for this area."; return; }
-  const rows=[["AI risk index", indexFor(rec)?.toFixed(3)],
-    ["Rank (of 78)", rec.ai_risk_rank], ["ADRI rank", rec.adri_rank],
-    ["Rank shift", rec.rank_shift], ["Stratum", rec.stratum],
-    ["Population", Number(rec.population_latest).toLocaleString()],
-    ["Essential services", rec.essential_services_score],
-    ["Population vulnerability", rec.population_vulnerability_score],
-    ["Institutional capacity", rec.institutional_capacity_score],
-    ["Deployment evidence", rec.deployment_evidence_score],
-    ["Components complete", rec.components_complete]];
-  el.innerHTML = `<h3>${rec.council_name||rec.short_name}</h3>` +
-    "<table>" + rows.map(([k,v])=>`<tr><td>${k}</td><td>${v??"—"}</td></tr>`).join("") + "</table>";
+  const idx = indexFor(rec);
+  const comps = COMPONENTS
+    .map(([k,label])=>[label, parseFloat(rec[k])])
+    .filter(([,v])=>Number.isFinite(v))
+    .sort((a,b)=>b[1]-a[1]);
+  const shift = parseInt(rec.rank_shift,10);
+  const shiftTxt = Number.isFinite(shift)
+    ? (shift>0?`+${shift} worse than ADRI`:shift<0?`${shift} better than ADRI`:"same as ADRI")
+    : "—";
+  const rows=[
+    ["QAIRI score", idx!=null?idx.toFixed(3):"—"],
+    ["QAIRI rank", rec.ai_risk_rank?`${rec.ai_risk_rank} of 78`:"—"],
+    ["ADRI rank (held out)", rec.adri_rank?`${rec.adri_rank} of 78`:"—"],
+    ["Divergence", shiftTxt],
+    ["Population", rec.population_latest?Number(rec.population_latest).toLocaleString():"—"]];
+  el.innerHTML =
+    `<h3>${rec.council_name||rec.short_name}</h3>` +
+    `<p style="margin:2px 0 6px;color:var(--ink3)">${classline(rec)}</p>` +
+    "<table>" + rows.map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join("") + "</table>" +
+    `<h2 style="margin:14px 0 4px">Component scores</h2>` +
+    "<table>" + comps.map(([k,v],i)=>
+      `<tr><td>${k}${i===0?' <span style="color:var(--ink3)">· highest</span>':''}</td>`+
+      `<td>${v.toFixed(2)}</td></tr>`).join("") + "</table>";
+}
+
+function tipHTML(rec, name){
+  if(!rec) return name;
+  const idx = indexFor(rec);
+  return `<b>${name}</b><br>`+
+    `QAIRI ${idx!=null?idx.toFixed(2):"—"} · rank ${rec.ai_risk_rank||"—"}/78<br>`+
+    `${rec.remoteness_category||"—"}${isYes(rec.is_indigenous_council)?" · Indigenous":""}<br>`+
+    `pop. ${rec.population_latest?Number(rec.population_latest).toLocaleString():"—"}`;
 }
 
 function sliders(){
@@ -245,8 +300,9 @@ Promise.all([
   geo=g; rows.forEach(r=> data[norm(r.short_name)] = r);
   layer = L.geoJSON(g,{
     onEachFeature:(f,l)=>{
-      const rec=data[norm(f.properties.lga_name)];
-      l.bindTooltip(f.properties.lga_name,{sticky:true});
+      const name=f.properties.lga_name;
+      const rec=data[norm(name)];
+      l.bindTooltip(tipHTML(rec,name),{sticky:true});
       l.on("click",()=>detail(rec));
       l.on("mouseover",()=>l.setStyle({weight:2,color:"#000"}));
       l.on("mouseout", ()=>l.setStyle({weight:.6,color:STROKE}));
