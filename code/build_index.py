@@ -104,17 +104,20 @@ def main() -> None:
         for cname, comp in cfg["components"].items():
             got = [(inp, norm_vals[inp["col"]][i]) for inp in comp["inputs"]]
             avail = [(inp, v) for inp, v in got if v is not None]
+            # Always write the same keys for every row, whether or not this component has
+            # data for this LGA -- otherwise csv.DictWriter breaks the moment row 0 happens
+            # to be a council with no available inputs (fieldnames come from out[0] only).
+            rec[f"{cname}_inputs_used"] = f"{len(avail)}/{len(got)}"
+            for inp, v in got:
+                rec[f"n_{inp['col']}"] = "" if v is None else round(v, 4)
             if not avail:
                 rec[f"{cname}_score"] = ""
                 continue
             wsum = sum(inp["weight"] for inp, _ in avail)      # renormalise on missing
             score = sum(v * inp["weight"] for inp, v in avail) / wsum
             rec[f"{cname}_score"] = round(score, 4)
-            rec[f"{cname}_inputs_used"] = f"{len(avail)}/{len(got)}"
             total += score * comp["weight"]
             complete += len(avail) == len(got)
-            for inp, v in got:
-                rec[f"n_{inp['col']}"] = "" if v is None else round(v, 4)
         rec["ai_risk_index"] = round(total, 4)
         rec["components_complete"] = f"{complete}/{len(cfg['components'])}"
         rec["adri_andri"] = r.get("adri_andri", "")

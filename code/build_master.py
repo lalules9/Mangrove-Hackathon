@@ -177,8 +177,14 @@ def main() -> None:
         else:
             row["water_connections_best"] = row["water_connections_vintage"] = ""
 
-        row["ai_deployment_confirmed"] = str(
-            (row.get("ai_status") or "").strip().lower().startswith("confirmed"))
+        # Three states, not two. "Confirmed AI" -> True. "No evidence found" -> blank
+        # (missing, so components_complete honestly reports it as incomplete rather than
+        # scoring it as a safe zero). Everything else checked (AI-adjacent, state-deployed
+        # but not council-run) -> False.
+        _ai = (row.get("ai_status") or "").strip().lower()
+        row["ai_deployment_confirmed"] = ("True" if _ai.startswith("confirmed")
+                                          else "" if _ai in ("", "no evidence found")
+                                          else "False")
 
         out.append(row)
 
