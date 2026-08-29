@@ -1,0 +1,79 @@
+short_name,roads_data_year,road_km_rural,road_km_urban,road_km_total,waste_data_year,waste_properties_serviced,waste_tonnes_domestic,waste_collection_cost_k,isolated_power_network,isolated_power_confidence
+Aurukun,2015_16,65.0,20.0,85.0,2015_16,366.0,50.0,45.0,True,inferred from region named by Ergon — VERIFY
+Balonne,2015_16,2538.0,67.0,2605.0,2015_16,1436.0,1850.0,360.0,False,assumed grid-connected
+Banana,2015_16,3826.0,162.0,3988.0,2015_16,,2964.0,3668.0,False,assumed grid-connected
+Barcaldine,2015_16,2921.0,65.0,2986.0,2015_16,1314.0,2390.0,274.0,False,assumed grid-connected
+Barcoo,2015_16,1649.0,17.0,1666.0,2015_16,133.0,,65.0,True,named by Ergon
+Blackall Tambo,2015_16,1826.0,41.0,1867.0,2015_16,736.0,1100.0,203.0,False,assumed grid-connected
+Boulia,2015_16,1318.0,11.0,1329.0,2015_16,140.0,131.0,105.0,True,named by Ergon
+Brisbane,2015_16,0.0,5679.0,5679.0,2015_16,479765.0,292614.0,38079.0,False,assumed grid-connected
+Bulloo,2015_16,1977.0,13.0,1990.0,2015_16,113.0,82.0,80.0,True,inferred from region named by Ergon — VERIFY
+Bundaberg,2015_16,2365.0,674.0,3039.0,2015_16,42589.0,28546.0,4193.0,False,assumed grid-connected
+Burdekin,2015_16,968.0,178.0,1146.0,2015_16,7072.0,3390.0,1788.0,False,assumed grid-connected
+Burke,2015_16,703.0,10.0,713.0,2015_16,97.0,175.0,297.0,True,named by Ergon
+Cairns,2015_16,413.0,913.0,1326.0,2015_16,70272.0,49681.0,3997.0,False,assumed grid-connected
+Carpentaria,2015_16,1601.0,37.0,1638.0,2015_16,689.0,,480.0,True,inferred from region named by Ergon — VERIFY
+Cassowary Coast,2015_16,1012.0,200.0,1212.0,2015_16,11764.0,9280.0,1380.0,False,assumed grid-connected
+Central Highlands,2015_16,4199.0,390.0,4589.0,2015_16,9885.0,10946.0,1950.0,False,assumed grid-connected
+Charters Towers,2015_16,3109.0,138.0,3247.0,2015_16,4352.0,2235.0,398.0,False,assumed grid-connected
+Cherbourg,2015_16,58.0,12.0,70.0,2015_16,,,,False,assumed grid-connected
+Cloncurry,2015_16,1486.0,85.0,1571.0,2015_16,986.0,,,False,assumed grid-connected
+Cook,2015_16,2837.0,90.0,2927.0,2015_16,1134.0,2739.0,1596.0,True,inferred from region named by Ergon — VERIFY
+Croydon,2015_16,1042.0,46.0,1088.0,2015_16,105.0,110.0,37.0,True,inferred from region named by Ergon — VERIFY
+Diamantina,2015_16,1037.0,24.0,1061.0,2015_16,104.0,135.0,112.0,True,inferred from region named by Ergon — VERIFY
+Doomadgee,2015_16,98.0,15.0,113.0,2015_16,,,,True,named by Ergon
+Douglas,2015_16,308.0,64.0,372.0,2015_16,7578.0,4647.0,488.0,False,assumed grid-connected
+Etheridge,2015_16,1706.0,51.0,1757.0,2015_16,135.0,265.0,45.0,True,inferred from region named by Ergon — VERIFY
+Flinders,2015_16,1947.0,45.0,1992.0,2015_16,592.0,1146.0,166.0,False,assumed grid-connected
+Fraser Coast,2015_16,1491.0,1118.0,2609.0,2015_16,41323.0,33438.0,4695.0,False,assumed grid-connected
+Gladstone,2015_16,2146.0,496.0,2642.0,2015_16,24761.0,16471.0,2464.0,False,assumed grid-connected
+Gold Coast,2015_16,677.0,2562.0,3239.0,2015_16,227812.0,208729.0,29399.0,False,assumed grid-connected
+Goondiwindi,2015_16,2346.0,138.0,2484.0,2015_16,4126.0,6012.0,467.0,False,assumed grid-connected
+Gympie,2015_16,1963.0,320.0,2283.0,2015_16,19190.0,16502.0,2879.0,False,assumed grid-connected
+Hinchinbrook,2015_16,601.0,92.0,693.0,2015_16,5545.0,3767.0,951.0,False,assumed grid-connected
+Hope Vale,2015_16,118.0,14.0,132.0,2015_16,257.0,1185.0,181.0,False,assumed grid-connected
+Ipswich,2015_16,573.0,1176.0,1749.0,2015_16,69343.0,49597.0,7574.0,False,assumed grid-connected
+Isaac,2015_16,3057.0,197.0,3254.0,2015_16,8894.0,8351.0,1373.0,False,assumed grid-connected
+Kowanyama,2015_16,345.0,8.0,353.0,2015_16,320.0,1040.0,50.0,True,inferred from region named by Ergon — VERIFY
+Livingstone,2015_16,1170.0,258.0,1428.0,2015_16,11941.0,8512.0,1928.0,False,assumed grid-connected
+Lockhart River,2015_16,161.0,11.0,172.0,2015_16,145.0,,183.0,True,inferred from region named by Ergon — VERIFY
+Lockyer Valley,2015_16,1074.0,355.0,1429.0,2015_16,13786.0,10903.0,2807.0,False,assumed grid-connected
+Logan,2015_16,1034.0,1350.0,2384.0,2015_16,105502.0,78663.0,10302.0,False,assumed grid-connected
+Longreach,2015_16,2658.0,90.0,2748.0,2015_16,1460.0,,236.0,False,assumed grid-connected
+Mackay,2015_16,1819.0,661.0,2480.0,2015_16,45000.0,32471.0,4880.0,False,assumed grid-connected
+Mapoon,2015_16,40.0,17.0,57.0,2015_16,75.0,306.0,53.0,True,inferred from region named by Ergon — VERIFY
+Maranoa,2015_16,5655.0,171.0,5826.0,2015_16,4018.0,4461.0,790.0,False,assumed grid-connected
+Mareeba,2015_16,2091.0,217.0,2308.0,2015_16,7278.0,5221.0,1500.0,False,assumed grid-connected
+McKinlay,2015_16,1605.0,28.0,1633.0,2015_16,259.0,1178.0,74.0,False,assumed grid-connected
+Moreton Bay,2015_16,1341.0,2295.0,3636.0,2015_16,151110.0,141274.0,10982.0,False,assumed grid-connected
+Mornington,2015_16,144.0,14.0,158.0,2015_16,264.0,720.0,,True,named by Ergon
+Mount Isa,2015_16,1872.0,161.0,2033.0,2015_16,6942.0,7386.0,3533.0,False,assumed grid-connected
+Murweh,2015_16,2701.0,81.0,2782.0,2015_16,1807.0,2110.0,431.0,False,assumed grid-connected
+Napranum,2015_16,159.0,14.0,173.0,2015_16,257.0,,153.0,True,inferred from region named by Ergon — VERIFY
+Noosa,2015_16,550.0,320.0,870.0,2015_16,27105.0,27600.0,4884.0,False,assumed grid-connected
+North Burnett,2015_16,4034.0,128.0,4162.0,2015_16,3037.0,3597.0,720.0,False,assumed grid-connected
+Northern Peninsula Area,2015_16,332.0,31.0,363.0,2015_16,,,,True,inferred from region named by Ergon — VERIFY
+Palm Island,2015_16,9.0,33.0,42.0,2015_16,,,,True,named by Ergon
+Paroo,2015_16,2207.0,52.0,2259.0,2015_16,552.0,2547.0,248.0,False,assumed grid-connected
+Pormpuraaw,2015_16,550.0,16.0,566.0,2015_16,163.0,28.0,227.0,True,inferred from region named by Ergon — VERIFY
+Quilpie,2015_16,2038.0,44.0,2082.0,2015_16,328.0,375.0,260.0,False,assumed grid-connected
+Redland,2015_16,324.0,778.0,1102.0,2015_16,57080.0,57334.0,7248.0,False,assumed grid-connected
+Richmond,2015_16,1281.0,15.0,1296.0,2015_16,308.0,365.0,108.0,False,assumed grid-connected
+Rockhampton,2015_16,1331.0,667.0,1998.0,2015_16,31221.0,24044.0,4833.0,False,assumed grid-connected
+Scenic Rim,2015_16,1560.0,221.0,1781.0,2015_16,14158.0,16330.0,2734.0,False,assumed grid-connected
+Somerset,2015_16,1724.0,158.0,1882.0,2015_16,8984.0,6793.0,1068.0,False,assumed grid-connected
+South Burnett,2015_16,3039.0,238.0,3277.0,2015_16,11193.0,8644.0,1183.0,False,assumed grid-connected
+Southern Downs,2015_16,2804.0,258.0,3062.0,2015_16,10912.0,9981.0,1953.0,False,assumed grid-connected
+Sunshine Coast,2015_16,1557.0,1414.0,2971.0,2015_16,108613.0,71753.0,10606.0,False,assumed grid-connected
+Tablelands,2015_16,1498.0,347.0,1845.0,2015_16,8763.0,11056.0,2133.0,False,assumed grid-connected
+Toowoomba,2015_16,5533.0,1078.0,6611.0,2015_16,57939.0,36602.0,11124.0,False,assumed grid-connected
+Torres,2015_16,191.0,108.0,299.0,2015_16,646.0,2000.0,1221.0,True,inferred from region named by Ergon — VERIFY
+Torres Strait Island,2015_16,301.0,68.0,369.0,2015_16,1160.0,1800.0,727.0,True,named by Ergon
+Townsville,2015_16,582.0,1154.0,1736.0,2015_16,76965.0,46736.0,16300.0,False,assumed grid-connected
+Weipa,,,,,,,,,True,inferred from region named by Ergon — VERIFY
+Western Downs,2015_16,7196.0,330.0,7526.0,2015_16,10463.0,6670.0,1164.0,False,assumed grid-connected
+Whitsunday,2015_16,1556.0,286.0,1842.0,2015_16,12849.0,31250.0,2192.0,False,assumed grid-connected
+Winton,2015_16,2445.0,21.0,2466.0,2015_16,584.0,,119.0,False,assumed grid-connected
+Woorabinda,2015_16,47.0,10.0,57.0,2015_16,,,,False,assumed grid-connected
+Wujal Wujal,2015_16,13.0,5.0,18.0,2015_16,88.0,410.0,128.0,False,assumed grid-connected
+Yarrabah,2015_16,35.0,21.0,56.0,2015_16,,,,False,assumed grid-connected

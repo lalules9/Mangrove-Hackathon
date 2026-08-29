@@ -67,6 +67,7 @@ def main() -> None:
     tracker = load(RESEARCH / "qld_lga_ai_infrastructure_tracker.csv", "LGA")
     policies = load(RESEARCH / "qld_council_ai_policies.csv", "short_name")
     airports = load(DATA / "qld_lga_airports.csv", "short_name")
+    infra    = load(DATA / "qld_lga_infrastructure.csv", "short_name")
 
     if not profile:
         raise SystemExit("lga_profile_QLD.csv is required. Run fetch_lga_profile.py first.")
@@ -119,6 +120,13 @@ def main() -> None:
         for c in ("airports_total", "airports_council_operated", "airports_external",
                   "has_lifeline_airstrip", "airport_control_tier"):
             row[c] = ap.get(c, "")
+
+        inf = infra.get(k, {})
+        for c in ("roads_data_year", "road_km_rural", "road_km_urban", "road_km_total",
+                  "waste_data_year", "waste_properties_serviced", "waste_tonnes_domestic",
+                  "waste_collection_cost_k", "isolated_power_network",
+                  "isolated_power_confidence"):
+            row[c] = inf.get(c, "")
 
         # ---- derived ----------------------------------------------------------
         ind, tot = num(row.get("staff_fte_indoor")), num(row.get("staff_fte_total"))
