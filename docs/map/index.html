@@ -12,12 +12,14 @@
   --rule:#D5DAE1;--accent:#0B5C8A;--cta:#E8531C;--cta-ink:#fff;
   --r1:#3D7A6B;--r2:#7A9B3C;--r3:#C79A12;--r4:#CE7026;--r5:#B0362C;
   --stage1:#2A6FA8;--stage2:#3D8A63;--stage3:#B98A15;--stage4:#B0562C;
+  --comp1:#2A6FA8;--comp2:#3D8A63;--comp3:#B98A15;--comp4:#B0562C;--comp5:#7B5EA7;--comp6:#C24B78;
 }
 @media(prefers-color-scheme:dark){:root{
   --paper:#0D1117;--card:#151B23;--ink:#E9EDF2;--ink2:#A6B1BF;--ink3:#788596;
   --rule:#28313D;--accent:#5FB3DE;--cta:#FF7A3D;--cta-ink:#181008;
   --r1:#57A18E;--r2:#9DBE5C;--r3:#DCB33A;--r4:#E28A45;--r5:#DE6155;
-  --stage1:#5B9FD8;--stage2:#6BBE8F;--stage3:#E0B448;--stage4:#E2895C;}}
+  --stage1:#5B9FD8;--stage2:#6BBE8F;--stage3:#E0B448;--stage4:#E2895C;
+  --comp1:#5B9FD8;--comp2:#6BBE8F;--comp3:#E0B448;--comp4:#E2895C;--comp5:#A98BD0;--comp6:#E081A8;}}
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
 body{background:var(--paper);color:var(--ink);
@@ -35,7 +37,9 @@ header p{margin:3px 0 0;font-size:14.5px;color:var(--ink2)}
   /* Queensland's bounding box is ~square, so give the map a square and hand the
      rest of the width to the two panels instead of empty ocean. */
   #map{flex:0 0 auto;height:100%;aspect-ratio:1/1;max-width:54%;min-height:0}
-  #detailCol,#side{flex:1 1 0;min-width:0;border-top:0;border-left:1px solid var(--rule)}
+  #detailCol,#side{min-width:0;border-top:0;border-left:1px solid var(--rule)}
+  #detailCol{flex:3 1 0}
+  #side{flex:2 1 0}
 }
 h2{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink3);
   margin:20px 0 8px;font-weight:600;font-family:ui-monospace,monospace}
@@ -391,6 +395,15 @@ const COMPONENTS = [
   ["synthetic_warning_score",       "Synthetic warning"],
   ["systemic_labour_score",         "Labour market exposure"]];
 
+// One colour per component, shared between the weight sliders and the score
+// bars so the two are visually tied together.
+const COMPONENT_COLOR = {
+  essential_services:"--comp1", population_vulnerability:"--comp2",
+  institutional_capacity:"--comp3", deployment_evidence:"--comp4",
+  synthetic_warning:"--comp5", systemic_labour:"--comp6"};
+const colorFor = key => getComputedStyle(document.documentElement)
+  .getPropertyValue(COMPONENT_COLOR[key.replace("_score","")] || "--accent").trim();
+
 function fmt(v,d=2){ const n=parseFloat(v); return Number.isFinite(n)?n.toFixed(d):"n/a"; }
 function isYes(v){ return String(v).toLowerCase()==="true"; }
 
@@ -406,7 +419,7 @@ function detail(rec){
   if(!rec){ el.textContent="No data for this area."; return; }
   const idx = indexFor(rec);
   const comps = COMPONENTS
-    .map(([k,label])=>[label, parseFloat(rec[k])])
+    .map(([k,label])=>[label, parseFloat(rec[k]), k])
     .filter(([,v])=>Number.isFinite(v))
     .sort((a,b)=>b[1]-a[1]);
   const shift = parseInt(rec.rank_shift,10);
@@ -424,9 +437,9 @@ function detail(rec){
     `<p style="margin:2px 0 6px;color:var(--ink3)">${classline(rec)}</p>` +
     "<table>" + rows.map(([k,v])=>`<tr><td>${k}</td><td>${v}</td></tr>`).join("") + "</table>" +
     `<h2 style="margin:14px 0 4px">Component scores</h2>` +
-    '<table class="scoretable">' + comps.map(([k,v],i)=>
-      `<tr><td>${k}${i===0?' <span style="color:var(--ink3)">· highest</span>':''}</td>`+
-      `<td class="scorebar"><span class="scorebar-track"><span class="scorebar-fill" style="width:${Math.round(v*100)}%"></span></span></td>`+
+    '<table class="scoretable">' + comps.map(([label,v,key])=>
+      `<tr><td>${label}</td>`+
+      `<td class="scorebar"><span class="scorebar-track"><span class="scorebar-fill" style="width:${Math.round(v*100)}%;background:${colorFor(key)}"></span></span></td>`+
       `<td class="scoreval">${v.toFixed(2)}</td></tr>`).join("") + "</table>";
 }
 
@@ -445,7 +458,8 @@ function sliders(){
     `<div class="sl"><label for="w_${k}">${LABELS[k]}
        <button type="button" class="info-btn" data-comp="${k}" aria-label="What is ${LABELS[k]}?">?</button>
      </label><b id="v_${k}">${weights[k].toFixed(2)}</b>
-     <input type="range" id="w_${k}" min="0" max="1" step="0.05" value="${weights[k]}"></div>`).join("");
+     <input type="range" id="w_${k}" min="0" max="1" step="0.05" value="${weights[k]}"
+       style="accent-color:${colorFor(k)}"></div>`).join("");
   box.querySelectorAll(".info-btn").forEach(btn=>{
     btn.addEventListener("click", e=>{ e.preventDefault(); openCompModal(btn.dataset.comp); });
     btn.addEventListener("mouseenter", ()=>{ openCompModal(btn.dataset.comp); });
