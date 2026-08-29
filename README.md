@@ -33,7 +33,7 @@ paper-based shire, not less.
 
 **Hold ADRI out as the control.** The index never uses ADRI's own scores as an input — only as
 a check afterwards. If the two rankings turned out to be near-identical, the honest finding
-would be "we rebuilt ADRI and added nothing." They diverge (Spearman r = −0.505, well below the
+would be "we rebuilt ADRI and added nothing." They diverge (Spearman r = −0.533, well below the
 0.9 threshold that would mean the index adds nothing), which is reported as the actual result,
 not hidden in favour of a cleaner story.
 
@@ -44,7 +44,7 @@ not hidden in favour of a cleaner story.
 
 | Component | Weight | What it measures |
 |---|---|---|
-| Essential services | 25% | Water/sewerage self-provision below the regulated critical-infrastructure threshold, remoteness (days to restore) |
+| Essential services | 25% | Water/sewerage self-provision below the regulated critical-infrastructure threshold, isolated (non-grid-connected) electricity networks, remoteness (days to restore) |
 | Population vulnerability | 20% | Disadvantage (SEIFA), crowding, Indigenous share — who absorbs a shock badly, hazard-agnostic |
 | Institutional capacity | 30% | Discretionary revenue, staffing depth and mix — can the council itself keep functioning |
 | Deployment evidence | 15% | Confirmed AI use, press-derived |

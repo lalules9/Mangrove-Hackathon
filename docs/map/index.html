@@ -11,11 +11,13 @@
   --paper:#F5F6F8;--card:#fff;--ink:#131820;--ink2:#465061;--ink3:#6F7A8C;
   --rule:#D5DAE1;--accent:#0B5C8A;--cta:#E8531C;--cta-ink:#fff;
   --r1:#3D7A6B;--r2:#7A9B3C;--r3:#C79A12;--r4:#CE7026;--r5:#B0362C;
+  --stage1:#2A6FA8;--stage2:#3D8A63;--stage3:#B98A15;--stage4:#B0562C;
 }
 @media(prefers-color-scheme:dark){:root{
   --paper:#0D1117;--card:#151B23;--ink:#E9EDF2;--ink2:#A6B1BF;--ink3:#788596;
   --rule:#28313D;--accent:#5FB3DE;--cta:#FF7A3D;--cta-ink:#181008;
-  --r1:#57A18E;--r2:#9DBE5C;--r3:#DCB33A;--r4:#E28A45;--r5:#DE6155;}}
+  --r1:#57A18E;--r2:#9DBE5C;--r3:#DCB33A;--r4:#E28A45;--r5:#DE6155;
+  --stage1:#5B9FD8;--stage2:#6BBE8F;--stage3:#E0B448;--stage4:#E2895C;}}
 *{box-sizing:border-box}
 html,body{height:100%;margin:0}
 body{background:var(--paper);color:var(--ink);
@@ -61,10 +63,10 @@ footer{background:var(--card);border-top:1px solid var(--rule);padding:9px 20px;
 .note{font-size:12px;color:var(--ink3);line-height:1.5;margin-top:6px}
 
 .header-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.badge-btn{width:auto;flex:none;white-space:normal;text-align:center;max-width:220px;
-  background:var(--cta);color:var(--cta-ink);border:none;border-radius:12px;
-  padding:12px 20px;font-size:14.5px;font-weight:800;line-height:1.25;cursor:pointer;
-  box-shadow:0 3px 14px rgba(232,83,28,.4)}
+.badge-btn{width:auto;flex:none;white-space:normal;text-align:center;max-width:150px;
+  background:var(--cta);color:var(--cta-ink);border:none;border-radius:10px;
+  padding:7px 12px;font-size:11.5px;font-weight:800;line-height:1.25;cursor:pointer;
+  box-shadow:0 2px 10px rgba(232,83,28,.4)}
 .badge-btn:hover{opacity:.9}
 
 .modal-overlay{position:fixed;inset:0;background:rgba(10,14,20,.55);z-index:500;
@@ -80,12 +82,13 @@ footer{background:var(--card);border-top:1px solid var(--rule);padding:9px 20px;
 
 .stage-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
 @media(max-width:480px){.stage-grid{grid-template-columns:repeat(2,1fr)}}
-.stage-pair{display:flex;flex-direction:column;align-items:center;gap:2px}
+.stage-pair{display:flex;flex-direction:column;align-items:center}
 .stage-box{width:100%;text-align:center;padding:12px 4px;border-radius:8px;
   font-size:13px;font-weight:700}
-.stage-box.report{background:var(--accent);color:#fff}
-.stage-box.dma{background:var(--paper);border:1.5px solid var(--accent);color:var(--accent)}
-.stage-arrow{font-size:17px;color:var(--ink3);line-height:1}
+.stage-box.report{background:var(--stage);color:#fff;border-radius:8px 8px 3px 3px}
+.stage-box.dma{background:var(--paper);border:1.5px solid var(--stage);color:var(--stage);
+  border-radius:3px 3px 8px 8px}
+.stage-arrow{width:5px;height:16px;background:var(--stage);flex:none}
 </style>
 </head>
 <body>
@@ -105,26 +108,26 @@ footer{background:var(--card);border-top:1px solid var(--rule);padding:9px 20px;
   <div class="modal" role="dialog" aria-label="Mapping AI risk to Disaster Risk Management">
     <button id="closeResilience" class="modal-close" aria-label="Close">&times;</button>
     <h2 class="modal-title">Mapping AI risk to Disaster Risk Management</h2>
-    <p class="modal-sub">The international AI safety report's resilience model lines up with the stages Queensland councils already run for disasters. AI risk is not a new discipline. It fits the shape councils already use.</p>
+    <p class="modal-sub">The International AI Safety Report's resilience model lines up with the stages Queensland councils already run for disasters. AI risk is not a new discipline. It fits the shape councils already use.</p>
     <div class="stage-grid">
-      <div class="stage-pair">
+      <div class="stage-pair" style="--stage:var(--stage1)">
         <div class="stage-box report">Resist</div>
-        <div class="stage-arrow">&#8597;</div>
+        <div class="stage-arrow"></div>
         <div class="stage-box dma">Prevention</div>
       </div>
-      <div class="stage-pair">
+      <div class="stage-pair" style="--stage:var(--stage2)">
         <div class="stage-box report">Absorb</div>
-        <div class="stage-arrow">&#8597;</div>
+        <div class="stage-arrow"></div>
         <div class="stage-box dma">Preparation</div>
       </div>
-      <div class="stage-pair">
+      <div class="stage-pair" style="--stage:var(--stage3)">
         <div class="stage-box report">Recover</div>
-        <div class="stage-arrow">&#8597;</div>
+        <div class="stage-arrow"></div>
         <div class="stage-box dma">Response</div>
       </div>
-      <div class="stage-pair">
+      <div class="stage-pair" style="--stage:var(--stage4)">
         <div class="stage-box report">Adapt</div>
-        <div class="stage-arrow">&#8597;</div>
+        <div class="stage-arrow"></div>
         <div class="stage-box dma">Recovery</div>
       </div>
     </div>

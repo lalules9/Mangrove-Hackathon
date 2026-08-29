@@ -44,17 +44,24 @@ components:
     weight: 0.25
     rationale: >
       Councils that run water and sewerage themselves, in places where restoration is slow,
-      and which sit below the SOCI Act threshold so owe no critical infrastructure risk
-      management program.
+      which sit below the SOCI Act threshold so owe no critical infrastructure risk
+      management program, and communities on an isolated electricity network with no
+      interconnected fallback if the local generator fails. Water and power are treated
+      differently on purpose: no Queensland council operates a grid, so "who's the
+      provider" doesn't apply to power the way it does to water -- what matters for power
+      is topology (isolated vs interconnected), not who's accountable for it.
     inputs:
       - col: above_soci_water_threshold
-        weight: 0.40
+        weight: 0.30
         direction: false_worse        # below the threshold = unregulated critical infrastructure
       - col: is_water_service_provider
-        weight: 0.35
-        direction: true_worse
-      - col: mean_remoteness_score
         weight: 0.25
+        direction: true_worse
+      - col: isolated_power_network
+        weight: 0.25
+        direction: true_worse         # no interconnected fallback if the local generator fails
+      - col: mean_remoteness_score
+        weight: 0.20
         direction: higher_worse       # consequence term: days to restore
 
   population_vulnerability:
