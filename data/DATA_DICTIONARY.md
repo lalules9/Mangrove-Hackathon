@@ -72,7 +72,9 @@ One row per LGA, keyed on `short_name`. A *feeder* for `build_master.py`, not th
 | `adri_andri`, `adri_coping_capacity`, `adri_adaptive_capacity`, `adri_information_access` | `lga_profile_QLD.csv` | Existing disaster-resilience baseline, carried for convenience |
 | `ai_status`, `ai_infrastructure_type`, `ai_source` | `research/qld_lga_ai_infrastructure_tracker.csv` | **Realized exposure** — is AI actually running in this council's infrastructure, verified against a named source |
 | `water_utility`, `water_control_tier`, `water_connections_2023_24`, `meets_soci_threshold` | `water_sewer_connections_NPR_2023_24_QLD.csv` | **Current critical-infrastructure exposure** — who runs the water/sewer asset (the council, or a joint bulk authority it doesn't control alone) and whether it crosses the SOCI Act's 100,000-connection line |
-| `has_published_ai_governance_policy` | tracker | **Governance readiness** — `True` for exactly one council (Cairns), `False` for all 77 others including every one of the 8 with confirmed AI in infrastructure |
+| `has_published_ai_governance_policy` | derived from the policy scan (see below) | **Governance readiness** — `True` for the 3 councils with an *adopted* AI policy (Cairns, Longreach, Burdekin), `False` for the other 75. A draft (Central Highlands) counts as `False` here |
+| `ai_policy_scan_result` | `research/qld_council_ai_policies.csv` | `YES` (adopted) · `DRAFT` · `DEPLOYS NO POLICY` (confirmed AI use, no governing policy) · `DISCLOSURE ONLY` · `MENTION ONLY` · `NOT FOUND` |
+| `ai_policy_scope` / `ai_policy_status` | same | `all AI` vs `generative AI only`; `adopted` / `draft` / `presented` |
 
 **Name crosswalk.** The AI tracker uses full names ("Sunshine Coast Regional"); the NPR water
 file uses utility names, and Urban Utilities / Unitywater are joint authorities covering several

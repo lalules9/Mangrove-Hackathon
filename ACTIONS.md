@@ -21,8 +21,6 @@ Every open to-do in one place. Updated 29 Aug 2026. Delete lines as they are don
 | 8 | **Contract registers ($200k, s 237 LG Reg 2012)** for real vendor evidence | Replaces press-derived deployment data with procurement fact. Would fix action 1 properly | ~1 day, 78 PDFs |
 | 9 | **Add `traces_to` to each component in `config/index.yaml`** | Makes the taxonomy lineage visible in the formula itself, not just in TAXONOMY-MAP.md | 20 min |
 | 10 | **Population-weight the ADRI SA2→LGA rollup** — currently area-weighted, which over-weights large empty SA2s | Join ABS ERP by SA2 code and swap the weight in `fetch_adri.py` | 1 hr |
-| 11 | **Verify the four AI policies** by opening the PDFs (Cairns, Central Highlands, Longreach, Burdekin) | Only seen as search snippets so far | 25 min |
-| 12 | **Finish the AI policy scan** — 47 of 78 done, 31 remaining (all small remote/Indigenous councils) | 4 found so far. Diminishing returns: the remaining 31 are the least likely to have one *and* the least likely to be indexed | ~8 searches |
 
 ## P3 — nice to have
 
@@ -41,6 +39,7 @@ Every open to-do in one place. Updated 29 Aug 2026. Delete lines as they are don
 | **ADII digital inclusion at LGA** | **Not published at that resolution.** State/SA4 only. Use `adri_information_access` instead |
 | **Travel time to ICU** | **Needs routing.** Straight-line distance is meaningless for island and Cape communities |
 | **Ergon isolated communities** | **Done** — 18 LGAs verified from ergon.com.au, replacing 22 inferred |
+| **AI policy scan** | **Done — all 78 councils** (`research/qld_council_ai_policies.csv`). 3 adopted (Cairns, Longreach, Burdekin), 1 draft (Central Highlands), 5 deploy AI with no policy, 2 disclosure/mention only, 67 nothing found. Councils block automated crawling, so this is web-search depth; the four policy docs were read via search, not opened directly |
 | **LB308 as an index variable** | **Not usable.** Uniform across all 78, no variance. It is a narrative finding and a recommendation, not a column |
 | **GitHub Pages** | **Blocked on Julie** — admin only. Settings → Pages → `main` → `/docs`. Map is published as an artifact in the meantime |
 

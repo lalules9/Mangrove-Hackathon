@@ -1,48 +1,79 @@
-short_name,stratum,ai_policy_found,policy_title,url,date,notes,method
-Cairns,outer_regional,YES,Artificial Intelligence General Policy,https://www.cairns.qld.gov.au/__data/assets/pdf_file/0012/737787/Artificial-Intelligence-General-Policy.pdf,,Ethical safe and compliant use; references Council values and legislative obligations,indexed search
-Central Highlands,outer_regional,YES,CHRCP 0081 Use of Artificial Intelligence (AI) Policy,https://chrc.qld.gov.au/wp-content/uploads/2025/11/ECM_1891688_v2_Draft-CHRC-Use-of-Generative-AI-Tools-Policy-Version-1-0-CHRC-ICT-19-March-2025.pdf,2025-03-19,Explicitly aligns to Qld Govt AI Governance Policy incl risk assessment,indexed search
-Longreach,very_remote,YES,Artificial Intelligence Policy No. 1.21,https://www.longreach.qld.gov.au/files/assets/public/v/1/about-council/documents/policies/121-artificial-intelligence-policy-17072025.pdf,2025-07-17,Applies to all AI systems developed procured or used by Council,indexed search
-Brisbane,seq_metro,NOT FOUND,,,,Only a public AI community event surfaced; no policy indexed,indexed search
-Gold Coast,seq_metro,NOT FOUND,,,,,indexed search
-Sunshine Coast,seq_metro,NOT FOUND,,,,AI data centre investment page only,indexed search
-Townsville,outer_regional,NOT FOUND,,,,Has Smart City Draft Strategy; no AI policy indexed,indexed search
-Toowoomba,regional_city,NOT FOUND,,,,Policy framework page indexed; no AI policy within it,indexed search
-Mount Isa,remote,NOT FOUND,,,,,indexed search
-Yarrabah,indigenous,NOT FOUND,,,,,indexed search
-Torres Strait Island,indigenous,NOT FOUND,,,,,indexed search
-Logan,seq_metro,NOT FOUND,,,,Policies index page indexed; no AI policy in it,indexed search
-Moreton Bay,seq_metro,DEPLOYS NO POLICY,,,,AI routes customer requests 24/7; AI on waste trucks detecting road damage. No policy found,indexed search
-Ipswich,seq_metro,DISCLOSURE ONLY,Personal Information Digest 2025,https://www.ipswich.qld.gov.au/files/assets/public/v/1/about-council/media-and-publications/corporate-publications/privacy-statement/documents/personalinformationdigest_2025.pdf,2025,Privacy statement discloses AI on de-identified data with human oversight. Not a policy,indexed search
-Rockhampton,regional_city,NOT FOUND,,,,,indexed search
-Mackay,regional_city,DEPLOYS NO POLICY,,,,Three AI initiatives funded in budget to mitigate cost pressures. No policy found,indexed search
-Bundaberg,regional_city,NOT FOUND,,,,,indexed search
-Gladstone,regional_city,NOT FOUND,,,,,indexed search
-Whitsunday,outer_regional,NOT FOUND,,,,,indexed search
-Redland,regional_city,NOT FOUND,,,,,indexed search
-Fraser Coast,regional_city,NOT FOUND,,,,,indexed search
-Scenic Rim,regional_city,NOT FOUND,,,,,indexed search
-Southern Downs,regional_city,NOT FOUND,,,,,indexed search
-Cook,remote,NOT FOUND,,,,Policy index and LDMP indexed; no AI policy,indexed search
-Barcaldine,very_remote,NOT FOUND,,,,,indexed search
-Aurukun,indigenous,NOT FOUND,,,,Several other policies indexed (WHS investment local law); no AI policy,indexed search
-Tablelands,outer_regional,NOT FOUND,,,,,indexed search
-Burdekin,outer_regional,YES,Use of Generative AI (GenAI) Technology Policy,https://www.burdekin.qld.gov.au/files/assets/public/v/1/about-council/documents/agendas-and-minutes/2026/20260310ordinarycouncilagendapublic.pdf,2026-03-10,Risk-based framework for staff and councillors; aligned to Australia's 8 AI Ethics Principles. Found in council agenda not a standalone policy page,indexed search
-Noosa,seq_metro,NOT FOUND,,,,,indexed search
-Livingstone,regional_city,NOT FOUND,,,,,indexed search
-Gympie,regional_city,NOT FOUND,,,,,indexed search
-Douglas,outer_regional,NOT FOUND,,,,,indexed search
-Mareeba,outer_regional,NOT FOUND,,,,,indexed search
-Hinchinbrook,outer_regional,NOT FOUND,,,,,indexed search
-Charters Towers,remote,NOT FOUND,,,,,indexed search
-Isaac,outer_regional,NOT FOUND,,,,,indexed search
-Banana,outer_regional,NOT FOUND,,,,,indexed search
-Western Downs,regional_city,NOT FOUND,,,,,indexed search
-Maranoa,remote,NOT FOUND,,,,,indexed search
-Goondiwindi,outer_regional,NOT FOUND,,,,,indexed search
-South Burnett,regional_city,NOT FOUND,,,,,indexed search
-North Burnett,regional_city,NOT FOUND,,,,,indexed search
-Lockyer Valley,regional_city,NOT FOUND,,,,,indexed search
-Somerset,regional_city,NOT FOUND,,,,,indexed search
-Cassowary Coast,outer_regional,NOT FOUND,,,,,indexed search
-Flinders,very_remote,NOT FOUND,,,,,indexed search
-Cloncurry,remote,MENTION ONLY,,,,Asset Management Plan references AI/RPA/CRM as 4th-generation technologies. Not a policy,indexed search
+short_name,stratum,ai_policy_found,policy_title,policy_scope,policy_status,url,date,notes,method,last_checked
+Cairns,outer_regional,YES,Artificial Intelligence General Policy,all AI,adopted,https://www.cairns.qld.gov.au/__data/assets/pdf_file/0012/737787/Artificial-Intelligence-General-Policy.pdf,2026-06-24,"Ethical, safe and compliant use; principles grouped as Responsible and Strategic; references Council values and legislative obligations; review due 2030-06-24",web search (policy text),2026-08-29
+Central Highlands,remote,DRAFT,Use of Generative AI Tools Policy (CHRCP 0081),generative AI only,draft,https://chrc.qld.gov.au/wp-content/uploads/2025/11/ECM_1891688_v2_Draft-CHRC-Use-of-Generative-AI-Tools-Policy-Version-1-0-CHRC-ICT-19-March-2025.pdf,2025-03-19,"Draft version 1.0 (ICT). Explicitly aligns to the Queensland Government AI Governance Policy including risk assessment; covers privacy, security and community trust",web search (policy text),2026-08-29
+Longreach,very_remote,YES,Artificial Intelligence Policy No. 1.21,all AI,adopted,https://www.longreach.qld.gov.au/files/assets/public/v/1/about-council/documents/policies/121-artificial-intelligence-policy-17072025.pdf,2025-08-14,"Applies to all AI systems developed, procured or used by Council. Adopted at the 14 August 2025 ordinary council meeting",web search (policy text + agenda),2026-08-29
+Burdekin,outer_regional,YES,Use of Generative AI (GenAI) Technology Policy,generative AI only,presented,https://www.burdekin.qld.gov.au/files/assets/public/v/1/about-council/documents/agendas-and-minutes/2026/20260310ordinarycouncilmeetingminutes.pdf,2026-03-10,"Presented to the 10 March 2026 ordinary meeting. Microsoft Copilot endorsed as the preferred GenAI platform (within existing M365 licensing). Covers data privacy, responsible use, accuracy verification, cybersecurity and human oversight; aligned to Australia's 8 AI Ethics Principles. Sits in a council agenda, not a standalone policy page",web search (agenda + minutes),2026-08-29
+Sunshine Coast,seq_metro,DEPLOYS NO POLICY,,,,,,"Has an AI Advisory Board and multiple AI deployments (customer-service avatars at City Hall; a 24/7 AI development-assistant planning tool trained on the planning scheme). No published AI policy found",web search (deep),2026-08-29
+Moreton Bay,seq_metro,DEPLOYS NO POLICY,,,,,,AI routes customer requests 24/7; AI on waste trucks detecting road damage. No policy found,web search,2026-08-29
+Logan,seq_metro,DEPLOYS NO POLICY,,,,,,"AI-linked CCTV analytics across ~1,400 cameras (monitored with police) and real-time AI parking guidance. Policies index page has no AI policy",web search (deep),2026-08-29
+Mackay,outer_regional,DEPLOYS NO POLICY,,,,,,Three AI initiatives funded in the budget to mitigate cost pressures. No policy found,web search,2026-08-29
+Cherbourg,indigenous,DEPLOYS NO POLICY,,,,,,"Confirmed AI at the Materials Recovery Facility (3D cameras plus ML, with Noosa's Peregian Digital Hub, from 2021). No governance policy found",web search,2026-08-29
+Ipswich,seq_metro,DISCLOSURE ONLY,Personal Information Digest 2025,n/a,n/a,https://www.ipswich.qld.gov.au/files/assets/public/v/1/about-council/media-and-publications/corporate-publications/privacy-statement/documents/personalinformationdigest_2025.pdf,2025,Privacy statement discloses AI use on de-identified data with human oversight. Not a policy,web search,2026-08-29
+Cloncurry,remote,MENTION ONLY,,n/a,n/a,,,Asset Management Plan references AI/RPA/CRM as fourth-generation technologies. Not a policy,web search,2026-08-29
+Brisbane,seq_metro,NOT FOUND,,,,,,"Rechecked Aug 2026. Only a public AI community event surfaced; no staff or corporate AI policy indexed. Runs a confirmed AI corridor traffic-coordination trial (Aug 2026)",web search (deep),2026-08-29
+Gold Coast,seq_metro,NOT FOUND,,,,,,Rechecked Aug 2026. No AI policy or published guideline found,web search (deep),2026-08-29
+Townsville,outer_regional,NOT FOUND,,,,,,Has a Smart City Draft Strategy; no AI policy indexed. Rechecked Aug 2026,web search (deep),2026-08-29
+Toowoomba,regional_city,NOT FOUND,,,,,,Policy framework page indexed; no AI policy within it. Rechecked Aug 2026,web search (deep),2026-08-29
+Redland,outer_regional,NOT FOUND,,,,,,Rechecked Aug 2026. No AI policy found,web search (deep),2026-08-29
+Rockhampton,regional_city,NOT FOUND,,,,,,,web search,2026-08-29
+Bundaberg,regional_city,NOT FOUND,,,,,,,web search,2026-08-29
+Gladstone,regional_city,NOT FOUND,,,,,,,web search,2026-08-29
+Fraser Coast,regional_city,NOT FOUND,,,,,,,web search,2026-08-29
+Scenic Rim,regional_city,NOT FOUND,,,,,,,web search,2026-08-29
+Southern Downs,regional_city,NOT FOUND,,,,,,,web search,2026-08-29
+Lockyer Valley,regional_city,NOT FOUND,,,,,,,web search,2026-08-29
+Somerset,regional_city,NOT FOUND,,,,,,,web search,2026-08-29
+South Burnett,regional_city,NOT FOUND,,,,,,,web search,2026-08-29
+Gympie,regional_city,NOT FOUND,,,,,,,web search,2026-08-29
+Livingstone,outer_regional,NOT FOUND,,,,,,,web search,2026-08-29
+Noosa,seq_metro,NOT FOUND,,,,,,,web search,2026-08-29
+Whitsunday,outer_regional,NOT FOUND,,,,,,,web search,2026-08-29
+Douglas,outer_regional,NOT FOUND,,,,,,,web search,2026-08-29
+Banana,outer_regional,NOT FOUND,,,,,,,web search,2026-08-29
+Isaac,outer_regional,NOT FOUND,,,,,,,web search,2026-08-29
+Western Downs,outer_regional,NOT FOUND,,,,,,,web search,2026-08-29
+Goondiwindi,outer_regional,NOT FOUND,,,,,,,web search,2026-08-29
+North Burnett,outer_regional,NOT FOUND,,,,,,,web search,2026-08-29
+Cassowary Coast,outer_regional,NOT FOUND,,,,,,,web search,2026-08-29
+Hinchinbrook,outer_regional,NOT FOUND,,,,,,,web search,2026-08-29
+Tablelands,outer_regional,NOT FOUND,,,,,,,web search,2026-08-29
+Mareeba,remote,NOT FOUND,,,,,,,web search,2026-08-29
+Maranoa,remote,NOT FOUND,,,,,,,web search,2026-08-29
+Charters Towers,remote,NOT FOUND,,,,,,,web search,2026-08-29
+Mount Isa,remote,NOT FOUND,,,,,,,web search,2026-08-29
+Cook,remote,NOT FOUND,,,,,,Policy index and Local Disaster Management Plan indexed; no AI policy,web search,2026-08-29
+Balonne,remote,NOT FOUND,,,,,,,web search,2026-08-29
+Barcaldine,very_remote,NOT FOUND,,,,,,,web search,2026-08-29
+Barcoo,very_remote,NOT FOUND,,,,,,,web search,2026-08-29
+Blackall Tambo,very_remote,NOT FOUND,,,,,,,web search,2026-08-29
+Boulia,very_remote,NOT FOUND,,,,,,,web search,2026-08-29
+Bulloo,very_remote,NOT FOUND,,,,,,,web search,2026-08-29
+Burke,very_remote,NOT FOUND,,,,,,,web search,2026-08-29
+Carpentaria,very_remote,NOT FOUND,,,,,,,web search,2026-08-29
+Croydon,very_remote,NOT FOUND,,,,,,,web search,2026-08-29
+Diamantina,very_remote,NOT FOUND,,,,,,,web search,2026-08-29
+Etheridge,very_remote,NOT FOUND,,,,,,,web search,2026-08-29
+Flinders,very_remote,NOT FOUND,,,,,,,web search,2026-08-29
+McKinlay,very_remote,NOT FOUND,,,,,,,web search,2026-08-29
+Murweh,very_remote,NOT FOUND,,,,,,,web search,2026-08-29
+Paroo,very_remote,NOT FOUND,,,,,,,web search,2026-08-29
+Quilpie,very_remote,NOT FOUND,,,,,,,web search,2026-08-29
+Richmond,very_remote,NOT FOUND,,,,,,,web search,2026-08-29
+Winton,very_remote,NOT FOUND,,,,,,,web search,2026-08-29
+Weipa,very_remote,NOT FOUND,,,,,,Weipa Town Authority (not a local government under the LGA 2009). No AI policy found,web search,2026-08-29
+Aurukun,indigenous,NOT FOUND,,,,,,"Several other policies indexed (WHS, investment, local law); no AI policy",web search,2026-08-29
+Doomadgee,indigenous,NOT FOUND,,,,,,,web search,2026-08-29
+Hope Vale,indigenous,NOT FOUND,,,,,,,web search,2026-08-29
+Kowanyama,indigenous,NOT FOUND,,,,,,,web search,2026-08-29
+Lockhart River,indigenous,NOT FOUND,,,,,,,web search,2026-08-29
+Mapoon,indigenous,NOT FOUND,,,,,,,web search,2026-08-29
+Mornington,indigenous,NOT FOUND,,,,,,,web search,2026-08-29
+Napranum,indigenous,NOT FOUND,,,,,,,web search,2026-08-29
+Northern Peninsula Area,indigenous,NOT FOUND,,,,,,,web search,2026-08-29
+Palm Island,indigenous,NOT FOUND,,,,,,,web search,2026-08-29
+Pormpuraaw,indigenous,NOT FOUND,,,,,,,web search,2026-08-29
+Torres,indigenous,NOT FOUND,,,,,,,web search,2026-08-29
+Torres Strait Island,indigenous,NOT FOUND,,,,,,,web search,2026-08-29
+Woorabinda,indigenous,NOT FOUND,,,,,,,web search,2026-08-29
+Wujal Wujal,indigenous,NOT FOUND,,,,,,,web search,2026-08-29
+Yarrabah,indigenous,NOT FOUND,,,,,,,web search,2026-08-29

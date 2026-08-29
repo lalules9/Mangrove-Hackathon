@@ -14,7 +14,7 @@ Sources, all joined on a normalised LGA name:
   data/qld_lga_remoteness.csv    official ABS Remoteness Area per LGA (vs the sampling stratum)
   research/disaster_events_by_lga.csv   recorded disaster events per LGA (AIDR)
   research/qld_lga_ai_infrastructure_tracker.csv   AI deployment detail and sources
-  research/qld_council_ai_policies.csv             published AI policy scan (partial)
+  research/qld_council_ai_policies.csv             AI policy scan — all 78 councils
 
 Output: data/qld_lga_master.csv
 
@@ -119,12 +119,15 @@ def main() -> None:
         row["ai_region"] = t.get("Region", "")
 
         p = policies.get(k, {})
-        checked = bool(p)
         row["ai_policy_scan_result"] = p.get("ai_policy_found", "not checked")
         row["ai_policy_url"] = p.get("url", "")
-        # Only 27 of 78 councils were scanned. Asserting False for the other 51 would be a
-        # false negative dressed as data, so unchecked councils are left blank.
-        if not checked:
+        row["ai_policy_scope"] = p.get("policy_scope", "")
+        row["ai_policy_status"] = p.get("policy_status", "")
+        # The scan now covers all 78 councils, so a negative is a real negative.
+        # "published governance policy" == an adopted one (YES); a DRAFT is not yet published.
+        if p:
+            row["has_published_ai_governance_policy"] = str(p.get("ai_policy_found") == "YES")
+        else:
             row["has_published_ai_governance_policy"] = ""
 
         ap = airports.get(k, {})
