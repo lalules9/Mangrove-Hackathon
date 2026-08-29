@@ -21,8 +21,8 @@ Every open to-do in one place. Updated 29 Aug 2026. Delete lines as they are don
 | 8 | **Contract registers ($200k, s 237 LG Reg 2012)** for real vendor evidence | Replaces press-derived deployment data with procurement fact. Would fix action 1 properly | ~1 day, 78 PDFs |
 | 9 | **Add `traces_to` to each component in `config/index.yaml`** | Makes the taxonomy lineage visible in the formula itself, not just in TAXONOMY-MAP.md | 20 min |
 | 10 | **Population-weight the ADRI SA2→LGA rollup** — currently area-weighted, which over-weights large empty SA2s | Join ABS ERP by SA2 code and swap the weight in `fetch_adri.py` | 1 hr |
-| 11 | **Verify the three AI policies** by opening the PDFs (Cairns, Central Highlands, Longreach) | Only seen as search snippets so far | 20 min |
-| 12 | **Complete the AI policy scan** for the remaining 51 councils | Requested, but see the caveat — 3 of 27 found, and "not found" ≠ "does not exist" | ~20 searches |
+| 11 | **Verify the four AI policies** by opening the PDFs (Cairns, Central Highlands, Longreach, Burdekin) | Only seen as search snippets so far | 25 min |
+| 12 | **Finish the AI policy scan** — 47 of 78 done, 31 remaining (all small remote/Indigenous councils) | 4 found so far. Diminishing returns: the remaining 31 are the least likely to have one *and* the least likely to be indexed | ~8 searches |
 
 ## P3 — nice to have
 
