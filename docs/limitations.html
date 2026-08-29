@@ -1,0 +1,245 @@
+<title>Limitations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+:root{
+  --paper:#F5F6F8;
+  --card:#FFFFFF;
+  --card-2:#E9ECF0;
+  --ink:#131820;
+  --ink-2:#465061;
+  --ink-3:#6F7A8C;
+  --rule:#D5DAE1;
+  --rule-soft:#E6EAEF;
+  --accent:#0B5C8A;
+  --accent-ink:#08476B;
+  --accent-soft:#DCEAF3;
+  --r1:#3D7A6B; --r2:#7A9B3C; --r3:#C79A12; --r4:#CE7026; --r5:#B0362C;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0D1117; --card:#151B23; --card-2:#1D242E;
+    --ink:#E9EDF2; --ink-2:#A6B1BF; --ink-3:#788596;
+    --rule:#28313D; --rule-soft:#1E2630;
+    --accent:#5FB3DE; --accent-ink:#84C8ED; --accent-soft:#122C3D;
+    --r1:#57A18E; --r2:#9DBE5C; --r3:#DCB33A; --r4:#E28A45; --r5:#DE6155;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0D1117; --card:#151B23; --card-2:#1D242E;
+  --ink:#E9EDF2; --ink-2:#A6B1BF; --ink-3:#788596;
+  --rule:#28313D; --rule-soft:#1E2630;
+  --accent:#5FB3DE; --accent-ink:#84C8ED; --accent-soft:#122C3D;
+  --r1:#57A18E; --r2:#9DBE5C; --r3:#DCB33A; --r4:#E28A45; --r5:#DE6155;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:16.5px;line-height:1.62;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:"Archivo",Helvetica,Arial,sans-serif;font-weight:600;margin:0;
+  text-wrap:balance;line-height:1.16;letter-spacing:-.012em}
+p{margin:0}
+a{color:var(--accent-ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-3);font-weight:500}
+
+header{background:var(--card);border-bottom:1px solid var(--rule)}
+header .wrap{padding:54px 24px 40px;display:flex;flex-direction:column;gap:16px}
+h1{font-size:clamp(30px,5vw,46px);font-weight:700}
+.stand{font-size:clamp(16.5px,2vw,19px);color:var(--ink-2);max-width:62ch}
+
+section{padding-top:50px}
+.sec-head{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;max-width:68ch}
+.sec-head h2{font-size:clamp(22px,3vw,28px)}
+.sec-head p{color:var(--ink-2);font-size:15.5px}
+.body{font-size:15.8px;color:var(--ink-2);max-width:68ch}
+.body+.body{margin-top:11px}
+.body b,.body strong{color:var(--ink);font-weight:600}
+
+.item{background:var(--card);border:1px solid var(--rule);border-radius:7px;
+  padding:18px 22px;margin-bottom:14px}
+.item h3{font-size:17.5px;margin:0 0 8px}
+.item p{font-size:15px;color:var(--ink-2)}
+.item p+p{margin-top:8px}
+.tag{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:10px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--accent-ink);
+  background:var(--accent-soft);padding:3px 8px;border-radius:3px;font-weight:500;
+  margin-bottom:10px}
+.tag.hot{color:var(--r5);background:#F4E2DF}
+@media (prefers-color-scheme: dark){.tag.hot{background:#3A211F}}
+
+.callout{border-left:3px solid var(--accent);background:var(--card);padding:18px 22px;
+  border-radius:0 6px 6px 0;margin:22px 0;font-size:15.6px;color:var(--ink-2)}
+.callout strong{color:var(--ink)}
+.callout.hot{border-left-color:var(--r5)}
+
+footer{border-top:1px solid var(--rule);margin-top:60px;background:var(--card)}
+footer .wrap{padding:28px 24px 50px}
+footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
+</style>
+
+<header>
+  <div class="wrap">
+    <p class="eyebrow">QAIRI, Queensland Artificial Intelligence Risk Index</p>
+    <h1>Limitations</h1>
+    <p class="stand">Everything here was found and named by the team building the index, not by
+      an outside reviewer. State it plainly rather than let a judge find it first.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <div class="sec-head">
+    <h2>What the index does not claim to be</h2>
+  </div>
+
+  <div class="item">
+    <span class="tag hot">The main limitation</span>
+    <h3>Most of the index is not AI-specific in its mechanism</h3>
+    <p><b>Essential services</b>, <b>population vulnerability</b> and <b>institutional
+      capacity</b> would score a council the same way for a natural disaster as for an
+      AI-caused one. They measure who absorbs any shock badly, borrowed directly from ADRI's
+      own architecture. That is legitimate, ADRI's approach is validated and the index says so
+      openly, but it means the index is mostly general vulnerability with an AI framing on top.</p>
+    <p>Of the six scored components, <b>synthetic warning is the only one whose scored factor
+      genuinely depends on AI as the cause</b>, a fabricated AI-generated warning message during
+      a live emergency. Deployment evidence and systemic labour are about AI specifically, but
+      they measure adoption and exposure, not a mechanism by which AI itself causes harm.</p>
+  </div>
+
+  <div class="item">
+    <span class="tag hot">Counter-argument, addressed directly</span>
+    <h3>Pabai v Commonwealth (2025)</h3>
+    <p>The Federal Court found the Commonwealth owed no duty of care to Torres Strait Islanders
+      over climate change harm. That is a real, negative precedent against the idea that
+      government already owes an affirmative duty to prevent diffuse, foreseeable but uncertain
+      harm, which is close to this project's own premise. It is named here on purpose, given the
+      dataset's own floor is Aurukun and the Torres Strait councils, rather than left for a judge
+      to raise first.</p>
+  </div>
+
+  <div class="item">
+    <span class="tag hot">Rogue AI is deliberately excluded</span>
+    <h3>Not every Hendrycks category is represented, and one is missing on purpose</h3>
+    <p>Rogue AI, an AI system developing its own goal and resisting correction, requires a level
+      of autonomous capability nothing in this dataset has. A pothole detector or a warning
+      system that fails or is hacked is a malfunction or a case of malicious use, not rogue AI.
+      Including it as a scored factor would mean inventing a proxy for something that is not
+      actually present in any confirmed deployment in this dataset, so it stays named and
+      excluded rather than forced in.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>Data quality</h2>
+  </div>
+
+  <div class="item">
+    <h3>Confirmed AI deployment is press-derived and sparse</h3>
+    <p>Only 8 of 78 councils have confirmed AI use, found by searching for news coverage. The
+      other 70 are not confirmed to be free of AI use, they are simply not covered in the press
+      the same way. The index treats "no evidence found" as missing data, not as evidence of
+      absence, and excludes those councils from that component's score rather than scoring them
+      as safe.</p>
+  </div>
+
+  <div class="item">
+    <h3>Disaster event locations are approximate</h3>
+    <p>The disaster frequency input to synthetic warning was matched to a council by coordinates
+      pulled from a public disaster events catalogue. Many older entries share the exact same
+      coordinate, a generic point near a major regional town, rather than the real event
+      location. This was confirmed directly on Cyclone Kirrily (2024), which the source data
+      places at generic coordinates near Townsville rather than its real path. This will
+      under-count events in remote and Cape York councils specifically. Known, and accepted for
+      this hackathon rather than hand-verified across all 78 councils.</p>
+  </div>
+
+  <div class="item">
+    <h3>Systemic labour is one occupational proxy, not a validated exposure index</h3>
+    <p>Which occupations count as AI-exposed (Professionals, Clerical and Administrative
+      Workers, Sales Workers) is a single judgement call about ANZSCO major groups, not a
+      published, validated AI-exposure index, and it has not been cross-checked against a second
+      index the way the project's own earlier notes said a scored factor like this should be.</p>
+    <p>It also behaves in a way worth naming directly. AI-exposed occupations are concentrated
+      in wealthy, high-capacity metro councils, the same councils that score well on ADRI. So
+      this component pulls in the opposite direction from the rest of the index, and is a large
+      part of why the overall correlation against ADRI moved further from zero once it was added.
+      Whether a high AI-exposed-occupation share is a risk or a proxy for capacity is an open
+      question. The index currently scores it as a risk. That is a defensible choice, not a
+      settled one.</p>
+  </div>
+
+  <div class="item">
+    <h3>Queensland council staff and finance figures are 2015 to 2016</h3>
+    <p>Every resource in the state's comparative information open data release stops there,
+      whatever the portal's last updated date says. Current years exist only as documents on the
+      department's site, which blocks automated fetching. Columns carry their own vintage field
+      so the age of the number travels with it.</p>
+  </div>
+
+  <div class="item">
+    <h3>ADRI's own LGA aggregation is area-weighted, not population-weighted</h3>
+    <p>The source ADRI data is published at SA2 level and aggregated to LGA by area times share,
+      because the population fields in the public API response are null. Area weighting
+      over-weights large, empty SA2s. Joining ABS population estimates by SA2 code and swapping
+      the weight would be more accurate, and was not done in the time available.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head">
+    <h2>Methodological choices worth contesting</h2>
+  </div>
+
+  <div class="item">
+    <h3>Weights are expert judgement, not fitted or independently validated</h3>
+    <p>The 22/18/25/15/10/10 split reflects reasoned judgement about which signals matter most
+      and which rest on the thinnest evidence, not a statistical fit to data or an external
+      panel's ranking. The interactive map's sliders exist specifically so a reader can test
+      whether the ranking survives a different weighting, which is the honest answer to "why
+      these numbers" rather than presenting them as optimised.</p>
+  </div>
+
+  <div class="item">
+    <h3>Vendor concentration is not measured</h3>
+    <p>A single vendor outage affecting many councils at once has no natural hazard analogue and
+      would be one of the cleanest sources of genuine divergence from ADRI. The one data source
+      tried for it, a specific contract disclosure field, had no variance across all 78 councils
+      and could not be scored. Measuring it properly would mean manually reading each council's
+      published contract register, roughly a day of work, judged not worth it against the time
+      available for this hackathon.</p>
+  </div>
+
+  <div class="item">
+    <h3>The AI policy scan is not complete</h3>
+    <p>47 of 78 council websites had been checked for a published AI governance policy as of
+      this submission. The remaining 31 are disproportionately small, remote councils, which are
+      also the least likely to have an indexed policy to find. Diminishing returns, not an
+      oversight.</p>
+  </div>
+</section>
+
+<div class="callout">
+  <strong>The honest headline.</strong> This index measures general council vulnerability,
+  borrowed from a validated natural-hazard framework, with a small number of genuinely
+  AI-specific signals layered on top. It diverges from Australia's own disaster resilience index
+  by a real, reported margin, not a manufactured one. What it is not is a complete or validated
+  measure of catastrophic AI risk. Nobody has built one of those yet, for any jurisdiction.
+</div>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p>QAIRI, Queensland Artificial Intelligence Risk Index. See README.md for the method and
+      HANDOVER.md and ACTIONS.md for the full working history behind these decisions.</p>
+  </div>
+</footer>

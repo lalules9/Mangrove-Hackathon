@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>QAIRI — Queensland Artificial Intelligence Risk Index</title>
+<title>QAIRI: Queensland Artificial Intelligence Risk Index</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -89,6 +89,17 @@ footer{background:var(--card);border-top:1px solid var(--rule);padding:9px 20px;
 .stage-box.dma{background:var(--paper);border:1.5px solid var(--stage);color:var(--stage);
   border-radius:3px 3px 8px 8px}
 .stage-arrow{width:5px;height:16px;background:var(--stage);flex:none}
+
+.info-btn{width:15px;height:15px;border-radius:50%;border:1px solid var(--ink3);
+  background:none;color:var(--ink3);font-size:10px;line-height:1;padding:0;
+  margin:0 0 0 4px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.info-btn:hover{border-color:var(--accent);color:var(--accent)}
+.comp-inputs{list-style:none;margin:0;padding:0}
+.comp-inputs li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;
+  border-bottom:1px solid var(--rule);font-size:13.5px;color:var(--ink2)}
+.comp-inputs li:last-child{border-bottom:0}
+.comp-inputs b{color:var(--ink);font-family:ui-monospace,monospace;font-size:12.5px;flex:none}
+.comp-single{font-size:13.5px;color:var(--ink3);font-style:italic}
 </style>
 </head>
 <body>
@@ -96,7 +107,7 @@ footer{background:var(--card);border-top:1px solid var(--rule);padding:9px 20px;
   <div class="header-row">
     <div>
       <h1>QAIRI · Queensland Artificial Intelligence Risk Index</h1>
-      <p>Every Queensland local government area (78), scored for exposure to AI-driven risks.</p>
+      <p>All 77 Queensland councils and 1 non-council entity, scored for exposure to catastrophic risks of AI.</p>
       <p>The <b>Australian Disaster Resilience Index (ADRI)</b> is a peer-reviewed natural-hazard
          resilience index that is used for comparison and not used as part of the QAIRI value.</p>
     </div>
@@ -135,6 +146,15 @@ footer{background:var(--card);border-top:1px solid var(--rule);padding:9px 20px;
   </div>
 </div>
 
+<div id="compModal" class="modal-overlay" hidden>
+  <div class="modal" role="dialog" aria-labelledby="compModalTitle">
+    <button id="closeCompModal" class="modal-close" aria-label="Close">&times;</button>
+    <h2 class="modal-title" id="compModalTitle"></h2>
+    <p class="modal-sub" id="compModalWhat"></p>
+    <div id="compModalInputs"></div>
+  </div>
+</div>
+
 <div id="wrap">
   <div id="map"></div>
 
@@ -154,6 +174,7 @@ footer{background:var(--card);border-top:1px solid var(--rule);padding:9px 20px;
       <option value="institutional_capacity_score">Component · institutional capacity</option>
       <option value="deployment_evidence_score">Component · deployment evidence</option>
       <option value="synthetic_warning_score">Component · synthetic warning</option>
+      <option value="systemic_labour_score">Component · systemic labour</option>
     </select>
 
     <h2>Component weights</h2>
@@ -179,7 +200,7 @@ footer{background:var(--card);border-top:1px solid var(--rule);padding:9px 20px;
   QAIRI (Queensland Artificial Intelligence Risk Index) is a draft research index, not an
   official product. Remoteness is the ABS Remoteness Area of each LGA; Indigenous status is
   shown separately. The Australian Disaster Resilience Index © Natural Hazards Research
-  Australia / University of New England, CC BY-NC 4.0 — non-commercial use only — is used only
+  Australia / University of New England, CC BY-NC 4.0 (non-commercial use only), is used only
   for comparison, not in the QAIRI score. Population, SEIFA and Census © Australian Bureau of Statistics,
   CC BY 4.0. Council data © State of Queensland, CC BY 4.0. Boundaries: ABS ASGS 2023.
 </footer>
@@ -191,14 +212,61 @@ const norm = n => (n||"").toLowerCase().split(/[^a-z]+/)
                    .filter(w => w && !TYPE.has(w)).join("");
 
 // Component weights as configured in config/index.yaml. Sliders override these live.
-const DEFAULTS = {essential_services:0.25, population_vulnerability:0.20,
-                  institutional_capacity:0.30, deployment_evidence:0.15,
-                  synthetic_warning:0.10};
+const DEFAULTS = {essential_services:0.22, population_vulnerability:0.18,
+                  institutional_capacity:0.25, deployment_evidence:0.15,
+                  synthetic_warning:0.10, systemic_labour:0.10};
 const LABELS = {essential_services:"Essential services",
                 population_vulnerability:"Population vulnerability",
                 institutional_capacity:"Institutional capacity",
                 deployment_evidence:"Deployment evidence",
-                synthetic_warning:"Synthetic warning"};
+                synthetic_warning:"Synthetic warning",
+                systemic_labour:"Systemic labour"};
+
+// Plain-language explanations for the "what does this mean" popup on each slider.
+// inputs is left empty for a component built from a single variable, nothing to weigh.
+const DEFINITIONS = {
+  essential_services: {
+    what: "How bad it would be if a basic service like water, sewerage or electricity failed, and how hard it would be to fix. Councils that run their own water supply, are small enough to fall outside national critical-infrastructure rules, or rely on an isolated power network not connected to the main grid, score higher here.",
+    inputs: [
+      ["Small enough to fall outside the national critical-infrastructure rules", "30%"],
+      ["Council runs its own water or sewerage service", "25%"],
+      ["Relies on an isolated electricity network, not the main grid", "25%"],
+      ["Remoteness (how long repairs realistically take)", "20%"]
+    ]
+  },
+  population_vulnerability: {
+    what: "How well residents themselves could cope if something went wrong, regardless of the cause. This uses the same kind of measures already used for floods and bushfires, not anything AI-specific. Areas with more disadvantage, more crowded housing, or a higher Aboriginal and Torres Strait Islander population share score higher.",
+    inputs: [
+      ["Socio-economic disadvantage (SEIFA index)", "40%"],
+      ["Household crowding (people per bedroom)", "35%"],
+      ["Aboriginal and Torres Strait Islander population share", "25%"]
+    ]
+  },
+  institutional_capacity: {
+    what: "Whether the council itself has the money and staff to keep going if its systems go down. Councils that rely heavily on state grants rather than their own rates, or run mostly office-based rather than field staff, score higher, meaning less spare capacity and more day-to-day dependence on digital systems.",
+    inputs: [
+      ["Relies on government grants rather than its own revenue", "50%"],
+      ["Share of staff who are office-based, not out in the field", "30%"],
+      ["Staff numbers relative to population", "20%"]
+    ]
+  },
+  deployment_evidence: {
+    what: "Whether this council has a confirmed, publicly reported example of using AI already. Only 8 of 78 councils are confirmed. The other 70 are not scored as safe, they are simply unconfirmed, so this component only ever affects the councils where real evidence exists.",
+    inputs: []
+  },
+  synthetic_warning: {
+    what: "The risk of a fake, AI-generated emergency warning, a cloned voice or a spoofed official message, reaching people during a real disaster with no easy way to check if it is real. This is the only part of the index that is genuinely about AI as the cause, not general vulnerability wearing an AI label.",
+    inputs: [
+      ["How often this area actually has an emergency", "40%"],
+      ["Mobile phone coverage (more coverage means more ways to double-check a warning)", "35%"],
+      ["Share of households that mainly speak a language other than English at home", "25%"]
+    ]
+  },
+  systemic_labour: {
+    what: "Whether a lot of local jobs are in the kinds of roles generative AI is most likely to change, office, clerical and sales work. This is the one component about the local economy rather than a specific emergency, and it is the only one that pulls in the opposite direction from the rest of the index, see the Limitations page.",
+    inputs: []
+  }
+};
 let weights = {...DEFAULTS}, data = {}, geo = null, layer = null, current = "ai_risk_index";
 
 const RAMP = ["--r1","--r2","--r3","--r4","--r5"].map(v =>
@@ -287,7 +355,7 @@ function render(){
     return {fillColor: rec?col(valueFor(rec)):"#00000012", fillOpacity:.85,
             color:STROKE, weight:.6};
   });
-  // QAIRI score in the tooltip moves with the weights — refresh the text.
+  // QAIRI score in the tooltip moves with the weights, refresh the text.
   layer.eachLayer(l=>{
     const name=l.feature.properties.lga_name;
     l.setTooltipContent(tipHTML(data[norm(name)],name));
@@ -299,9 +367,10 @@ const COMPONENTS = [
   ["population_vulnerability_score","Population vulnerability"],
   ["institutional_capacity_score",  "Institutional capacity"],
   ["deployment_evidence_score",     "Deployment evidence"],
-  ["synthetic_warning_score",       "Synthetic warning"]];
+  ["synthetic_warning_score",       "Synthetic warning"],
+  ["systemic_labour_score",         "Systemic labour"]];
 
-function fmt(v,d=2){ const n=parseFloat(v); return Number.isFinite(n)?n.toFixed(d):"—"; }
+function fmt(v,d=2){ const n=parseFloat(v); return Number.isFinite(n)?n.toFixed(d):"n/a"; }
 function isYes(v){ return String(v).toLowerCase()==="true"; }
 
 function classline(rec){
@@ -320,15 +389,15 @@ function detail(rec){
     .filter(([,v])=>Number.isFinite(v))
     .sort((a,b)=>b[1]-a[1]);
   const shift = parseInt(rec.rank_shift,10);
-  const shiftTxt = !Number.isFinite(shift) ? "—"
+  const shiftTxt = !Number.isFinite(shift) ? "n/a"
     : shift===0 ? "same as ADRI"
     : `${shift>0?"worse":"better"} than ADRI (${Math.abs(shift)} ${Math.abs(shift)===1?"place":"places"})`;
   const rows=[
-    ["QAIRI score", idx!=null?idx.toFixed(3):"—"],
-    ["QAIRI rank", rec.ai_risk_rank?`${rec.ai_risk_rank} of 78`:"—"],
-    ["ADRI rank", rec.adri_rank?`${rec.adri_rank} of 78`:"—"],
+    ["QAIRI score", idx!=null?idx.toFixed(3):"n/a"],
+    ["QAIRI rank", rec.ai_risk_rank?`${rec.ai_risk_rank} of 78`:"n/a"],
+    ["ADRI rank", rec.adri_rank?`${rec.adri_rank} of 78`:"n/a"],
     ["Divergence", shiftTxt],
-    ["Population", rec.population_latest?Number(rec.population_latest).toLocaleString():"—"]];
+    ["Population", rec.population_latest?Number(rec.population_latest).toLocaleString():"n/a"]];
   el.innerHTML =
     `<h3>${rec.council_name||rec.short_name}</h3>` +
     `<p style="margin:2px 0 6px;color:var(--ink3)">${classline(rec)}</p>` +
@@ -343,16 +412,21 @@ function tipHTML(rec, name){
   if(!rec) return name;
   const idx = indexFor(rec);
   return `<b>${name}</b><br>`+
-    `QAIRI ${idx!=null?idx.toFixed(2):"—"} · rank ${rec.ai_risk_rank||"—"}/78<br>`+
-    `${rec.remoteness_category||"—"}${isYes(rec.is_indigenous_council)?" · Indigenous":""}<br>`+
-    `pop. ${rec.population_latest?Number(rec.population_latest).toLocaleString():"—"}`;
+    `QAIRI ${idx!=null?idx.toFixed(2):"n/a"} · rank ${rec.ai_risk_rank||"n/a"}/78<br>`+
+    `${rec.remoteness_category||"n/a"}${isYes(rec.is_indigenous_council)?" · Indigenous":""}<br>`+
+    `pop. ${rec.population_latest?Number(rec.population_latest).toLocaleString():"n/a"}`;
 }
 
 function sliders(){
   const box=document.getElementById("sliders");
   box.innerHTML = Object.keys(DEFAULTS).map(k=>
-    `<div class="sl"><label for="w_${k}">${LABELS[k]}</label><b id="v_${k}">${weights[k].toFixed(2)}</b>
+    `<div class="sl"><label for="w_${k}">${LABELS[k]}
+       <button type="button" class="info-btn" data-comp="${k}" aria-label="What is ${LABELS[k]}?">?</button>
+     </label><b id="v_${k}">${weights[k].toFixed(2)}</b>
      <input type="range" id="w_${k}" min="0" max="1" step="0.05" value="${weights[k]}"></div>`).join("");
+  box.querySelectorAll(".info-btn").forEach(btn=>{
+    btn.addEventListener("click", e=>{ e.preventDefault(); openCompModal(btn.dataset.comp); });
+  });
   Object.keys(DEFAULTS).forEach(k=>{
     document.getElementById("w_"+k).addEventListener("input", e=>{
       weights[k]=parseFloat(e.target.value);
@@ -375,7 +449,7 @@ function wsum(){
 const map = L.map("map",{
   scrollWheelZoom:true,
   zoomSnap:0.25, zoomDelta:0.5,          // finer steps, less jump per notch
-  wheelPxPerZoomLevel:240,               // default 60 — much gentler wheel
+  wheelPxPerZoomLevel:240,               // default 60, much gentler wheel
   wheelDebounceTime:60,
   minZoom:2, maxZoom:9, maxBoundsViscosity:1,
   attributionControl:false
@@ -398,7 +472,7 @@ Promise.all([
       l.on("mouseout", ()=>l.setStyle({weight:.6,color:STROKE}));
     }}).addTo(map);
   // The map div has no final size on first paint. Wait for it to get one, fit the state to
-  // the frame, then lock that as the furthest-out zoom and pen panning to the state — no
+  // the frame, then lock that as the furthest-out zoom and pen panning to the state, no
   // scrolling off into blank ocean.
   const fit = () => {
     map.setMinZoom(2);
@@ -426,7 +500,31 @@ const resilienceModal = document.getElementById("resilienceModal");
 document.getElementById("openResilience").addEventListener("click", ()=>{ resilienceModal.hidden = false; });
 document.getElementById("closeResilience").addEventListener("click", ()=>{ resilienceModal.hidden = true; });
 resilienceModal.addEventListener("click", e=>{ if (e.target === resilienceModal) resilienceModal.hidden = true; });
-document.addEventListener("keydown", e=>{ if (e.key === "Escape") resilienceModal.hidden = true; });
+
+const compModal = document.getElementById("compModal");
+function openCompModal(key){
+  const def = DEFINITIONS[key];
+  if(!def) return;
+  document.getElementById("compModalTitle").textContent = LABELS[key];
+  document.getElementById("compModalWhat").textContent = def.what;
+  const box = document.getElementById("compModalInputs");
+  if(def.inputs.length){
+    box.innerHTML = `<h2 style="margin:0 0 6px">What makes up this score</h2>` +
+      `<ul class="comp-inputs">` + def.inputs.map(([label,w])=>
+        `<li><span>${label}</span><b>${w}</b></li>`).join("") + `</ul>`;
+  } else {
+    box.innerHTML = `<p class="comp-single">Built from a single variable, so there is no internal weighting to show.</p>`;
+  }
+  compModal.hidden = false;
+}
+document.getElementById("closeCompModal").addEventListener("click", ()=>{ compModal.hidden = true; });
+compModal.addEventListener("click", e=>{ if (e.target === compModal) compModal.hidden = true; });
+
+document.addEventListener("keydown", e=>{
+  if (e.key !== "Escape") return;
+  resilienceModal.hidden = true;
+  compModal.hidden = true;
+});
 </script>
 </body>
 </html>

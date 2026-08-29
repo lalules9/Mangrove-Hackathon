@@ -33,22 +33,43 @@ paper-based shire, not less.
 
 **Hold ADRI out as the control.** The index never uses ADRI's own scores as an input — only as
 a check afterwards. If the two rankings turned out to be near-identical, the honest finding
-would be "we rebuilt ADRI and added nothing." They diverge (Spearman r = −0.533, well below the
+would be "we rebuilt ADRI and added nothing." They diverge (Spearman r = −0.331, well below the
 0.9 threshold that would mean the index adds nothing), which is reported as the actual result,
 not hidden in favour of a cleaner story.
 
 ## What's built
 
-**All five components are live** in `config/index.yaml` and `data/qld_lga_index.csv`, weighted
-25/20/30/15/10.
+**All six components are live** in `config/index.yaml` and `data/qld_lga_index.csv`, weighted
+22/18/25/15/10/10.
 
-| Component | Weight | What it measures |
-|---|---|---|
-| Essential services | 25% | Water/sewerage self-provision below the regulated critical-infrastructure threshold, isolated (non-grid-connected) electricity networks, remoteness (days to restore) |
-| Population vulnerability | 20% | Disadvantage (SEIFA), crowding, Indigenous share — who absorbs a shock badly, hazard-agnostic |
-| Institutional capacity | 30% | Discretionary revenue, staffing depth and mix — can the council itself keep functioning |
-| Deployment evidence | 15% | Confirmed AI use, press-derived |
-| Synthetic warning | 10% | Fabricated, AI-generated evacuation message during a live emergency, with no second channel to check it against — the only component whose scored factor genuinely depends on AI as the cause. Built from disaster-event frequency, funded mobile coverage (channel redundancy) and non-English-speaking household share (does the official channel actually reach everyone) |
+| Component | Weight | Bengio category | What it measures |
+|---|---|---|---|
+| Essential services | 22% | Malicious use / Malfunctions | Water/sewerage self-provision below the regulated critical-infrastructure threshold, isolated (non-grid-connected) electricity networks, remoteness (days to restore) |
+| Population vulnerability | 18% | Cross-cutting | Disadvantage (SEIFA), crowding, Indigenous share — who absorbs a shock badly, hazard-agnostic |
+| Institutional capacity | 25% | Malfunctions | Discretionary revenue, staffing depth and mix — can the council itself keep functioning |
+| Deployment evidence | 15% | AI race (Hendrycks) | Confirmed AI use, press-derived |
+| Synthetic warning | 10% | Malicious use | Fabricated, AI-generated evacuation message during a live emergency, with no second channel to check it against — the only component whose scored factor genuinely depends on AI as the cause. Built from disaster-event frequency, funded mobile coverage (channel redundancy) and non-English-speaking household share (does the official channel actually reach everyone) |
+| Systemic labour | 10% | Systemic risk | Share of employed persons in occupations most exposed to generative AI (Professionals, Clerical and Administrative, Sales — Census 2021, ABS). The only component addressing Bengio's third category, which was otherwise absent from the index entirely |
+
+**A genuine, notable tension surfaced by adding systemic labour:** this component pulls in the
+*opposite* direction from the rest of the index. AI-exposed occupations (professional, clerical,
+sales) are concentrated in wealthy, high-capacity metro councils — the same councils that score
+*well* on ADRI. So this component, scored as "more exposure = more risk," actually correlates
+*positively* with ADRI resilience, dragging the overall correlation toward zero (a large part of
+why it moved from −0.533 to −0.331 once this was added). This is the same pattern already flagged
+for `indoor_staff_share` in institutional capacity — a "digitisation" variable that could
+plausibly point either way depending on whether it's read as exposure or as capacity. Worth
+naming directly rather than left for a judge to spot: is a high AI-exposed-occupation share a
+risk (more jobs an AI could disrupt) or a proxy for capacity (a well-resourced local economy)?
+The index currently assumes the former. That assumption is arguable, not settled.
+
+**Against Hendrycks' four categories** (malicious use, AI race, organisational risk, rogue AI):
+essential services, synthetic warning and institutional capacity fall under malicious use and
+organisational risk; deployment evidence is the closest fit for AI race (competitive pressure to
+deploy); rogue AI is deliberately not represented — it requires a level of system autonomy
+nothing in this dataset has, and pretending otherwise would be dishonest. Full column-by-column
+mapping against both taxonomies, including the 43 collected variables not currently scored:
+`TAXONOMY-MAP.md`.
 
 Synthetic warning deliberately does not use `adri_information_access` as a channel-access proxy,
 even though it's the closest-fitting ADRI theme — that column is held out as the control, and
@@ -59,15 +80,16 @@ direction.
 
 **Why these weights.** Institutional capacity carries the most weight because it's the
 component with the least analogue in ADRI — the independent signal this index can actually add.
-Deployment evidence and synthetic warning are deliberately the two lowest weights, and
-deliberately not equal: both rest on the thinnest evidence in the index (press-derived AI-usage
-reports; a disaster-event catalogue that under-counts remote areas), but synthetic warning's
-data is thinner still, so it carries less weight than deployment evidence, not the same amount.
-Together the two lowest-confidence components hold 25% of the index, not 50% — reliability
-comes from keeping the weakest evidence from dominating the result, not from excluding it.
-These are expert-judgement weights, not fitted ones; the interactive map's sliders exist so a
-reader can test whether the ranking survives a different weighting, which is the sensitivity
-check a fixed number can't show on its own.
+Deployment evidence, synthetic warning and systemic labour are deliberately the three lowest
+weights, and deliberately not all equal: all three rest on thinner evidence than the first three
+components (press-derived AI-usage reports; a disaster-event catalogue that under-counts remote
+areas; a single occupational-exposure proxy never cross-checked against a second index), but
+synthetic warning and systemic labour's data is thinner still, so they carry less weight than
+deployment evidence, not the same amount. Together the three lowest-confidence components hold
+35% of the index, not 70% — reliability comes from keeping the weakest evidence from dominating
+the result, not from excluding it. These are expert-judgement weights, not fitted ones; the
+interactive map's sliders exist so a reader can test whether the ranking survives a different
+weighting, which is the sensitivity check a fixed number can't show on its own.
 
 **The legal case for why this is a council's problem, not a hypothetical one:**
 
@@ -104,23 +126,38 @@ resilience — it's the same shape as the disaster planning every council alread
 
 ## What this doesn't claim
 
+The full account, written as its own page rather than a footnote, is **[`docs/limitations.html`](docs/limitations.html)**. Headlines:
+
 - Most of the index measures general vulnerability, not an AI-specific mechanism — it would
-  score similarly for a natural disaster. Of the components above, synthetic warning is the one
+  score similarly for a natural disaster. Of the six components, synthetic warning is the one
   genuinely specific to AI as the cause.
+- Systemic labour pulls in the *opposite* direction from the rest of the index — AI-exposed
+  occupations concentrate in the same wealthy, high-capacity councils ADRI already scores as
+  resilient, which is a large part of why the overall correlation moved toward zero once it was
+  added, not away from it.
 - `Pabai v Commonwealth (2025)` — the Federal Court declined to find the Commonwealth owed a
   duty of care to Torres Strait Islanders over climate-change harm. A real negative precedent
   against the idea that government already owes an affirmative duty here; addressed directly
   rather than left for a judge to raise.
+- Rogue AI (Hendrycks) is deliberately not represented — nothing in this dataset has the
+  autonomous capability the category actually describes, and inventing a proxy for it would be
+  dishonest.
 - Full source list, data provenance, and everything still open — `HANDOVER.md` and `ACTIONS.md`.
 
 ## In this repo
 
 | Folder | What's in it |
 |---|---|
-| `docs/` | The full write-up (`ai-disaster-resilience-index.html`), the legal background (`qld-council-governance.html`), and the live map (`map/`) |
-| `code/` | The pipeline — `fetch_adri.py` → `build_councils.py` → `fetch_lga_profile.py` → `build_master.py` → `build_index.py` |
+| `docs/` | The full write-up (`ai-disaster-resilience-index.html`), the limitations page (`limitations.html`), the legal background (`qld-council-governance.html`), and the live map (`map/`) |
+| `code/` | The pipeline — `fetch_adri.py` → `build_councils.py` → `fetch_lga_profile.py` → `fetch_mbsp.py` → `build_master.py` → `build_index.py` |
 | `data/` | ADRI 2024 by LGA, the 78-council register, the merged master table, the scored index |
-| `research/` | Raw source material |
+| `research/` | Raw source material, including the disaster-events-by-council data behind synthetic warning |
+
+**The interactive map explains itself.** Every slider carries a small "?" button, opening a
+plain-language explanation of what that component measures and, where it's built from more than
+one input, exactly how much weight each one carries. Built on the assumption that this is a tool
+for council staff, not just researchers, so nothing in it should require already knowing what
+SEIFA or SOCI or ADRI mean.
 
 **Attribution required:** the ADRI data in `data/` is Australian Disaster Resilience Index,
 Natural Hazards Research Australia / University of New England, licensed CC BY-NC 4.0.

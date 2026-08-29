@@ -41,7 +41,7 @@ meta:
 components:
 
   essential_services:
-    weight: 0.25
+    weight: 0.22
     rationale: >
       Councils that run water and sewerage themselves, in places where restoration is slow,
       which sit below the SOCI Act threshold so owe no critical infrastructure risk
@@ -65,7 +65,7 @@ components:
         direction: higher_worse       # consequence term: days to restore
 
   population_vulnerability:
-    weight: 0.20
+    weight: 0.18
     rationale: >
       Who absorbs a shock badly. Validated vulnerability measures, hazard-agnostic.
     inputs:
@@ -80,7 +80,7 @@ components:
         direction: higher_worse
 
   institutional_capacity:
-    weight: 0.30
+    weight: 0.25
     rationale: >
       The independent signal. None of these appear in ADRI, so this is where any divergence
       from the natural-hazard index has to come from.
@@ -127,3 +127,21 @@ components:
       - col: pct_language_not_english_home
         weight: 0.25
         direction: higher_worse       # consequence: official channel may not reach everyone
+
+  systemic_labour:
+    weight: 0.10
+    rationale: >
+      Bengio's third category (systemic risk) was almost entirely absent from the index
+      until this component -- everything else here is malicious use or malfunctions.
+      Proxy: share of employed persons in occupations most exposed to generative AI
+      (Professionals, Clerical and Administrative Workers, Sales Workers -- ANZSCO 1-digit
+      major groups 2, 5, 6), from Census 2021 G61, ABS SDMX API. This is one judgement call
+      about which occupations count as exposed, not a validated exposure index, and it has
+      not been cross-checked against a second published index the way the project's own
+      earlier notes said it should be. Weighted the same as synthetic_warning for that
+      reason -- real signal, real variance (19% to 53% across the 78), but a single proxy,
+      not multiple corroborating sources.
+    inputs:
+      - col: pct_ai_exposed_occupation
+        weight: 1.0
+        direction: higher_worse
