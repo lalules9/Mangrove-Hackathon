@@ -1,6 +1,10 @@
 # HANDOVER — Mangrove Ground-level Governance Hackathon
 
 **Written:** 29 August 2026
+**Updated:** 29 August 2026, afternoon — the original version of this file undersold how far
+Option A had gotten. Section 3 and Section 7 below are now current. For anything more recent
+than this update, **`ACTIONS.md` is the live backlog** and `TAXONOMY-MAP.md` is the current
+data-to-risk-category mapping — check those before assuming this file is up to date.
 **For:** Julie and Paul, to pick this up without access to the Claude Code session it came from.
 **Read this first.** Everything else in this folder is referenced from here.
 
@@ -58,28 +62,41 @@ claude.ai — if that account is still accessible the URLs are at the end of thi
 
 ## 3. The state of play
 
-Two viable projects came out of this. Both are described in `docs/`. Neither was built.
+**Decided and built, not just recommended.** Option A was chosen, Option B's code was removed
+from the repo (commit `dbe9b04`, "Drop Robodebt research and the front-door audit pipeline") —
+`run_queries.py`, `grade.py`, `validate.py`, `analyse.py` no longer exist. `code/README.md`
+still documents that pipeline as if it's live; it isn't, and needs updating or deleting.
 
-### Option A — AI Disaster Resilience Index *(the stronger one)*
+### Option A — AI Disaster Resilience Index — built, not just data-in-hand
 
 Take the **Australian Disaster Resilience Index**, a peer-reviewed, government-published index
 that scores every Australian LGA on coping and adaptive capacity across eight themes, keep its
 architecture, and swap the hazard from natural disasters to catastrophic AI.
 
-**The data is already downloaded and sitting in `data/`.** See section 6.
+As of this update:
 
-Full framework in `docs/ai-disaster-resilience-index.html`: six catastrophic outcomes, one
-scoreable exposure factor each, mapped to public LGA-level data.
+- `data/qld_lga_master.csv` — 93-column merged table, all 78 councils
+- `config/index.yaml` — the scoring formula, 4 weighted components (essential services,
+  population vulnerability, institutional capacity, deployment evidence)
+- `code/build_index.py` — scores every council, writes `data/qld_lga_index.csv`, and runs the
+  honesty check (rank correlation against ADRI, held out of the model)
+- `docs/map/` — a live interactive map (Leaflet, weight sliders, click-to-inspect)
+- AI-policy scan: 47 of 78 councils checked (`ACTIONS.md` #12 for the rest)
 
-### Option B — Council front-door accuracy audit
+**Known gap, unresolved:** `docs/ai-disaster-resilience-index.html` still describes the
+*original* design — six hazards, H1–H6, each with its own formula. What actually got built in
+`config/index.yaml` is a different shape: four components, not six hazards. H2 (needs ICU
+travel-time routing — never built) and H3 (needs DRFA disaster-activation data — confirmed dead,
+see `ACTIONS.md`) appear to be why two of the six didn't survive into the real formula, but
+nobody has gone back and said so in the doc. Reconcile these before the doc and the map
+contradict each other in front of a judge.
 
-Measure what general AI assistants tell Queenslanders about their own council, scored against
-the council's own website as ground truth, stratified from SEQ metro to the 17 Indigenous
-councils. Code scaffold is in `code/`, described in `code/README.md`.
+### Option B — dropped
 
-**Recommendation if you only do one: Option A.** It has real data in hand, a validated
-architecture to borrow, and a genuinely novel question. Option B is a good fallback because it
-depends on no legal analysis at all.
+Was: measure what general AI assistants tell Queenslanders about their own council, scored
+against the council's own website. Formally abandoned same day as Option A's build began — see
+commit `dbe9b04` above. `code/README.md` (the Option B pipeline doc) is now stale and should be
+updated or removed so nobody tries to run scripts that aren't there anymore.
 
 ---
 
@@ -329,17 +346,17 @@ ADRI, and the overall rank correlation will fall below 0.9.*
 
 ## 7. Running the code
 
-Six Python scripts. **Only two have been run, and those two have already produced everything in
-`data/`.** The other four are scaffold for Option B, which was never started.
+Option B's four scripts (`run_queries.py`, `grade.py`, `validate.py`, `analyse.py`) are gone —
+see section 3. What's actually in `code/` now:
 
 | Script | Purpose | Status |
 |---|---|---|
 | `fetch_adri.py` | Pulls ADRI off its REST API, aggregates SA2 → LGA | **Run** — produced `data/adri_*` |
 | `build_councils.py` | Builds the 78-row council list, verifies every URL | **Run** — produced `data/councils.csv` |
-| `fetch_lga_profile.py` | ABS population/SEIFA/Census/area + QLD staff and finances onto the council list | **Run** — produced `data/lga_profile_QLD.csv` |
+| `fetch_lga_profile.py` | Joins ABS population/SEIFA/Census/area + QLD staff and finances onto the council list | **Run** — produced `data/lga_profile_QLD.csv` |
 | `fetch_mbsp.py` | MBSP funded base stations per LGA, by carrier, from the DITRDCA ArcGIS service | **Run** — produced `data/qld_lga_mobile_blackspots.csv` |
 | `build_master.py` | Joins every source into the one analysis table | **Run** — produced `data/qld_lga_master.csv` |
-| `build_index.py` | Scores `qld_lga_master.csv` against `config/index.yaml`, ranks vs ADRI | **Run** — produced `data/qld_lga_index.csv` |
+| `build_index.py` | Scores every council against `config/index.yaml`, writes the ranked index, runs the ADRI correlation check | **Run** — produced `data/qld_lga_index.csv` (also copied to `docs/map/`) |
 | `run_queries.py` | Puts the question set to Gemini / a SERP API, caches and archives | Never run |
 | `grade.py` | Scrapes council ground truth, grades the answers | Never run |
 | `validate.py` | Blind hand-labelling by both of you, then agreement stats | Never run |
@@ -352,19 +369,19 @@ reusing — see below.
 ```bash
 cd code
 pip install -r requirements.txt
-cp .env.example .env                 # only needed for Option B
 python fetch_adri.py --state QLD     # already run; re-run only to refresh
 python build_councils.py             # already run; takes ~5 min, hits 78 sites
 python fetch_lga_profile.py          # already run; ABS + QLD open data, all cached
-python fetch_mbsp.py                  # already run; DITRDCA ArcGIS, cached
-python build_master.py               # join everything -> data/qld_lga_master.csv
-python build_index.py                # score it -> data/qld_lga_index.csv
+python fetch_mbsp.py                 # already run; DITRDCA ArcGIS, cached
+python build_master.py               # already run; re-run after touching a source
+python build_index.py                # already run; re-run after any config/index.yaml edit
 ```
 
 Re-run order after touching a source: its `fetch_*`, then `build_master.py`, then `build_index.py`.
 
-`code/README.md` documents the Option B pipeline in full:
-`build_councils.py` → `run_queries.py` → `grade.py` → `validate.py` → `analyse.py`.
+`code/README.md` still documents the old Option B pipeline
+(`build_councils.py` → `run_queries.py` → `grade.py` → `validate.py` → `analyse.py`). Those
+scripts don't exist anymore — update or delete that file so nobody tries to follow it.
 
 Two things in there worth keeping whatever you build:
 
@@ -413,9 +430,13 @@ Be honest about these in any submission.
   fetching. Columns carry their own `*_data_year` so the vintage travels with the number.
 - **`staff_per_1000_residents` mixes vintages** — 2015-16 staff over 2025 population. Rough
   indicator only; recompute against 2016 ERP if it matters.
-- **Full council names** — `councils.csv` derives most from a pattern (`<name> Regional
-  Council`), which will be wrong for some shires and city councils. The *URLs* are verified; the
-  *names* are not. Fix them from the Department's directory before any of them appear on screen.
+- **Full council names — corrected 29 Aug, afternoon.** 33 of 78 were wrong (pattern-guessed as
+  `<name> Regional Council` regardless of actual type), fixed against Wikipedia's LGA table
+  cross-referenced with the Local Government Act 2009 naming convention, applied across all six
+  files that carry `council_name`. **Two are lower-confidence and worth a one-click spot check**
+  against the council's own site: `City of Gold Coast` and `City of Moreton Bay` — both dropped
+  "Council" from their public branding, but that's from memory, not a fetched source. Everything
+  else (Shire/Regional/City suffix corrections) came directly from Wikipedia's table, not memory.
 - **ADRI LGA aggregation** — `fetch_adri.py` weights by area × share, because the population
   fields in the API payload are null. Area weighting over-weights large empty SA2s. Joining ABS
   ERP by SA2 code and swapping the weight would be better.
