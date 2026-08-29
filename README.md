@@ -33,16 +33,14 @@ paper-based shire, not less.
 
 **Hold ADRI out as the control.** The index never uses ADRI's own scores as an input — only as
 a check afterwards. If the two rankings turned out to be near-identical, the honest finding
-would be "we rebuilt ADRI and added nothing." They diverge (Spearman r ≈ −0.67 to −0.85,
-depending on data-quality decisions — see limitations), which is reported as the actual result,
+would be "we rebuilt ADRI and added nothing." They diverge (Spearman r = −0.505, well below the
+0.9 threshold that would mean the index adds nothing), which is reported as the actual result,
 not hidden in favour of a cleaner story.
 
 ## What's built
 
-Five scored components, weighted 25/20/30/15/10. **Status:** the first four are live in
-`config/index.yaml` and `data/qld_lga_index.csv` today; synthetic warning's weight and
-justification are settled below, but it still needs two data pulls (English proficiency, mobile
-coverage) before it's wired into the scored index — see `HANDOVER.md`.
+**All five components are live** in `config/index.yaml` and `data/qld_lga_index.csv`, weighted
+25/20/30/15/10.
 
 | Component | Weight | What it measures |
 |---|---|---|
@@ -50,7 +48,14 @@ coverage) before it's wired into the scored index — see `HANDOVER.md`.
 | Population vulnerability | 20% | Disadvantage (SEIFA), crowding, Indigenous share — who absorbs a shock badly, hazard-agnostic |
 | Institutional capacity | 30% | Discretionary revenue, staffing depth and mix — can the council itself keep functioning |
 | Deployment evidence | 15% | Confirmed AI use, press-derived |
-| Synthetic warning | 10% | Fabricated, AI-generated evacuation message during a live emergency, with no second channel to check it against — the only component whose scored factor genuinely depends on AI as the cause |
+| Synthetic warning | 10% | Fabricated, AI-generated evacuation message during a live emergency, with no second channel to check it against — the only component whose scored factor genuinely depends on AI as the cause. Built from disaster-event frequency, funded mobile coverage (channel redundancy) and non-English-speaking household share (does the official channel actually reach everyone) |
+
+Synthetic warning deliberately does not use `adri_information_access` as a channel-access proxy,
+even though it's the closest-fitting ADRI theme — that column is held out as the control, and
+using it here would leak the control into the model. It also deliberately excludes remoteness:
+the project's own analysis found remoteness genuinely ambiguous for this hazard (a short local
+verification chain cuts one way, thin channel coverage cuts the other), not a defensible single
+direction.
 
 **Why these weights.** Institutional capacity carries the most weight because it's the
 component with the least analogue in ADRI — the independent signal this index can actually add.

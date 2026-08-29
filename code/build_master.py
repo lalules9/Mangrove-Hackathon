@@ -12,6 +12,7 @@ Sources, all joined on a normalised LGA name:
   data/qld_lga_infrastructure.csv roads, waste, isolated power networks
   data/qld_lga_mobile_blackspots.csv  MBSP funded base stations per LGA, by carrier
   data/qld_lga_remoteness.csv    official ABS Remoteness Area per LGA (vs the sampling stratum)
+  research/disaster_events_by_lga.csv   recorded disaster events per LGA (AIDR)
   research/qld_lga_ai_infrastructure_tracker.csv   AI deployment detail and sources
   research/qld_council_ai_policies.csv             published AI policy scan (partial)
 
@@ -77,6 +78,7 @@ def main() -> None:
     infra    = load(DATA / "qld_lga_infrastructure.csv", "short_name")
     mbsp     = load(DATA / "qld_lga_mobile_blackspots.csv", "join_key")
     remote   = load(DATA / "qld_lga_remoteness.csv", "short_name")
+    devents  = load(RESEARCH / "disaster_events_by_lga.csv", "lga_name")
 
     if not profile:
         raise SystemExit("lga_profile_QLD.csv is required. Run fetch_lga_profile.py first.")
@@ -143,6 +145,12 @@ def main() -> None:
         for c in ("remoteness_category", "remoteness_rank", "remoteness_method",
                   "remoteness_sa2_mix"):
             row[c] = rm.get(c, "")
+
+        # Recorded disaster events (AIDR). Left join: an LGA absent from the file has
+        # no recorded events, which is a real zero. Feeds the synthetic_warning component.
+        de = devents.get(k, {})
+        row["disaster_events_alltime"] = de.get("events_all_time", "0")
+        row["disaster_events_last5yr"] = de.get("events_last_5yr", "0")
 
         # Mobile Black Spot Program funded base stations. Left join: an LGA absent from
         # the file received no MBSP funding, which is a real zero, not missing data.

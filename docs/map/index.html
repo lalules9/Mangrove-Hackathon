@@ -150,6 +150,7 @@ footer{background:var(--card);border-top:1px solid var(--rule);padding:9px 20px;
       <option value="population_vulnerability_score">Component · population vulnerability</option>
       <option value="institutional_capacity_score">Component · institutional capacity</option>
       <option value="deployment_evidence_score">Component · deployment evidence</option>
+      <option value="synthetic_warning_score">Component · synthetic warning</option>
     </select>
 
     <h2>Component weights</h2>
@@ -187,12 +188,14 @@ const norm = n => (n||"").toLowerCase().split(/[^a-z]+/)
                    .filter(w => w && !TYPE.has(w)).join("");
 
 // Component weights as configured in config/index.yaml. Sliders override these live.
-const DEFAULTS = {essential_services:0.30, population_vulnerability:0.25,
-                  institutional_capacity:0.30, deployment_evidence:0.15};
+const DEFAULTS = {essential_services:0.25, population_vulnerability:0.20,
+                  institutional_capacity:0.30, deployment_evidence:0.15,
+                  synthetic_warning:0.10};
 const LABELS = {essential_services:"Essential services",
                 population_vulnerability:"Population vulnerability",
                 institutional_capacity:"Institutional capacity",
-                deployment_evidence:"Deployment evidence"};
+                deployment_evidence:"Deployment evidence",
+                synthetic_warning:"Synthetic warning"};
 let weights = {...DEFAULTS}, data = {}, geo = null, layer = null, current = "ai_risk_index";
 
 const RAMP = ["--r1","--r2","--r3","--r4","--r5"].map(v =>
@@ -289,10 +292,11 @@ function render(){
 }
 
 const COMPONENTS = [
-  ["essential_services_score",     "Essential services"],
+  ["essential_services_score",      "Essential services"],
   ["population_vulnerability_score","Population vulnerability"],
-  ["institutional_capacity_score", "Institutional capacity"],
-  ["deployment_evidence_score",    "Deployment evidence"]];
+  ["institutional_capacity_score",  "Institutional capacity"],
+  ["deployment_evidence_score",     "Deployment evidence"],
+  ["synthetic_warning_score",       "Synthetic warning"]];
 
 function fmt(v,d=2){ const n=parseFloat(v); return Number.isFinite(n)?n.toFixed(d):"—"; }
 function isYes(v){ return String(v).toLowerCase()==="true"; }
