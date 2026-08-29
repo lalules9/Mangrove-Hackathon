@@ -242,9 +242,9 @@ function detail(rec){
     .filter(([,v])=>Number.isFinite(v))
     .sort((a,b)=>b[1]-a[1]);
   const shift = parseInt(rec.rank_shift,10);
-  const shiftTxt = Number.isFinite(shift)
-    ? (shift>0?`+${shift} worse than ADRI`:shift<0?`${shift} better than ADRI`:"same as ADRI")
-    : "—";
+  const shiftTxt = !Number.isFinite(shift) ? "—"
+    : shift===0 ? "same as ADRI"
+    : `${shift>0?"worse":"better"} than ADRI (${Math.abs(shift)} ${Math.abs(shift)===1?"place":"places"})`;
   const rows=[
     ["QAIRI score", idx!=null?idx.toFixed(3):"—"],
     ["QAIRI rank", rec.ai_risk_rank?`${rec.ai_risk_rank} of 78`:"—"],
