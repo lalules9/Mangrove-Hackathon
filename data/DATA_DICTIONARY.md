@@ -21,6 +21,44 @@ Every column in every file in `data/`, what it means, where it came from, and ho
 
 ---
 
+## 0. `qld_lga_ai_risk_master.csv` — THE index spine, start here
+
+**This is the file the index gets built from.** Everything else in `data/` and `research/` is a
+source that feeds this one. One row per LGA (78 — 77 councils plus Weipa Town Authority), keyed on
+`short_name`, joining together every layer collected so far:
+
+| Column | Source | Meaning |
+|---|---|---|
+| `short_name`, `council_name`, `stratum`, `is_indigenous_council` | `lga_profile_QLD.csv` | Identity |
+| `population_latest`, `own_source_revenue_share`, `staff_fte_total` | `lga_profile_QLD.csv` | Capacity |
+| `adri_andri`, `adri_coping_capacity`, `adri_adaptive_capacity`, `adri_information_access` | `lga_profile_QLD.csv` | Existing disaster-resilience baseline |
+| `ai_status`, `ai_infrastructure_type`, `ai_source` | `research/qld_lga_ai_infrastructure_tracker.csv` | **Realized exposure** — is AI actually running in this council's infrastructure, verified against a named source |
+| `water_utility`, `water_control_tier`, `water_connections_2023_24`, `meets_soci_threshold` | `data/water_sewer_connections_NPR_2023_24_QLD.csv` | **Current critical-infrastructure exposure** — who actually runs the water/sewer asset (the council itself, or a joint bulk authority it doesn't control alone) and whether it crosses the SOCI Act's 100,000-connection line |
+| `has_published_ai_governance_policy` | tracker | **Governance readiness** — currently `True` for exactly one council (Cairns), `False` for all 77 others including every one of the 8 with confirmed AI in infrastructure |
+
+**The join key is `short_name`** — ADRI's own naming convention, already used across `councils.csv`,
+`adri_lga_QLD.csv`, `adri_sa2_QLD.csv` and `lga_profile_QLD.csv`. Neither the AI tracker (which
+uses full LGA names like "Sunshine Coast Regional") nor the NPR water file (which uses utility
+names, several of which — Urban Utilities, Unitywater — are joint authorities covering *multiple*
+councils, not 1:1) match this convention directly, which is exactly why they'd been sitting as
+separate, unmergeable files. The name-normalisation logic that resolves both onto `short_name`
+(stripping "Regional"/"Shire"/"City"/"Council"/"Aboriginal", handling the "City of X" prefix, and
+explicitly mapping the two bulk water authorities to their member councils) isn't yet saved as a
+standalone script — it's currently one-off Python run to produce this CSV. **Worth turning into a
+proper `code/build_master.py` before this needs re-running with a fifth data source**, so the
+crosswalk logic doesn't get silently re-derived (and potentially drift) each time.
+
+**What's still a gap, not filled by this merge:** 52 of the 78 councils have no water-connection
+data at all (blank `water_utility`) because they fall below the ~10,000-connection NPR reporting
+threshold — they're still only findable in the stale 2015-16 release. And `ai_status` for the 61
+"no evidence found" councils means exactly that — not found in the sources searched, not
+confirmed absent.
+
+**This is a feature table, not a score.** Per HANDOVER's own rule, the next step is not collapsing
+these columns into one composite — it's deciding how the realized-exposure, capacity, and
+governance-readiness layers get reported side by side so a council can see which one drives its
+own result.
+
 ## 1. `lga_profile_QLD.csv` — the main working file
 
 78 rows: Queensland's 77 local governments plus the Weipa Town Authority. One row per LGA.
@@ -197,7 +235,51 @@ entry is non-commercial, but put the attribution on the page rather than in a fo
 
 ---
 
-## 6. Joining to anything else
+## 6. `water_sewer_connections_NPR_2023_24_QLD.csv` — current water/sewer connections
+
+Fills the gap flagged above: the Queensland comparative-information water/sewer connection
+figures in `lga_profile_QLD.csv` (`water_sewer_data_year`) are **2015–16**. This file is **current
+to 2023–24**, sourced from the Bureau of Meteorology's **Urban National Performance Report
+2023–24**, "Complete dataset" sheet, indicators `C4` ("Total number of connected properties:
+water supply") and `C8` ("...wastewater"). Only Queensland service providers required to report
+under the NPR framework (retail utilities above roughly 10,000 connections) are included — 22
+entities, not all 77 LGAs. Smaller/remote councils' water and sewer connection counts are **still
+only available from the stale 2015–16 release** — this file does not fill that part of the gap.
+
+| Column | Meaning |
+|---|---|
+| `utility` | The reporting entity's own name — not always a council (see below) |
+| `water_connections_2023_24` / `sewer_connections_2023_24` | Property connection counts, 2023–24 |
+| `meets_soci_critical_water_asset_threshold` | `True` if either count is ≥100,000 — the *Security of Critical Infrastructure Act 2018* (Cth) threshold for a "critical water asset" |
+| `notes` | Flags entities that are not a retail council utility at all |
+
+**A unit-labelling bug worth knowing about, caught by cross-checking rather than trusting the
+source file:** the BOM spreadsheet's own `Unit` column for indicators `C4`/`C8` says `population
+000s`, which contradicts the indicator's own name ("connected **properties**"). Cross-checked
+against `avg_household_size` and total population in `lga_profile_QLD.csv` (e.g. Cairns:
+76,270 connections against ~179,000 population ≈ 2.35 people/property, matching the recorded
+household size) — the values are connected properties as named, and the BOM `Unit` label is wrong,
+not the data. Don't repeat BOM's own unit label without this caveat if citing the source directly.
+
+**The finding that changes HANDOVER's H1 (SOCI critical-infrastructure) claim from general to
+specific:** it is not simply true that "almost every Queensland council sits below the 100,000
+connection threshold" — four entities cross it: **Urban Utilities** (676,983 water / 648,710
+sewer) and **Unitywater** (358,160 / 318,537), plus **City of Gold Coast** (279,107 / 264,660) and
+**Logan City Council** (142,488 / 126,947) on their own. Every other reporting QLD utility sits
+well below. The structural point: Urban Utilities and Unitywater are **not councils** — they are
+statutory bulk retail authorities jointly owned by, respectively, Brisbane + Ipswich + Lockyer
+Valley + Scenic Rim + Somerset, and Moreton Bay + Sunshine Coast + Noosa. So for most of the SEQ
+councils that *do* cross the SOCI threshold, the entity actually operating the critical
+infrastructure — and therefore the one an AI-failure liability question would first land on — is a
+joint authority the council partly owns, not the council itself. That is a materially different
+governance/control relationship (dependent-on-another-body, not directly-operated) than for Gold
+Coast and Logan, which run their own water utilities and cross the threshold directly.
+
+**Attribution:** Bureau of Meteorology, *National Performance Report 2023–24: urban water
+utilities*, © Commonwealth of Australia. Not covered by the ADRI CC BY-NC licence — BOM data has
+its own terms, check before redistribution.
+
+## 7. Joining to anything else
 
 `abs_lga_code` is the key to the wider ABS universe. With it you can pull any LGA-level dataflow
 from `data.api.abs.gov.au` — Census tables `C21_G01_LGA` through `C21_G62_LGA`, `ERP_LGA2025`,
