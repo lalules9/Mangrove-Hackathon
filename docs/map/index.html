@@ -24,8 +24,8 @@ body{background:var(--paper);color:var(--ink);
   font-family:"Source Sans 3",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   display:flex;flex-direction:column}
 header{background:var(--card);border-bottom:1px solid var(--rule);padding:14px 20px}
-h1{margin:0;font-size:19px;font-weight:700;letter-spacing:-.01em}
-header p{margin:3px 0 0;font-size:13.5px;color:var(--ink2)}
+h1{margin:0;font-size:22px;font-weight:700;letter-spacing:-.01em}
+header p{margin:3px 0 0;font-size:16.5px;color:var(--ink2)}
 #wrap{flex:1;display:flex;min-height:0;flex-direction:column}
 #map{flex:1;min-height:340px;background:var(--paper)}
 #detailCol,#side{background:var(--card);border-top:1px solid var(--rule);
@@ -49,9 +49,9 @@ button{cursor:pointer;margin-top:8px}
 .sl input{grid-column:1/-1;width:100%;accent-color:var(--accent)}
 #wsum{font-size:12px;font-family:ui-monospace,monospace;color:var(--ink3);margin-top:-2px}
 #wsum.bad{color:var(--r5);font-weight:700}
-#detail{font-size:13.5px;color:var(--ink2);line-height:1.55}
-#detail h3{margin:0 0 4px;font-size:17px;color:var(--ink)}
-#detail table{width:100%;border-collapse:collapse;margin-top:8px;font-size:12.5px}
+#detail{font-size:15.5px;color:var(--ink2);line-height:1.55}
+#detail h3{margin:0 0 4px;font-size:19px;color:var(--ink)}
+#detail table{width:100%;border-collapse:collapse;margin-top:8px;font-size:14.5px}
 #detail td{padding:3px 0;border-bottom:1px solid var(--rule)}
 #detail td:last-child{text-align:right;font-family:ui-monospace,monospace;color:var(--ink)}
 .legend{display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--ink2)}
@@ -62,6 +62,7 @@ footer{background:var(--card);border-top:1px solid var(--rule);padding:9px 20px;
 footer a{color:var(--accent);font-weight:600;text-decoration:none}
 footer a:hover{text-decoration:underline}
 .leaflet-container{background:var(--paper)}
+.leaflet-interactive:focus{outline:none}
 .note{font-size:12px;color:var(--ink3);line-height:1.5;margin-top:6px}
 
 .header-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -80,6 +81,8 @@ footer a:hover{text-decoration:underline}
   font-size:26px;line-height:1;color:var(--ink3);cursor:pointer;width:auto;padding:4px}
 .modal-title{margin:0 0 8px;font-size:20px;font-weight:700}
 .modal-sub{font-size:13.5px;color:var(--ink2);line-height:1.5;margin:0 0 20px}
+.modal-rowkey{font-size:12px;color:var(--ink3);line-height:1.5;margin:-12px 0 12px}
+.modal-rowkey b{color:var(--ink2)}
 .modal-source{font-size:11.5px;color:var(--ink3);line-height:1.5;margin-top:16px}
 
 .stage-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
@@ -122,6 +125,7 @@ footer a:hover{text-decoration:underline}
     <button id="closeResilience" class="modal-close" aria-label="Close">&times;</button>
     <h2 class="modal-title">Mapping AI risk to Disaster Risk Management</h2>
     <p class="modal-sub">The International AI Safety Report's resilience model lines up with the stages Queensland councils already run for disasters. AI risk is not a new discipline. It fits the shape councils already use.</p>
+    <p class="modal-rowkey"><b>Top row:</b> the stage name from the International AI Safety Report. <b>Bottom row:</b> the matching stage in Queensland's Disaster Management Act 2003.</p>
     <div class="stage-grid">
       <div class="stage-pair" style="--stage:var(--stage1)">
         <div class="stage-box report">Resist</div>
@@ -436,6 +440,7 @@ function sliders(){
      <input type="range" id="w_${k}" min="0" max="1" step="0.05" value="${weights[k]}"></div>`).join("");
   box.querySelectorAll(".info-btn").forEach(btn=>{
     btn.addEventListener("click", e=>{ e.preventDefault(); openCompModal(btn.dataset.comp); });
+    btn.addEventListener("mouseenter", ()=>{ openCompModal(btn.dataset.comp); });
   });
   Object.keys(DEFAULTS).forEach(k=>{
     document.getElementById("w_"+k).addEventListener("input", e=>{
