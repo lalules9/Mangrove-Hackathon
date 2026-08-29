@@ -276,6 +276,75 @@ The thesis went through several rounds of repair. These are settled:
 6. **Don't script google.com directly.** Against their terms, and a bad look in a submission
    about responsible AI.
 
+### How the taxonomy was built — rationale, 29 Aug afternoon
+
+**References actually used:**
+
+| Source | What it supplied |
+|---|---|
+| International AI Safety Report 2026 (Bengio) | Primary risk categories — malicious use / malfunctions / systemic |
+| An Overview of Catastrophic AI Risks (Hendrycks, Mazeika & Woodside) | Secondary categories — malicious use / AI race / organisational risk / rogue AI |
+| Mapping AI-Caused Disasters (Afroogh & Jiao) | Disaster-type taxonomy, and the developer/operator/regulator/government accountability structure |
+| Two Types of AI Existential Risk (Kasirzadeh) | The decisive-vs-accumulative framing — council-scale AI risk is accumulative, not one sudden event |
+| Disaster Management Act 2003 (Qld), ss4A(d), 16(1)(d), 29–30 | Legal anchor — councils are already primarily responsible for "events," and infrastructure failure already counts as one |
+| Human Rights Act 2019 (Qld), ss9, 58 | Legal anchor — councils must already give demonstrable consideration to human rights in decisions |
+| Local Government Act 2009 (Qld), ss9, 262 | General competence power — a council can act on AI risk without waiting for AI-specific legislation |
+| Pabai v Commonwealth (2025) | Counter-argument — courts have already declined to extend duty-of-care to diffuse, uncertain harm |
+| Australian Disaster Resilience Index (NHRA/UNE) | The architecture (coping/adaptive capacity across themes) borrowed wholesale, hazard swapped |
+
+**The method:** don't invent a risk list — cite one (Bengio, then Hendrycks for finer-grained
+categories). Then only include a specific hazard if it passes four tests: it traces to that
+taxonomy, a council controls or is exposed through a local channel, there's real data that
+differs council to council, and a council can actually do something about it. Every hazard's
+score is built from three separate terms — exposure (does it reach you), absorptive capacity
+(can you contain it locally), consequence (how bad if it lands) — because collapsing them into
+one number hid real effects (remoteness protects against some hazards and worsens others; a
+highly digitised metro council can be more exposed than a paper-based shire, not less).
+
+**What actually survived contact with real data, on the audit below: two of six hazards (H1,
+H5) are properly built. One (H3) is being added now. Two (H2, H4) don't hold up and are cut or
+relabelled. One (H6) is named but not scored. Two live components (`deployment_evidence`,
+`population_vulnerability`) were added after the six-hazard register for reasons the register
+itself doesn't cover, and are reconciled below.**
+
+### Taxonomy audit, 29 Aug afternoon
+
+Went through all six hazards (H1–H6, `docs/ai-disaster-resilience-index.html`) against the
+doc's own four-part selection test. Findings:
+
+- **Only H1 and H5 made it into the real scored index** (`config/index.yaml`), as
+  `essential_services` and `institutional_capacity`. H2, H3, H4, H6 were never built.
+- **H2 (biological) — keep, but relabel.** AI-biosecurity risk is real and well-sourced
+  (Hendrycks cites a 2022 case: a drug-discovery AI, reward-flipped, generated 40,000 candidate
+  chemical weapons in six hours). But H2's *scored factor* — `ICU travel time × overcrowding ÷
+  health workforce` — measures general bio-vulnerability, not anything AI-specific; it would
+  score identically for a natural pandemic. **Revised call: keep H2, but be explicit in the
+  write-up that it's a consequence-only proxy — general bio-vulnerability, not an AI-specific
+  measure — because no AI-specific, LGA-varying exposure signal currently exists.** Councils can
+  still act on it via their DMA s30 disaster-coordination duties (community awareness, comms),
+  even without running health services.
+- **H3 (synthetic warning) — the most genuinely AI-specific hazard of the six, and fixable, not
+  dead.** Of its 4 inputs: `DRFA_activations_5yr` is genuinely dead (URL 404s). Digital
+  inclusion at LGA level is structurally unpublished — but `adri_information_access` is already
+  in the data (78/78, LGA-level) and is a ready free substitute. English proficiency needs one
+  more ABS Census pull. Mobile/NBN coverage is a known 30-minute manual download (`ACTIONS.md`
+  #6). Worth actually building as a fifth component if time allows — most of the blockers are
+  cheap.
+- **H4 (service substitutability) — drop.** Never had data (`council_function_breadth` self-
+  admitted "no dataset, code it by hand" from day one), and like H2, doesn't actually depend on
+  AI as the cause.
+- **`vendor_concentration` in H5's formula is stale — remove it from the doc.** It was never a
+  team decision to cut it; one candidate dataset (`LB308`, a contract-disclosure source) turned
+  out to have zero variance across all 78 councils. `ACTIONS.md` #8 (manually pulling contract
+  registers, s237/$200k threshold) is the real, still-open way to measure it properly.
+- **`deployment_evidence` and `population_vulnerability`** (both live in `config/index.yaml`
+  today) were added after the six-hazard register and never reconciled with it. `deployment_
+  evidence` is the de facto measure of Hendrycks' **AI Race** category (competitive pressure to
+  deploy) — currently your weakest-covered Hendrycks category, so this is filling a real gap,
+  not a stray addition. `population_vulnerability` isn't a hazard at all — it's the
+  consequence/absorptive layer the framework's own design says should sit under every hazard,
+  generalised out of what used to be buried inside H2's formula alone.
+
 ---
 
 ## 6. The ADRI data — already pulled, ready to use
@@ -440,6 +509,29 @@ Be honest about these in any submission.
 - **ADRI LGA aggregation** — `fetch_adri.py` weights by area × share, because the population
   fields in the API payload are null. Area weighting over-weights large empty SA2s. Joining ABS
   ERP by SA2 code and swapping the weight would be better.
+- **No limitations page exists yet** (`ACTIONS.md` P1 #2, assigned to Julie). Two things that
+  must go in it when it's written:
+  - **`Pabai v Commonwealth (2025)`** — the Federal Court found the Commonwealth owed **no**
+    duty of care to Torres Strait Islanders over climate-change harm. A real, negative
+    precedent against the idea that government already owes an affirmative duty to prevent
+    diffuse, foreseeable-but-uncertain harm — exactly the shape of this project's premise, and
+    most pointed given the dataset's own floor is Aurukun and the Torres Strait councils. Cite
+    it yourselves before a judge does.
+  - **Most of the index isn't AI-specific in its mechanism, and that's worth saying outright.**
+    `essential_services` and `population_vulnerability` would score identically for a natural
+    disaster — they measure general vulnerability, borrowed from ADRI's own architecture. Of
+    the whole index, **H3 (synthetic warning) is the only component whose scored factor
+    actually depends on AI as the cause** — a fake, AI-generated warning message specifically.
+    Say plainly that the index is mostly "who absorbs any shock badly," with one AI-specific
+    layer on top, not six independently AI-specific hazards.
+  - **`research/disaster_events_by_lga.csv` locations are approximate, not verified per
+    event.** Pulled from AIDR's Disaster Mapper and matched to a council by coordinates. Many
+    older entries share the exact same coordinate (a regional default near Townsville, Brisbane
+    etc.), not the real event location — confirmed on Cyclone Kirrily (2024), which the database
+    places at generic Townsville coordinates rather than its real path. This will under-count
+    events in remote and Cape York councils and over-count events near major named towns. No
+    time to hand-verify all 78 councils for this hackathon — known and accepted, state it
+    plainly rather than present the counts as precise.
 
 ---
 
