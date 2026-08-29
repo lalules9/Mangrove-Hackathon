@@ -10,3 +10,19 @@ Toowoomba,regional_city,NOT FOUND,,,,"Policy framework page indexed; no AI polic
 Mount Isa,remote,NOT FOUND,,,,,indexed search
 Yarrabah,indigenous,NOT FOUND,,,,,indexed search
 Torres Strait Island,indigenous,NOT FOUND,,,,,indexed search
+Logan,seq_metro,NOT FOUND,,,,"Policies index page indexed; no AI policy in it",indexed search
+Moreton Bay,seq_metro,DEPLOYS NO POLICY,,,,"AI routes customer requests 24/7; AI on waste trucks detecting road damage. No policy found",indexed search
+Ipswich,seq_metro,DISCLOSURE ONLY,Personal Information Digest 2025,https://www.ipswich.qld.gov.au/files/assets/public/v/1/about-council/media-and-publications/corporate-publications/privacy-statement/documents/personalinformationdigest_2025.pdf,2025,"Privacy statement discloses AI on de-identified data with human oversight. Not a policy",indexed search
+Rockhampton,regional_city,NOT FOUND,,,,,indexed search
+Mackay,regional_city,DEPLOYS NO POLICY,,,,"Three AI initiatives funded in budget to mitigate cost pressures. No policy found",indexed search
+Bundaberg,regional_city,NOT FOUND,,,,,indexed search
+Gladstone,regional_city,NOT FOUND,,,,,indexed search
+Whitsunday,outer_regional,NOT FOUND,,,,,indexed search
+Redland,regional_city,NOT FOUND,,,,,indexed search
+Fraser Coast,regional_city,NOT FOUND,,,,,indexed search
+Scenic Rim,regional_city,NOT FOUND,,,,,indexed search
+Southern Downs,regional_city,NOT FOUND,,,,,indexed search
+Cook,remote,NOT FOUND,,,,"Policy index and LDMP indexed; no AI policy",indexed search
+Barcaldine,very_remote,NOT FOUND,,,,,indexed search
+Aurukun,indigenous,NOT FOUND,,,,"Several other policies indexed (WHS investment local law); no AI policy",indexed search
+Tablelands,outer_regional,NOT FOUND,,,,,indexed search
