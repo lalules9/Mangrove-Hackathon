@@ -116,7 +116,7 @@ h3{font-size:20px;margin:30px 0 9px}
 table{border-collapse:collapse;width:100%;font-size:14.2px;min-width:620px}
 thead th{text-align:left;font-family:"JetBrains Mono",monospace;font-size:10px;
   letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);font-weight:500;
-  padding:12px 15px;border-bottom:1px solid var(--rule);background:var(--card-2);white-space:nowrap}
+  padding:12px 15px;border-bottom:1px solid var(--rule);background:var(--card-2)}
 tbody td{padding:11px 15px;border-bottom:1px solid var(--rule-soft);vertical-align:top;color:var(--ink-2)}
 tbody tr:last-child td{border-bottom:0}
 td strong{color:var(--ink);font-weight:600}
@@ -216,11 +216,11 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
     <p class="eyebrow">Remoteness</p>
     <h2>Remoteness and the QAIRI</h2>
   </div>
-  <p class="body">Across the six components, risk in remote areas according to the QAIRI varies. There are benefits to being a small, remote community such as opportunity to seal entry and exit which a large urban area could not; or having the social infrastructure in place to check and verify things by council staff visiting home by home.</p>
-  <p class="body">Remoteness uses exposure, absorptive capacity and consequence combined to create this component.</p>
+  <p class="body" style="max-width:none">Across the six components, risk in remote areas according to the QAIRI varies. There are benefits to being a small, remote community such as opportunity to seal entry and exit which a large urban area could not; or having the social infrastructure in place to check and verify things by council staff visiting home by home.</p>
+  <p class="body" style="max-width:none">Remoteness uses exposure, absorptive capacity and consequence combined to create this component.</p>
   <div class="tablewrap">
     <table>
-      <thead><tr><th>Component</th><th>Exposure, does it reach the community</th><th>Absorptive, can it be contained locally</th><th>Consequence, how bad if it lands</th><th>Net</th></tr></thead>
+      <thead><tr><th>Component</th><th>Exposure</th><th>Absorptive capacity</th><th>Consequence</th><th>Net</th></tr></thead>
       <tbody>
         <tr><td><strong>Essential services</strong></td><td>Neutral</td><td>Worse, one plant, one operator</td><td>Worse, days to restore</td><td><strong>Remote worse</strong></td></tr>
         <tr><td><strong>Population vulnerability</strong></td><td>Cross-cutting</td><td>Cross-cutting</td><td>Worse, disadvantage compounds</td><td><strong>Remote worse</strong></td></tr>
@@ -231,21 +231,18 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
       </tbody>
     </table>
   </div>
-  <p class="body" style="margin-top:14px">Institutional capacity inverts entirely: a highly digitised metropolitan council with two hundred integrated systems and no manual process is more exposed to institutional failure than a shire that still runs on paper. Synthetic warning's remoteness sign is genuinely ambiguous rather than resolvable either way, so the formula leaves remoteness out of that component rather than force a direction onto it.</p>
-  <div class="callout hot">
-    <strong>Every factor is built with all three terms explicit.</strong> Exposure times (1 minus absorptive capacity) times consequence, with the sign on remoteness set per component rather than assumed.
-  </div>
+  <p class="body" style="margin-top:14px;max-width:none">Institutional capacity inverts entirely: a highly digitised metropolitan council with two hundred integrated systems and no manual process is more exposed to institutional failure than a shire that still runs on paper. Synthetic warning's remoteness sign is genuinely ambiguous rather than resolvable either way, so the formula leaves remoteness out of that component rather than force a direction onto it.</p>
+
 </section>
 
 <section id="divergence">
   <div class="sec-head">
     <p class="eyebrow">The validation that matters</p>
     <h2>The actual result, not a prediction of one</h2>
-    <p>This was pre-registered before the index was scored, then tested. Here is what happened.</p>
   </div>
   <p class="body">Reusing ADRI's own inputs and assumptions would only reproduce ADRI with extra steps, rediscovering that remote communities are disadvantaged. The test is not an argument. It is a number, computed against ADRI held entirely out of the model and used only for comparison.</p>
   <p class="body"><strong>Spearman rank correlation between QAIRI and ADRI's resilience score: r = -0.408.</strong> Comfortably below the 0.9 threshold that would mean the index adds nothing, and below the 0.7 threshold that would mean it is merely a variant of the same thing. The two rankings are substantially different.</p>
-  <p class="body" style="margin-top:11px">The prediction, written down before the six components were finalised: highly digitised metropolitan councils would rank worse on QAIRI than they do on ADRI, because system dependence is a strength in a natural-hazard index and a liability in this one. That prediction held. Townsville, Brisbane, Sunshine Coast, Moreton Bay and Livingstone all shift more than fifty ranks worse on QAIRI than their ADRI position would predict.</p>
+  <p class="body" style="margin-top:11px">Highly digitised metropolitan councils rank worse on QAIRI than they do on ADRI, because system dependence is a strength in a natural-hazard index and a liability in this one. Townsville, Brisbane, Sunshine Coast, Moreton Bay and Livingstone all shift more than fifty ranks worse on QAIRI than their ADRI position would predict.</p>
   <p class="body" style="margin-top:14px">Two real sources of divergence turned out to matter, and one turned out to cut the other way:</p>
   <div class="tablewrap">
     <table>
