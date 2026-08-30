@@ -1,3 +1,4 @@
+<meta charset="utf-8">
 <title>QAIRI: Methodology</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -161,7 +162,7 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
     <h2>Inspired by ADRI, built fresh for AI</h2>
   </div>
   <p class="body">The <strong>Australian Disaster Resilience Index</strong> scores every Australian LGA on coping capacity and adaptive capacity across eight themes and 82 indicators, social character, economic capital, infrastructure and planning, emergency services, community capital, information access, governance and leadership, and social and community engagement. It is peer-reviewed, government-published, and already at the geography you need.</p>
-  <p class="body">Its structure is <strong>hazard-agnostic by design</strong>. It does not measure "how much bushfire is coming"; it measures whether a community can absorb a shock and adapt afterwards. That is exactly the part that transfers. What does not transfer is the hazard model, so that is the part that had to be built, and the part this page is honest about.</p>
+  <p class="body">Its structure is <strong>hazard-agnostic by design</strong>. It does not measure "how much bushfire is coming"; it measures whether a community can absorb a shock and adapt afterwards. That is the part that transfers. The hazard model does not transfer; it was built new for AI, and that is the part this page documents.</p>
 </section>
 
 <section id="taxonomy">
@@ -184,45 +185,43 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
       <p>Broad societal harms from widespread deployment. Labour market disruption and threats to human autonomy.</p>
     </div>
   </div>
-  <p class="body" style="margin-top:16px">Citing this rather than a list of your own does three things: it is unimpeachable as a source, it is internationally legible, and it saves you from being told you picked the risks that suited your data.</p>
 </section>
 
 <section id="selection">
   <div class="sec-head">
     <p class="eyebrow">Provenance</p>
-    <h2>Where the six came from</h2>
-    <p>An honest answer, because it is the first thing you will be asked.</p>
+    <h2>The six component weights</h2>
   </div>
-  <p class="body">The three-category taxonomy is sourced: International AI Safety Report 2026. <strong>The specific outcomes tested against it are not.</strong> They were a derivation, the taxonomy mapped onto the things Australian local government actually touches. Nobody has published a local-government AI hazard register, so there was nothing to cite. Say that out loud rather than implying the list is authoritative.</p>
-  <p class="body">What makes the derivation defensible is a stated selection rule, applied to six candidate hazards. A hazard earns a place only if all four hold:</p>
+  <p class="body">The three-category taxonomy is sourced from the International AI Safety Report 2026. <strong>The specific outcomes tested against it are not.</strong> They are a derivation: the taxonomy mapped onto the things Australian local government actually touches. Nobody has published a local-government AI hazard register, so there was nothing else to cite.</p>
+  <p class="body">The derivation follows a stated selection rule, applied to six candidate hazards. A hazard earns a place only if all four hold:</p>
   <div class="tablewrap">
     <table>
       <thead><tr><th>Test</th><th>Why</th></tr></thead>
       <tbody>
-        <tr><td><strong>1 · Traces to the taxonomy</strong></td><td>It is a recognised category of AI risk, not one you invented to fit your data.</td></tr>
+        <tr><td><strong>1 · Traces to the taxonomy</strong></td><td>It is a recognised category of AI risk, not one invented to fit the data.</td></tr>
         <tr><td><strong>2 · Lands through a local channel</strong></td><td>Local government either controls the channel, or the community's exposure through it differs by place.</td></tr>
-        <tr><td><strong>3 · Varies measurably by LGA</strong></td><td>There is public data that separates one council from another. A uniform national risk belongs in someone else's report.</td></tr>
+        <tr><td><strong>3 · Varies measurably by LGA</strong></td><td>There is public data that separates one council from another. A uniform national risk belongs in a national report, not this one.</td></tr>
         <tr><td><strong>4 · Somebody local can act</strong></td><td>A risk a council can do nothing about produces a scary map and no decision.</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="callout key">
-    <strong>Why water and not electricity, and why that first answer was too quick.</strong> Water and sewerage passed test 2 easily: in regional Queensland the council <em>is</em> the utility. Electricity failed it at first, because distribution and generation are state-owned and no council runs a grid. But that reasoning conflated <em>who operates the asset</em> with <em>how exposed the community is</em>, and the index measures the second. Queensland has communities served by <strong>isolated electricity networks</strong> rather than the national grid, and an isolated network is a materially different risk object from a grid connection, regardless of who holds the licence. Essential services now scores water and sewerage provision <em>and</em> isolated-network dependence as separate inputs, not just water.
+    <strong>Why water and electricity are scored differently.</strong> Water and sewerage pass test 2 directly: in regional Queensland the council <em>is</em> the utility. Electricity does not, because distribution and generation are state-owned and no council runs a grid. Who operates the asset is a separate question from <em>how exposed the community is</em>, and the index measures the second. Queensland has communities served by <strong>isolated electricity networks</strong> rather than the national grid, and an isolated network is a materially different risk object from a grid connection, regardless of who holds the licence. Essential services scores water and sewerage provision <em>and</em> isolated-network dependence as separate inputs.
   </div>
 </section>
 
 <section id="remoteness">
   <div class="sec-head">
-    <p class="eyebrow">Correction</p>
+    <p class="eyebrow">Remoteness</p>
     <h2>Remoteness is not a curse</h2>
-    <p>The single biggest error in the first draft, and fixing it is where this framework earns its keep.</p>
+    <p>Remoteness does not have a single sign across the six components: it raises risk in some and lowers it in others.</p>
   </div>
-  <p class="body">Treating remoteness as monotonic vulnerability is wrong, and obviously wrong once stated. <strong>A town of 400 can seal its entry and exit; a city of two million cannot.</strong> That is not hypothetical. During 2020, Commonwealth biosecurity determinations restricted entry to designated remote communities, and those communities were markedly protected as a result. Forty staff who know every ratepayer by name can run the rates on paper for a fortnight. Brisbane City Council cannot. A fabricated message from "the council" is checkable in a small town by walking down the street; in a capital city there is no social path to verification at all.</p>
-  <p class="body">The error was collapsing three different things into one variable. Separate them and remoteness stops having a single sign, across the six components actually scored:</p>
+  <p class="body">Treating remoteness as monotonic vulnerability is incorrect. <strong>A town of 400 can seal its entry and exit; a city of two million cannot.</strong> That is not hypothetical. During 2020, Commonwealth biosecurity determinations restricted entry to designated remote communities, and those communities were markedly protected as a result. Forty staff who know every ratepayer by name can run the rates on paper for a fortnight. Brisbane City Council cannot. A fabricated message from "the council" is checkable in a small town by walking down the street; in a capital city there is no social path to verification at all.</p>
+  <p class="body">Remoteness collapses three different mechanisms into one variable: exposure, absorptive capacity and consequence. Separated, remoteness does not have a single sign across the six components actually scored:</p>
   <div class="tablewrap">
     <table>
-      <thead><tr><th>Component</th><th>Exposure, does it reach you</th><th>Absorptive, can you contain it locally</th><th>Consequence, how bad if it lands</th><th>Net</th></tr></thead>
+      <thead><tr><th>Component</th><th>Exposure, does it reach the community</th><th>Absorptive, can it be contained locally</th><th>Consequence, how bad if it lands</th><th>Net</th></tr></thead>
       <tbody>
         <tr><td><strong>Essential services</strong></td><td>Neutral</td><td>Worse, one plant, one operator</td><td>Worse, days to restore</td><td><strong>Remote worse</strong></td></tr>
         <tr><td><strong>Population vulnerability</strong></td><td>Cross-cutting</td><td>Cross-cutting</td><td>Worse, disadvantage compounds</td><td><strong>Remote worse</strong></td></tr>
@@ -233,9 +232,9 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
       </tbody>
     </table>
   </div>
-  <p class="body" style="margin-top:14px">Institutional capacity is the one that plausibly inverts entirely: a highly digitised metropolitan council with two hundred integrated systems and no manual process is more exposed to institutional failure than a shire that still runs on paper. That inversion is the most interesting thing in the whole framework. Synthetic warning's remoteness sign was genuinely ambiguous rather than resolvable either way, which is exactly why the built formula leaves remoteness out of that component rather than force a direction onto it.</p>
+  <p class="body" style="margin-top:14px">Institutional capacity inverts entirely: a highly digitised metropolitan council with two hundred integrated systems and no manual process is more exposed to institutional failure than a shire that still runs on paper. Synthetic warning's remoteness sign is genuinely ambiguous rather than resolvable either way, so the formula leaves remoteness out of that component rather than force a direction onto it.</p>
   <div class="callout hot">
-    <strong>Build every factor with all three terms explicit.</strong> Exposure times (1 minus absorptive capacity) times consequence, with the sign on remoteness set per component rather than assumed. If you cannot say which of the three a variable belongs to, you do not understand what you are measuring yet.
+    <strong>Every factor is built with all three terms explicit.</strong> Exposure times (1 minus absorptive capacity) times consequence, with the sign on remoteness set per component rather than assumed.
   </div>
 </section>
 
@@ -245,7 +244,7 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
     <h2>The actual result, not a prediction of one</h2>
     <p>This was pre-registered before the index was scored, then tested. Here is what happened.</p>
   </div>
-  <p class="body">If you take the same inputs and make the same assumptions as ADRI, you reproduce it with extra steps, and a judge will say you rediscovered that remote communities are disadvantaged. The defence is not an argument. It is a number, computed against ADRI held entirely out of the model and used only for comparison.</p>
+  <p class="body">Reusing ADRI's own inputs and assumptions would only reproduce ADRI with extra steps, rediscovering that remote communities are disadvantaged. The test is not an argument. It is a number, computed against ADRI held entirely out of the model and used only for comparison.</p>
   <p class="body"><strong>Spearman rank correlation between QAIRI and ADRI's resilience score: r = -0.408.</strong> Comfortably below the 0.9 threshold that would mean the index adds nothing, and below the 0.7 threshold that would mean it is merely a variant of the same thing. The two rankings are substantially different.</p>
   <p class="body" style="margin-top:11px">The prediction, written down before the six components were finalised: highly digitised metropolitan councils would rank worse on QAIRI than they do on ADRI, because system dependence is a strength in a natural-hazard index and a liability in this one. That prediction held. Townsville, Brisbane, Sunshine Coast, Moreton Bay and Livingstone all shift more than fifty ranks worse on QAIRI than their ADRI position would predict.</p>
   <p class="body" style="margin-top:14px">Two real sources of divergence turned out to matter, and one turned out to cut the other way:</p>
@@ -260,7 +259,7 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
     </table>
   </div>
   <div class="callout">
-    <strong>The pre-registration held, provisionally.</strong> Both stated predictions, metros ranking worse and correlation under 0.9, came true. What was not anticipated is that one of the six components (systemic labour) would push correlation back toward zero rather than away from it. That is reported here rather than quietly dropped, because a result that only survives by excluding the parts that complicate it is not a validated result.
+    <strong>The pre-registration held, provisionally.</strong> Both stated predictions, metros ranking worse and correlation under 0.9, came true. One of the six components, systemic labour, was not anticipated: it pushes correlation back toward zero rather than away from it, and is reported here rather than excluded.
   </div>
 </section>
 
@@ -268,7 +267,7 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
   <div class="sec-head">
     <p class="eyebrow">The register</p>
     <h2>Six components, as actually built</h2>
-    <p>Formulas below match <span class="mono">config/index.yaml</span> exactly. Two of the original six candidate hazards did not survive the selection test in section above and are not here: a biological-event factor (travel time to intensive care) failed test 4, health access is not a council function in Queensland, and an automated-decision-failure factor never had a workable dataset. Both are named, not hidden, in the Limitations page.</p>
+    <p>Formulas below match <span class="mono">config/index.yaml</span> exactly. Two of the original six candidate hazards did not survive the selection test in section above and are not here: a biological-event factor (travel time to intensive care) failed test 4, health access is not a council function in Queensland, and an automated-decision-failure factor never had a workable dataset. Both are documented in the Limitations page.</p>
   </div>
 
   <!-- Essential services -->
@@ -316,7 +315,7 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
     <div class="haz-grid">
       <div class="fld wide">
         <h5>Scored factor, validated disadvantage measures</h5>
-        <p>Every input here is a <b>validated vulnerability measure already used for natural hazards</b>. Nothing about it depends on believing a particular AI story, which is exactly why it belongs under a hazard-agnostic architecture. It would score similarly for a flood or a pandemic. Say so plainly rather than implying it is AI-specific.</p>
+        <p>Every input here is a <b>validated vulnerability measure already used for natural hazards</b>. It does not depend on any particular AI scenario, which is why it belongs under a hazard-agnostic architecture: it would score similarly for a flood or a pandemic.</p>
         <div class="formula">population_vulnerability =
    0.40 × seifa_irsd_score       (invert, lower = more disadvantaged)
  + 0.35 × avg_persons_per_bedroom (higher_worse)
@@ -349,7 +348,7 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
       <div class="fld wide">
         <h5>Scored factor, institutional thinness</h5>
         <p>Two things determine whether a council can survive its systems going down: how many people it has indoors, and how much of its money it controls. Grant-funded money is committed money; <b>own-source revenue is the only discretionary capacity a council really has</b>, and Indigenous councils have almost none because DOGIT land is largely not valued and therefore not rateable.</p>
-        <p style="margin-top:9px"><b>This is the component that may invert, and does.</b> A shire that still runs half its processes on paper has a smaller attack surface and a real manual fallback; a metropolitan council with two hundred integrated systems and no non-digital path has neither. Digitisation is a strength in the natural-hazard index and a liability here. This inversion is the largest single driver of QAIRI diverging from ADRI, confirmed in the validation section above, not just a theoretical possibility.</p>
+        <p style="margin-top:9px"><b>This is the component that inverts.</b> A shire that still runs half its processes on paper has a smaller attack surface and a real manual fallback; a metropolitan council with two hundred integrated systems and no non-digital path has neither. Digitisation is a strength in the natural-hazard index and a liability here. This inversion is the largest single driver of QAIRI diverging from ADRI, confirmed in the validation section above.</p>
         <div class="formula">institutional_capacity =
    0.50 × own_source_revenue_share  (invert)
  + 0.30 × indoor_staff_share        (higher_worse, digitisation proxy)
@@ -391,8 +390,8 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
         </ul>
       </div>
       <div class="fld">
-        <h5>Honest note</h5>
-        <p>This is the closest fit in the whole index for Hendrycks' AI race category, competitive pressure to deploy fast. It is weighted low deliberately, the evidence base is thin by construction.</p>
+        <h5>Why it's weighted low</h5>
+        <p>This is the closest fit in the whole index for Hendrycks' AI race category, competitive pressure to deploy fast. It is weighted low deliberately: the evidence base is thin by construction.</p>
       </div>
     </div>
   </article>
@@ -452,7 +451,7 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
         </ul>
       </div>
       <div class="fld">
-        <h5>Honest note</h5>
+        <h5>Proxy limitations</h5>
         <p>One judgement call about which occupations count as exposed, not a validated index, and not cross-checked against a second published exposure measure. It also correlates with council wealth and capacity, which pulls the overall index toward ADRI rather than away from it. See Limitations for the full discussion.</p>
       </div>
     </div>
@@ -467,7 +466,7 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
   </div>
   <div class="tablewrap">
     <table>
-      <thead><tr><th>ADRI theme</th><th>Capacity</th><th>AI equivalent</th><th>Indicator you can get</th></tr></thead>
+      <thead><tr><th>ADRI theme</th><th>Capacity</th><th>AI equivalent</th><th>Available indicator</th></tr></thead>
       <tbody>
         <tr><td><strong>Social character</strong></td><td>Coping</td><td>Who can detect and challenge a wrong automated answer</td><td>Age structure, education, English proficiency, disability</td></tr>
         <tr><td><strong>Economic capital</strong></td><td>Coping</td><td>Can the council fund remediation without a grant round</td><td>Own-source revenue share, rate revenue per capita</td></tr>
@@ -480,7 +479,7 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
       </tbody>
     </table>
   </div>
-  <p class="body" style="margin-top:14px">Note that ADRI itself had <strong>67 of its indicators in coping capacity and far fewer in adaptive capacity</strong>, because national-scale adaptive indicators are hard to find. You will hit the same wall. Say so rather than padding it.</p>
+  <p class="body" style="margin-top:14px">ADRI itself has <strong>67 of its indicators in coping capacity and far fewer in adaptive capacity</strong>, because national-scale adaptive indicators are hard to find. The same scarcity applies to AI-specific adaptive indicators at the LGA level.</p>
 </section>
 
 <section id="datastatus">
@@ -508,46 +507,46 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
 
   <h3 style="font-size:21px;margin:34px 0 8px">ADRI is the control, not an input</h3>
   <p class="body">ADRI's composite is built from 77 indicators, overwhelmingly ABS Census, named variables include <span class="mono">AGEP</span>, <span class="mono">SEXP</span>, <span class="mono">HCFMD</span>, <span class="mono">HEAP</span>, <span class="mono">LFHRP</span>, <span class="mono">OCCP</span>, <span class="mono">VEHD</span>, <span class="mono">VOLWP</span>. <strong>The raw indicator values are not published</strong>, the API serves only the eight themes, the two capacities and the composite. Verified by reading the application's own bundle.</p>
-  <p class="body" style="margin-top:11px">So: hold every <span class="mono">adri_*</span> column out of the model and use it as the held-out comparison. But know that the overlap is heavier than it looks, median income, age structure, household composition and SEIFA all draw on the same Census variables ADRI does, and <em>council staff per dwelling is itself an ADRI indicator</em>. Genuinely independent of ADRI: own-source revenue share, water connections, the SOCI flag, and Indigenous council status. That is a thinner independent signal than it first appears, and the write-up should say so.</p>
+  <p class="body" style="margin-top:11px">Every <span class="mono">adri_*</span> column is held out of the model and used only as the comparison. The overlap is heavier than it looks: median income, age structure, household composition and SEIFA all draw on the same Census variables ADRI does, and <em>council staff per dwelling is itself an ADRI indicator</em>. Genuinely independent of ADRI: own-source revenue share, water connections, the SOCI flag, and Indigenous council status. That is a thinner independent signal than it first appears.</p>
 
   <h3 style="font-size:21px;margin:34px 0 8px">Sign inversions, the actual contribution</h3>
-  <p class="body">You do not need to build a competing index. Take ADRI's own indicators and <strong>flip the sign where the causal mechanism inverts.</strong> Every flip below traces to a stated argument, so the divergence is derived rather than manufactured.</p>
+  <p class="body">This does not require building a competing index. ADRI's own indicators are reused, with <strong>the sign flipped where the causal mechanism inverts.</strong> Every flip below traces to a stated argument, so the divergence is derived rather than manufactured.</p>
   <div class="tablewrap">
     <table>
       <thead><tr><th>Indicator</th><th>Natural hazard</th><th>AI</th><th>Why it flips</th></tr></thead>
       <tbody>
-        <tr><td><strong>Connectivity</strong> (information_access)</td><td>Good, you get the warning</td><td class="crit-txt">Bad</td><td>It is the entire exposure surface for synthetic content, scams and AI-mediated services. Partly offset: connectivity also enables verification</td></tr>
+        <tr><td><strong>Connectivity</strong> (information_access)</td><td>Good, the warning gets through</td><td class="crit-txt">Bad</td><td>It is the entire exposure surface for synthetic content, scams and AI-mediated services. Partly offset: connectivity also enables verification</td></tr>
         <tr><td><strong>Education, % managers and professionals</strong></td><td>Good, literacy, resources, planning</td><td class="crit-txt">Bad</td><td>Professional and managerial work is the most automatable. The cleanest flip in the set, and it moves metro councils</td></tr>
         <tr><td><strong>Dwellings per FTE council staff</strong></td><td>More staff = capacity</td><td class="crit-txt">Inverts</td><td>ND reads staffing; AI reads system dependence. Many staff and few systems means real manual fallback</td></tr>
         <tr><td><strong>Remoteness</strong> (distance to facility / airport)</td><td>Bad, slow everything</td><td>Partly protective</td><td>Sealable, low digital penetration, fewer systems to compromise. Consequence still worse</td></tr>
-        <tr><td><strong>Volunteering, residence &gt;5 years</strong></td><td>Good</td><td>Good, <em>under-weighted</em></td><td>Not a flip, a re-weight. These are the mechanism of social verification: you can check a fake by asking someone</td></tr>
+        <tr><td><strong>Volunteering, residence &gt;5 years</strong></td><td>Good</td><td>Good, <em>under-weighted</em></td><td>Not a flip, a re-weight. These are the mechanism of social verification: a fake can be checked by asking someone</td></tr>
         <tr><td><strong>% caravan &amp; improvised dwellings</strong></td><td>Bad, structural vulnerability</td><td>Bad, <em>different reason</em></td><td>Exactly the false-positive class for aerial change-detection compliance enforcement</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="callout">
-    <strong>One line of attack that turned out not to work.</strong> ADRI 1 measured connectivity as <span class="mono">% area with excellent or good ADSL cover</span>, from 2016 broadband data, which looked like an exploitable staleness. It is not. Comparing ADRI 1 and ADRI 2 across matched areas, <strong>information_access correlates at only 0.605 and its mean rose from 0.486 to 0.571</strong>, exactly what the NBN rollout would produce. The indicator was refreshed. Drop that argument. <em>(Caveat on our own method: the two versions use different ASGS boundary editions, so the correlation is contaminated; the means are not.)</em> Incidentally <span class="mono">govt_leadership</span> moved most of all, at r = 0.426, nobody appears to have looked at why.
+    <strong>One line of attack that turned out not to work.</strong> ADRI 1 measured connectivity as <span class="mono">% area with excellent or good ADSL cover</span>, from 2016 broadband data, which looked like an exploitable staleness. It is not. Comparing ADRI 1 and ADRI 2 across matched areas, <strong>information_access correlates at only 0.605 and its mean rose from 0.486 to 0.571</strong>, exactly what the NBN rollout would produce. The indicator was refreshed; that line of attack does not hold. <em>(Caveat on our own method: the two versions use different ASGS boundary editions, so the correlation is contaminated; the means are not.)</em> Incidentally <span class="mono">govt_leadership</span> moved most of all, at r = 0.426, nobody appears to have looked at why.
   </div>
 </section>
 
 <section id="honesty">
   <div class="sec-head">
-    <p class="eyebrow">Read this before you publish a number</p>
+    <p class="eyebrow">Constraints on interpretation</p>
     <h2>What this index cannot do</h2>
   </div>
   <div class="callout hot">
-    <strong>You cannot validate it, and you must not imply that you have.</strong> ADRI's indicators are grounded in hazards that recur, there are decades of floods and fires to check them against. The catastrophic AI outcomes in this register have not occurred. That means every weight in every formula above is a judgement, not a fitted parameter, and no amount of arithmetic makes it otherwise. An index that looks precise about an unprecedented event is the most dangerous artefact you could hand a council.
+    <strong>This index cannot be validated against historical outcomes.</strong> ADRI's indicators are grounded in hazards that recur; there are decades of floods and fires to check them against. The catastrophic AI outcomes in this register have not occurred. Every weight in every formula above is a judgement, not a fitted parameter, and no amount of arithmetic changes that. An index that looks precise about an unprecedented event is the most dangerous artefact to hand a council.
   </div>
-  <p class="body"><strong>So do these four things.</strong></p>
+  <p class="body"><strong>Four practices follow from that.</strong></p>
   <ul class="body" style="padding-left:19px;display:flex;flex-direction:column;gap:8px;margin-top:10px">
-    <li><b>Do not publish a single composite score.</b> Publish the six factors separately. A council should be able to see which factor drives its own exposure and go fix that one thing. A rolled-up number hides exactly the information that makes it useful.</li>
-    <li><b>Separate the measured from the assumed, visibly.</b> Travel time to an ICU, overcrowding, remoteness, connectivity and own-source revenue are measured. The hazard scenarios are assumed. Put them in different columns and use different styling so nobody has to take your word for which is which.</li>
-    <li><b>Ship the weights as a control, not a constant.</b> If the reader can move a slider and watch the ranking change, you have demonstrated the sensitivity honestly instead of asserting a result. This is also the best possible demo moment.</li>
-    <li><b>State the falsifier.</b> Write down, before you run it, what result would tell you the framework is wrong, for instance, if exposure turns out uncorrelated with remoteness across every factor, your theory of the case has failed.</li>
+    <li><b>The composite score is not published alone.</b> The interactive map shows the six component scores alongside it, so a council can see which factor drives its own exposure.</li>
+    <li><b>The measured is kept separate from the assumed.</b> Water and sewerage connections, remoteness, connectivity and own-source revenue are measured. The hazard scenarios are assumed.</li>
+    <li><b>The weights are a control, not a constant.</b> The interactive map lets a reader move the sliders and watch the ranking change, which demonstrates the sensitivity of the result rather than asserting one.</li>
+    <li><b>The falsifier is stated.</b> If exposure turns out uncorrelated with remoteness across every factor, the theory of the case has failed.</li>
   </ul>
   <div class="callout">
-    <strong>The claim that survives all of this.</strong> Australia has a government-published, peer-reviewed index of which communities absorb shocks badly. It was built for natural hazards. Every catastrophic AI scenario in the international literature lands through the same channels, essential services, health access, warning systems, institutional capacity. The communities already known to be least resilient are therefore the ones with the most to lose from an entirely new hazard class, and <em>no one has checked</em>. That is a defensible, novel, two-day question.
+    <strong>The core claim.</strong> Australia has a government-published, peer-reviewed index of which communities absorb shocks badly. It was built for natural hazards. Every catastrophic AI scenario in the international literature lands through the same channels: essential services, health access, warning systems, institutional capacity. The communities already known to be least resilient are the ones with the most to lose from an entirely new hazard class, and <em>no one has checked</em>.
   </div>
 </section>
 
@@ -627,13 +626,13 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
 
 <section id="sources">
   <div class="sec-head">
-    <p class="eyebrow">Everything you need</p>
+    <p class="eyebrow">Where the data comes from</p>
     <h2>Sources</h2>
   </div>
   <div class="res">
     <div class="rescard"><h4>International AI Safety Report 2026</h4><p>The hazard taxonomy. Bengio, 100+ authors, panel from 30+ countries, published 3 February 2026.</p><a href="https://internationalaisafetyreport.org/publication/international-ai-safety-report-2026">internationalaisafetyreport.org/publication/international-ai-safety-report-2026</a></div>
-    <div class="rescard"><h4>Australian Disaster Resilience Index</h4><p>The architecture you are borrowing. 82 indicators, LGA and SA2, on the federal Regional Data Hub. NEMA has published a refresh.</p><a href="https://catalogue.data.infrastructure.gov.au/dataset/rdh-australiandisasterresilienceindex">catalogue.data.infrastructure.gov.au/dataset/rdh-australiandisasterresilienceindex</a></div>
-    <div class="rescard"><h4>ADRI methodology, index design and computation</h4><p>Volume II. Read this for how they actually combined indicators, you want to mirror the method, not just the themes.</p><a href="https://www.preventionweb.net/publication/australian-natural-disaster-resilience-index-volume-ii">preventionweb.net/publication/australian-natural-disaster-resilience-index-volume-ii</a></div>
+    <div class="rescard"><h4>Australian Disaster Resilience Index</h4><p>The index that inspired QAIRI's approach. 82 indicators, LGA and SA2, on the federal Regional Data Hub. NEMA has published a refresh.</p><a href="https://catalogue.data.infrastructure.gov.au/dataset/rdh-australiandisasterresilienceindex">catalogue.data.infrastructure.gov.au/dataset/rdh-australiandisasterresilienceindex</a></div>
+    <div class="rescard"><h4>ADRI methodology, index design and computation</h4><p>Volume II. Sets out how ADRI actually combined its indicators, not just its list of themes.</p><a href="https://www.preventionweb.net/publication/australian-natural-disaster-resilience-index-volume-ii">preventionweb.net/publication/australian-natural-disaster-resilience-index-volume-ii</a></div>
     <div class="rescard"><h4>SOCI Act, water and sewerage</h4><p>The 100,000-connection threshold and what a responsible entity owes above it. The basis for essential services.</p><a href="https://www.cisc.gov.au/information-for-your-industry/water-and-sewerage/legislation-regulation-and-compliance/soci-act-2018">cisc.gov.au, water and sewerage, SOCI Act 2018</a></div>
     <div class="rescard"><h4>ABS Data by Region, LGA</h4><p>Health, housing, income, population, employment per LGA. Feeds population vulnerability and most of the capacity themes.</p><a href="https://dataexplorer.abs.gov.au/vis?tm=ABS_REGIONAL_LGA2021">dataexplorer.abs.gov.au/vis?tm=ABS_REGIONAL_LGA2021</a></div>
     <div class="rescard"><h4>QRA Disaster Funding Activations</h4><p>Every Disaster Recovery Funding Arrangements activation by council since 2010 to 2011, filterable directly on the site. The disaster-frequency input to synthetic warning.</p><a href="https://www.qra.qld.gov.au/disaster-funding-activations/activations">qra.qld.gov.au/disaster-funding-activations/activations</a></div>
