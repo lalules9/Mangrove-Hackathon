@@ -117,8 +117,9 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
     <h3>Most of the index is not AI-specific in its mechanism</h3>
     <p><b>Essential services</b>, <b>population vulnerability</b> and <b>institutional
       capacity</b> would score a council the same way for a natural disaster as for an
-      AI-caused one. They measure who absorbs any shock badly, an approach inspired by the ADRI.
-      We build on the legitimacy of the ADRI with an AI framing on top.</p>
+      AI-caused one. They measure who absorbs any shock badly, an approach inspired by the
+      Australian Disaster Resilience Index (ADRI). We build on the legitimacy of the ADRI with
+      an AI framing on top.</p>
     <p>Of the six scored components, <b>synthetic warning is the only one whose scored factor
       genuinely depends on AI as the cause</b>, a fabricated AI-generated warning message during
       a live emergency. Deployment evidence and systemic labour are about AI specifically, but
@@ -168,46 +169,33 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
   </div>
 
   <div class="item">
-    <h3>Disaster frequency, corrected during this build</h3>
-    <p>The first version of this input matched disaster events to a council by coordinates pulled
-      from a public disaster events catalogue, and that approach was wrong more often than it was
-      right. Many entries shared the exact same generic coordinate near a major regional town
-      rather than the real event location, and it missed real, confirmed events entirely,
-      including Cyclone Jasper at Wujal Wujal and Cyclone Kirrily's actual path.</p>
-    <p>Replaced with the Queensland Reconstruction Authority's own Disaster Recovery Funding
-      Arrangements activation records, filterable by council directly on QRA's site, every
-      activation since 2010 to 2011. This is the authoritative source, not an approximation of
-      one, and every council's count is independently checkable.</p>
-  </div>
-
-  <div class="item">
     <h3>Systemic labour is one occupational proxy, not a validated exposure index</h3>
     <p>Which occupations count as AI-exposed (Professionals, Clerical and Administrative
-      Workers, Sales Workers) is a single judgement call about ANZSCO major groups, not a
-      published, validated AI-exposure index, and it has not been cross-checked against a second
-      published exposure measure.</p>
-    <p>AI-exposed occupations are concentrated in wealthy, high-capacity metro councils, the
-      same councils that score well on ADRI. This component therefore pulls in the opposite
-      direction from the rest of the index, and is a large part of why the overall correlation
-      against ADRI moved further from zero once it was added. Whether a high AI-exposed-occupation
-      share is a risk or a proxy for capacity is an open question. The index scores it as a risk;
-      it could equally be read as a proxy for capacity.</p>
+      Workers, Sales Workers, under the Australian and New Zealand Standard Classification of
+      Occupations (ANZSCO)) is a single judgement call, not a published, validated AI-exposure
+      index, and it has not been cross-checked against a second published exposure measure.</p>
+    <p>AI-exposed occupations concentrate in wealthy, high-capacity metro councils, the same
+      councils that already score well on ADRI. This component pulls in the opposite direction
+      from the rest of the index, and is a large part of why the overall correlation against
+      ADRI moved further from zero once it was added.</p>
   </div>
 
   <div class="item">
     <h3>Queensland council staff and finance figures are 2015 to 2016</h3>
-    <p>Every resource in the state's comparative information open data release stops there,
-      whatever the portal's last updated date says. Current years exist only as documents on the
-      department's site, which blocks automated fetching. Columns carry their own vintage field
-      so the age of the number travels with it.</p>
+    <p>Every staff and finance figure in this index is from the Queensland Government's 2015-16
+      comparative information release, the most recent year published as open data. More recent
+      years exist only as PDF documents that block automated fetching. Each column carries its
+      own vintage field, so the age of the number travels with it.</p>
   </div>
 
   <div class="item">
     <h3>ADRI's own LGA aggregation is area-weighted, not population-weighted</h3>
-    <p>The source ADRI data is published at SA2 level and aggregated to LGA by area times share,
-      because the population fields in the public API response are null. Area weighting
-      over-weights large, empty SA2s. Joining ABS population estimates by SA2 code and swapping
-      the weight would be more accurate, and was not done in the time available.</p>
+    <p>The source ADRI data is published at Statistical Area Level 2 (SA2) and aggregated to
+      Local Government Area (LGA) by area times share, because the population fields in the
+      public Application Programming Interface (API) response are null. Area weighting
+      over-weights large, empty SA2s. Joining Australian Bureau of Statistics (ABS) population
+      estimates by SA2 code and swapping the weight would be more accurate, and was not done in
+      the time available.</p>
   </div>
 </section>
 
@@ -218,10 +206,9 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
 
   <div class="item">
     <h3>Weights are expert judgement, not fitted or independently validated</h3>
-    <p>The 22/18/25/15/10/10 split reflects reasoned judgement about which signals matter most
-      and which rest on the thinnest evidence, not a statistical fit to data or an external
-      panel's ranking. The interactive map's sliders let a reader test whether the ranking
-      survives a different weighting, rather than presenting these numbers as optimised.</p>
+    <p>The 22/18/25/15/10/10 split is reasoned judgement, not a statistical fit to data or an
+      external panel's ranking. The interactive map's sliders let a reader test whether the
+      ranking survives a different weighting.</p>
   </div>
 
   <div class="item">
@@ -242,14 +229,6 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
       oversight.</p>
   </div>
 </section>
-
-<div class="callout">
-  <strong>Summary.</strong> This index measures general council vulnerability, using an
-  approach inspired by a validated natural-hazard framework, with a small number of genuinely
-  AI-specific signals layered on top. It diverges from Australia's own disaster resilience index
-  by a real, reported margin, not a manufactured one. What it is not is a complete or validated
-  measure of catastrophic AI risk. Nobody has built one of those yet, for any jurisdiction.
-</div>
 
 </div>
 
