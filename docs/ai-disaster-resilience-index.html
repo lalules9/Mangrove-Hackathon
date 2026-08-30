@@ -550,7 +550,7 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
 <section id="appendix">
   <div class="sec-head">
     <p class="eyebrow">Appendix</p>
-    <h2>Every column we hold</h2>
+    <h2>List of data sets to build QAIRI</h2>
     <p>The original 51 columns below, 78 Queensland LGAs, kept as the reference dictionary for this write-up. The live master table, <span class="mono">data/qld_lga_master.csv</span>, has grown since (mobile coverage, occupation, disaster events, area and density), documented in <span class="mono">data/DATA_DICTIONARY.md</span> rather than duplicated here.</p>
   </div>
   <p class="body" style="margin-bottom:14px">The column that matters most is <strong>“In ADRI?”</strong>. Anything marked <span style="color:var(--r1);font-weight:600">clean</span> is genuine independent signal. Anything <span style="color:var(--r3);font-weight:600">partial</span> or <span style="color:var(--r3);font-weight:600">indirect</span> shares Census inputs with the natural-hazard index and will drag your correlation up on its own. Anything <span style="color:var(--r5);font-weight:600">red</span> must be held out of the model entirely.</p>
@@ -613,7 +613,7 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
     </table>
   </div>
   <div class="callout">
-    <strong>The independent signal, in full.</strong> Fourteen columns have no ADRI analogue at all: Indigenous population and share, persons per bedroom, the four council finance measures, own-source revenue share, the four water and sewerage measures, and the two derived service flags. That is the entire basis on which your index can differ from the natural-hazard one. Everything else is either shared Census input or ADRI itself.
+    <strong>The independent signal, in full.</strong> Fourteen columns have no ADRI analogue at all: Indigenous population and share, persons per bedroom, the four council finance measures, own-source revenue share, the four water and sewerage measures, and the two derived service flags.
   </div>
   <div class="callout hot">
     <strong>Two coverage warnings.</strong> <span class="mono">water_connections_residential</span> is only 58/78, do not build a factor on it. Every Queensland council column is <strong>2015–16</strong> regardless of what the portal says; the <span class="mono">*_data_year</span> fields carry the vintage so it travels with the number. All 30 ABS and ADRI columns are complete at 78/78 and current.
