@@ -127,7 +127,7 @@ footer a:hover{text-decoration:underline}
       <h1>QAIRI · Queensland Artificial Intelligence Risk Index</h1>
       <p>All 77 Queensland councils and 1 non-council entity scored for exposure to catastrophic risks of AI.</p>
       <p>The Australian Disaster Resilience Index (ADRI) is a peer-reviewed natural-hazard
-         resilience index that is used for comparison and not used as part of the QAIRI value.</p>
+         resilience index that is used for comparison and not used as part of QAIRI.</p>
     </div>
     <button id="openResilience" class="badge-btn">Mapping AI risk to Disaster Risk Management</button>
   </div>
@@ -200,18 +200,19 @@ footer a:hover{text-decoration:underline}
     <div id="sliders"></div>
     <div id="wsum"></div>
     <button id="reset">Reset to defaults</button>
-    <p class="note">Adjust to test how much the ranking depends on the formula's choices.</p>
+    <p class="note">Adjust the sliders to vary the weightings of the component weights.</p>
 
     <h2>Legend</h2>
     <div class="legend" id="legend"></div>
 
     <h2>About this index</h2>
-    <p class="note">Architecture borrowed from the Australian Disaster Resilience Index, hazard
-      swapped from natural disaster to AI. Risk categories from the <i>International AI Safety
-      Report 2026</i> (Bengio et al.) and <i>An Overview of Catastrophic AI Risks</i> (Hendrycks,
-      Mazeika &amp; Woodside). Legal basis: Disaster Management Act 2003 (Qld) s4A(d), s16(1)(d);
-      Human Rights Act 2019 (Qld) ss9, 58. See "Mapping AI risk to Disaster Risk Management"
-      above for how the response model maps onto Queensland's existing disaster planning.</p>
+    <p class="note">The QAIRI architecture is inspired by the Australian Disaster Resilience
+      Index. Risk categories derived from the <i>International AI Safety Report 2026</i> (Bengio
+      et al.) and <i>An Overview of Catastrophic AI Risks</i> (Hendrycks, Mazeika &amp; Woodside).
+      Legal basis: Disaster Management Act 2003 (Qld) s4A(d), s16(1)(d); Human Rights Act 2019
+      (Qld) ss9, 58. The "Mapping AI risk to Disaster Risk Management" (orange button top right)
+      shows how the International AI Safety Report's resilience model directly maps onto
+      Queensland's existing disaster planning.</p>
   </aside>
 </div>
 
@@ -364,12 +365,12 @@ function legend(vals){
   // value for the resilience layer, matching scale()'s colour assignment exactly.
   const highIsWorse = current!=="adri_andri";
   const cols = RAMP.slice().reverse();
+  const tailWord = highIsWorse ? "risk" : "resilience";
   const bands = highIsWorse
-    ? ["Highest 20%","60–80%","Middle 20%","20–40%","Lowest 20%"]
-    : ["Lowest 20%","20–40%","Middle 20%","60–80%","Highest 20%"];
-  const tail = current==="adri_andri" ? " resilience" : " risk";
+    ? [`Highest-${tailWord} quintile`,"Second-highest quintile","Middle quintile","Second-lowest quintile",`Lowest-${tailWord} quintile`]
+    : [`Lowest-${tailWord} quintile`,"Second-lowest quintile","Middle quintile","Second-highest quintile",`Highest-${tailWord} quintile`];
   el.innerHTML = bands
-    .map((t,i)=>`<div><i style="background:${cols[i]}"></i>${t}${i===0||i===4?tail:""}</div>`)
+    .map((t,i)=>`<div><i style="background:${cols[i]}"></i>${t}</div>`)
     .join("");
 }
 
