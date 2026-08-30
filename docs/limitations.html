@@ -101,8 +101,7 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
   <div class="wrap">
     <p class="eyebrow">QAIRI, Queensland Artificial Intelligence Risk Index</p>
     <h1>Limitations</h1>
-    <p class="stand">Everything here was found and named by the team building the index, not by
-      an outside reviewer. State it plainly rather than let a judge find it first.</p>
+    <p class="stand">This document outlines any limitations in the design and development of the QAIRI.</p>
   </div>
 </header>
 
@@ -118,9 +117,8 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
     <h3>Most of the index is not AI-specific in its mechanism</h3>
     <p><b>Essential services</b>, <b>population vulnerability</b> and <b>institutional
       capacity</b> would score a council the same way for a natural disaster as for an
-      AI-caused one. They measure who absorbs any shock badly, borrowed directly from ADRI's
-      own architecture. That is legitimate, ADRI's approach is validated and the index says so
-      openly, but it means the index is mostly general vulnerability with an AI framing on top.</p>
+      AI-caused one. They measure who absorbs any shock badly, an approach inspired by the ADRI.
+      We build on the legitimacy of the ADRI with an AI framing on top.</p>
     <p>Of the six scored components, <b>synthetic warning is the only one whose scored factor
       genuinely depends on AI as the cause</b>, a fabricated AI-generated warning message during
       a live emergency. Deployment evidence and systemic labour are about AI specifically, but
@@ -130,12 +128,18 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
   <div class="item">
     <span class="tag hot">Counter-argument, addressed directly</span>
     <h3>Pabai v Commonwealth (2025)</h3>
-    <p>The Federal Court found the Commonwealth owed no duty of care to Torres Strait Islanders
-      over climate change harm. That is a real, negative precedent against the idea that
-      government already owes an affirmative duty to prevent diffuse, foreseeable but uncertain
-      harm, which is close to this project's own premise. It is named here on purpose, given the
-      dataset's own floor is Aurukun and the Torres Strait councils, rather than left for a judge
-      to raise first.</p>
+    <p>In 2025 the Federal Court declined to find that the Commonwealth owed Torres Strait
+      Islanders a duty of care over climate change harm. This project's legal grounding
+      (<a href="qld-council-governance.html">see Legal background</a>) rests on a narrower,
+      different claim: that an AI-caused failure of a specific essential service is a concrete,
+      attributable "event" under s16(1)(d) of the Disaster Management Act, not that government
+      owes a general duty to prevent diffuse, hard-to-attribute harm. Climate-change causation is
+      diffuse across decades and emitters; an AI-caused water or power outage in a named council
+      area is not. Pabai is still worth naming, since Aurukun and the Torres Strait councils sit
+      at the highest-risk end of this index: a court has already declined, in a case involving
+      these same communities, to extend an affirmative duty over harm resembling this project's
+      broader premise, even though the narrower statutory hook this project actually relies on is
+      not the claim that case rejected.</p>
   </div>
 
   <div class="item">
@@ -182,14 +186,13 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
     <p>Which occupations count as AI-exposed (Professionals, Clerical and Administrative
       Workers, Sales Workers) is a single judgement call about ANZSCO major groups, not a
       published, validated AI-exposure index, and it has not been cross-checked against a second
-      index the way the project's own earlier notes said a scored factor like this should be.</p>
-    <p>It also behaves in a way worth naming directly. AI-exposed occupations are concentrated
-      in wealthy, high-capacity metro councils, the same councils that score well on ADRI. So
-      this component pulls in the opposite direction from the rest of the index, and is a large
-      part of why the overall correlation against ADRI moved further from zero once it was added.
-      Whether a high AI-exposed-occupation share is a risk or a proxy for capacity is an open
-      question. The index currently scores it as a risk. That is a defensible choice, not a
-      settled one.</p>
+      published exposure measure.</p>
+    <p>AI-exposed occupations are concentrated in wealthy, high-capacity metro councils, the
+      same councils that score well on ADRI. This component therefore pulls in the opposite
+      direction from the rest of the index, and is a large part of why the overall correlation
+      against ADRI moved further from zero once it was added. Whether a high AI-exposed-occupation
+      share is a risk or a proxy for capacity is an open question. The index scores it as a risk;
+      it could equally be read as a proxy for capacity.</p>
   </div>
 
   <div class="item">
@@ -218,9 +221,8 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
     <h3>Weights are expert judgement, not fitted or independently validated</h3>
     <p>The 22/18/25/15/10/10 split reflects reasoned judgement about which signals matter most
       and which rest on the thinnest evidence, not a statistical fit to data or an external
-      panel's ranking. The interactive map's sliders exist specifically so a reader can test
-      whether the ranking survives a different weighting, which is the honest answer to "why
-      these numbers" rather than presenting them as optimised.</p>
+      panel's ranking. The interactive map's sliders let a reader test whether the ranking
+      survives a different weighting, rather than presenting these numbers as optimised.</p>
   </div>
 
   <div class="item">
@@ -243,8 +245,8 @@ footer p{font-size:13.3px;color:var(--ink-3);max-width:76ch}
 </section>
 
 <div class="callout">
-  <strong>The honest headline.</strong> This index measures general council vulnerability,
-  borrowed from a validated natural-hazard framework, with a small number of genuinely
+  <strong>Summary.</strong> This index measures general council vulnerability, using an
+  approach inspired by a validated natural-hazard framework, with a small number of genuinely
   AI-specific signals layered on top. It diverges from Australia's own disaster resilience index
   by a real, reported margin, not a manufactured one. What it is not is a complete or validated
   measure of catastrophic AI risk. Nobody has built one of those yet, for any jurisdiction.

@@ -367,8 +367,8 @@ function legend(vals){
   const cols = RAMP.slice().reverse();
   const tailWord = highIsWorse ? "risk" : "resilience";
   const bands = highIsWorse
-    ? [`Highest-${tailWord} quintile`,"Second-highest quintile","Middle quintile","Second-lowest quintile",`Lowest-${tailWord} quintile`]
-    : [`Lowest-${tailWord} quintile`,"Second-lowest quintile","Middle quintile","Second-highest quintile",`Highest-${tailWord} quintile`];
+    ? [`Highest ${tailWord} quintile`,"Second highest quintile","Middle quintile","Second lowest quintile",`Lowest ${tailWord} quintile`]
+    : [`Lowest ${tailWord} quintile`,"Second lowest quintile","Middle quintile","Second highest quintile",`Highest ${tailWord} quintile`];
   el.innerHTML = bands
     .map((t,i)=>`<div><i style="background:${cols[i]}"></i>${t}</div>`)
     .join("");

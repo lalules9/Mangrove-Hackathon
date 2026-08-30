@@ -34,10 +34,10 @@ anyone checked?**
 
 ## The method
 
-**Borrow ADRI's architecture, swap the hazard.** ADRI doesn't measure "how much bushfire is
+**Inspired by ADRI, built fresh for AI.** ADRI doesn't measure "how much bushfire is
 coming", it measures whether a community can absorb a shock and adapt afterwards. That
-structure is hazard-agnostic and transfers directly. What doesn't transfer is the hazard model
-itself, which this project had to build from scratch.
+approach carried across; the hazard model itself, and every input behind it, was built new
+for AI.
 
 **Don't invent a risk list, cite one.** The categories come from the *International AI Safety
 Report 2026* (Bengio et al.), malicious use, malfunctions, systemic risks, with the *Overview
@@ -164,9 +164,11 @@ The full account, written as its own page rather than a footnote, is **[`docs/li
   resilient, which is a large part of why the overall correlation moved toward zero once it was
   added, not away from it.
 - `Pabai v Commonwealth (2025)`, the Federal Court declined to find the Commonwealth owed a
-  duty of care to Torres Strait Islanders over climate-change harm. A real negative precedent
-  against the idea that government already owes an affirmative duty here; addressed directly
-  rather than left for a judge to raise.
+  duty of care to Torres Strait Islanders over climate-change harm. This project's legal
+  grounding rests on a narrower, different claim (a specific, attributable service failure as
+  a DMA "event"), not a general duty over diffuse harm, but Pabai is still worth naming since
+  Aurukun and the Torres Strait councils sit at the highest-risk end of this index. Full
+  discussion in `docs/limitations.html`.
 - Rogue AI (Hendrycks) is deliberately not represented, nothing in this dataset has the
   autonomous capability the category actually describes, and inventing a proxy for it would be
   dishonest.
